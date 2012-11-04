@@ -1,0 +1,45 @@
+ /* Events
+-----------------------------------------------------*/
+ 
+.vkNgine-calendar-event-skin {
+	background: none !important;
+	color: #000 !important;
+	}
+	
+/* horizontal events */
+	
+.vkNgine-calendar-event-hori {
+	border-width: 0 0 1px 0 !important;
+	border-bottom-style: dotted !important;
+	border-bottom-color: #000 !important;
+	padding: 1px 0 0 0 !important;
+	}
+	
+.vkNgine-calendar-event-hori .vkNgine-calendar-event-inner {
+	border-width: 0 !important;
+	padding: 0 1px !important;
+	}
+	
+/* vertical events */
+	
+.vkNgine-calendar-event-vert {
+	border-width: 0 0 0 1px !important;
+	border-left-style: dotted !important;
+	border-left-color: #000 !important;
+	padding: 0 1px 0 0 !important;
+	}
+	
+.vkNgine-calendar-event-vert .vkNgine-calendar-event-inner {
+	border-width: 0 !important;
+	padding: 1px 0 !important;
+	}
+	
+.vkNgine-calendar-event-bg {
+	display: none !important;
+	}
+	
+.vkNgine-calendar-event .ui-resizable-handle {
+	display: none !important;
+	}
+	
+	

@@ -1,0 +1,70 @@
+<?php 
+define('IN_DEVELOPMENT', APPLICATION_ENV === 'development');
+
+$this->headLink()
+	 ->prependStylesheet($this->baseUrl('/css/admin/ui/ui.base.css'))
+	 ->appendStylesheet($this->baseUrl('/css/admin/ui/ui.login.css'))
+  	 ->appendStylesheet($this->baseUrl('/css/admin/themes/vkNgine3/ui.css'))
+  	 ->appendStylesheet($this->baseUrl('/css/admin/gritter.css'));
+
+$this->headScript()
+     ->prependFile($this->baseUrl('/js/jquery-1.7.1.js'))
+     ->appendFile($this->baseUrl('/js/admin/ui/ui.core.js'))
+     ->appendFile($this->baseUrl('/js/admin/ui/ui.tabs.js'))
+     ->appendFile($this->baseUrl('/js/admin/gritter.js'))
+     ->appendFile($this->baseUrl('/js/form.js'))
+     ->appendFile($this->baseUrl('/js/admin/dialog.js'))
+     ->appendFile($this->baseUrl('/js/admin/login.js'));
+
+$this->headMeta()
+	 ->prependName('keywords', 'volkan yavuz, volkan, yavuz, turkey, istanbul, ankara, usa, new york')
+	 ->prependName('description', 'vkNgine_version v'.vkNgine_Version::VERSION .' admin panel')
+	 ->appendHttpEquiv('Content-Type', 'text/html; charset=UTF-8')
+	 ->appendHttpEquiv('expires', 'Sun, 31 Oct 1982 01:00:00 GMT')
+     ->appendHttpEquiv('pragma', 'no-cache')
+     ->appendHttpEquiv('Cache-Control', 'no-cache')
+     ->appendHttpEquiv('Content-Language', 'en-US');
+?>
+
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head profile="http://www.w3.org/2005/10/profile"> 
+
+<?php 
+	echo $this->headTitle() . "\n";
+	echo $this->headMeta()  . "\n";
+	echo $this->headLink()  . "\n";
+	echo $this->headScript(). "\n";
+?>	
+	<!--[if IE 7]><link media="all" rel="stylesheet" type="text/css" href="<?= $this->baseUrl('/css/admin/css/ie7.css') ?>" /><![endif]-->
+	
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#tabs, #tabs5').tabs();
+		});
+	</script>
+	
+	</head>
+	
+<body vkNgine_version="<?= vkNgine_Version::VERSION; ?>"> 		
+	<div id="page_wrapper">
+		<div id="page-header">
+			<div id="page-header-wrapper">
+				<div id="top">
+					<a href="#" class="logo" title="vkNgine v<?= vkNgine_Version::VERSION; ?>">vkNgine v<?= vkNgine_Version::VERSION; ?></a>
+				</div>
+			</div>
+		</div>
+		<div class="clear"></div>
+		<div id="page-layout">
+			<div id="page-content">
+				<div id="page-content-wrapper">
+				<div id="tabs">
+					<?= $this->layout()->content; ?>
+				</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

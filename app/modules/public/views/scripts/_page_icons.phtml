@@ -1,0 +1,43 @@
+<div class="header">
+	<div class="page-icons">
+	<?php if($this->back) : ?>
+	 	<a class="refresh"
+	 	<?php if(isset($this->ref)): ?>
+	 		rel="/<?= str_replace(',', '/', $this->ref); ?>"
+	 	<?php else: ?>
+    	 	rel="<?= $this->back; ?>" 
+    	<?php endif; ?>
+    	>
+    	<img alt="<?= $this->t->_('Go Back'); ?>" src="/images/mobile/icon/1333034310_back.png" width="25px" /></a>
+    <?php endif; ?>
+    
+    	<a 
+    		<?php if(isset($this->refreshLink)) : ?>
+    			href="<?= $this->refreshLink; ?>"
+    		<?php endif; ?>
+    		
+    		<?php if(isset($this->ajax)) :
+    			     $ref = null;
+    			 	 if(isset($this->ref)): 
+				 		$ref = '/ref/' . $this->ref;
+    				  endif; 
+    			?>	
+    			class="refresh" rel="<?= $this->ajax . $ref; ?>"
+    		<?php endif; ?>
+    	>
+    	<img alt="<?= $this->t->_('Refresh'); ?>" src="/images/mobile/icon/1333034102_gtk-refresh.png" width="25px" /></a>
+    
+    </div>
+</div>
+
+<script>
+	$('.refresh').bind('click', function() {
+		$('#content-load').show();
+		
+		rel = $(this).attr('rel');
+		
+		$('#content').load(rel, null, function() {
+			$('#content-load').hide();
+		});
+	});
+</script>

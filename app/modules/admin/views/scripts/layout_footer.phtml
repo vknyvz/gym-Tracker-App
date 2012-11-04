@@ -1,0 +1,13 @@
+<div id="footer">
+	<?= $this->t->_('Software written by Volkan Yavuz'); ?>
+</div>
+
+<div id="copyright">
+	<?= sprintf($this->t->_('Powered by %s'), '<a href="http://www.vknyvz.com/" title="vkNgine v' . vkNgine_Version::VERSION . '">vkNgine v' . vkNgine_Version::VERSION . '</a>'); ?>	
+</div>
+
+<?= $this->partial('_dialog.phtml', array('t' => $this->t)); ?>
+			
+</body>
+
+</html>

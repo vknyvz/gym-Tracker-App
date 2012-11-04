@@ -1,0 +1,87 @@
+<section id="maincontainer">
+	<div id="main">
+		<div class="box">
+		  <div class="box-header">
+		    <h1><?= $this->t->_('My Settings'); ?></h1>
+		  </div>
+		  
+		  <div class="box-content">
+		    <div>
+		      <h3><?= $this->t->_('My Settings'); ?></h3>
+		      <p>
+		      	<?= $this->formSettings; ?>
+		      </p>
+		    </div>
+		  </div>
+		  
+		  <div class="box-content">
+		    <div>
+		      <h3><?= $this->t->_('Language'); ?></h3>
+		      <p>
+				<a class="language" href="javascript:void(0);" rel="tr"><img src="/images/Turkey.png" width="32"></a>
+				<a class="language" href="javascript:void(0);" rel="en"><img src="/images/Us.png" width="32"></a>
+			  </p>
+			  <p class="warning"><?= $this->t->_('Clicking a flag will change the language for the current session'); ?> </p>
+		    </div>
+		  </div>
+		</div>
+    </div>
+</section>
+
+<style>
+.description {margin-top:20px;}
+dt { padding-bottom:15px; font-size:14px;}
+</style>
+
+<script>
+$('.description').addClass('warning');
+
+$('.setCalendarView').change(function(){
+	var selected = $(".setCalendarView option:selected");    
+	if(selected.val()){
+		$.ajax( {
+			url: '/my-account/index/method/1/calendarview/1/value/' + selected.val(),
+			dataType : 'json',
+			success: function(data) {
+				$.gritter.add({
+					title: data.title,
+					text: data.message,
+					image: '/images/admin/icons/success.png',
+					sticky: false,
+					time: 3000
+				});
+			}
+		});
+	}
+});
+
+$("input[name='notifications']").change(function(){
+	$.ajax( {
+			url: '/my-account/index/method/get/notifications/1/value/' + $(this).val(),
+			dataType : 'json',
+			success: function(data) {
+				$.gritter.add({
+					title: data.title,
+					text: data.message,
+					image: '/images/admin/icons/success.png',
+					sticky: false,
+					time: 3000
+				});
+			}
+		});
+});
+
+$('.language').bind('click', function() {
+	var lang = $(this).attr('rel');
+	
+	$.ajax( {
+		url: '/my-account/language/lang/' + lang,
+		dataType : 'json',
+		success: function(data) {
+			if(data.success)
+				window.top.location = '/';
+		}
+	});
+	return false;
+}); 
+</script>

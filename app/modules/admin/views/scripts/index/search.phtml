@@ -1,0 +1,25 @@
+<?php 
+	if(0 < $this->usersFound) :
+?>
+<div class="search-results">
+	<h2><?= sprintf($this->t->_('Search results for &s'), '<i>'.$this->q.'</i>'); ?></h2>
+	
+	<ul>
+		<li>
+			<a href="javascript:void(0);" title="<?= $this->plural($this->usersFound, 'User'); ?> <?= $this->t->_('found') ?>">
+				<?= $this->plural($this->usersFound, $this->t->_('User')); ?> <?= $this->t->_('found') ?>
+				<span>
+					<?php
+						foreach($this->users as $user) {
+							echo '<u>#</u> ' . $user->getId() . ' <u>Email</u> ' . $user->email . ' <br>';
+							
+						}
+					?>
+				</span>			
+			</a>
+		</li>
+	</ul>
+</div>
+<?php 
+	endif;
+?>

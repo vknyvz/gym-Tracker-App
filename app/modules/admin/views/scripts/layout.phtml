@@ -1,0 +1,6 @@
+<?= $this->partial('layout_header.phtml', array('appTitle' => $this->appTitle, 'user' => $this->user, 't' => $this->t)); ?>
+<div id="vkNgine-loaded-content" style="position:relative">
+	<?= $this->layout()->content; ?>
+</div>
+
+<?= $this->partial('layout_footer.phtml', array('t' => $this->t)); ?>

@@ -1,0 +1,38 @@
+<div class="titlebar">
+	<h3><?= $this->t->_('GYM Tracker'); ?></h3>
+	<a href="#" class="toggle">&nbsp;</a>
+</div>
+
+<div class="block_cont ui-tabs-panel ui-widget-content ui-corner-bottom">
+	<h4><?= $this->t->_('Search results');?>: `<i><?= $this->q; ?></i>`</h4>
+	<h5><?= sprintf($this->t->_('%s exercises were found'), count($this->exercises)); ?></h5>
+	<?php if( 0 != count($this->exercises)): ?>
+	<div class="table">
+		<table>
+		<thead>
+			<tr>
+				<th><?= $this->t->_('Exercise Name Capital'); ?></th>
+			    <th><?= $this->t->_('Primary Muscle Capital'); ?></th> 
+			    <th><?= $this->t->_('Secondary Muscle Capital'); ?></th> 
+			    <th><?= $this->t->_('Mechanics Capital'); ?></th>
+			    <th><?= $this->t->_('Equipment Used Capital'); ?></th>
+			</tr>
+		</thead>
+		<?php 
+			foreach($this->exercises as $exercise):
+		?>
+			<tr>
+				<td><a href="<?= $this->publicUrl('view', 'index') ?>/id/<?= $exercise['exerciseId']; ?>"><?= $exercise['name']; ?></a></td>
+				<td><?= $exercise['primaryMuscle']; ?></td>
+				<td><?= $exercise['secondaryMuscle']; ?></td>
+				<td><?= $exercise['mechanics']; ?></td>
+				<td><?= $exercise['equipmentUsed']; ?></td>
+			</tr>
+		<?php 
+			endforeach;
+		?>
+		</table>
+	</div>
+	<?php endif; ?>	
+</div>
+

@@ -1,0 +1,31 @@
+<ul>
+	<li><a href="#login"><?= $this->t->_('Login Capital'); ?></a></li>
+	<li><a href="#recover"><?= $this->t->_('Recover Password Capital'); ?></a></li>
+</ul>
+					
+<div id="login">
+	<?= $this->loginForm; ?>
+</div>
+
+<div id="recover">
+	<?= $this->recoverForm; ?>
+</div>
+
+<script>
+	$(document).ready(function(){
+		var optionsLoginForm = {  
+			url: '/admin/auth/login',
+	        success: vkNgineAjaxFormSubmit,
+			dataType : 'json'		
+	    };
+
+		var optionsRecoverForm = {  
+				url: '/admin/auth/recover',
+		        success: vkNgineAjaxFormSubmit,
+				dataType : 'json'		
+		    };
+	    
+		$('#<?= $this->loginForm->getId(); ?>').ajaxForm(optionsLoginForm);
+		$('#<?= $this->recoverForm->getId(); ?>').ajaxForm(optionsRecoverForm);
+	});
+</script>

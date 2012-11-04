@@ -1,0 +1,44 @@
+<?= $this->form; ?>
+
+<script>
+$(document).ready(function(){
+	$("#email").focus();
+
+	var options = {  
+		url: '<?= $this->form->getAction(); ?>',
+        success: vkNgineAjaxFormSubmit,
+		dataType : 'json'
+    };
+    
+	$('#<?= $this->form->getId(); ?>').ajaxForm(options);
+
+	$('.ajax-enabled').removeClass('ajax-enabled');
+	$('.vkNgineForm').addClass('ajax-enabled-full-width');
+	$('.vkNgineLabel').removeClass('vkNgineLabel');
+	$('.ajax-enabled-full-width label').addClass('vkNgineLabel-short');
+	$('fieldset legend').addClass('ui-box-header ui-corner-all');   
+});
+</script>
+
+<script id="usersTemplate" type="text/x-jquery-tmpl"> 
+<tr class="${className}" id="user-${itemId}">
+	<td class="center">${itemId}</td> 
+    <td>${fullName}</td> 
+    <td>${email}</td> 
+    <td>${level}</td> 
+    <td>${active}</td> 
+    <td>${lastLogin}</td> 
+    <td>
+		<a class="btn_no_text btn ui-state-default ui-corner-all tooltip" href="javascript:void(0);" 
+		   onclick="btn_edituser('${Save}', '${Cancel}', '${href}', '${itemId}', '${title}');" title="${tagTitle}">
+			<span class="ui-icon ui-icon-wrench"></span>
+		</a>
+	{{if masterUser == "no" }}
+		<a onclick="btn_deleteuser('${Yes}', '${No}', ${itemId});" href="javascript:void(0);" class="btn_no_text btn ui-state-default ui-corner-all tooltip" title="${tagTitleDelete}">
+			<span class="ui-icon ui-icon-trash"></span>
+		</a>
+	{{/if}}
+	</td>
+</tr>
+</script>
+

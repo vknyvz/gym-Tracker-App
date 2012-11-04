@@ -1,0 +1,92 @@
+<script type="text/javascript">
+$(document).ready(function() {
+	$('body').removeClass('layout1280');
+	$('body').addClass('layout980');
+	
+	$("#sort-table")
+	.tablesorter({
+		widgets: ['zebra'],
+		headers: { 
+            6: { sorter: false } 
+        } 
+	})
+	
+	$(".header").append('<span class="ui-icon ui-icon-carat-2-n-s"></span>');
+
+	$('.tooltip').tooltip({
+			track: true,
+			delay: 0,
+			showURL: false,
+			showBody: " - ",
+			fade: 250
+	});
+});
+</script>
+
+<?= $this->partial('_breadcrumbs.phtml', array('breadcrumb' => $this->breadcrumb())); ?>
+
+<div id="page-layout" class="fixed">
+	<div id="page-content">
+		<div id="page-content-wrapper">
+			<div class="inner-page-title">
+				<h2><?= $this->t->_('Workouts Management'); ?></h2>
+				<span><?= $this->t->_('Here you can add/update or delete workouts in the system'); ?></span>
+			</div>
+			<div class="hastable">
+					<form action="" method="post" class="pager-form" name="myform">
+						<table id="sort-table"> 
+							<thead> 
+								<tr>
+									<th style="width:23px" class="header">#</th>
+								    <th class="header"><?= $this->t->_('Workout Name'); ?></th>
+								    <th class="header"><?= $this->t->_('Start Date'); ?></th>  
+								    <th class="header"><?= $this->t->_('End Date'); ?></th> 
+									<th style="width:100px"><?= $this->t->_('Actions'); ?></th> 
+								</tr> 
+							</thead> 
+						<tbody>
+						<?php 
+							if (count($this->workouts)) :
+								$i = 0;
+								foreach($this->workouts as $workout) :	
+						?>
+							<tr id="workout-<?= $workout->workoutId; ?>" class="<?php ($i % 2 == 0) ? 'even' : 'odd'; ?>">
+								<td class="center"><?= $workout->workoutId; ?></td> 
+							    <td><?= $this->escape($workout->name); ?></td> 
+							    <td><?= ($workout->startDate != '0000-00-00') ? $this->escape($this->dateFormat($workout->startDate, Zend_Date::DATE_FULL)) : $this->t->_('Never') ?></td>
+								<td><?= ($workout->endDate != '0000-00-00') ? $this->escape($this->dateFormat($workout->endDate, Zend_Date::DATE_FULL)) : $this->t->_('Never') ?></td> 
+							    <td>
+									<a onclick="btn_editworkout('<?= $this->t->_('Save'); ?>', '<?= $this->t->_('Cancel'); ?>', '<?= $this->adminUrl('edit', 'workouts'); ?>', <?= $workout->workoutId; ?>, '<?= $this->t->_('Workout is being edited'); ?>');" href="javascript:void(0);" class="btn_no_text btn ui-state-default ui-corner-all tooltip" title="<?= $this->t->_('Edit this workout'); ?>">
+										<span class="ui-icon ui-icon-wrench"></span>
+									</a>
+									<a onclick="btn_addexercisetoworkout('<?= $this->t->_('Save'); ?>', '<?= $this->t->_('Cancel'); ?>', '<?= $this->adminUrl('add-exercise', 'workouts'); ?>', <?= $workout->workoutId; ?>, '<?= $this->t->_('Workout is being edited'); ?>');" class="btn_no_text btn ui-state-default ui-corner-all tooltip" href="javascript:void(0);" class="btn_no_text btn ui-state-default ui-corner-all tooltip" title="<?= $this->t->_('Add Exercise to this Workout'); ?>">
+										<span class="ui-icon ui-icon-plusthick"></span>
+									</a>
+									<a onclick="btn_deleteworkout('<?= $this->t->_('Yes'); ?>', '<?= $this->t->_('No'); ?>', <?= $workout->workoutId; ?>);" href="javascript:void(0);" class="btn_no_text btn ui-state-default ui-corner-all tooltip" title="<?= $this->t->_('Delete this workout'); ?>">
+										<span class="ui-icon ui-icon-trash"></span>
+									</a>
+								</td>
+							</tr>
+						<?php 
+							    $i++;
+								endforeach;
+							endif;
+						?>						
+						</tbody>
+						</table>
+					</form>
+					
+					<div class="clear"></div>
+					
+					<?= $this->paginationControl($this->workouts, 'Sliding', '_paginator.phtml'); ?>
+					
+				</div>
+			
+			<?= $this->partial('layout-sidebar.phtml', array('section' => 'workouts', 't' => $this->t, 'refreshLink' => $this->adminUrl(null, 'workouts'))); ?>	
+					
+	<div class="clear"></div>			
+			</div>
+		<div class="clear"></div>
+	</div>
+	</div>
+	<div class="clear"></div>

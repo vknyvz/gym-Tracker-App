@@ -1,0 +1,68 @@
+	<script type="text/javascript">
+		$(function() {
+			$("#systemSettings").accordion({collapsible: true, active: false, autoHeight:false});
+
+			$('body').removeClass('layout1280');
+			$('body').addClass('layout980');
+		});
+	</script>
+   
+	<?= $this->partial('_breadcrumbs.phtml', array('breadcrumb' => $this->breadcrumb())); ?>
+
+	<div id="page-layout" class="fixed">
+	<div id="page-content">
+		<div id="page-content-wrapper">
+			<div class="inner-page-title">
+				<h2><?= $this->t->_('System Settings'); ?></h2>
+				<span><?= $this->t->_('Here you can adjust various aspects of this application'); ?></span>
+			</div>
+			<div class="content-box">
+				
+			<form action="<?= $this->adminUrl(null, 'system'); ?>" method="post" enctype="application/x-www-form-urlencoded" id="adminSystemSettingsForm">
+				<div id="systemSettings">
+					<?php foreach($this->form->getSubForms() as $forms) : ?>
+						<?= $this->partial('_accordions.phtml', 
+								array(
+									'title' => $this->t->_(str_replace('_', ' ', $forms->getName())),	
+									'form'  => $forms,
+								)
+							);
+						?>	
+					<?php endforeach; ?>	
+				</div>
+				<?php
+				   $submit = new vkNgine_Form_Element_Submit(
+								'submit', 
+								array('value' => Zend_Registry::get('t')->_('Save'), 
+									  'ignore' => true,
+									  'class' => 'ui-corner-all float-right ui-button'));
+				   
+				   echo $submit->render(); 
+				?>
+			</form>
+			<script>
+				$(document).ready(function(){
+					var options = {  
+						url: '/admin/system/',
+				        success: vkNgineAjaxFormSubmit,
+						dataType : 'json'		
+				    };
+				    
+					$('#adminSystemSettingsForm').ajaxForm(options);
+					
+					$('#Cache_Settings-cache_clear').bind('click', function() {
+						btn_cacheclear_dialog('<?= $this->t->_('Clean'); ?>', '<?= $this->t->_('Cancel'); ?>', '<?= $this->adminUrl('truncate-cache', 'system'); ?>');
+					});
+				});
+			</script>
+				
+			</div>
+					
+	<?= $this->partial('layout-sidebar.phtml', array('t' => $this->t, 'refreshLink' => $this->adminUrl(null, 'system'))); ?>			
+					
+	<div class="clear"></div>			
+			</div>
+		<div class="clear"></div>
+	</div>
+	</div>
+	<div class="clear"></div>

@@ -1,0 +1,23 @@
+<?php
+define('IN_DEVELOPMENT', APPLICATION_ENV === 'development');
+
+$this->headLink()->prependStylesheet($this->baseUrl('/css/error.css'));
+
+echo $this->doctype() . "\n";
+?>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://www.w3.org/2005/10/profile">
+
+<?php
+echo $this->headTitle() . "\n";
+echo $this->headMeta() . "\n";
+echo $this->headLink() . "\n";
+echo $this->headScript(). "\n";
+?>
+
+</head>
+
+<body>
+	<?= $this->layout()->content ?>
+</html>

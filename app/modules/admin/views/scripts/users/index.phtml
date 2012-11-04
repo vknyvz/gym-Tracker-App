@@ -1,0 +1,95 @@
+<script type="text/javascript">
+$(document).ready(function() {
+	$('body').removeClass('layout1280');
+	$('body').addClass('layout980');
+	
+	$("#sort-table")
+	.tablesorter({
+		widgets: ['zebra'],
+		headers: { 
+            6: { sorter: false } 
+        } 
+	})
+	
+	$(".header").append('<span class="ui-icon ui-icon-carat-2-n-s"></span>');
+
+	$('.tooltip').tooltip({
+			track: true,
+			delay: 0,
+			showURL: false,
+			showBody: " - ",
+			fade: 250
+	});
+});
+</script>
+
+<?= $this->partial('_breadcrumbs.phtml', array('breadcrumb' => $this->breadcrumb())); ?>
+
+<div id="page-layout" class="fixed">
+	<div id="page-content">
+		<div id="page-content-wrapper">
+			<div class="inner-page-title">
+				<h2><?= $this->t->_('User Management'); ?></h2>
+				<span><?= $this->t->_('Here you can adjust various settings of all users in the system'); ?></span>
+			</div>
+			<div class="hastable">
+					<form action="" method="post" class="pager-form" name="myform">
+						<table id="sort-table"> 
+							<thead> 
+								<tr>
+									<th style="width:23px" class="header">#</th>
+								    <th class="header"><?= $this->t->_('Full Name'); ?></th>
+								    <th class="header"><?= $this->t->_('Email'); ?></th>  
+								    <th class="header"><?= $this->t->_('Level'); ?></th> 
+								    <th style="width:55px" class="header"><?= $this->t->_('Active'); ?></th>
+								    <th><?= $this->t->_('Last Login'); ?></th>
+									<th style="width:70px"><?= $this->t->_('Actions'); ?></th> 
+								</tr> 
+							</thead> 
+						<tbody>
+						<?php 
+							if (count($this->users)) :
+								$i = 0;
+								foreach($this->users as $user) :	
+						?>
+							<tr id="user-<?= $user->userId; ?>" class="<?php ($i % 2 == 0) ? 'even' : 'odd'; ?>">
+								<td class="center"><?= $user->userId; ?></td> 
+							    <td><?= $this->escape($user->firstName . ' ' . $user->lastName); ?></td> 
+							    <td><?= $this->escape($user->email); ?></td> 
+							    <td><?= $this->t->_(ucfirst(strtolower($this->level[$user->userId]))); ?></td> 
+							    <td><?= $this->t->_($user->active); ?></td> 
+							    <td><?= ($user->lastLogin != '0000-00-00 00:00:00') ? $this->escape($this->dateFormat($user->lastLogin, Zend_Date::DATETIME)) : $this->t->_('Never') ?></td> 
+							    <td>
+									<a onclick="btn_edituser('<?= $this->t->_('Save'); ?>', '<?= $this->t->_('Cancel'); ?>', '<?= $this->adminUrl('edit', 'users'); ?>', <?= $user->userId; ?>, '<?= $this->t->_('User is being edited'); ?>');" href="javascript:void(0);" class="btn_no_text btn ui-state-default ui-corner-all tooltip" title="<?= $this->t->_('Edit this user'); ?>">
+										<span class="ui-icon ui-icon-wrench"></span>
+									</a>
+									<?php if(vkNgine_Config::getSystemConfig()->master->user != $user->userId) : ?>
+										<a onclick="btn_deleteuser('<?= $this->t->_('Yes'); ?>', '<?= $this->t->_('No'); ?>', <?= $user->userId; ?>);" href="javascript:void(0);" class="btn_no_text btn ui-state-default ui-corner-all tooltip" title="<?= $this->t->_('Delete this user'); ?>">
+											<span class="ui-icon ui-icon-trash"></span>
+										</a>
+									<?php endif; ?>
+								</td>
+							</tr>
+						<?php 
+							    $i++;
+								endforeach;
+							endif;
+						?>						
+						</tbody>
+						</table>
+					</form>
+					
+					<div class="clear"></div>
+					
+					<?= $this->paginationControl($this->users, 'Sliding', '_paginator.phtml'); ?>
+					
+				</div>
+			
+			<?= $this->partial('layout-sidebar.phtml', array('section' => 'users', 't' => $this->t, 'refreshLink' => $this->adminUrl(null, 'users'))); ?>	
+					
+	<div class="clear"></div>			
+			</div>
+		<div class="clear"></div>
+	</div>
+	</div>
+	<div class="clear"></div>

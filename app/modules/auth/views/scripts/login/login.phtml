@@ -1,0 +1,40 @@
+<div id="login_container">
+  <div id="login_form">
+    <form action="/auth/login" method="post" enctype="application/x-www-form-urlencoded" name="publicFormLogin" id="publicFormLogin">
+      <p>
+        <?= $this->form->username; ?>
+        <span class="error" style="display:none">
+			<label class="error" for="username" style="display: block;">
+				<?= $this->t->_('Username is required'); ?>
+			<span class="tip"></span>
+			</label>
+		</span>
+		<span class="icon tick valid success" style="display:none"></span>
+      </p>
+      <p>
+        <?= $this->form->password; ?>
+        <span class="error" style="display:none">
+			<label class="error" for="username" style="display: block;">
+				<?= $this->t->_('Password is required'); ?>
+			<span class="tip"></span>
+			</label>
+		</span>
+		<span class="icon tick valid success" style="display:none"></span>
+      </p>
+      <button type="submit" class="button blue lowercase"><span class="glyph key"></span> <?= $this->t->_('Login'); ?></button>
+    </form>
+  </div>
+</div>
+
+<script>
+	$("#username").focus();
+
+	var options = {  
+		url: '<?= $this->form->getAction(); ?>',
+        success: loginHandler,
+		dataType : 'json'
+    };
+    
+	$('#<?= $this->form->getId(); ?>').ajaxForm(options);
+</script>
+

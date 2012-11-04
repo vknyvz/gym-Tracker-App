@@ -1,0 +1,127 @@
+<?php
+echo $this->headScript()
+				->appendFile($this->baseUrl('/js/mobile/view-day.m.js'));
+echo $this->headLink()
+				->prependStylesheet($this->baseUrl('/css/mobile/iphone.css'));
+?>
+
+<style>
+.no-padding {
+	padding-bottom:2px;
+}
+ul {
+	margin: 0 10px 17px 0;
+}
+ul.field li h3.supplement {
+	width:45%
+}
+ul.field li a.supplement {
+	width:45%
+}
+ul.field li a.long {
+	width:100%
+}
+</style>
+
+<?= $this->partial('_page_icons.phtml', array('t' 		=> $this->t,
+											  'back' 	=> $this->publicUrl(null, 'calendar'),
+										      'ajax'    => $this->publicUrl('view-day', 'calendar') . '/date/' . $this->param['date'])); 
+?>
+
+<div class="full-width no-padding">
+	<h4 class="shadow"><?= $this->t->_('Workout Details') ?> :: <?= date('m-d-Y', strtotime($this->param['date'])); ?></h4>
+	<div class="decoration decoration-less-padding"></div>
+</div>
+
+<?php
+	if(0 != count($this->detail)) :
+?>
+	<h4 class="no-padding"><?= $this->t->_('Workout'); ?></h4>
+<ul class="field">
+<?php 
+	foreach($this->detail as $detail):
+		if($detail['workoutId']){
+?>
+	<li><h3><?= $this->t->_('Workout') ?></h3><a><?= $this->workoutDetail[$detail['workoutId']]; ?></a></li>
+	<li><h3><?= $this->t->_('Day') ?></h3><a><?= $detail['workoutDay']; ?></a></li>
+	<li><a>
+	<table style="width:270px;">
+		 <tbody>
+		 	<tr>
+		        <td style="border-bottom:1px dotted"><?= $this->t->_('Exercise Name'); ?></td>
+		        <td style="border-bottom:1px dotted;width:25px;"><?= $this->t->_('Sets'); ?></td>
+		        <td style="border-bottom:1px dotted;width:40px;"><?= $this->t->_('Reps'); ?></td>
+		      </tr>
+		  </tbody>
+	    <?php
+	    	foreach($this->workoutExercises->fetchAll('workoutId = ' . $detail['workoutId'] . ' and day = ' . $detail['workoutDay'], 'order ASC')->toArray() as $exercise):
+	    		$exerciseDetail = $this->exercises->fetch($exercise['exerciseId']);
+	    ?>
+	    	<tr>
+	    		<td><a class="loadexercise long" href="javascript:void(0);" rel="<?= $this->publicUrl('view', 'index') ?>/id/<?= $exercise['exerciseId']; ?>/ref/calendar,view-day,date,<?= $this->param['date']; ?>"><span style="border-bottom:1px dotted"><?= $exerciseDetail->getName() ?></span></a></td>
+	    		<td><?= $exercise['sets']; ?></td> 
+	    		<td><?= $exercise['reps']; ?></td>
+	    	</tr>
+	    <?php
+	    	endforeach; 
+	    ?>	
+    	</table>
+	</a></li>
+</ul>
+<?php }
+	endforeach;
+?>
+<?php endif; ?>
+
+<?php
+	if(0 != count($this->detail2)) :
+?>
+	<h4 class="no-padding"><?= $this->t->_('Activity'); ?></h4>
+
+<?php 
+	foreach($this->detail2 as $detail):
+?>
+	<ul class="field">
+<?php
+		if($detail['type']){
+?>
+	<li><h3 class="supplement"><?= $this->t->_('Type') ?></h3><a class="supplement"><?= $this->t->_($detail['type']); ?></a></li>	
+<?php
+		}
+		if($detail['activity']){
+?>
+	<li><h3 class="supplement"><?= $this->t->_('Activity') ?></h3><a class="supplement"><?= $detail['activity']; ?></a></li>	
+<?php				
+		}
+		if($detail['moreDetails']){
+?>
+	<li><h3 class="supplement"><?= $this->t->_('More Details') ?></h3><a class="supplement"><?= $detail['moreDetails']; ?></a></li>	
+<?php				
+		} 			
+?>
+	</ul>
+<?php
+	endforeach;
+?>
+
+<?php endif; ?>
+
+<?php
+	if(0 != count($this->dailyDetails)) :
+?>
+	<h4 class="no-padding"><?= $this->t->_('Supplements'); ?></h4>	
+<ul class="field">
+<?php 
+	foreach($this->dailyDetails as $detail):
+		if($detail['type'] == 'SUPPLEMENT') :
+?>
+	<li><h3 class="supplement"><?= $this->t->_('Supplement') ?></h3><a class="supplement"><?= $detail['value']; ?></a></li>	
+<?php 
+		endif;
+?>
+<?php
+	endforeach;
+?>
+</ul>
+
+<?php endif; ?>

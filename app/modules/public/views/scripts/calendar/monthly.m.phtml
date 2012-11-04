@@ -1,0 +1,169 @@
+<?=
+$this->headScript()
+		->appendFile($this->baseUrl('/js/mobile/monthly.m.js'));
+?>
+
+<div id="vkNgine-calendar-iphone-menu-content-on" style="display: none">
+	<p>
+		<a class="loadadddaydetails iphoneblack iphonebutton" rel="<?= $this->publicUrl('add-daily', 'calendar') ?>/date/"><?= $this->t->_('add day details'); ?></a> 
+		<a class="loadmarkas iphoneblack iphonebutton" rel="<?= $this->publicUrl('mark-day', 'calendar') ?>/mode/off/date/"><?= $this->t->_('mark as off day'); ?></a> 
+		<a class="loadviewday iphonewhite iphonebutton" rel="<?= $this->publicUrl('view-day', 'calendar') ?>/date/"><?= $this->t->_('view day'); ?></a> 
+		<a class="iphonered iphonebutton close"><?= $this->t->_('close'); ?></a>
+	</p> 
+</div>
+ 
+<div id="vkNgine-calendar-iphone-menu-content-off" style="display: none">
+	<p>
+		<a class="loadadddaydetails iphoneblack iphonebutton" rel="<?= $this->publicUrl('add-daily', 'calendar') ?>/date/"><?= $this->t->_('add day details'); ?></a> 
+		<a class="loadmarkas iphoneblack iphonebutton" rel="<?= $this->publicUrl('mark-day', 'calendar') ?>/mode/on/date/"><?= $this->t->_('mark as on day'); ?></a> 
+		<a class="loadviewday iphonewhite iphonebutton" rel="<?= $this->publicUrl('view-day', 'calendar') ?>/date/"><?= $this->t->_('view day'); ?></a> 
+		<a class="iphonered iphonebutton close"><?= $this->t->_('close'); ?></a>
+	</p> 
+</div>
+
+<?= $this->partial('_page_icons.phtml', array('t' 		=> $this->t,
+											  'back' 	=> false,
+										      'ajax'    => $this->publicUrl(null, 'calendar'))); 
+?>
+
+<div class="full-width">
+	<h4 class="shadow"><?= $this->t->_('Calendar lower'); ?> :: <?= $this->t->_(date('F', $this->calendar->getTimeStamp())); ?> <?= date('Y', $this->calendar->getTimeStamp()); ?></h4>
+	<div class="decoration decoration-less-padding"></div>
+			<table class="vkNgine-calendar-border-separate" style="width:100%;text-align:center">
+				<thead>
+					<tr class="vkNgine-calendar-first">
+						<th style="width: 127px;" class="vkNgine-calendar-mon vkNgine-calendar-widget-header vkNgine-calendar-first"><?= $this->t->_('Monday short'); ?></th>
+						<th style="width: 127px;" class="vkNgine-calendar-tue vkNgine-calendar-widget-header"><?= $this->t->_('Tuesday short'); ?></th>
+						<th style="width: 127px;" class="vkNgine-calendar-wed vkNgine-calendar-widget-header"><?= $this->t->_('Wednesday short'); ?></th>
+						<th style="width: 127px;" class="vkNgine-calendar-thu vkNgine-calendar-widget-header"><?= $this->t->_('Thursday short'); ?></th>
+						<th style="width: 127px;" class="vkNgine-calendar-fri vkNgine-calendar-widget-header"><?= $this->t->_('Friday short'); ?></th>
+						<th style="width: 127px;" class="vkNgine-calendar-sat vkNgine-calendar-widget-header"><?= $this->t->_('Saturday short'); ?></th>
+						<th style="width: 127px;" class="vkNgine-calendar-sun vkNgine-calendar-widget-header vkNgine-calendar-last"><?= $this->t->_('Sunday short'); ?></th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php
+						while ( $day = $this->calendar->fetch() ) {							
+							$modelDailyExercises = new Public_Model_Daily_Exercises();
+							$modelDailyDetails = new Public_Model_Daily_Details();
+							$days = $modelDailyExercises->fetchByDate($day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay(), $this->user);							
+							$details = $modelDailyDetails->fetchByDate($day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay(), $this->user);
+							
+							$firstLast = null;
+					    	if($day->isLast()) {
+					    		$firstLast = 'vkNgine-calendar-last';
+					    	}
+					    	if($day->isFirst()) {
+					    		$firstLast = 'vkNgine-calendar-first';
+					    	}
+						       	
+						    if($day->isFirst())
+						    	echo "<tr>\n";
+						        	
+						    if($day->isSelected() ) {
+						   	 	$cssBgColor = null;
+						    	$j = null;
+						    	$offon = 'data="off"';
+						    	for($k=0; $k<count($details); $k++) {
+						    		if($details[$k]['type'] == 'COLOR' and $details[$k]['value'] == 'LightSlateGray') {
+						    			$cssBgColor = 'style="background-color:' . $details[$k]['value'] . '" ';
+						    			$offon = 'data="on"';
+						    		}
+						    	}
+						    	
+						    	for($i=0; $i<count($days); $i++) {
+						    		if($days[$i]['workoutId'] or $days[$i]['activity'] or $days[$i]['type']) {
+						    			$cssBgColor = 'style="background-color: OrangeRed;" ';
+						    			$offon = 'data="disabled"';
+						    		}
+						    	}
+						    	
+						        echo "<td {$cssBgColor} {$offon} rel=\"{$day->thisYear()}-{$day->thisMonth()}-{$day->thisDay()}\" class=\"vkNgine-calendar-state-highlight vkNgine-calendar-menu vkNgine-calendar-widget-content {$firstLast}\">
+										  {$day->thisDay()}
+						       		  </td>";
+						    } 
+						    else if ($day->isEmpty()) {
+						    	$cssBgColor = null;
+						    	$j = null;
+						    	$offon = 'data="off"';
+						    	for($k=0; $k<count($details); $k++) {
+						    		if($details[$k]['type'] == 'COLOR' and $details[$k]['value'] == 'LightSlateGray') {
+						    			$cssBgColor = 'style="background-color:' . $details[$k]['value'] . '" ';
+						    			$offon = 'data="on"';
+						    		}
+						    	}
+						    	
+						    	for($i=0; $i<count($days); $i++) {
+						    		if($days[$i]['workoutId'] or $days[$i]['activity'] or $days[$i]['type']) {
+						    			$cssBgColor = 'style="background-color: OrangeRed;" ';
+						    			$offon = 'data="disabled"';
+						    		}
+						    	}
+						    	
+						        echo "<td {$cssBgColor} {$offon} rel=\"{$day->thisYear()}-{$day->thisMonth()}-{$day->thisDay()}\" style=\"color:gray\" class=\"vkNgine-calendar-menu {$firstLast}\">
+						        			{$day->thisDay()}
+						       		  </td>";
+						    }
+						    else {
+						    	$cssBgColor = null;
+						    	$j = null;
+						    	$offon = 'data="off"';
+						    	for($k=0; $k<count($details); $k++) {
+						    		if($details[$k]['type'] == 'COLOR' and $details[$k]['value'] == 'LightSlateGray') {
+						    			$cssBgColor = 'style="background-color:' . $details[$k]['value'] . '" ';
+						    			$offon = 'data="on"';
+						    		}
+						    	}
+						    	
+						    	for($i=0; $i<count($days); $i++) {
+						    		if($days[$i]['workoutId'] or $days[$i]['activity'] or $days[$i]['type']) {
+						    			$cssBgColor = 'style="background-color: OrangeRed;" ';
+						    			$offon = 'data="disabled"';
+						    		}
+						    	}
+						    	
+						        echo "<td {$cssBgColor} {$offon} rel=\"{$day->thisYear()}-{$day->thisMonth()}-{$day->thisDay()}\" class=\"vkNgine-calendar-menu {$firstLast}\">
+						        		  {$day->thisDay()}
+						       		  </td>";
+						    }
+						    
+						    if($day->isLast())
+						        echo ( "</tr>\n" );						        
+					   	}						
+					?>
+				</tbody>	
+		</table>
+	</div>
+	<br>
+	<?php 
+		if(0 != count($this->otherdata)) :
+	?>
+      <div class="full-width">
+		<h4 class="shadow"><?= $this->t->_('Other Monthly Recorded Data'); ?></h4>
+		<div class="decoration decoration-less-padding"></div>
+			  <table style="width:100%;text-align:center">
+			    <thead>
+			      <tr>
+			        <th><?= $this->t->_('Value'); ?></th>
+					<th><?= $this->t->_('Type'); ?></th>
+					<th><?= $this->t->_('Record Date'); ?></th>
+			      </tr>
+			    </thead>
+			    <tbody>
+	      		<?php
+					foreach($this->otherdata as $data) :
+				?>	
+					<tr>
+						<td><?= $data['value']?></td>
+						<td><?= ($data['type'] == 'WEIGHT') ? $this->t->_('Weight') : $this->t->_('Not Entered'); ?></td>
+						<td><?= $this->escape($this->dateFormat($data['date'], Zend_Date::DATE_MEDIUM)); ?></td>
+					</tr>
+				<?php 
+					endforeach;
+				?>
+	      </tbody>
+	      </table>
+	</div>
+	<?php endif; ?>
+
+	
