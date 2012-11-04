@@ -1,0 +1,70 @@
+<section id="maincontainer">
+   <div id="main">
+      
+      <div class="box">
+		  <div class="box-header">
+		    <h1><?= $this->t->_('My Workouts'); ?></h1>
+		  </div>
+		
+		  <table class="datatable">
+		    <thead>
+		      <tr>
+		        <th><?= $this->t->_('Workout Name'); ?></th>
+		        <th><?= $this->t->_('Days'); ?></th>
+		        <th><?= $this->t->_('Start Date'); ?></th>
+		        <th><?= $this->t->_('End Date'); ?></th>
+		        <th style="width:185px;"><?= $this->t->_('Actions'); ?></th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		    <?php
+				foreach($this->workouts as $workout) :
+			?>	
+		      <tr>
+		        <td><a href="<?= $this->publicUrl('view-workout', 'my-account'); ?>/id/<?= $workout['workoutId']; ?>"><?= $this->escape($workout['name']); ?></a></td>
+		        <td><?= $this->escape($workout['day']); ?></td>
+		        <td><?= ($workout['startDate'] != '0000-00-00') ? $this->escape($this->dateFormat($workout['startDate'], Zend_Date::DATE_FULL)) : $this->t->_('Not entered') ?></td>
+		        <td><?= ($workout['endDate'] != '0000-00-00') ? $this->escape($this->dateFormat($workout['endDate'], Zend_Date::DATE_FULL)) : $this->t->_('Not entered') ?></td>
+		        <td>
+		          <a class="button plain manageworkout" href="javascript:void(0);" rel="<?= $workout['workoutId']; ?>">
+		          	<?= $this->t->_('Manage'); ?>
+		          </a>
+		          <a class="button plain editworkout" href="javascript:void(0);" rel="<?= $workout['workoutId']; ?>">
+		          	<?= $this->t->_('Edit'); ?>
+		          </a>
+		          <a class="button plain deleteworkout" href="javascript:void(0);" rel="<?= $workout['workoutId']; ?>">
+		          	<?= $this->t->_('Delete Capital'); ?>
+		          </a>
+		        </td>
+		      </tr>
+		    <?php 
+				endforeach;
+			?>
+		    </tbody>
+		  </table>
+		  <div>
+			<a class="button btn_add_selected_workouts lowercase editworkout" href="#">
+				<span class="glyph plus"></span>
+					<?= $this->t->_('Add New Workout');?>
+			</a>
+	      </div>
+		</div>
+	</div>
+</section>
+
+<script>
+$('.editworkout').bind('click', function() {
+	var id = $(this).attr('rel');
+	btn_editworkout('<?= $this->t->_('Save'); ?>', '<?= $this->t->_('Cancel'); ?>', id);
+});
+
+$('.manageworkout').bind('click', function() {
+	var id = $(this).attr('rel');
+	btn_manageworkout('<?= $this->t->_('Close'); ?>', id);
+});
+
+$('.deleteworkout').bind('click', function() {
+	var id = $(this).attr('rel');
+	btn_deleteworkout('<?= $this->t->_('Delete'); ?>', '<?= $this->t->_('Cancel'); ?>', id);
+});
+</script>

@@ -1,0 +1,41 @@
+<?= $this->form; ?>
+
+<script>
+$(document).ready(function(){
+	$('select#type').select_skin();
+	
+	var options = {  
+		url: '<?= $this->form->getAction(); ?>',
+        success: vkNgineAjaxFormSubmit,
+		dataType : 'json'
+    };
+    
+	$('#<?= $this->form->getId(); ?>').ajaxForm(options);
+});
+
+$('#value').hide();
+$('#color-label').hide();
+$('#color-element').hide();
+
+$(".select").change(function(){
+	var selected = $("#type option:selected");    
+	if(selected.val() == 'COLOR'){
+		$('#color-label').show();
+		$('#color-element').show();
+		$('select#color').select_skin();
+		$('#value').hide();
+	}
+	else if(selected.val() == 'SUPPLEMENT'){
+		$('#color-label').hide();
+		$('#color-element').hide();
+		$('#value').show();
+	}
+	else {
+		$('#value').hide();
+		$('#color-label').hide();
+		$('#color-element').hide();
+	}
+	
+});
+
+</script>

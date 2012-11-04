@@ -1,0 +1,230 @@
+<style>
+.box-content ul li {list-style: none;}
+</style>
+
+<section id="maincontainer" style="height:430px;">
+   <div id="main">
+      
+      <div class="box">
+		  <div class="box-header">
+		    <h1><?= $this->t->_('My Plate'); ?> :: 
+		    <?php 
+		    	if('tr' == vkNgine_Config::getSystemConfig()->language->locale) {	 
+		    		echo date('j ') . ' ' . $this->t->_(date('F') . ' Capital') . ' ' . date(' Y');
+		    	}
+		    	else {
+		    		echo date('F j, Y');
+		    	}
+		    ?>
+			 </h1>
+		  </div>
+		  <div class="box-content">
+		      <div>		    	
+		      	  <h3><?= $this->t->_('My Meals'); ?></h3>
+		      	  <p>
+			      	<?= $this->formMeals; ?>
+			      </p>
+			      <a class="button lowercase addmeal" href="#">
+				      <span class="glyph plus"></span><?= $this->t->_('Add Meal'); ?>
+				  </a>
+			  </div>
+		 </div>
+		 <div class="box-content">		 
+			  <div>
+			      <h3><?= $this->t->_('Foods'); ?></h3>
+			      <p>
+			      <table>
+			      	  <tr>
+			      	  	<td style="width:500px">
+			      	  		<?= $this->formFoods->foodId; ?>
+				      	  	<?= $this->formFoods->foodSearch; ?>
+				      	  	<div id="servingSize" style="padding-top:10px;padding-left:3px">Serving Size: <span id="servingSizeValue"></span></div>
+				      	</td>
+					  	<td><?= $this->formFoods->servingSize; ?>
+					  		<?= $this->formFoods->servingSizes; ?>
+					  	</td>
+					  </tr>
+				  </table>
+				 
+				  <a class="button lowercase addfood" href="#">				  
+				      <span class="glyph plus"></span><?= $this->t->_('Add Food'); ?>
+				  </a>
+			  </div>		 	
+		 </div>	  
+	</div>
+</section>
+
+<section id="maincontainer" style="height:350px;">
+	<div id="main">
+      <div class="box">
+		  <div class="box-header">
+		    <h1><?= $this->t->_('Foods'); ?> :: <?= $this->t->_('Daily Intake'); ?> :: 
+		    <?php 
+		    	if('tr' == vkNgine_Config::getSystemConfig()->language->locale) {	 
+		    		echo date('j ') . ' ' . $this->t->_(date('F') . ' Capital') . ' ' . date(' Y');
+		    	}
+		    	else {
+		    		echo date('F j, Y');
+		    	}
+		    ?>
+		    </h1>
+		  </div>
+	  <div class="box-content">
+	      <div>	
+	      	<table>
+	      		<tr>
+	      			<th><?= $this->t->_('Name'); ?></th>
+	      			<th><?= $this->t->_('Servings'); ?></th>
+	      			<th><?= $this->t->_('Calories'); ?></th>
+	      			<th><?= $this->t->_('Fat'); ?></th>
+	      			<th><?= $this->t->_('Cholesterol'); ?></th>
+	      			<th><?= $this->t->_('Sodium'); ?></th>
+	      			<th><?= $this->t->_('Carbs'); ?></th>
+	      			<th><?= $this->t->_('Fiber'); ?></th>
+	      			<th><?= $this->t->_('Protein'); ?></th>
+	      			<th><?= $this->t->_('Sugars'); ?></th>
+	      		</tr>
+	      	  <?php 
+	      	    foreach($this->dailyIntake as $intake):
+	      	  		if($intake['mealId']):
+	      	    		$modelMeals = new Model_Meals();
+					    $meal = $modelMeals->fetchMealTotal($intake['mealId']);
+					    
+					    $modelMealsFoods = new Model_Meals_Foods();
+					    $foods = $modelMealsFoods->fetchAll('mealId = ' . $intake['mealId']);
+					    
+			  ?>
+	      	  	<tr>
+	      			<td><?= $meal['title']; ?></td>
+	      	  		<td><?php 
+	      	  				foreach($foods as $food) {
+	      	  					$modelFoods = new Model_Foods();
+	      	  					$foodDetail = $modelFoods->fetch($food['foodId']);
+	      	  					
+	      	  					echo $foodDetail->getName() . ' x ' . $food['servingSize'] . '  <br> ';
+	      	  				}
+	      	  		    ?>
+	      	  		</td>
+	      	  		<td><?= $meal['calories']; ?></td>
+	      	  		<td><?= $meal['fat']; ?></td>
+	      	  		<td><?= $meal['cholesterol']; ?></td>
+	      	  		<td><?= $meal['sodium']; ?></td>
+	      	  		<td><?= $meal['carbs']; ?></td>
+	      	  		<td><?= $meal['fiber']; ?></td>
+	      	  		<td><?= $meal['protein']; ?></td>
+	      	  		<td><?= $meal['sugar']; ?></td>
+	      		</tr>
+	      	  <?php 	      	  			
+	      	  		else:
+	      	  			$modelFoods = new Model_Foods();
+	      	  			$food = $modelFoods->fetch($intake['foodId'])->toArray();
+	      	  ?>
+	      	  	<tr>
+	      			<td><?= $food['name']; ?></td>
+	      	  		<td><?= $intake['servingSize']; ?> <?= $food['servingSizeType']?></td>
+	      			<td><?= ($food['calories']) ? $food['calories'] * $intake['servingSize'] : 'N/A'; ?></td>
+	      			<td><?= ($food['fat']) ? $food['fat'] * $intake['servingSize'] : 'N/A'; ?></td>
+	      			<td><?= ($food['cholesterol']) ? $food['cholesterol'] * $intake['servingSize'] : 'N/A'; ?></td>
+	      			<td><?= ($food['sodium']) ? $food['sodium'] * $intake['servingSize'] : 'N/A'; ?></td>
+	      			<td><?= ($food['carbs']) ? $food['carbs'] * $intake['servingSize'] : 'N/A'; ?></td>
+	      			<td><?= ($food['fiber']) ? $food['fiber'] * $intake['servingSize'] : 'N/A'; ?></td>
+	      			<td><?= ($food['protein']) ? $food['protein'] * $intake['servingSize'] : 'N/A'; ?></td>
+	      			<td><?= ($food['sugar']) ? $food['sugar'] * $intake['servingSize'] : 'N/A'; ?></td>
+	      		</tr>
+	      	  <?php 
+	      	  		endif;
+	      		endforeach; 
+	      	  ?>
+	      	  	<tr>
+	      	  		<td><span style="float:right">Total</span></td>
+	      	  		<td>-</td>
+	      	  		<td><?= $this->dailyTotals['calories']; ?></td>
+	      	  		<td><?= $this->dailyTotals['fat']; ?></td>
+	      	  		<td><?= $this->dailyTotals['cholesterol']; ?></td>
+	      	  		<td><?= $this->dailyTotals['sodium']; ?></td>
+	      	  		<td><?= $this->dailyTotals['carbs']; ?></td>
+	      	  		<td><?= $this->dailyTotals['fiber']; ?></td>
+	      	  		<td><?= $this->dailyTotals['protein']; ?></td>
+	      	  		<td><?= $this->dailyTotals['sugar']; ?></td>
+	      	  	</tr>
+	      	  </table>	      	  
+		  </div>
+	  </div>
+	</div>
+	</div>
+</section>
+
+<script type="text/javascript">
+ 	var options = {
+		script:"/my-account/my-plate?food=1&",
+		varname:"foodsearch",
+		json:true,
+		shownoresults:true,
+		maxresults:100,
+		maxentries:100,
+		delay:1,
+		callback: function (obj) { 
+			$('#foodId').val(obj.id);  
+			$('#servingSizeValue').html(obj.servingSize);		
+			$("#servingSizes option[value=" + obj.servingSizeType + "]").attr('selected', 'selected');			
+		}
+	};
+	var as_json = new bsn.AutoSuggest('foodSearch', options);
+</script>
+
+<script>
+$(function(){
+	$('#servingSizes').select_unskin();
+		
+	var date = '<?= date('Y-m-d'); ?>';
+	
+	$('.addmeal').bind('click', function() {
+		var mealId = $('#meals').val();
+		
+		$.ajax( {
+	        url: '/my-account/my-plate/mealId/' + mealId + '/date/' + date,
+	        dataType : 'json',
+	        success: function(data) { 
+		        if(data.success){
+		        	$.gritter.add({
+						title: data.title,
+						text: data.message,
+						image: '/images/admin/icons/success.png',
+						sticky: false,
+						time: 3000
+					});
+		        }
+			}
+	       }
+	    );
+	});
+
+	$('.addfood').bind('click', function() {
+		var foodId = $('#foodId').val();
+		var servingSize = $('#servingSize').val();
+		var servingSizes = $('#servingSizes').val();
+		
+		if(!foodId || !servingSize || !servingSizes) {
+			alert('Please enter a food, how much of it consumed, and consumed serving size.');
+			return false;
+		}
+
+		$.ajax( {
+	        url: '/my-account/my-plate/foodIds/' + foodId + '/servingSize/' + servingSize + '/servingSizes/' + servingSizes + '/date/' + date,
+	        dataType : 'json',
+	        success: function(data) { 
+		        if(data.success){
+		        	$.gritter.add({
+						title: data.title,
+						text: data.message,
+						image: '/images/admin/icons/success.png',
+						sticky: false,
+						time: 3000
+					});
+		        }
+			}
+	       }
+	    );
+	});
+});
+</script>

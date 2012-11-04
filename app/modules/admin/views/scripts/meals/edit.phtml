@@ -1,0 +1,33 @@
+<?= $this->form; ?>
+
+<script>
+$(document).ready(function(){
+	$("#title").focus();
+
+	var options = {  
+		url: '<?= $this->form->getAction(); ?>',
+        success: vkNgineAjaxFormSubmit,
+		dataType : 'json'
+    };
+    
+	$('#<?= $this->form->getId(); ?>').ajaxForm(options);
+});
+</script>
+
+<script id="mealsTemplate" type="text/x-jquery-tmpl"> 
+<tr class="${className}" id="meal-${itemId}">
+	<td class="center">${itemId}</td> 
+    <td>${titlee}</td> 
+    <td>
+		<a class="btn_no_text btn ui-state-default ui-corner-all tooltip" href="javascript:void(0);" onclick="btn_editmeal('${Save}', '${Cancel}', '${href}', '${itemId}', '${title}');" title="${tagTitle}">
+			<span class="ui-icon ui-icon-wrench"></span>
+		</a>
+		<a onclick="btn_addfoodtomeal('${Yes}', '${No}', '${href2}', ${itemId}, '${title}');" class="btn_no_text btn ui-state-default ui-corner-all tooltip" href="javascript:void(0);" class="btn_no_text btn ui-state-default ui-corner-all tooltip" title="${tagTitleFood}">
+			<span class="ui-icon ui-icon-plusthick"></span>
+		</a>
+		<a onclick="btn_deletemeal('${Yes}', '${No}', ${itemId});" href="javascript:void(0);" class="btn_no_text btn ui-state-default ui-corner-all tooltip" title="${tagTitleDelete}">
+			<span class="ui-icon ui-icon-trash"></span>
+		</a>
+	</td>
+</tr>
+</script>

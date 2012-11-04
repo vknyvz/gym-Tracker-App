@@ -1,0 +1,48 @@
+<?php
+define('IN_DEVELOPMENT', APPLICATION_ENV === 'development');
+
+echo $this->doctype() . "\n";
+
+$this->headLink()
+		->prependStylesheet($this->baseUrl('/css/reset.css'))
+		->headLink(array('rel' => 'icon', 'href' => $this->baseUrl('dumbbell.ico'), 'type' => 'image/x-icon', 'PREPEND'))
+		->appendStylesheet($this->baseUrl('/css/icons.css'))
+		->appendStylesheet($this->baseUrl('/css/formalize.css'))
+		->appendStylesheet($this->baseUrl('/css/fonts.css'))
+	 	->appendStylesheet($this->baseUrl('/css/style.css'))
+	 	->appendStylesheet($this->baseUrl('/css/portrait.css'), 'all and (orientation:portrait)')
+	 	->headLink(array('rel' => 'apple-touch-icon', 'href' => '/V.ico'));
+	 			 
+$this->headScript()
+	 	->prependFile($this->baseUrl('/js/jquery-1.7.1.js'))
+	 	->appendFile($this->baseUrl('/js/form.js'))
+	 	->appendFile($this->baseUrl('/js/public/dialog.js'))
+	 	->appendFile($this->baseUrl('/js/public/html5.js'), 'text/javascript', array('conditional' => 'lt IE 9'));
+
+$this->headMeta()
+     	->appendHttpEquiv('Content-Type', 'text/html; charset=UTF-8')
+		->appendHttpEquiv('expires', 'Oct, 31 Sun 1982 06:66:66 GMT')
+		->appendHttpEquiv('pragma', 'no-cache')
+		->appendHttpEquiv('Cache-Control', 'no-cache')
+        ->appendName('apple-mobile-web-app-capable', 'yes')
+		->appendName('apple-mobile-web-app-status-bar-style', 'black')
+		->appendName('viewport', 'user-scalable=no');
+?>
+<html lang="en">
+<head>
+
+<?= $this->headTitle() . "\n"; ?>
+
+<?= $this->headMeta() . "\n"; ?>
+
+<?= $this->headLink()  . "\n"; ?>
+<?= $this->headScript(). "\n"; ?>	
+</head> 
+
+<body id="login">
+	<?php echo $this->layout()->content; ?>
+	
+	<div class="footer"></div>
+</body>
+
+</html>	

@@ -1,0 +1,49 @@
+<div id="main">
+		<div class="box column-full">
+		  <div class="box-header">
+		    <span class="glyph chart"></span><h1><?= $this->t->_('My Statistics'); ?></h1>
+		  </div>
+		
+		  <ul class="statistics">
+		    <li>
+		      <a href="javascript:void(0);">
+		        <span><?= $this->statistics['workouts']; ?></span>
+		        <?= $this->t->_('Workouts'); ?>
+		      </a>
+		    </li>
+		    <li>
+		      <a href="javascript:void(0);">
+		        <span><?= $this->statistics['dailydetails']; ?></span>
+		        <?= $this->t->_('Daily details'); ?>
+		      </a>
+		    </li>
+		    <li>
+		      <a href="javascript:void(0);">
+		        <span><?= $this->statistics['dailyexercises']; ?></span>
+		        <?= $this->t->_('Daily exercises'); ?>
+		      </a>
+		    </li>
+		    <li>
+		      <a href="javascript:void(0);">
+		        <span><?= $this->statistics['measurements']; ?></span>
+		        <?= $this->t->_('Measurements'); ?>
+		      </a>
+		    </li>
+		  </ul>
+		</div>
+	
+		<div class="box column-full">    
+		  <div class="box-header">
+		    <h1><?= $this->t->_('App Details'); ?></h1>
+		  </div>
+		
+		  <table>
+		    <tbody>
+		      <tr>
+		        <td><?= $this->t->_('App version'); ?>:</td>
+		        <td class="red"><?= vkNgine_Version::APP_VERSION; ?></td>
+		      </tr>	
+		    </tbody>
+		  </table>
+		</div>
+      </div>

@@ -1,0 +1,57 @@
+<section id="maincontainer">
+   <div id="main">
+      
+      <div class="box">
+		  <div class="box-header">
+		    <h1><?= $this->t->_('My Body Measurements'); ?></h1>
+		  </div>
+		
+		  <table class="datatable">
+		    <thead>
+		      <tr>
+		        <th><?= $this->t->_('Value'); ?></th>
+		        <th><?= $this->t->_('Type'); ?></th>
+		        <th><?= $this->t->_('Record Date Capital'); ?></th>
+		        <th style="width:50px;"><?= $this->t->_('Actions'); ?></th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		    <?php
+				foreach($this->measurements as $measurements) :
+			?>	
+		      <tr>
+		        <td><?= $this->escape($measurements['value']); ?></td>
+		        <td><?= ($measurements['type'] == 'WEIGHT') ? $this->t->_('Weight') : $this->t->_('Not Entered'); ?></td>
+		        <td><?= $this->escape($this->dateFormat($measurements['date'], Zend_Date::DATE_FULL)); ?></td>
+		        <td>
+		          <a class="button plain deletemeasurement" href="javascript:void(0);" rel="<?= $measurements['id']; ?>">
+		          	<?= $this->t->_('Delete Capital'); ?>
+		          </a>
+		        </td>
+		      </tr>
+		    <?php 
+				endforeach;
+			?>
+		    </tbody>
+		  </table>
+		  <div>
+			<a class="button btn_add_selected_workouts lowercase editmeasurements" href="#">
+				<span class="glyph plus"></span>
+					<?= $this->t->_('Add New Measurement');?>
+			</a>
+	      </div>
+		</div>
+	</div>
+</section>
+
+<script>
+$('.editmeasurements').bind('click', function() {
+	var id = $(this).attr('rel');
+	btn_editmeasurements('<?= $this->t->_('Save'); ?>', '<?= $this->t->_('Cancel'); ?>', id);
+});
+
+$('.deletemeasurement').bind('click', function() {
+	var id = $(this).attr('rel');
+	btn_deletemeasurement('<?= $this->t->_('Delete'); ?>', '<?= $this->t->_('Cancel'); ?>', id);
+});
+</script>

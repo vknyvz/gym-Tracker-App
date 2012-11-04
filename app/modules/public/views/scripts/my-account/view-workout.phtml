@@ -1,0 +1,71 @@
+<section id="maincontainer">
+	<div id="main" class="container_12">
+		<div class="box">
+		  <div class="box-header">
+		    <h1><?= $this->t->_('Viewing Workout'); ?> :: <?= $this->workout['name']; ?></h1>
+		  </div>
+		
+		  <div class="box-content">
+		    <h4><?= $this->t->_('Notes'); ?></h4>
+		    <p><?= nl2br($this->t->_($this->workout['notes']));?></p>
+		    
+		    <h4><?= $this->t->_('Workout Details'); ?></h4>
+		        <ul>
+	                <li><u><span><?= $this->t->_('Name'); ?></span></u>: <?= $this->workout['name']; ?></li>
+					<li><u><span><?= $this->t->_('Day'); ?></span></u>: <?= $this->t->_($this->workout['day']); ?></li>
+	                <li><u><span><?= $this->t->_('Start Date'); ?></span></u>: <?= $this->t->_($this->workout['startDate']); ?></li>
+	                <li><u><span><?= $this->t->_('End Date'); ?></span></u>: <?= $this->t->_($this->workout['endDate']); ?></li>
+	                <?php if($this->workout['source']) : ?>
+	                	<li><span><?= $this->t->_('Source');  ?></span>: <a href="<?= $this->t->_($this->workout['source']); ?>" target="_blank"><?= $this->t->_('View'); ?></a></li>
+	                <?php endif; ?>
+				</ul>
+			</div>
+		 </div>
+		 <div class="box-content">	
+			<h5><?= $this->t->_('Workout Days'); ?></h5>
+			<?php
+				if(0 != count($this->exercises->fetchAll('workoutId = ' . $this->workout['workoutId']))) :
+				
+				$total = $this->workout['day'];
+			?>
+			<?php for($i=1; $i<=$this->workout['day']; $i++) : 
+					$class = null;
+					if($i == 1)
+						$class = 'alpha';
+					if($i == $total)
+						$class = 'omega';
+			?>
+			
+			
+			<div class="box grid_4 <?= $class; ?>">
+				<div class="box-header">
+					<h1><?= $this->t->_('Day'); ?> <?= $i?></h1>
+				</div>
+				<div class="box-content">
+					<table>
+					    <thead>
+					      <tr>
+					        <th><?= $this->t->_('Exercise Name'); ?></th>
+					        <th><?= $this->t->_('Sets'); ?></th>
+					        <th><?= $this->t->_('Reps'); ?></th>
+					      </tr>
+					    </thead>
+					    <tbody>
+					<?php foreach($this->exercises->fetchAllPerDay($this->workout['workoutId'], $i) as $exercise) : ?>
+						<tr>
+					        <td><a href="<?= $this->publicUrl('view', 'index'); ?>/id/<?= $exercise['exerciseId']; ?>" class="exercisedetail">
+									<?= $this->exerciseDetail[$exercise['exerciseId']]; ?>
+					   		</a></td>
+					        <td><?= $exercise['sets']; ?></td>
+					        <td><?= $exercise['reps']; ?></td>
+					      </tr>
+					<?php endforeach; ?>
+				   	</table>
+				</div>
+			</div>
+			
+			<?php endfor; ?>
+			<?php endif; ?> 
+		</div>
+	</div>
+</section>

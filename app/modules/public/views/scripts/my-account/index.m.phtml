@@ -1,0 +1,80 @@
+<?=
+$this->headScript()
+		->appendFile($this->baseUrl('/js/mobile/myaccount.m.js'));
+?>
+
+<?= $this->partial('_page_icons.phtml', array('t' 		=> $this->t,
+											  'back' 	=> false,
+										      'ajax'    => $this->publicUrl(null, 'my-account'))); 
+?>
+
+<style>
+dt { padding-top:23px;}
+dd { padding-left:3px;font-size:12px;font-weight:normal;}
+form {padding-bottom:25px;}
+
+</style>
+
+<div class="full-width">
+	<h4 class="shadow"><?= $this->t->_('My Settings'); ?></h4>
+	<div class="decoration decoration-less-padding"></div>
+	
+	<div class="column">
+	    <p class="column-text shadow">
+	        <?= $this->formSettings; ?>
+	    </p>
+	  	
+	    <p class="column-text shadow">
+	      <h4 class="shadow"><?= $this->t->_('Language'); ?></h4>
+	      <p>
+			<a class="language" href="javascript:void(0);" rel="tr"><img src="/images/Turkey.png" width="32"></a>
+			<a class="language" href="javascript:void(0);" rel="en"><img src="/images/Us.png" width="32"></a>
+		  </p>
+		  <p class="shadow"><?= $this->t->_('Clicking a flag will change the language for the current session'); ?> </p>
+	    </p>
+	</div>
+</div>
+
+<script>
+$('.setCalendarView').change(function(){
+	var selected = $(".setCalendarView option:selected");    
+	if(selected.val()){
+		$.ajax( {
+			url: '/my-account/index/calendarview/1/value/' + selected.val(),
+			dataType : 'json',
+			success: function(data) {
+			}
+		});
+	}
+});
+
+$("input[name='notifications']").change(function(){
+	$.ajax( {
+			url: '/my-account/index/method/get/notifications/1/value/' + $(this).val(),
+			dataType : 'json',
+			success: function(data) {
+				$.gritter.add({
+					title: data.title,
+					text: data.message,
+					image: '/images/admin/icons/success.png',
+					sticky: false,
+					time: 3000
+				});
+			}
+		});
+});
+
+$('.language').bind('click', function() {
+	var lang = $(this).attr('rel');
+	
+	$.ajax( {
+		url: '/my-account/language/lang/' + lang,
+		dataType : 'json',
+		success: function(data) {
+			if(data.success)
+				window.top.location = '/';
+		}
+	});
+	return false;
+}); 
+</script>

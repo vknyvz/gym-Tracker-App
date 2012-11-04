@@ -1,0 +1,435 @@
+<?php 
+	$state = null;
+	if(isset($this->params['day'])) {
+		if (date('d') == $this->params['day']){
+			$state = 'vkNgine-calendar-state-disabled';
+		}
+	}
+	
+	$prevMonth = $this->links['prev'];
+	if($prevMonth->thisMonth() == date('n')){
+		$dayPrev = date('d');
+	}
+	else {
+		$dayPrev = 0;
+	}
+	
+	$nextMonth = $this->links['next'];
+	if($nextMonth->thisMonth() == date('n')){
+		$dayNext = date('d');
+	}
+	else {
+		$dayNext = 0;
+	}
+	
+	$today =  '/calendar';
+	$prev = '/calendar/index/year/' . $prevMonth->thisYear().'/month/'.$prevMonth->thisMonth().'/day/'.$dayPrev;
+	$next = '/calendar/index/year/' . $nextMonth->thisYear().'/month/'.$nextMonth->thisMonth().'/day/'.$dayNext;
+?>
+	
+<script>
+	$(function() {
+		$('.vkNgine-calendar-button-prev').bind('click', function() {
+			window.top.location = '<?= $prev; ?>';
+		});
+		$('.vkNgine-calendar-button-next').bind('click', function() {
+			window.top.location = '<?= $next; ?>';
+		});
+		$('.vkNgine-calendar-button-today').bind('click', function() {
+			window.top.location = '<?= $today; ?>';
+		});
+		$('.vkNgine-calendar-button-month').bind('click', function() {
+			window.top.location = '<?= $this->publicUrl('monthly', 'calendar'); ?>';
+		});
+		$('.vkNgine-calendar-button-basicDay').bind('click', function() {
+			window.top.location = '<?= $this->publicUrl('weekly', 'calendar'); ?>';
+		});
+
+		<?php
+			if(!isset($this->params['month'])) :
+		?>
+			$('.vkNgine-calendar-button-today').addClass('vkNgine-calendar-state-disabled');
+		<?php endif; ?>
+							
+		$("table.vkNgine-calendar-border-separate tr:last").addClass('vkNgine-calendar-last');
+
+		$('.addExercise').bind('click', function() {
+			day = $(this).attr('rel');
+			date = explode('-', $(this).attr('rel'));
+			dateStr = date[1] + '/' + date[2] + '/' + date[0];
+			lnk_addExercise('<?= $this->t->_('Save'); ?>', '<?= $this->t->_('Cancel'); ?>', day, '<?= $this->t->_('Adding Daily Workout: '); ?> ' + dateStr, '<?= $this->param['action']; ?>');
+		});	
+
+		$('.viewDetail').bind('click', function() {
+			lnk_viewDetail('<?= $this->t->_('Delete'); ?>', '<?= $this->t->_('Close'); ?>', $(this).attr('rel'), '<?= $this->t->_('Daily Workout Details'); ?>', '<?= $this->t->_('Error Message')?>', '<?= $this->t->_('Exercise was successfully deleted')?>');
+			return false;
+		});
+
+		$('.viewDayDetail').bind('click', function() {
+			lnk_viewDayDetail('<?= $this->t->_('Delete'); ?>', '<?= $this->t->_('Close'); ?>', $(this).attr('rel'), '<?= $this->t->_('Day Details'); ?>', '<?= $this->t->_('Error Message')?>', '<?= $this->t->_('Day detail was successfully deleted')?>');
+			return false;
+		});
+
+		$('.dayDetail').bind('click', function() {
+			day = $(this).attr('rel');
+			date = explode('-', $(this).attr('rel'));
+			dateStr = date[1] + '/' + date[2] + '/' + date[0];
+			lnk_dayDetail('<?= $this->t->_('Save'); ?>', '<?= $this->t->_('Close'); ?>', day, '<?= $this->t->_('Adding Day Details: '); ?> ' + dateStr, '<?= $this->param['action']; ?>');
+			return false;				
+		});
+	});
+</script>
+		
+<section id="maincontainer">
+   <div id="main">
+      <div class="box">
+	  	 <div class="box-header">
+		    <h1><?= $this->t->_('Monthly Calendar'); ?></h1>
+		 </div>
+		 <div id="calendar" class="vkNgine-calendar">
+			<table class="vkNgine-calendar-header" style="width: 100%;">
+			<tbody>
+			<tr>
+				<td class="vkNgine-calendar-header-left"></td>
+				<td class="vkNgine-calendar-header-center">
+					<span class="vkNgine-calendar-header-title">
+						<h2><?= $this->t->_(date('F', $this->calendar->getTimeStamp())); ?> <?= date('Y', $this->calendar->getTimeStamp()); ?></h2>
+					</span>	
+				</td>
+				<td class="vkNgine-calendar-header-right">
+				<span class="vkNgine-calendar-button vkNgine-calendar-button-prev vkNgine-calendar-state-default vkNgine-calendar-corner-left">
+					<span class="vkNgine-calendar-button-inner">
+						<span class="vkNgine-calendar-button-content">
+							<span class="glyph left"></span>
+						</span>
+						<span class="vkNgine-calendar-button-effect">
+							<span></span>
+						</span>
+					</span>
+				</span><span class="vkNgine-calendar-button vkNgine-calendar-button-today vkNgine-calendar-state-default <?= $state; ?>">
+					<span class="vkNgine-calendar-button-inner">
+						<span class="vkNgine-calendar-button-content"><?= $this->t->_('today'); ?></span>
+						<span class="vkNgine-calendar-button-effect">
+							<span></span>
+						</span>
+					</span>
+				</span><span class="vkNgine-calendar-button vkNgine-calendar-button-next vkNgine-calendar-state-default vkNgine-calendar-corner-right">
+					<span class="vkNgine-calendar-button-inner">
+						<span class="vkNgine-calendar-button-content">
+							<span class="glyph right"></span>
+						</span>
+						<span class="vkNgine-calendar-button-effect">
+							<span></span>
+						</span>
+					</span>
+				</span>
+				<span class="vkNgine-calendar-header-space"></span>
+					<span class="vkNgine-calendar-button vkNgine-calendar-button-month vkNgine-calendar-state-default vkNgine-calendar-corner-left vkNgine-calendar-state-active">
+						<span class="vkNgine-calendar-button-inner">
+							<span class="vkNgine-calendar-button-content"><?= $this->t->_('month'); ?></span>
+							<span class="vkNgine-calendar-button-effect">
+								<span></span>
+							</span>
+						</span>
+				</span><span class="vkNgine-calendar-button vkNgine-calendar-button-basicDay vkNgine-calendar-state-default vkNgine-calendar-corner-right">
+				<span class="vkNgine-calendar-button-inner">
+					<span class="vkNgine-calendar-button-content"><?= $this->t->_('week'); ?></span>
+					<span class="vkNgine-calendar-button-effect">
+						<span></span>
+					</span>
+				</span>
+				</span>
+			</td>
+		</tr>
+	</tbody>
+	</table>
+	<div class="vkNgine-calendar-content" style="position: relative; min-height: 1px;">
+		<div class="vkNgine-calendar-view vkNgine-calendar-grid" style="position: relative; -moz-user-select: none;">
+			<table class="vkNgine-calendar-border-separate" style="width:100%">
+				<thead>
+					<tr class="vkNgine-calendar-first">
+						<th style="width: 127px;" class="vkNgine-calendar-mon vkNgine-calendar-widget-header vkNgine-calendar-first"><?= $this->t->_('Monday'); ?></th>
+						<th style="width: 127px;" class="vkNgine-calendar-tue vkNgine-calendar-widget-header"><?= $this->t->_('Tuesday'); ?></th>
+						<th style="width: 127px;" class="vkNgine-calendar-wed vkNgine-calendar-widget-header"><?= $this->t->_('Wednesday'); ?></th>
+						<th style="width: 127px;" class="vkNgine-calendar-thu vkNgine-calendar-widget-header"><?= $this->t->_('Thursday'); ?></th>
+						<th style="width: 127px;" class="vkNgine-calendar-fri vkNgine-calendar-widget-header"><?= $this->t->_('Friday'); ?></th>
+						<th style="width: 127px;" class="vkNgine-calendar-sat vkNgine-calendar-widget-header"><?= $this->t->_('Saturday'); ?></th>
+						<th style="width: 127px;" class="vkNgine-calendar-sun vkNgine-calendar-widget-header vkNgine-calendar-last"><?= $this->t->_('Sunday'); ?></th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php
+						while ( $day = $this->calendar->fetch() ) {							
+							$modelDailyExercises = new Public_Model_Daily_Exercises();
+							$modelDailyDetails = new Public_Model_Daily_Details();
+							$days = $modelDailyExercises->fetchByDate($day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay(), $this->user);							
+							$details = $modelDailyDetails->fetchByDate($day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay(), $this->user);
+							
+							$firstLast = null;
+					    	if($day->isLast()) {
+					    		$firstLast = 'vkNgine-calendar-last';
+					    	}
+					    	if($day->isFirst()) {
+					    		$firstLast = 'vkNgine-calendar-first';
+					    	}
+						       	
+						    if($day->isFirst())
+						    	echo "<tr>\n";
+						        	
+						    if($day->isSelected() ) {
+						    	
+						   	 	$cssBgColor = null;
+						    	$j = null;
+						    	for($k=0; $k<count($details); $k++) {
+						    		if($details[$k]['type'] == 'COLOR') {
+						    			$cssBgColor = 'style="background-color:' . $details[$k]['value'] . ' "';
+						    		}
+						    	}
+						    	
+						        echo "<td {$cssBgColor} rel=\"{$day->thisYear()}-{$day->thisMonth()}-{$day->thisDay()}\" class=\"vkNgine-calendar-state-highlight vkNgine-calendar-widget-content addExercise {$firstLast}\">
+										  <div>
+											  <div class=\"vkNgine-calendar-day-number dayDetail\" rel=\"{$day->thisYear()}-{$day->thisMonth()}-{$day->thisDay()}\">{$day->thisDay()}</div>
+											  	  <div class=\"vkNgine-calendar-day-content\">
+												  <div style=\"position:relative\">
+												  ";
+													for($i=0; $i<count($days); $i++) {
+														$workoutName = null;
+														$image = null;
+														$style = null;
+														if(0 != $days[$i]['workoutId']) {
+															$workoutName .= $this->workoutDetail[$days[$i]['workoutId']];
+															
+															echo '
+															<div rel="' . $days[$i]['id'] . '" class="viewDetail vkNgine-calendar-event vkNgine-calendar-event-skin vkNgine-calendar-event-hori vkNgine-calendar-corner-left vkNgine-calendar-corner-right" style="background-color: rgb(71, 125, 174); border-color: rgb(14, 105, 161); top: 30px; -moz-user-select: none;">
+																<div class="vkNgine-calendar-event-inner vkNgine-calendar-event-skin" style="background-color:#477dae;border-color:#0E69A1">
+																	<span class="vkNgine-calendar-event-time"> ' . $workoutName . '</span>
+																	<span class="vkNgine-calendar-event-title"> ' . $this->t->_('Day') . ' ' . $days[$i]['workoutDay'] . '</span>
+																</div>
+															</div>
+															';
+														}
+														elseif(0 == $days[$i]['workoutId']) {
+															if($days[$i]['activity']){
+																$workoutName .= $days[$i]['activity'];
+															}
+															else {
+																$workoutName .= $this->t->_($days[$i]['type']);
+															}
+														
+															echo '
+															<div rel="' . $days[$i]['id'] . '" class="viewDetail vkNgine-calendar-event vkNgine-calendar-event-skin vkNgine-calendar-event-hori vkNgine-calendar-corner-left vkNgine-calendar-corner-right" style="background-color: rgb(71, 125, 174); border-color: rgb(14, 105, 161); top: 30px; -moz-user-select: none;">
+																<div class="vkNgine-calendar-event-inner vkNgine-calendar-event-skin" style="background-color:#477dae;border-color:#0E69A1">
+																	<span class="vkNgine-calendar-event-time"> ' . $this->t->_($days[$i]['type']) . '</span>
+																	' . (($workoutName != $this->t->_($days[$i]['type'])) ? '<span class="vkNgine-calendar-event-title"> ' . $workoutName . '</span>' : '') . '
+																</div>
+															</div>
+															';
+														}
+													}
+													
+													for($k=0; $k<count($details); $k++) {
+														if($details[$k]['type'] == 'SUPPLEMENT'){
+															echo '
+															<div rel="' . $details[$k]['id'] . '" class="viewDayDetail vkNgine-calendar-event vkNgine-calendar-event-skin vkNgine-calendar-event-hori vkNgine-calendar-corner-left vkNgine-calendar-corner-right" style="background-color: rgb(71, 125, 174); border-color: rgb(14, 105, 161); top: 30px; -moz-user-select: none;">
+																<div class="vkNgine-calendar-event-inner vkNgine-calendar-event-skin" style="background-color:#477dae;border-color:#0E69A1">
+																	<span class="vkNgine-calendar-event-time">' . $this->t->_('Supplement Taken') .'</span>
+																	<span class="vkNgine-calendar-event-title">' . $details[$k]['value'] . '</span>
+																</div>
+															</div>
+															';
+														}
+													}
+													
+													echo "
+												</div>
+										      </div>
+										  </div>
+						       		  </td>";
+						    } 
+						    else if ($day->isEmpty()) {
+						    	
+						    	$cssBgColor = null;
+						    	$j = null;
+						    	for($k=0; $k<count($details); $k++) {
+						    		if($details[$k]['type'] == 'COLOR') {
+						    			$cssBgColor = 'style="background-color:' . $details[$k]['value'] . ' "';
+						    		}
+						    	}
+						    	
+						        echo "<td {$cssBgColor} rel=\"{$day->thisYear()}-{$day->thisMonth()}-{$day->thisDay()}\" class=\"vkNgine-calendar-widget-content vkNgine-calendar-other-month addExercise {$firstLast}\">
+						        			<div style=\"min-height: 106px;\">
+												<div class=\"vkNgine-calendar-day-number dayDetail\" rel=\"{$day->thisYear()}-{$day->thisMonth()}-{$day->thisDay()}\">{$day->thisDay()}</div>
+													<div class=\"vkNgine-calendar-day-content\">
+													<div style=\"position:relative\">
+												  ";
+													for($i=0; $i<count($days); $i++) {
+														$workoutName = null;
+														$image = null;
+														$style = null;
+														if(0 != $days[$i]['workoutId']) {
+															$workoutName .= $this->workoutDetail[$days[$i]['workoutId']];
+															
+															echo '
+															<div rel="' . $days[$i]['id'] . '" class="viewDetail vkNgine-calendar-event vkNgine-calendar-event-skin vkNgine-calendar-event-hori vkNgine-calendar-corner-left vkNgine-calendar-corner-right" style="background-color: rgb(71, 125, 174); border-color: rgb(14, 105, 161); top: 30px; -moz-user-select: none;">
+																<div class="vkNgine-calendar-event-inner vkNgine-calendar-event-skin" style="background-color:#477dae;border-color:#0E69A1">
+																	<span class="vkNgine-calendar-event-time"> ' . $workoutName . '</span>
+																	<span class="vkNgine-calendar-event-title"> ' . $this->t->_('Day') . ' ' . $days[$i]['workoutDay'] . '</span>
+																</div>
+															</div>
+															';
+														}
+														elseif(0 == $days[$i]['workoutId']) {
+															if($days[$i]['activity']){
+																$workoutName .= $days[$i]['activity'];
+															}
+															else {
+																$workoutName .= $this->t->_($days[$i]['type']);
+															}
+														
+															echo '
+															<div rel="' . $days[$i]['id'] . '" class="viewDetail vkNgine-calendar-event vkNgine-calendar-event-skin vkNgine-calendar-event-hori vkNgine-calendar-corner-left vkNgine-calendar-corner-right" style="background-color: rgb(71, 125, 174); border-color: rgb(14, 105, 161); top: 30px; -moz-user-select: none;">
+																<div class="vkNgine-calendar-event-inner vkNgine-calendar-event-skin" style="background-color:#477dae;border-color:#0E69A1">
+																	<span class="vkNgine-calendar-event-time"> ' . $this->t->_($days[$i]['type']) . '</span>
+																	' . (($workoutName != $this->t->_($days[$i]['type'])) ? '<span class="vkNgine-calendar-event-title"> ' . $workoutName . '</span>' : '') . '
+																</div>
+															</div>
+															';
+														}
+													}
+													
+													for($k=0; $k<count($details); $k++) {
+														if($details[$k]['type'] == 'SUPPLEMENT'){
+															echo '
+															<div rel="' . $details[$k]['id'] . '" class="viewDayDetail vkNgine-calendar-event vkNgine-calendar-event-skin vkNgine-calendar-event-hori vkNgine-calendar-corner-left vkNgine-calendar-corner-right" style="background-color: rgb(71, 125, 174); border-color: rgb(14, 105, 161); top: 30px; -moz-user-select: none;">
+																<div class="vkNgine-calendar-event-inner vkNgine-calendar-event-skin" style="background-color:#477dae;border-color:#0E69A1">
+																	<span class="vkNgine-calendar-event-time">' . $this->t->_('Supplement Taken') .'</span>
+																	<span class="vkNgine-calendar-event-title">' . $details[$k]['value'] . '</span>
+																</div>
+															</div>
+															';
+														}
+													}
+													
+													echo "
+												</div>
+										      </div>
+										  </div>
+						       		  </td>";
+						    }
+						    else {
+						    	
+						    	$cssBgColor = null;
+						    	$j = null;
+						    	for($k=0; $k<count($details); $k++) {
+						    		if($details[$k]['type'] == 'COLOR') {
+						    			$cssBgColor = 'style="background-color:' . $details[$k]['value'] . ' "';
+						    		}
+						    	}
+						    	
+						        echo "<td {$cssBgColor} rel=\"{$day->thisYear()}-{$day->thisMonth()}-{$day->thisDay()}\" class=\"vkNgine-calendar-widget-content addExercise {$firstLast}\">
+						        		  <div style=\"min-height: 107px;\">
+											  <div class=\"vkNgine-calendar-day-number dayDetail\" rel=\"{$day->thisYear()}-{$day->thisMonth()}-{$day->thisDay()}\">{$day->thisDay()}</div>
+												  <div class=\"vkNgine-calendar-day-content\">
+												  <div style=\"position:relative\">
+												  ";
+													for($i=0; $i<count($days); $i++) {
+														$workoutName = null;
+														$image = null;
+														$style = null;
+														if(0 != $days[$i]['workoutId']) {
+															$workoutName .= $this->workoutDetail[$days[$i]['workoutId']];
+															
+															echo '
+															<div rel="' . $days[$i]['id'] . '" class="viewDetail vkNgine-calendar-event vkNgine-calendar-event-skin vkNgine-calendar-event-hori vkNgine-calendar-corner-left vkNgine-calendar-corner-right" style="background-color: rgb(71, 125, 174); border-color: rgb(14, 105, 161); top: 30px; -moz-user-select: none;">
+																<div class="vkNgine-calendar-event-inner vkNgine-calendar-event-skin" style="background-color:#477dae;border-color:#0E69A1">
+																	<span class="vkNgine-calendar-event-time"> ' . $workoutName . '</span>
+																	<span class="vkNgine-calendar-event-title"> ' . $this->t->_('Day') . ' ' . $days[$i]['workoutDay'] . '</span>
+																</div>
+															</div>
+															';
+														}
+														elseif(0 == $days[$i]['workoutId']) {
+															if($days[$i]['activity']){
+																$workoutName .= $days[$i]['activity'];
+															}
+															else {
+																$workoutName .= $this->t->_($days[$i]['type']);
+															}
+														
+															echo '
+															<div rel="' . $days[$i]['id'] . '" class="viewDetail vkNgine-calendar-event vkNgine-calendar-event-skin vkNgine-calendar-event-hori vkNgine-calendar-corner-left vkNgine-calendar-corner-right" style="background-color: rgb(71, 125, 174); border-color: rgb(14, 105, 161); top: 30px; -moz-user-select: none;">
+																<div class="vkNgine-calendar-event-inner vkNgine-calendar-event-skin" style="background-color:#477dae;border-color:#0E69A1">
+																	<span class="vkNgine-calendar-event-time"> ' . $this->t->_($days[$i]['type']) . '</span>
+																	' . (($workoutName != $this->t->_($days[$i]['type'])) ? '<span class="vkNgine-calendar-event-title"> ' . $workoutName . '</span>' : '') . '
+																</div>
+															</div>
+															';
+														}
+													}
+													
+													for($k=0; $k<count($details); $k++) {
+														if($details[$k]['type'] == 'SUPPLEMENT'){
+															echo '
+															<div rel="' . $details[$k]['id'] . '" class="viewDayDetail vkNgine-calendar-event vkNgine-calendar-event-skin vkNgine-calendar-event-hori vkNgine-calendar-corner-left vkNgine-calendar-corner-right" style="background-color: rgb(71, 125, 174); border-color: rgb(14, 105, 161); top: 30px; -moz-user-select: none;">
+																<div class="vkNgine-calendar-event-inner vkNgine-calendar-event-skin" style="background-color:#477dae;border-color:#0E69A1">
+																	<span class="vkNgine-calendar-event-time">' . $this->t->_('Supplement Taken') .'</span>
+																	<span class="vkNgine-calendar-event-title">' . $details[$k]['value'] . '</span>
+																</div>
+															</div>
+															';
+														}
+													}
+													
+													echo "
+												</div>
+										      </div>
+										  </div>
+						       		  </td>";
+						    }
+						    
+						    if ( $day->isLast() )
+						        echo ( "</tr>\n" );						        
+					   	}						
+					?>
+				</tbody>	
+		</table>
+	</div>
+	</div>
+	</div>
+	</div>
+</section>		
+			
+	<?php 
+		if(0 != count($this->otherdata)) :
+	?>
+      <div id="main">
+	      <div class="box">
+			  <div class="box-header">
+			    <h1><?= $this->t->_('Other Monthly Recorded Data'); ?></h1>
+			  </div>
+			  <table>
+			    <thead>
+			      <tr>
+			        <th><?= $this->t->_('Value'); ?></th>
+					<th><?= $this->t->_('Type'); ?></th>
+					<th><?= $this->t->_('Record Date Capital'); ?></th>
+			      </tr>
+			    </thead>
+			    <tbody>
+	      		<?php
+					foreach($this->otherdata as $data) :
+				?>	
+					<tr>
+						<td><?= $data['value']?></td>
+						<td><?= ($data['type'] == 'WEIGHT') ? $this->t->_('Weight') : $this->t->_('Not Entered'); ?></td>
+						<td><?= $this->escape($this->dateFormat($data['date'], Zend_Date::DATE_FULL)); ?></td>
+					</tr>
+				<?php 
+					endforeach;
+				?>
+	      </tbody>
+	      </table>
+		</div>
+	</div>
+	<?php endif; ?>
+	

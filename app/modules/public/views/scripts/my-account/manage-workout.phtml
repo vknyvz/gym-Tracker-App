@@ -1,0 +1,73 @@
+<div class="accordion">
+	<?php for($i=1; $i<=$this->workout['day']; $i++) :?>
+		<h3><a href="#"><?= $this->t->_('Day'); ?> <?= $i?></a></h3>
+		<div>
+		<?php foreach($this->exercises->fetchAllPerDay($this->workout['workoutId'], $i) as $exercise) :
+		?>
+		<div style="padding:5px;">
+			<a href="javascript:void(0);" rel="<?= $exercise['exerciseId']; ?>" class="exercisedetail">
+				<?= $this->exerciseDetail[$exercise['exerciseId']]; ?>
+			</a>
+			
+			<span style="padding-left:5px;">
+			|
+			<label for="sets"><?= $this->t->_('Sets'); ?></label>
+			<input id="sets" class="setField" rel="<?= $exercise['id']; ?>" style="width:25px;" ref="sets" type="text" value="<?= $exercise['sets']; ?>" placeholder="<?= $this->t->_('Sets'); ?>" >
+			</span>
+			
+			<span style="padding-left:5px;">
+			|
+			<label for="reps"><?= $this->t->_('Reps'); ?></label>
+			<input id="reps" class="setField" rel="<?= $exercise['id']; ?>" style="width:25px;" ref="reps" type="text" value="<?= $exercise['reps']; ?>" placeholder="<?= $this->t->_('Reps'); ?>" >
+			</span>
+			
+			<span style="padding-left:5px;">
+			|
+			<label for="order"><?= $this->t->_('Order'); ?></label>
+			<input id="order" class="setField" rel="<?= $exercise['id']; ?>" style="width:25px;" ref="order" type="text" value="<?= $exercise['order']; ?>" placeholder="<?= $this->t->_('Reps'); ?>" >
+			<span id="set-saved-<?= $exercise['id']; ?>"></span>
+			<span id="rep-saved-<?= $exercise['id']; ?>"></span>
+			<span id="order-saved-<?= $exercise['id']; ?>"></span>
+			</span>
+		</div>
+		<?php endforeach; ?>
+		</div>
+	<?php endfor; ?>
+</div>
+
+<script type="text/javascript">		
+	$(".accordion").accordion({collapsible: true, active: false, autoHeight:false});
+
+	$('.exercisedetail').bind('click', function() {
+		var id = $(this).attr('rel');
+		btn_exerciseDetail('<?= $this->t->_('Close'); ?>', id);
+	});
+
+	$('.setField').bind('mouseleave', function() {
+		var id = $(this).attr('rel') 
+		var val = $(this).val();
+		var field = $(this).attr('ref');
+		if(val){
+			$.ajax({
+		        url: '/my-account/edit-setfield/field/' + field + '/id/' + id + '/value/' + val,
+		        dataType : 'json',
+		        success: function(data) {
+			        if(data.success) 	
+				        if(field == 'sets') {
+				        	$('#set-saved-' + id).show();
+			        		$('#set-saved-' + id).html('<?= $this->t->_('Set saved'); ?>').fadeOut(3000);
+				        }
+				        else if(field == 'reps') {
+				        	$('#rep-saved-' + id).show();
+		        			$('#rep-saved-' + id).html('<?= $this->t->_('Rep saved'); ?>').fadeOut(3000);
+				        }
+				        else if(field == 'order') {
+				        	$('#order-saved-' + id).show();
+		        			$('#order-saved-' + id).html('<?= $this->t->_('Order saved'); ?>').fadeOut(3000);
+				        }
+		    	}
+		       }
+		    );
+		}
+	});
+</script>

@@ -1,0 +1,98 @@
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#sort-table").tablesorter({
+		widgets: ['zebra'],
+		headers: { 
+			0: { sorter: false },
+        } 
+	})
+	
+	$(".header").append('<span class="ui-icon ui-icon-carat-2-n-s"></span>');
+
+	$('.tooltip').tooltip({
+			track: true,
+			delay: 0,
+			showURL: false,
+			showBody: " - ",
+			fade: 250
+	});
+
+	$('.deleteSelected').bind('click', function() {
+		btn_deleteselected('<?= $this->t->_('Yes'); ?>', '<?= $this->t->_('No'); ?>', 'log-', 'admin/logs/delete/mode/logins', '<?= $this->t->_('Success Message'); ?>', '<?= $this->t->_('Items Deleted')?>');
+		return false; 
+	});
+
+	$('body').removeClass('layout1280');
+	$('body').addClass('layout980');
+
+	$('.deleteSelected').addClass('ui-state-disabled');	
+});
+
+</script>
+
+<?= $this->partial('_js.phtml'); ?>
+
+<?= $this->partial('_breadcrumbs.phtml', array('breadcrumb' => $this->breadcrumb())); ?>
+
+<div id="page-layout" class="fixed">
+	<div id="page-content">
+		<div id="page-content-wrapper">
+			<div class="inner-page-title">
+				<h2><?= $this->t->_('Login Logs'); ?></h2>
+				<span><?= $this->t->_('Here you can view general logged activities'); ?></span>
+			</div>
+			<div class="hastable">
+					<form action="" method="post" class="pager-form" name="myform">
+						<table id="sort-table"> 
+							<thead> 
+								<tr>
+									<th style="width:23px">
+										<input type="checkbox" class="submit checkbox" onclick="check(this.form.list, '<?= $this->t->_('All Selected'); ?>', '<?= $this->t->_('Select All'); ?>')" value="check_none">
+									</th>
+								    <th style="width:180px" class="header"><?= $this->t->_('Date of Action'); ?></th>
+								    <th style="width:150px" class="header"><?= $this->t->_('User'); ?></th>  
+								    <th style="width:150px" class="header"><?= $this->t->_('User Type'); ?></th> 
+								    <th class="header"><?= $this->t->_('IP'); ?></th>
+								</tr> 
+							</thead> 
+						<tbody>
+						<?php 
+							if (count($this->logs)) :
+								$i = 0;
+								foreach($this->logs as $log) :	
+						?>
+							<tr id="log-<?= $log->id; ?>" class="<?php ($i % 2 == 0) ? 'even' : 'odd'; ?>">
+								<td><input type="checkbox" value="<?= $log->id; ?>" name="list" class="checkbox checkOne"/></td>
+								<td class="center"><?= $this->dateFormat($log->dateInserted, Zend_Date::DATETIME) ?></td> 
+							    <td><?= $this->escape($this->userInfo[$log->userId]); ?></td> 
+							    <td><?= $this->escape($log->userType); ?></td> 
+							    <td><?= $this->escape($log->ip); ?></td> 
+							</tr>
+						<?php 
+							    $i++;
+								endforeach;
+							endif;
+						?>						
+						</tbody>
+						</table>
+						
+					<div class="clear"></div>
+					
+					<p>
+	                    <button class="ui-state-default float-right ui-corner-all ui-button deleteSelected"><?= $this->t->_('Delete'); ?></button>
+					    <button class="ui-state-default float-right ui-corner-all ui-button selectAll" onclick="check(this.form.list, '<?= $this->t->_('All Selected'); ?>', '<?= $this->t->_('Select All'); ?>'); return false;" > <?= $this->t->_('Select All'); ?></button>
+	                </p>
+	                
+					</form>
+					<?= $this->paginationControl($this->logs, 'Sliding', '_paginator.phtml'); ?>
+					
+				</div>
+			
+			<?= $this->partial('layout-sidebar.phtml', array('section' => 'logs', 't' => $this->t, 'refreshLink' => $this->adminUrl('logins', 'logs'))); ?>	
+					
+	<div class="clear"></div>			
+			</div>
+		<div class="clear"></div>
+	</div>
+	</div>
+	<div class="clear"></div>

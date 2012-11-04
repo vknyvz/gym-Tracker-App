@@ -1,0 +1,20 @@
+<?= $this->form; ?>
+
+<script>
+$(document).ready(function(){
+	var options = {  
+		url: '<?= $this->form->getAction(); ?>',
+        success: vkNgineAjaxFormSubmit,
+		dataType : 'json'
+    };
+    
+	$('#<?= $this->form->getId(); ?>').ajaxForm(options);
+
+	$('.ajax-enabled').removeClass('ajax-enabled');
+	$('.vkNgineForm').addClass('ajax-enabled-medium-width');
+	$('.vkNgineLabel').removeClass('vkNgineLabel');
+	$('.ajax-enabled-medium-width label').addClass('vkNgineLabel-short');
+	$('fieldset legend').addClass('ui-box-header ui-corner-all');    
+});
+</script>
+

@@ -1,0 +1,150 @@
+<?php 
+define('IN_DEVELOPMENT', APPLICATION_ENV === 'development');
+
+$this->headLink(array('rel' => 'icon', 'href' => $this->baseUrl('V.ico'), 'type' => 'image/x-icon'))
+	 ->prependStylesheet($this->baseUrl('/css/admin/ui/ui.base.css'))
+  	 ->appendStylesheet($this->baseUrl('/css/admin/themes/vkNgine3/ui.css'))
+  	 ->appendStylesheet($this->baseUrl('/css/admin/ui/ui.accordion.css'))
+  	 ->appendStylesheet($this->baseUrl('/css/admin/ui/ui.datepicker.css'))
+  	 ->appendStylesheet($this->baseUrl('/css/admin/gritter.css'));
+
+$this->headScript()
+     ->prependFile($this->baseUrl('/js/jquery-1.7.1.js'))
+     ->appendFile($this->baseUrl('/js/admin/ui/ui.core.js'))
+     ->appendFile($this->baseUrl('/js/admin/superfish.js'))
+     ->appendFile($this->baseUrl('/js/admin/live_search.js'))
+     ->appendFile($this->baseUrl('/js/admin/superfish.js'))
+     ->appendFile($this->baseUrl('/js/admin/tooltip.js'))
+     ->appendFile($this->baseUrl('/js/admin/cookie.js'))
+     ->appendFile($this->baseUrl('/js/form.js'))
+     ->appendFile($this->baseUrl('/js/admin/ui/ui.draggable.js'))
+     ->appendFile($this->baseUrl('/js/admin/ui/ui.resizable.js'))
+     ->appendFile($this->baseUrl('/js/admin/ui/ui.dialog.js'))
+     ->appendFile($this->baseUrl('/js/admin/ui/ui.tabs.js'))
+     ->appendFile($this->baseUrl('/js/admin/ui/ui.accordion.js'))
+     ->appendFile($this->baseUrl('/js/admin/ui/ui.datepicker.js'))
+     ->appendFile($this->baseUrl('/js/admin/tablesorter.js'))
+     ->appendFile($this->baseUrl('/js/admin/tmpl.js'))
+     ->appendFile($this->baseUrl('/js/admin/gritter.js'))
+     ->appendFile($this->baseUrl('/js/admin/dialog.js'))
+     ->appendFile($this->baseUrl('/js/admin/vkNgine.js'));
+
+$this->headMeta()
+	 ->prependName('keywords', vkNgine_Config::getSystemConfig()->meta->appDescription)
+	 ->prependName('description', vkNgine_Config::getSystemConfig()->meta->appKeywords)
+	 ->appendHttpEquiv('Content-Type', 'text/html; charset=UTF-8')
+	 ->appendHttpEquiv('expires', 'Sun, 31 Oct 1982 01:00:00 GMT')
+     ->appendHttpEquiv('pragma', 'no-cache')
+     ->appendHttpEquiv('Cache-Control', 'no-cache')
+     ->appendHttpEquiv('Content-Language', 'en-US');
+?>
+
+<?= $this->doctype() . PHP_EOL; ?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+<?php 
+	if('tr' == vkNgine_Config::getSystemConfig()->language->locale) {	
+		$this->headScript()->appendFile($this->baseUrl('/js/admin/ui/locale/ui.datepicker-tr.js'));
+	}
+	
+	echo $this->headTitle() . "\n";
+	echo $this->headMeta()  . "\n";
+	echo $this->headLink()  . "\n";
+	echo $this->headScript(). "\n";
+?>	
+
+	<!--[if IE 7]><link media="all" rel="stylesheet" type="text/css" href="<?= $this->baseUrl('/css/admin/css/ie7.css') ?>" /><![endif]-->
+	
+	</head>
+	
+<body vkNgine_version="<?= vkNgine_Version::VERSION; ?>" class="layout980">  
+<div id="page_wrapper">
+	<div id="page-header">
+			<div id="page-header-wrapper" class="fixed">
+				<div id="top">
+					<a href="<?= $this->adminUrl(); ?>" class="logo" title="vkNgine v<?= vkNgine_Version::VERSION; ?>"><?= vkNgine_Version::VERSION; ?></a>
+					<div class="welcome">
+						<span class="note"><?= $this->t->_('Welcome'); ?>, <a href="javascript:void(0);" class="tooltip" title="<?= $this->t->_('Welcome'); ?>, <?= $this->user->getFullName(); ?>"><?= $this->user->getFullName(); ?></a></span>
+						<a id="myAccount" class="btn ui-state-default ui-corner-all tooltip" href="javascript:void(0);" title="<?= $this->t->_('Change your Account Settings'); ?>">
+							<span class="ui-icon ui-icon-person"></span>
+							<?= $this->t->_('My account'); ?>
+						</a>
+						<a class="btn ui-state-default ui-corner-all tooltip view-application" href="/" target="_blank" title="<?= $this->t->_('View the Application'); ?>">
+							<span class="ui-icon ui-icon-person"></span>
+							<?= $this->t->_('View Application'); ?>
+						</a>
+						<a id="logout" class="btn ui-state-default ui-corner-all tooltip" href="javascript:void(0);" title="<?= $this->t->_('Click to Logout'); ?>">
+							<span class="ui-icon ui-icon-power"></span>
+							<?= $this->t->_('Logout'); ?>
+						</a>						
+					</div>
+				</div>
+				<ul id="navigation">
+					<li>
+						<a href="javascript:void(0);" rel="<?= $this->adminUrl(null, 'system'); ?>" title="<?= $this->appTitle; ?> - <?= $this->t->_('Dashboard'); ?>" lang="<?= $this->t->_('loading...'); ?>" class="sf-with-ul goto"><?= $this->t->_('Dashboard'); ?></a>
+						<ul>
+							<li><a href="javascript:void(0);" rel="<?= $this->adminUrl(null, 'system'); ?>" title="<?= $this->appTitle; ?> - <?= $this->t->_('System Settings'); ?>" lang="<?= $this->t->_('loading...'); ?>" class="goto"><?= $this->t->_('System Settings'); ?></a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="javascript:void(0);" rel="<?= $this->adminUrl(null, 'users'); ?>" title="<?= $this->appTitle; ?> - <?= $this->t->_('User Management'); ?>" lang="<?= $this->t->_('loading...'); ?>" class="sf-with-ul goto"><?= $this->t->_('User Management'); ?></a>
+						<ul>
+							<li><a href="javascript:void(0);" rel="<?= $this->adminUrl(null, 'users'); ?>" title="<?= $this->appTitle; ?> - <?= $this->t->_('User Management'); ?>" lang="<?= $this->t->_('loading...'); ?>" class="goto"><?= $this->t->_('User Management'); ?></a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="javascript:void(0);" rel="<?= $this->adminUrl(null, 'exercises'); ?>" title="<?= $this->appTitle; ?> - <?= $this->t->_('Exercise Management'); ?>" lang="<?= $this->t->_('loading...'); ?>" class="sf-with-ul goto"><?= $this->t->_('Exercise Management'); ?></a>
+						<ul>
+							<li><a href="javascript:void(0);" rel="<?= $this->adminUrl(null, 'exercises'); ?>" title="<?= $this->appTitle; ?> - <?= $this->t->_('Exercise Management'); ?>" lang="<?= $this->t->_('loading...'); ?>" class="goto"><?= $this->t->_('Exercise Management'); ?></a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="javascript:void(0);" rel="<?= $this->adminUrl(null, 'workouts'); ?>" title="<?= $this->appTitle; ?> - <?= $this->t->_('Workouts Management'); ?>" lang="<?= $this->t->_('loading...'); ?>" class="sf-with-ul goto"><?= $this->t->_('Workouts Management'); ?></a>
+						<ul>
+							<li><a href="javascript:void(0);" rel="<?= $this->adminUrl(null, 'workouts'); ?>" title="<?= $this->appTitle; ?> - <?= $this->t->_('Workouts Management'); ?>" lang="<?= $this->t->_('loading...'); ?>" class="goto"><?= $this->t->_('Workouts Management'); ?></a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="javascript:void(0);" rel="<?= $this->adminUrl(null, 'foods'); ?>" title="<?= $this->appTitle; ?> - <?= $this->t->_('Foods Management'); ?>" lang="<?= $this->t->_('loading...'); ?>" class="sf-with-ul goto"><?= $this->t->_('Foods Management'); ?></a>
+						<ul>
+							<li><a href="javascript:void(0);" rel="<?= $this->adminUrl(null, 'foods'); ?>" title="<?= $this->appTitle; ?> - <?= $this->t->_('Foods Management'); ?>" lang="<?= $this->t->_('loading...'); ?>" class="goto"><?= $this->t->_('Foods Management'); ?></a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="javascript:void(0);" rel="<?= $this->adminUrl(null, 'meals'); ?>" title="<?= $this->appTitle; ?> - <?= $this->t->_('Meals Management'); ?>" lang="<?= $this->t->_('loading...'); ?>" class="sf-with-ul goto"><?= $this->t->_('Meals Management'); ?></a>
+						<ul>
+							<li><a href="javascript:void(0);" rel="<?= $this->adminUrl(null, 'meals'); ?>" title="<?= $this->appTitle; ?> - <?= $this->t->_('Meals Management'); ?>" lang="<?= $this->t->_('loading...'); ?>" class="goto"><?= $this->t->_('Meals Management'); ?></a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="javascript:void(0);" rel="<?= $this->adminUrl(null, 'logs'); ?>" title="<?= $this->appTitle; ?> - <?= $this->t->_('Logs'); ?>" lang="<?= $this->t->_('loading...'); ?>" class="sf-with-ul goto"><?= $this->t->_('Logs'); ?></a>
+						<ul>
+							<li><a href="javascript:void(0);" rel="<?= $this->adminUrl(null, 'logs'); ?>" title="<?= $this->appTitle; ?> - <?= $this->t->_('Logs'); ?>" lang="<?= $this->t->_('loading...'); ?>" class="goto"><?= $this->t->_('Logs'); ?></a></li>
+							<li><a href="javascript:void(0);" rel="<?= $this->adminUrl('activity', 'logs'); ?>" title="<?= $this->appTitle; ?> - <?= $this->t->_('Activity Logs'); ?>" lang="<?= $this->t->_('loading...'); ?>" class="goto"><?= $this->t->_('Activity Logs'); ?></a></li>
+							<li><a href="javascript:void(0);" rel="<?= $this->adminUrl('logins', 'logs'); ?>" title="<?= $this->appTitle; ?> - <?= $this->t->_('Login Logs'); ?>" lang="<?= $this->t->_('loading...'); ?>" class="goto"><?= $this->t->_('Login Logs'); ?></a></li>
+						</ul>
+					</li>
+				</ul>
+				<div id="search-bar">
+					<form method="post" action="">
+						<input type="text" name="q" id="search" value="<?= $this->t->_('search something'); ?>" style="box-shadow:none"/>
+					</form>
+					<script type="text/javascript">
+						$('#search').blur(function() {
+							if ($(this).val() == '') {$(this).val('<?= $this->t->_('search something'); ?>') ;}
+						});
+			
+						$('#search').focus(function() {
+							if ($(this).val() == '<?= $this->t->_('search something'); ?>') {$(this).val('');}
+						});
+						$('#myAccount').bind('click', function() {
+							btn_myaccount('<?= $this->t->_('Save'); ?>', '<?= $this->t->_('Cancel'); ?>', '<?= $this->adminUrl('myaccount', 'index'); ?>');		
+						});
+						$('#logout').bind('click', function() {
+							btn_logout('<?= $this->t->_('Yes'); ?>', '<?= $this->t->_('No'); ?>', '<?= $this->adminUrl('logout', 'auth'); ?>');
+						});
+					</script>
+				</div>
+			</div>
+		</div>

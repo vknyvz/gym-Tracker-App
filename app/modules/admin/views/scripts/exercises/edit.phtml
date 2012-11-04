@@ -1,0 +1,42 @@
+<?= $this->form; ?>
+
+<script>
+$(document).ready(function(){
+	$("#name").focus();
+
+	var options = {  
+		url: '<?= $this->form->getAction(); ?>',
+        success: vkNgineAjaxFormSubmit,
+		dataType : 'json'
+    };
+    
+	$('#<?= $this->form->getId(); ?>').ajaxForm(options);
+
+	$('.ajax-enabled').removeClass('ajax-enabled');
+	$('.vkNgineForm').addClass('ajax-enabled-full-width');
+	$('.vkNgineLabel').removeClass('vkNgineLabel');
+	$('.ajax-enabled-full-width label').addClass('vkNgineLabel-short');
+	$('fieldset legend').addClass('ui-box-header ui-corner-all');   
+});
+</script>
+
+<script id="exercisesTemplate" type="text/x-jquery-tmpl"> 
+<tr class="${className}" id="exercise-${itemId}">
+	<td class="center">${itemId}</td> 
+    <td>${name}</td> 
+    <td><a class="showDetails" rel="${itemId}" href="javascript:void(0);">${View}</a></td>
+    <td>${primaryMuscle}</td> 
+    <td>${secondaryMuscle}</td> 
+    <td>${mechanics}</td> 
+    <td>${equipmentUsed}</td> 
+    <td>
+		<a class="btn_no_text btn ui-state-default ui-corner-all tooltip" href="javascript:void(0);" 
+		   onclick="btn_editexercise('${Save}', '${Cancel}', '${href}', '${itemId}', '${title}');" title="${tagTitle}">
+			<span class="ui-icon ui-icon-wrench"></span>
+		</a>
+		<a onclick="btn_deleteexercise('${Yes}', '${No}', ${itemId});" href="javascript:void(0);" class="btn_no_text btn ui-state-default ui-corner-all tooltip" title="${tagTitleDelete}">
+			<span class="ui-icon ui-icon-trash"></span>
+		</a>
+	</td>
+</tr>
+</script>

@@ -1,0 +1,14 @@
+<?= $this->form; ?>
+<script>
+$(document).ready(function(){
+	$("#password").focus();
+
+	var options = {  
+		url: '<?= $this->form->getAction(); ?>',
+        success: vkNgineAjaxFormSubmit,
+		dataType : 'json'		
+    };
+    
+	$('#<?= $this->form->getId(); ?>').ajaxForm(options);
+});
+</script>

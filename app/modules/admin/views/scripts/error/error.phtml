@@ -1,0 +1,19 @@
+<div>
+	<h1><?php echo $this->message; ?><blink>__</blink></h1>
+</div>
+
+<span class="neg"><?php echo $this->exception->getMessage(); ?></span>
+
+<p>
+	<pre>
+		<div class="left"><?php echo $this->exception->getTraceAsString(); ?></div>
+	</pre>
+</p>
+
+<p>
+	<?php echo print_r($this->request->getParams(), 1); ?>
+</p>
+
+<div class="menu">
+	<a href="<?= $this->baseUrl(); ?>">home</a>
+</div>

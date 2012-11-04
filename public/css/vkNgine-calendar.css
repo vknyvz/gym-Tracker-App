@@ -1,0 +1,388 @@
+.vkNgine-calendar {
+    direction: ltr;
+    text-align: left;
+}
+.vkNgine-calendar table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+html .vkNgine-calendar, .vkNgine-calendar table {
+    font-size: 1em;
+}
+.vkNgine-calendar td, .vkNgine-calendar th {
+    padding: 0;
+    vertical-align: top;
+}
+.vkNgine-calendar-header td {
+    white-space: nowrap;
+}
+.vkNgine-calendar-header-left {
+    text-align: left;
+    width: 25%;
+}
+.vkNgine-calendar-header-center {
+    text-align: center;
+}
+.vkNgine-calendar-header-right {
+    text-align: right;
+    width: 25%;
+}
+.vkNgine-calendar-header-title {
+    display: inline-block;
+    vertical-align: top;
+}
+.vkNgine-calendar-header-title h2 {
+    margin-top: 0;
+    white-space: nowrap;
+}
+.vkNgine-calendar .vkNgine-calendar-header-space {
+    padding-left: 10px;
+}
+.vkNgine-calendar-header .vkNgine-calendar-button {
+    margin-bottom: 1em;
+    vertical-align: top;
+}
+.vkNgine-calendar-header .vkNgine-calendar-button {
+    margin-right: -1px;
+}
+.vkNgine-calendar-header .vkNgine-calendar-corner-right {
+    margin-right: 1px;
+}
+.vkNgine-calendar-header .ui-corner-right {
+    margin-right: 0;
+}
+.vkNgine-calendar-header .vkNgine-calendar-state-hover, .vkNgine-calendar-header .ui-state-hover {
+    z-index: 2;
+}
+.vkNgine-calendar-header .vkNgine-calendar-state-down {
+    z-index: 3;
+}
+.vkNgine-calendar-header .vkNgine-calendar-state-active, .vkNgine-calendar-header .ui-state-active {
+    z-index: 4;
+}
+.vkNgine-calendar-content {
+    clear: both;
+}
+.vkNgine-calendar-view {
+    overflow: hidden;
+    width: 100%;
+}
+.vkNgine-calendar-widget-header, .vkNgine-calendar-widget-content {
+    border: 1px solid #CCCCCC;
+}
+.vkNgine-calendar-state-highlight {
+    background: none repeat scroll 0 0 #FFFFCC !important;
+}
+.vkNgine-calendar-cell-overlay {
+    background: none repeat scroll 0 0 #99CCFF;
+    opacity: 0.2;
+}
+.vkNgine-calendar-button {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+}
+.vkNgine-calendar-state-default {
+    border-style: solid;
+    border-width: 1px 0;
+}
+.vkNgine-calendar-button-inner {
+    float: left;
+    overflow: hidden;
+    position: relative;
+}
+.vkNgine-calendar-state-default .vkNgine-calendar-button-inner {
+    border-style: solid;
+    border-width: 0 1px;
+}
+.vkNgine-calendar-button-content {
+    float: left;
+    height: 1.9em;
+    line-height: 1.9em;
+    padding: 0 0.6em;
+    position: relative;
+    white-space: nowrap;
+}
+.vkNgine-calendar-button-content .vkNgine-calendar-icon-wrap {
+    float: left;
+    position: relative;
+    top: 50%;
+}
+.vkNgine-calendar-button-content .ui-icon {
+    float: left;
+    margin-top: -50%;
+    position: relative;
+}
+.vkNgine-calendar-state-default .vkNgine-calendar-button-effect {
+    left: 0;
+    position: absolute;
+    top: 50%;
+}
+.vkNgine-calendar-state-default .vkNgine-calendar-button-effect span {
+    background: none repeat scroll 0 0 #444444;
+    border-color: #FFFFFF;
+    border-style: solid;
+    border-width: 100px 0 0 1px;
+    height: 100px;
+    left: 0;
+    opacity: 0.09;
+    position: absolute;
+    top: -100px;
+    width: 500px;
+}
+.vkNgine-calendar-state-default, .vkNgine-calendar-state-default .vkNgine-calendar-button-inner {
+    background: none repeat scroll 0 0 #F3F3F3;
+    border-color: #CCCCCC #BBBBBB #AAAAAA;
+    border-style: solid;
+    color: #000000;
+}
+.vkNgine-calendar-state-hover, .vkNgine-calendar-state-hover .vkNgine-calendar-button-inner {
+    border-color: #999999;
+}
+.vkNgine-calendar-state-down, .vkNgine-calendar-state-down .vkNgine-calendar-button-inner {
+    background: none repeat scroll 0 0 #777777;
+    border-color: #555555;
+}
+.vkNgine-calendar-state-active, .vkNgine-calendar-state-active .vkNgine-calendar-button-inner {
+    background: none repeat scroll 0 0 #777777;
+    border-color: #555555;
+    color: #FFFFFF;
+}
+.vkNgine-calendar-state-disabled, .vkNgine-calendar-state-disabled .vkNgine-calendar-button-inner {
+    border-color: #DDDDDD;
+    color: #999999;
+}
+.vkNgine-calendar-state-disabled {
+    cursor: default;
+}
+.vkNgine-calendar-state-disabled .vkNgine-calendar-button-effect {
+    display: none;
+}
+.vkNgine-calendar-event {
+    border-style: solid;
+    border-width: 0;
+    cursor: default;
+    font-size: 0.85em;
+}
+a.vkNgine-calendar-event, .vkNgine-calendar-event-draggable {
+    cursor: pointer;
+}
+a.vkNgine-calendar-event {
+    text-decoration: none;
+}
+.vkNgine-calendar-rtl .vkNgine-calendar-event {
+    text-align: right;
+}
+.vkNgine-calendar-event-skin {
+    background-color: #3366CC;
+    border-color: #3366CC;
+    color: #FFFFFF;
+}
+.vkNgine-calendar-event-inner {
+    border-style: solid;
+    border-width: 0;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+.vkNgine-calendar-event-time, .vkNgine-calendar-event-title {
+    padding: 0 1px;
+}
+.vkNgine-calendar .ui-resizable-handle {
+    display: block;
+    font-size: 300%;
+    line-height: 50%;
+    overflow: hidden;
+    position: absolute;
+    z-index: 99999;
+}
+.vkNgine-calendar-event-time {
+    font-weight: bold;
+}
+.vkNgine-calendar-event-hori {
+    border-width: 1px 0;
+    margin-bottom: 1px;
+}
+.vkNgine-calendar-event-hori .ui-resizable-e {
+    cursor: e-resize;
+    height: 100% !important;
+    right: -3px !important;
+    top: 0 !important;
+    width: 7px !important;
+}
+.vkNgine-calendar-event-hori .ui-resizable-w {
+    cursor: w-resize;
+    height: 100% !important;
+    left: -3px !important;
+    top: 0 !important;
+    width: 7px !important;
+}
+.vkNgine-calendar-event-hori .ui-resizable-handle {
+}
+.vkNgine-calendar-corner-left {
+    margin-left: 1px;
+}
+.vkNgine-calendar-corner-left .vkNgine-calendar-button-inner, .vkNgine-calendar-corner-left .vkNgine-calendar-event-inner {
+    margin-left: -1px;
+}
+.vkNgine-calendar-corner-right {
+    margin-right: 1px;
+}
+.vkNgine-calendar-corner-right .vkNgine-calendar-button-inner, .vkNgine-calendar-corner-right .vkNgine-calendar-event-inner {
+    margin-right: -1px;
+}
+.vkNgine-calendar-corner-top {
+    margin-top: 1px;
+}
+.vkNgine-calendar-corner-top .vkNgine-calendar-event-inner {
+    margin-top: -1px;
+}
+.vkNgine-calendar-corner-bottom {
+    margin-bottom: 1px;
+}
+.vkNgine-calendar-corner-bottom .vkNgine-calendar-event-inner {
+    margin-bottom: -1px;
+}
+.vkNgine-calendar-corner-left .vkNgine-calendar-event-inner {
+    border-left-width: 1px;
+}
+.vkNgine-calendar-corner-right .vkNgine-calendar-event-inner {
+    border-right-width: 1px;
+}
+.vkNgine-calendar-corner-top .vkNgine-calendar-event-inner {
+    border-top-width: 1px;
+}
+.vkNgine-calendar-corner-bottom .vkNgine-calendar-event-inner {
+    border-bottom-width: 1px;
+}
+table.vkNgine-calendar-border-separate {
+    border-collapse: separate;
+}
+.vkNgine-calendar-border-separate th, .vkNgine-calendar-border-separate td {
+    border-width: 1px 0 0 1px;
+}
+.vkNgine-calendar-border-separate th.vkNgine-calendar-last, .vkNgine-calendar-border-separate td.vkNgine-calendar-last {
+    border-right-width: 1px;
+}
+.vkNgine-calendar-border-separate tr.vkNgine-calendar-last th, .vkNgine-calendar-border-separate tr.vkNgine-calendar-last td {
+    border-bottom-width: 1px;
+}
+.vkNgine-calendar-border-separate tbody tr.vkNgine-calendar-first td, .vkNgine-calendar-border-separate tbody tr.vkNgine-calendar-first th {
+    border-top-width: 0;
+}
+.vkNgine-calendar-grid th {
+    text-align: center;
+}
+.vkNgine-calendar-grid .vkNgine-calendar-day-number {
+    float: right;
+    padding: 0 2px;
+}
+.vkNgine-calendar-grid .vkNgine-calendar-other-month .vkNgine-calendar-day-number {
+    opacity: 0.3;
+}
+.vkNgine-calendar-grid .vkNgine-calendar-day-content {
+    clear: both;
+    padding: 2px 2px 1px;
+}
+.vkNgine-calendar-grid .vkNgine-calendar-event-time {
+    font-weight: bold;
+}
+.vkNgine-calendar-rtl .vkNgine-calendar-grid .vkNgine-calendar-day-number {
+    float: left;
+}
+.vkNgine-calendar-rtl .vkNgine-calendar-grid .vkNgine-calendar-event-time {
+    float: right;
+}
+.vkNgine-calendar-agenda table {
+    border-collapse: separate;
+}
+.vkNgine-calendar-agenda-days th {
+    text-align: center;
+}
+.vkNgine-calendar-agenda .vkNgine-calendar-agenda-axis {
+    font-weight: normal;
+    padding: 0 4px;
+    text-align: right;
+    vertical-align: middle;
+    white-space: nowrap;
+    width: 50px;
+}
+.vkNgine-calendar-agenda .vkNgine-calendar-day-content {
+    padding: 2px 2px 1px;
+}
+.vkNgine-calendar-agenda-days .vkNgine-calendar-agenda-axis {
+    border-right-width: 1px;
+}
+.vkNgine-calendar-agenda-days .vkNgine-calendar-col0 {
+    border-left-width: 0;
+}
+.vkNgine-calendar-agenda-allday th {
+    border-width: 0 1px;
+}
+.vkNgine-calendar-agenda-allday .vkNgine-calendar-day-content {
+    min-height: 34px;
+}
+.vkNgine-calendar-agenda-divider-inner {
+    height: 2px;
+    overflow: hidden;
+}
+.vkNgine-calendar-widget-header .vkNgine-calendar-agenda-divider-inner {
+    background: none repeat scroll 0 0 #EEEEEE;
+}
+.vkNgine-calendar-agenda-slots th {
+    border-width: 1px 1px 0;
+}
+.vkNgine-calendar-agenda-slots td {
+    background: none repeat scroll 0 0 transparent;
+    border-width: 1px 0 0;
+}
+.vkNgine-calendar-agenda-slots td div {
+    height: 20px;
+}
+.vkNgine-calendar-agenda-slots tr.vkNgine-calendar-slot0 th, .vkNgine-calendar-agenda-slots tr.vkNgine-calendar-slot0 td {
+    border-top-width: 0;
+}
+.vkNgine-calendar-agenda-slots tr.vkNgine-calendar-minor th, .vkNgine-calendar-agenda-slots tr.vkNgine-calendar-minor td {
+    border-top-style: dotted;
+}
+.vkNgine-calendar-agenda-slots tr.vkNgine-calendar-minor th.ui-widget-header {
+}
+.vkNgine-calendar-event-vert {
+    border-width: 0 1px;
+}
+.vkNgine-calendar-event-vert .vkNgine-calendar-event-head, .vkNgine-calendar-event-vert .vkNgine-calendar-event-content {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    z-index: 2;
+}
+.vkNgine-calendar-event-vert .vkNgine-calendar-event-time {
+    font-size: 10px;
+    white-space: nowrap;
+}
+.vkNgine-calendar-event-vert .vkNgine-calendar-event-bg {
+    background: none repeat scroll 0 0 #FFFFFF;
+    height: 100%;
+    left: 0;
+    opacity: 0.3;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+}
+.vkNgine-calendar .ui-draggable-dragging .vkNgine-calendar-event-bg, .vkNgine-calendar-select-helper .vkNgine-calendar-event-bg {
+}
+.vkNgine-calendar-event-vert .ui-resizable-s {
+    bottom: 0 !important;
+    cursor: s-resize;
+    font-family: monospace;
+    font-size: 11px !important;
+    height: 8px !important;
+    line-height: 8px !important;
+    overflow: hidden !important;
+    text-align: center;
+    width: 100% !important;
+}
+.vkNgine-calendar-agenda .ui-resizable-resizing {
+}
