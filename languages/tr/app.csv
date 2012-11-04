@@ -1,0 +1,343 @@
+// İ, ı, Ö, ö, Ü, ü, Ç, ç, Ğ, ğ, Ş, ş
+// &#304; &#305; &#214; &#246; &#220; &#252; &#199; &#231; &#286; &#287; &#350; &#351;
+
+"Turkish";"Türkçe"
+"English";"İngilizce"
+
+"Exercises";"Egzersizler" 
+"Exercises Capital";"Egzersİzler"
+"Workouts";"Workoutlar"
+"Measurements";"Ölçüler"
+"Exercise Management";"Egzersizler"
+"Foods Management";"Yiyecekler"
+"Meals Management";"Öğünler"
+"Workouts Management";"Workoutlar"
+"Total excercise count";"Toplam egzersiz sayısı"
+"Total workout count";"Toplam workout sayısı"
+"Workout Log";"Workout Kayıtları"
+
+"Are you sure you want to delete this exercise?";"Bu egzersizi silmek istediğinizden eminmisiniz?"
+"Are you sure you want to delete this workout?";"Bu workoutu silmek istediğinizden eminmisiniz?"
+"Are you sure you want to delete this measurement?";"Bu ölçüyü silmek istediğinizden eminmisiniz?"
+"Are you sure you want to delete this meal?";"Bu öğünü silmek istediğinizden eminmisiniz?"
+"Are you sure you want to delete this food?";"Bu yiyeceği silmek istediğinizden eminmisiniz?"
+
+"Exercise was successfully added";"Egzersiz başarıyla kaydedildi"
+"Food was successfully added";"Yiyecek başarıyla kaydedildi"
+"Day details was successfully added";"Günlük ayrıntılar başarıyla kaydedildi"
+
+"Running";"Koşu"
+"Swimming";"Yüzme"
+"Weight Lifting";"Ağırlık Çalışma"
+"Cycling";"Bisiklet"
+
+"Adding Daily Workout: ";"Günlük çalışma eklenİyor: "
+"Adding Daily Workout lower";"Günlük çalışma ekleniyor"
+"Adding Day Details: ";"Günlük detaylar eklenİyor: "
+"Workouts";"Workoutlar"
+"Workout Details";"Workout detayları "
+
+"Daily detail added";"Günlük çalışma eklendi"
+
+"Activity";"Aktivite"
+"If nothing from the above list";"Eğer üstekilerden biri değil ise";
+
+"Exercises in this workout";"Bu workoutdaki egzersizler"
+"times";"kere"
+"Type";"Türü"
+"Choose One";"Birini Seçin"
+
+"Daily Workout Details";"Günlük çalışma ayrıntıları"
+"Close";"Kapat"
+"close";"kapat"
+"Exercise was successfully deleted";"Egzersiz başarıyla silindi"
+
+"Access denied!";"Girişiniz Yasak!"
+
+"Calendar";"Takvİm"
+"Exercise Calendar";"Egzersiz Takvimi"
+"Username";"Kullanıcı adı"
+"GYM Tracker";"GYM Takİpçİsİ"
+"GYM Tracker lower";"GYM Takipçisi"
+
+"Select an option above";"Üstten bir seçenek seçin"
+
+"Exercise-s";"Egzersiz"
+
+"Abdominals";"Abdomen"
+"Back";"Sırt"
+"Biceps";"Pazı"
+"Calves";"Baldır"
+"Chest";"Göğüs"
+"Forearms";"Ön kol"
+"Legs";"Bacaklar"
+"Shoulders";"Omuz"
+"Traps";"Trapler"
+"Triceps";"Pazı arkası"
+
+"A New Exercise is being added";"Yenİ bİr egzersİz eklenİyor"
+"A New Workout is being added";"Yenİ bİr workout eklenİyor"
+"A New Meal is being added";"Yenİ bİr öğün eklenİyor"
+"A New Food is being added";"Yenİ bİr yiyecek eklenİyor"
+
+"Exercise is being deleted";"Egzersİz sİlİnİyor"
+"Exercise is being edited";"Egzersİz denetlenİyor"
+"Workout is being edited";"Workout denetlenİyor"
+"Workout is being deleted";"Workout sİlİnİyor"
+"Meal is being edited";"Öğün denetlenİyor"
+"Meal is being deleted";"Öğün sİlİnİyor"
+"Food is being edited";"Yiyecek denetlenİyor"
+"Food is being deleted";"Yiyecek sİlİnİyor"
+
+"Delete this exercise";"Egzersizi sil"
+"Delete this workout";"Workoutu sil"
+"Delete this meal";"Öğünü sil"
+"Delete this food";"Yiyeceği sil"
+
+"Edit this exercise";"Egzersizi denetle"
+"Edit this workout";"Workoutu denetle"
+"Edit this meal";"Öğünü denetle"
+"Edit this food";"Yiyeceği denetle"
+
+"Viewing Exercise Details";"Egzersİz ayrıntıları görüntülenİyor"
+
+"Here you can add/update or delete exercises in the system";"Buradan sistemdeki tüm egzersizlerin ayarlarını degiştirebilirsiniz"
+"Here you can add/update or delete workouts in the system";"Buradan sistemdeki tüm workoutların ayarlarını degiştirebilirsiniz"
+"Here you can add/update or delete meals in the system";"Buradan sistemdeki tüm öğünlerin ayarlarını degiştirebilirsiniz"
+"Here you can add/update or delete foods in the system";"Buradan sistemdeki tüm yiyeceklerin ayarlarını degiştirebilirsiniz"
+
+"Add New Exercise";"Yeni Egzersiz Ekle"
+"Add New Workout";"Yeni Workout Ekle"
+"Add New Measurement";"Yeni Ölçü Ekle"
+"Add New Meal";"Yeni Öğün Ekle"
+"Add New Food";"Yeni Yiyecek Ekle"
+
+"Exercise Name";"Egzersiz"
+"Instructions";"Açıklamalar"
+"Primary Muscle";"Birincil Kas"
+"Secondary Muscle";"İkincil Kas"
+"Mechanics";"Mekanik"
+"Equipment Used";"Ekipman"
+
+"Name";"İsmi"
+"Workout Name";"Workout İsmi"
+"Start Date";"Başlangıç Tarihi"
+"End Date";"Bitiş Tarihi"
+
+"Workout Name Capital";"Workout İsmİ"
+"Start Date Capital";"Başlangıç Tarİhİ"
+"End Date Capital";"Bİtİş Tarİhİ"
+
+"Add Exercise to this Workout";"Bu workouta egzersiz ekle"
+"Add Food to this Meal";"Bu öğüne yiyecek ekle"
+
+"Exercise Name Capital";"Egzersİz"
+"Primary Muscle Capital";"Bİrİncİl Kas"
+"Secondary Muscle Capital";"İkincİl Kas"
+"Mechanics Capital";"Mekanİk"
+"Equipment Used Capital";"Ekİpman"
+
+"No instructions yet";"Bunun için henüz açıklama yok"
+"Exercise Details";"Egzersİz Bİlgİlerİ"
+"Exercise Images";"Egzersİz Resİmlerİ"
+
+"Search exercises";"Egzersiz ara"
+"Search results";"Arama sonuçları"
+"%s exercises were found";"%s egzersiz bulundu"
+
+"At least one field must be filled";"En azından bir seçenek seçilmelidir"
+"More details for this";"Daha fazla ayrıntılar"
+"Additional Details";"Ayrıntılar"
+
+
+"Add exercises to Workouts";"Egzersİzlerİ workout'a ekle"
+"Choose a workout to add selected exercises";"Seçilen egzersizleri eklemek için bir workout seçin"
+
+"Workout will be added to this user";"Workout bu kullanıcıya eklenecektir"
+"Meal will be added to this user";"Öğün bu kullanıcıya eklenecektir"
+
+"Not entered";"Girilmemiş"
+"Edit";"Denetle"
+"Delete Capital";"Sİl"
+"Delete Measurement";"Ölçü Sİl"
+"Manage";"Ayarla"
+
+"click a flag to change the locale of the app";"uygulamanın dilini değiştirmek için bir bayrağa tıklayın"
+"Add Selected Exercises to a Workout";"Seçilenleri Workout'a ekle"
+
+"Edit Workout";"Workout'u Denetle"
+"Delete Workout";"Workout'u Sİl"
+"Edit Measurement";"Vücut Ölçülerİmİ Denetle"
+
+"You don't have any workouts";"Şu an için bir workout'unuz yok"
+"You don't have any measurement data";"Şu an için bir ölçü bilgiliniz yok"
+
+"Value";"Değer"
+"Record Date Capital";"Kayıt Tarİhİ"
+"Record Date";"Kayıt Tarihi"
+
+"Weight";"Ağırlık"
+"Other Monthly Recorded Data";"Diğer kayıtlanan değerler"
+
+"How many days a week";"Haftada bu kadar gün"
+"Days";"Gün"
+"Day";"Gün"
+"Reps";"Repler"
+"Sets";"Setler"
+
+"Choose the day you want to add these";"Hangi güne bu egzersizler eklensin"
+
+"Exercise Detail";"Egzersiz Detayları"
+"Saved";"Kaydedildi"
+"Viewing Workout";"Workout gÖrÜntÜlenİYor"
+"Workout Days";"Workout Günleri"
+"Workout Day";"Workout Günü"
+
+"Choose a workout day";"Bir workout günü seç"
+
+"Order";"Sıralama"
+
+"Legend";"Gösterge"
+"off gym";"Gym'e gidilmedi"
+
+"Color";"Renk"
+"Supplement";"Hap"
+
+"Choose one if you want to color a box on the calendar";"Takvim kutucuklarını renklendirmek için birini seçin"
+"Color will color the box, Supplement will log the daily use";"Renk bir kutucuğu renklendirir, Hap ise günlük kullanımı kaydeder"
+"Enter the value for the type";"Bir değer girin"
+
+"Day Details";"Günlük ayrıntılar"
+"Supplement Taken";"Alınan haplar"
+
+"Calendar ucfirst";"Takvim"
+"select a default calendar view";"varsayılan bir takvim türü seçin"
+"Calendar View";"Varsayılan takvim"
+
+"week";"hafta"
+"month";"ay"
+
+"Weekly";"Haftalık"
+"Monthly";"Aylık"
+
+"Monthly Calendar";"Aylık Takvİm"
+"Weekly Calendar";"Haftalık Takvİm"
+"Weekly Calendar lower";"Haftalık Takvim"
+"Monthly Calendar lower";"Aylık Takvim"
+
+"Username is required";"Kullanıcı adı girilmelidir"
+"Password is required";"Şifre girilmelidir"
+
+"App Details";"App Ayrıntıları"
+"App version";"App Sürümü"
+
+"My Account";"Benİm Hesabım"
+"My Statistics";"İstatİstİklerİm"
+"My Statistics lower";"İstatistiklerim"
+"My Settings";"Ayarlarım"
+"My Workouts";"Workoutlarım"
+"My Measurements";"Ölçülerİm"
+"My Body Measurements";"Vücut Ölçülerim"
+
+"Daily details";"Günlük detaylar"
+"Daily exercises";"Günlük egzersizler"
+
+"This will change the default view of the calendar";"Buradan takvimin geçerli görünüş biçimini ayarlıyabilirsin"
+"Clicking a flag will change the language for the current session";"Bir bayrağa tıklayarak uygulamanın dilini değiştirin"
+
+"Supplement Taken";"Alınan Hap"
+
+"app is loading...";"app yükleniyor..."
+
+"You can't change the layout of the calendar on the mobile app";"Takvimin geçerli görünüşünü mobile app'de değiştiremezsiniz"
+
+"Monday short";"Pt"
+"Tuesday short";"Sa"
+"Wednesday short";"Ça"
+"Thursday short";"Pe"
+"Friday short";"Cu"
+"Saturday short";"Ct"
+"Sunday short";"Pa"
+
+"add day details";"gün detayı ekle"
+"view day";"günü görüntüle"
+
+"Exercise Details lower";"Egzersiz Bilgileri"
+"Exercise Images lower";"Egzersiz Resimleri"
+
+"Calendar lower";"Takvim"
+
+"Rope Jumping";"İp Atlama"
+
+"mark as off day";"günü off olarak işaretle"
+"mark as on day";"günü on olarak işaretle"
+"Day was successfully marked";"Gün başarıyla işaretlendi"
+
+"More Details";"Ayrıntılar"
+
+"Tips";"İpuçları"
+
+"Refresh";"Yenile"
+"Go Back";"Geri Dön"
+
+"Title";"Başlık"
+
+"Serving Size";"Miktar"
+"Calories";"Kalori"
+"Fat";"Yağ"
+"Sugar";"Şeker"
+"Cholesterol";"Kolesterol"
+"Sodium";"Sodyum"
+"Carbs";"Karbonhidrat"
+
+"Meals";"Öğünler"
+"Foods";"Yiyecekler"
+
+"My Plate";"Tabağım"
+"My Meals";"Öğünlerim"
+"April Capital";"NİSAN"
+
+"Add Meal";"Öğünü Ekle"
+"Add Food";"Yiyecek Ekle"
+"Type a food";"Bir yiyecek gir"
+
+"Meal was successfully added";"Öğün başarıyla eklendi"
+"Food(s) was successfully added";"Yiyecek(ler) başarıyla eklendi"
+
+"You can change your notifications settings here";"Buradan ileti ayarlarınızı değiştirebilirsiniz"
+"Default Calendar View";"Varsayılan Takvim modu"
+"Notifications";"İletiler"
+" Send daily reminders";" Günlük ileti gönder"
+" Send daily reminders if nothing logged for the day";" Günlük iletileri sadece eğer herhangi bir kayıt girilmemişse gönder"
+" Don't send any reminders";" Hiç bir ileti gönderme"
+
+"Notifications was successfully updated";"İleti ayarları başarıyla kaydedildi"
+"Calendar view was successfully updated";"Takvim ayarları başarıyla kaydedildi"
+
+"Calorie Calendar";"Kalori Takvimi"
+"Weekly Calorie Calendar";"Haftalik Kalorİ Takvİmİ"
+
+"Enter a food";"Yiyecek gir"
+
+"Summary of Daily Consumption";"Günlük Tüketim"
+
+"consumed %s calories";"%s kalori tüketildi"
+"consumed %s gr protein";"%s gr protein tüketildi"
+"consumed %s gr fat";"%s gr yağ tüketildi"
+"consumed %s gr carbs";"%s gr karbonhidrat tüketildi"
+"consumed %s gr sugar";"%s gr şeker tüketildi"
+"consumed %s gr fiber";"%s gr fiber tüketildi"
+
+"Daily Intake";"Günlük Tüketİm"
+
+"How much?";"Ne kadar?"
+"Serving";"Miktar"
+"cup";"kap"
+"tbsp";"çorba kaşığı"
+"tsp";"çay kaşığı"
+
+"May Capital";"MAYIS"
+
+"Serving Size Type";"Miktar Ölçüsü"
+
+"Meal";"Öğün"

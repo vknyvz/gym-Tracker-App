@@ -1,0 +1,72 @@
+<h6><?= $this->t->_('Workout Details') ?>: <?= date('m-d-Y', strtotime($this->detail['date'])) ?></h6>
+   	<div class="box-content">	
+   		<ul>
+    	<?php 
+    		if($this->detail['workoutId']) :
+    	?>	
+	    	<li><strong><?= $this->t->_('Workout Name') ?>:</strong> <a href="<?= $this->publicUrl('view-workout', 'my-account'); ?>/id/<?= $this->detail['workoutId']; ?>"><?= $this->workoutDetail['name'] ?></a></li>
+    	<?php endif; ?>
+    	
+    	<?php 
+    		if($this->detail['workoutDay']) :
+    	?>	
+	    	<li><strong><?= $this->t->_('Workout Day') ?>:</strong> <?= $this->detail['workoutDay'] ?></li>
+    	<?php endif; ?>
+    	
+    	<?php
+    		if($this->detail['activity'])	:
+    	?>
+	    	<li><strong><?= $this->t->_('Activity') ?>:</strong> <?= $this->detail['activity'] ?></li>
+    	<?php endif; ?>
+    	
+    	<?php
+    		if($this->detail['type']) :
+    	?>
+    		<li><strong><?= $this->t->_('Type') ?>:</strong> <?= $this->t->_($this->detail['type']) ?> </li>
+		<?php endif; ?>
+		
+		<?php
+    		if($this->detail['moreDetails']) :
+    	?>
+    		<li><strong><?= $this->t->_('Additional Details') ?>:</strong> <div style="padding-left:15px;padding-top:5px;"> <?= nl2br($this->detail['moreDetails']); ?></div> </li>
+		<?php endif; ?>
+		</ul>
+	  </div>
+	  
+		<?php
+    	if(0 != count($this->workoutExercises)) :
+    	?>
+	    <h6><?= $this->t->_('Exercises in this workout') ?>:</h6>
+    	<div class="box-content">	
+	    <table>
+		 <tbody>
+		 	<tr>
+		        <th><?= $this->t->_('Exercise Name'); ?></th>
+		        <th><?= $this->t->_('Sets'); ?></th>
+		        <th><?= $this->t->_('Reps'); ?></th>
+		      </tr>
+		      		    <tbody>
+	    <?php
+	    	foreach($this->workoutExercises as $exercise):
+	    		$exerciseDetail = $this->exercises->fetch($exercise['exerciseId']);
+	    ?>
+	    	<tr>
+	    		<td><a href="javascript:void(0);" rel="<?= $exercise['exerciseId']; ?>" class="exercisedetail"><?= $exerciseDetail->getName() ?></a></td>
+	    		<td><?= $exercise['sets']; ?></td> 
+	    		<td><?= $exercise['reps']; ?></td>
+	    	</tr>
+	    <?php
+	    	endforeach; 
+	    ?>	
+	    	</table>
+	    </div>
+	    <?php endif; ?>
+   
+
+
+<script type="text/javascript">		
+	$('.exercisedetail').bind('click', function() {
+		var id = $(this).attr('rel');
+		btn_exerciseDetail('<?= $this->t->_('Close'); ?>', id);
+	});
+</script>   

@@ -1,0 +1,113 @@
+<?php
+
+define('IN_DEVELOPMENT', APPLICATION_ENV === 'development');
+
+echo $this->doctype() . "\n";
+
+$this->headLink()
+		->headLink(array('rel' => 'apple-touch-icon', 'href' => '/dumbbell.png'))
+		->prependStylesheet($this->baseUrl('/css/mobile/style.css'))
+		->appendStylesheet($this->baseUrl('/css/mobile/buttons.css'))
+		->appendStylesheet($this->baseUrl('/css/mobile/type.css'))
+		->appendStylesheet($this->baseUrl('/css/admin/gritter.css'))
+		->appendStylesheet($this->baseUrl('/css/mobile/photoswipe.css'));
+		
+$this->headScript()
+	     ->prependFile($this->baseUrl('/js/jquery-1.7.1.js'))
+	     ->appendFile($this->baseUrl('/js/public/ui/jquery-ui-1.8.17.custom.js'))
+	     ->appendFile($this->baseUrl('/js/form.js'))
+	     ->appendFile($this->baseUrl('/js/admin/gritter.js'))
+	     ->appendFile($this->baseUrl('/js/mobile/dialog.js'))
+	     ->appendFile($this->baseUrl('/js/mobile/klass.min.js'))
+	     ->appendFile($this->baseUrl('/js/mobile/photoswipe.min.js'))
+	     ->appendFile($this->baseUrl('/js/mobile/vkNgine.js'));
+	     
+$this->headMeta()
+		->appendHttpEquiv('Content-Type', 'text/html; charset=UTF-8')
+		->appendHttpEquiv('expires', 'Oct, 31 Sun 1982 06:66:66 GMT')
+		->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+		->appendName('apple-mobile-web-app-capable', 'yes')
+		->appendName('apple-mobile-web-app-status-bar-style', 'black')
+		->appendName('viewport', 'user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0');
+
+if('tr' == vkNgine_Config::getSystemConfig()->language->locale) {
+	$this->headScript()->appendFile($this->baseUrl('/js/admin/ui/locale/ui.datepicker-tr.js'));
+}
+
+?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<?= $this->headTitle() . "\n"; ?>
+
+<?= $this->headMeta() . "\n"; ?>
+	
+<?= $this->headLink()  . "\n"; ?>
+
+<script type="text/javascript" charset="utf-8">
+	function load() {
+		document.getElementById('hidepage').style.visibility = 'hidden';
+	}
+</script>
+
+<?= $this->headScript(). "\n"; ?>
+
+</head>
+		
+<body onLoad="load();" vkNgine_version="<?= vkNgine_Version::VERSION; ?>">
+	<div class="site">
+	
+	<div id="hidepage"> 
+		<p class="center-text"><?= $this->t->_('app is loading...'); ?><br/><img src="/images/mobile/background/130.gif" alt="<?= $this->t->_('app is loading...'); ?>"></p>
+	</div>
+	
+	<div id="content-load" style="display:none">
+		<p class="center-text"><?= $this->t->_('app is loading...'); ?><br/><img src="/images/mobile/background/130.gif" alt="<?= $this->t->_('app is loading...'); ?>"></p>
+	</div>
+		
+	<div class="navigation">
+		<a <?= ($this->params['controller'] == 'index' && $this->params['action'] != 'exercises') ? 'class="selected home"' : ''; ?> href="<?= $this->publicUrl(); ?>">
+			<img src="/images/mobile/nav/81-dashboard@2x.png" style="width:30px;height:30px;" alt="<?= $this->t->_('Dashboard'); ?>">
+			<em class="under-icon-text"><?= $this->t->_('Dashboard'); ?></em>
+		</a>
+	    <a class="load my-account" rel="<?= $this->publicUrl(null, 'my-account'); ?>">
+	    	<img src="/images/mobile/nav/111-user@2x.png" style="width:30px;height:30px;" alt="<?= $this->user->getFullName(); ?>">
+	    	<em class="under-icon-text"><?= $this->user->getFullName(); ?></em>
+	    </a>
+	    <a class="load calendar" rel="<?= $this->publicUrl(null, 'calendar'); ?>">
+	    	<img src="/images/mobile/nav/83-calendar@2x.png" style="width:30px;height:30px;"alt="<?= $this->t->_('Calendar'); ?>">
+	    	<em class="under-icon-text"><?= $this->t->_('Calendar'); ?></em>
+	    </a>
+	    <a class="load exercises" rel="<?= $this->publicUrl('exercises', null); ?>">
+	    	<img src="/images/mobile/nav/89-dumbell@2x.png" style="width:35px;height:30px;" alt="<?= $this->t->_('Exercises'); ?>">
+	    	<em class="under-icon-text"><?= $this->t->_('Exercises'); ?></em>
+	    </a>
+	    <a class="load" rel="<?= $this->publicUrl('login', 'auth'); ?>/logout">
+	    	<img src="/images/mobile/nav/57-power.png" style="width:30px;height:30px;"alt="<?= $this->t->_('Logout'); ?>">
+	    	<em class="under-icon-text"><?= $this->t->_('Logout'); ?></em>
+	    </a>
+	</div>
+	
+	<div id="content">
+		<?= $this->layout()->content; ?>
+	</div>
+
+	<div class="empty-clear-menu"></div>
+</div>
+	</div>
+    
+    <?php if(vkNgine_Config::getSystemConfig()->settings->ga->enabled) : ?>	
+	<script type="text/javascript">
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', '<?= vkNgine_Config::getSystemConfig()->settings->ga->code; ?>']);
+	  _gaq.push(['_trackPageview']);
+	
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	</script>
+	<?php endif; ?>
+
+</body>
+</html>	

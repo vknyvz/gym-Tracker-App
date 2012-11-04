@@ -1,0 +1,38 @@
+<html>
+<head>
+<title>forgotAddExercise.phtml</title>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link href="http://gym.vknyvz.com/css/style.css" media="screen" rel="stylesheet" type="text/css" >
+
+</head>
+<body>
+<div id="maincontainer">
+	<div id="main">
+		<div class="box">
+		  <div class="box-header">
+		    <h1><?= $this->firstName; ?>! Did you add your exercise log for today?</h1>
+		  </div>
+		  
+		  <div class="box-content">
+		    <div>
+		      <p><b>Hi there, <?= $this->firstName; ?>!</b></p>
+               <p class="innerText">Don't forget to add your daily log today!</p>
+		       <p class="innerText">If you haven't added yet, make sure you do that by going to; <a href="http://gym.vknyvz.com">http://gym.vknyvz.com</a></p>
+		    </div>
+		  </div>
+		  <center>
+			<small>
+				You may edit your notification settings in your My Account page.
+			</small>
+		  </center>
+		  <br>
+		</div>
+    </div>
+</div>
+
+<div align="center">
+	<small>vkNgine Emailer v<?= $this->version; ?></small>
+</div>
+
+</body>
+</html>

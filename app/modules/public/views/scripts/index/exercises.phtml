@@ -1,0 +1,56 @@
+<section id="maincontainer">
+   <div id="main">
+      <div class="box">
+		<div class="box-header">
+		    <h1><?= $this->t->_('Exercises Capital'); ?></h1>
+		</div>
+		  <table class="datatable">
+		    <thead>
+		      <tr>
+		        <th>&nbsp;</th>
+				<th><?= $this->t->_('Exercise Name'); ?></th>
+			    <th><?= $this->t->_('Primary Muscle'); ?></th> 
+			    <th><?= $this->t->_('Secondary Muscle'); ?></th> 
+			    <th><?= $this->t->_('Mechanics'); ?></th>
+			    <th><?= $this->t->_('Equipment Used'); ?></th>
+		      </tr>
+		    </thead>
+		    
+		    <tbody>
+		    <?php
+			    if($this->params['type'] != 'Legs'){
+			    	$this->params['type'] = "primaryMuscle LIKE '%" . $this->params['type'] . "%'";
+			    }
+			    else {
+			    	$this->params['type'] = "primaryMuscle LIKE '%Hamstrings%' or primaryMuscle LIKE '%Glutes, Hamstrings, Quadriceps%' or primaryMuscle LIKE '%Quadriceps%' or primaryMuscle LIKE '%Glutes%'";
+			    }
+				foreach($this->exercises->fetchAll($this->params['type'])->toArray() as $exercise):
+			?>	
+		      <tr>
+		        <td><input type="checkbox" name="exercises[]" value="<?= $exercise['exerciseId']; ?>"></td>
+				<td><a href="<?= $this->publicUrl('view', 'index') ?>/id/<?= $exercise['exerciseId']; ?>/tab/<?= $this->tab; ?>"><?= $exercise['name']; ?></a></td>
+				<td><?= $exercise['primaryMuscle']; ?></td>
+				<td><?= $exercise['secondaryMuscle']; ?></td>
+				<td><?= $exercise['mechanics']; ?></td>
+				<td><?= $exercise['equipmentUsed']; ?></td>
+		      </tr>
+		    <?php 
+				endforeach;
+			?>
+		    </tbody>
+		    </table>
+		    <div>
+				<a class="button btn_add_selected_workouts lowercase" href="#">
+					<span class="glyph plus"></span>
+						<?= $this->t->_('Add Selected Exercises to a Workout');?>
+				</a>
+		    </div>
+		</div>
+	</div>
+</section>
+
+<script>
+$('.btn_add_selected_workouts').bind('click', function() {
+	btn_add_selected_workouts('<?= $this->t->_('Add'); ?>', '<?= $this->t->_('Cancel'); ?>');
+});	
+</script>

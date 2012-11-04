@@ -1,0 +1,147 @@
+<div id="sidebar">
+	<div class="sidebar-content">
+		<a id="close_sidebar" class="btn ui-state-default full-link ui-corner-all" href="javascript:void(0);">
+			<span class="ui-icon ui-icon-circle-arrow-e"></span>
+			<?= $this->t->_('Close Sidebar'); ?>
+		</a>
+		<a id="open_sidebar" class="btn tooltip ui-state-default full-link icon-only ui-corner-all" title="<?= $this->t->_('Open Sidebar'); ?>" href="#">
+			<span class="ui-icon ui-icon-circle-arrow-w"></span>
+		</a>
+		<div class="hide_sidebar">
+			<a class="fg-button btn ui-state-default full-link ui-corner-all refresh" href="javascript:void(0);" rel="<?= $this->refreshLink; ?>">
+				<span class="ui-icon ui-icon-arrowrefresh-1-e"></span>
+				<?= $this->t->_('Refresh this page'); ?>
+			</a>
+			<?php if('users' == $this->section) : ?>
+			<div class="portlet ui-widget ui-widget-content ui-helper-clearfix ui-corner-all">
+				<div class="portlet-header ui-widget-header"><?= $this->t->_('Options'); ?>
+					<span class="ui-icon ui-icon-circle-arrow-s"></span>
+				</div>
+				<div class="portlet-content">
+					<ul class="side-menu">
+						<li>
+							<a href="javascript:void(0);" onclick="btn_edituser('<?= $this->t->_('Add'); ?>', '<?= $this->t->_('Cancel'); ?>', '<?= $this->adminUrl('edit', 'users'); ?>', 0, '<?= $this->t->_('A New User is being added'); ?>')" title="<?= $this->t->_('Add New User'); ?>"><?= $this->t->_('Add New User'); ?></a>
+						</li>					
+					</ul>
+				</div>
+			</div>
+			<?php elseif('exercises' == $this->section) : ?>
+			<div class="portlet ui-widget ui-widget-content ui-helper-clearfix ui-corner-all">
+				<div class="portlet-header ui-widget-header"><?= $this->t->_('Options'); ?>
+					<span class="ui-icon ui-icon-circle-arrow-s"></span>
+				</div>
+				<div class="portlet-content">
+					<ul class="side-menu">
+						<li>
+							<a href="javascript:void(0);" onclick="btn_editexercise('<?= $this->t->_('Add'); ?>', '<?= $this->t->_('Cancel'); ?>', '<?= $this->adminUrl('edit', 'exercises'); ?>', 0, '<?= $this->t->_('A New Exercise is being added'); ?>')" title="<?= $this->t->_('Add New Exercise'); ?>"><?= $this->t->_('Add New Exercise'); ?></a>
+						</li>					
+					</ul>
+				</div>
+			</div>
+			<?php elseif('workouts' == $this->section) : ?>
+			<div class="portlet ui-widget ui-widget-content ui-helper-clearfix ui-corner-all">
+				<div class="portlet-header ui-widget-header"><?= $this->t->_('Options'); ?>
+					<span class="ui-icon ui-icon-circle-arrow-s"></span>
+				</div>
+				<div class="portlet-content">
+					<ul class="side-menu">
+						<li>
+							<a href="javascript:void(0);" onclick="btn_editworkout('<?= $this->t->_('Add'); ?>', '<?= $this->t->_('Cancel'); ?>', '<?= $this->adminUrl('edit', 'workouts'); ?>', 0, '<?= $this->t->_('A New Workout is being added'); ?>')" title="<?= $this->t->_('Add New Workout'); ?>"><?= $this->t->_('Add New Workout'); ?></a>
+						</li>					
+					</ul>
+				</div>
+			</div>
+			<?php elseif('meals' == $this->section) : ?>
+			<div class="portlet ui-widget ui-widget-content ui-helper-clearfix ui-corner-all">
+				<div class="portlet-header ui-widget-header"><?= $this->t->_('Options'); ?>
+					<span class="ui-icon ui-icon-circle-arrow-s"></span>
+				</div>
+				<div class="portlet-content">
+					<ul class="side-menu">
+						<li>
+							<a href="javascript:void(0);" onclick="btn_editmeal('<?= $this->t->_('Add'); ?>', '<?= $this->t->_('Cancel'); ?>', '<?= $this->adminUrl('edit', 'meals'); ?>', 0, '<?= $this->t->_('A New Meal is being added'); ?>')" title="<?= $this->t->_('Add New Meal'); ?>"><?= $this->t->_('Add New Meal'); ?></a>
+						</li>					
+					</ul>
+				</div>
+			</div>
+			<?php elseif('foods' == $this->section) : ?>
+			<div class="portlet ui-widget ui-widget-content ui-helper-clearfix ui-corner-all">
+				<div class="portlet-header ui-widget-header"><?= $this->t->_('Options'); ?>
+					<span class="ui-icon ui-icon-circle-arrow-s"></span>
+				</div>
+				<div class="portlet-content">
+					<ul class="side-menu">
+						<li>
+							<a href="javascript:void(0);" onclick="btn_editfood('<?= $this->t->_('Add'); ?>', '<?= $this->t->_('Cancel'); ?>', '<?= $this->adminUrl('edit', 'foods'); ?>', 0, '<?= $this->t->_('A New Food is being added'); ?>')" title="<?= $this->t->_('Add New Food'); ?>"><?= $this->t->_('Add New Food'); ?></a>
+						</li>					
+					</ul>
+				</div>
+			</div>
+			<?php endif; ?>
+		</div>
+	</div>
+</div>
+
+<script>
+$('.refresh').bind('click', function() {
+	$('#page-content-wrapper').css('opacity', '0.2');
+	$('#page-content').append('<div class="ui-widget ui-widget-content ui-corner-all" style="position: absolute; width: 80px; height: 30px;left: 352px; top: 30px; padding: 10px;border-radius:20px"><div style="background: white; border: 0;" class="ui-dialog-content ui-widget-content"><p align="center"><?= $this->t->_('loading...'); ?></p></div></div>');
+	$('#vkNgine-loaded-content').load($(this).attr('rel'), null, function() {
+	});	
+});
+
+var sidebarHeight = $("#sidebar").height();
+$("#page-content-wrapper").css({"minHeight" : sidebarHeight });
+
+$(".portlet-header").hover(function() {
+	$(this).addClass("ui-portlet-hover");
+},
+function(){
+	jQuery(this).removeClass("ui-portlet-hover");
+});
+
+jQuery(".portlet-header .ui-icon").click(function() {
+	jQuery(this).toggleClass("ui-icon-circle-arrow-n");
+	jQuery(this).parents(".portlet:first").find(".portlet-content").toggle();
+});
+
+function close_sidebar() {
+	
+	$("#sidebar").addClass('closed-sidebar');
+	$("#page_wrapper #page-content #page-content-wrapper").addClass("no-bg-image wrapper-full");
+	$("#open_sidebar").show();
+	$("#close_sidebar, .hide_sidebar").hide();
+}
+function open_sidebar() {
+	$("#sidebar").removeClass('closed-sidebar');
+	$("#page_wrapper #page-content #page-content-wrapper").removeClass("no-bg-image wrapper-full");
+	$("#open_sidebar").hide();
+	$("#close_sidebar, .hide_sidebar").show();
+}
+$('#close_sidebar').click(function(){
+	close_sidebar();
+	if($.browser.safari) {
+	    location.reload();
+	}
+	$.cookie('sidebar', 'closed' );
+		$(this).addClass("active");
+});
+
+$('#open_sidebar').click(function(){
+	open_sidebar();
+	if($.browser.safari) {
+	    location.reload();
+	}
+	$.cookie('sidebar', 'open' );
+});
+
+var sidebar = $.cookie('sidebar');
+
+if (sidebar == 'closed') {
+	close_sidebar();
+};
+
+if (sidebar == 'open') {
+	open_sidebar();
+};
+</script>

@@ -1,0 +1,85 @@
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#sort-table")
+	.tablesorter({
+		widgets: ['zebra'],
+		headers: { 
+            6: { sorter: false } 
+        } 
+	})
+	
+	$(".header").append('<span class="ui-icon ui-icon-carat-2-n-s"></span>');
+
+	$('.tooltip').tooltip({
+			track: true,
+			delay: 0,
+			showURL: false,
+			showBody: " - ",
+			fade: 250
+	});
+});
+</script>
+
+<?= $this->partial('_breadcrumbs.phtml', array('breadcrumb' => $this->breadcrumb())); ?>
+
+<div id="page-layout" class="fixed">
+	<div id="page-content">
+		<div id="page-content-wrapper">
+			<div class="inner-page-title">
+				<h2><?= $this->t->_('Meals Management'); ?></h2>
+				<span><?= $this->t->_('Here you can add/update or delete meals in the system'); ?></span>
+			</div>
+			<div class="hastable">
+					<form action="" method="post" class="pager-form" name="myform">
+						<table id="sort-table"> 
+							<thead> 
+								<tr>
+									<th style="width:23px" class="header">#</th>
+								    <th class="header"><?= $this->t->_('Title'); ?></th>
+								    <th style="width:100px"><?= $this->t->_('Actions'); ?></th> 
+								</tr> 
+							</thead> 
+						<tbody>
+						<?php 
+							if (count($this->meals)) :
+								$i = 0;
+								foreach($this->meals as $meal) :	
+						?>
+							<tr id="meal-<?= $meal->mealId; ?>" class="<?php ($i % 2 == 0) ? 'even' : 'odd'; ?>">
+								<td class="center"><?= $meal->mealId; ?></td> 
+							    <td><?= $this->escape($meal->title); ?></td> 
+							    <td>
+									<a onclick="btn_editmeal('<?= $this->t->_('Save'); ?>', '<?= $this->t->_('Cancel'); ?>', '<?= $this->adminUrl('edit', 'meals'); ?>', <?= $meal->mealId; ?>, '<?= $this->t->_('Meal is being edited'); ?>');" href="javascript:void(0);" class="btn_no_text btn ui-state-default ui-corner-all tooltip" title="<?= $this->t->_('Edit this meal'); ?>">
+										<span class="ui-icon ui-icon-wrench"></span>
+									</a>
+									<a onclick="btn_addfoodtomeal('<?= $this->t->_('Save'); ?>', '<?= $this->t->_('Cancel'); ?>', '<?= $this->adminUrl('add-food', 'meals'); ?>', <?= $meal->mealId; ?>, '<?= $this->t->_('Meal is being edited'); ?>');" class="btn_no_text btn ui-state-default ui-corner-all tooltip" href="javascript:void(0);" class="btn_no_text btn ui-state-default ui-corner-all tooltip" title="<?= $this->t->_('Add Food to this Meal'); ?>">
+										<span class="ui-icon ui-icon-plusthick"></span>
+									</a>
+									<a onclick="btn_deletemeal('<?= $this->t->_('Yes'); ?>', '<?= $this->t->_('No'); ?>', <?= $meal->mealId; ?>);" href="javascript:void(0);" class="btn_no_text btn ui-state-default ui-corner-all tooltip" title="<?= $this->t->_('Delete this meal'); ?>">
+										<span class="ui-icon ui-icon-trash"></span>
+									</a>
+								</td>
+							</tr>
+						<?php 
+							    $i++;
+								endforeach;
+							endif;
+						?>						
+						</tbody>
+						</table>
+					</form>
+					
+					<div class="clear"></div>
+					
+					<?= $this->paginationControl($this->meals, 'Sliding', '_paginator.phtml'); ?>
+					
+				</div>
+			
+			<?= $this->partial('layout-sidebar.phtml', array('section' => 'meals', 't' => $this->t, 'refreshLink' => $this->adminUrl(null, 'meals'))); ?>	
+					
+	<div class="clear"></div>			
+			</div>
+		<div class="clear"></div>
+	</div>
+	</div>
+	<div class="clear"></div>

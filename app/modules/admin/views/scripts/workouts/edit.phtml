@@ -1,0 +1,54 @@
+<?= $this->form; ?>
+
+<script>
+$(document).ready(function(){
+	$("#name").focus();
+
+	var options = {  
+		url: '<?= $this->form->getAction(); ?>',
+        success: vkNgineAjaxFormSubmit,
+		dataType : 'json'
+    };
+    
+	$('#<?= $this->form->getId(); ?>').ajaxForm(options);
+	
+	$('.datePicker').datepicker({
+		changeMonth: true,
+		changeYear: true,
+		showButtonPanel: true,
+		dateFormat: 'yy-mm-dd'
+	});
+});
+</script>
+
+<script id="workoutsTemplate" type="text/x-jquery-tmpl"> 
+<tr class="${className}" id="workout-${itemId}">
+	<td class="center">${itemId}</td> 
+    <td>${name}</td> 
+    <td> 
+		{{if startDate != "0000-00-00" }}
+			${startDateFormatted}
+		{{else}}
+			${Never}
+		{{/if}}
+	</td>
+	<td>
+		{{if endDate != "0000-00-00" }}
+			${endDateFormatted}
+		{{else}}
+			${Never}
+		{{/if}}	
+	</td>
+    <td>
+		<a class="btn_no_text btn ui-state-default ui-corner-all tooltip" href="javascript:void(0);" onclick="btn_editworkout('${Save}', '${Cancel}', '${href}', '${itemId}', '${title}');" title="${tagTitle}">
+			<span class="ui-icon ui-icon-wrench"></span>
+		</a>
+		<a onclick="btn_addexercisetoworkout('${Save}', '${Cancel}', '<?= $this->adminUrl('add-exercise', 'workouts'); ?>', ${itemId}, '${title}');" class="btn_no_text btn ui-state-default ui-corner-all tooltip" href="javascript:void(0);" class="btn_no_text btn ui-state-default ui-corner-all tooltip" title="${tagTitleAddExercise}">
+			<span class="ui-icon ui-icon-plusthick"></span>
+		</a>
+		<a onclick="btn_deleteworkout('${Yes}', '${No}', ${itemId});" href="javascript:void(0);" class="btn_no_text btn ui-state-default ui-corner-all tooltip" title="${tagTitleDelete}">
+			<span class="ui-icon ui-icon-trash"></span>
+		</a>
+	</td>
+</tr>
+</script>

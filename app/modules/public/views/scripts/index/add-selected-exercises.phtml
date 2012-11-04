@@ -1,0 +1,39 @@
+<?= $this->form; ?>
+<script>
+$(document).ready(function(){
+	$('select#workoutId').select_skin();
+	
+	var options = {  
+		url: '<?= $this->form->getAction(); ?>',
+        success: vkNgineAjaxFormSubmit,
+		dataType : 'json'
+    };
+    
+	$('#<?= $this->form->getId(); ?>').ajaxForm(options);
+});
+
+$('#day-label').hide();
+$('#day-element').hide();
+
+$(".setdays").change(function(){
+	var selected = $(".setdays option:selected");    
+
+	if(selected.val()){
+		
+		$('#day-element').show();
+		
+		$.ajax({ 
+			url: '/index/set-day/id/' + selected.val(),
+			success: function(returnData) {
+				$('dd#day-element').html(returnData);
+				$('select#day').select_skin();
+			}
+		})
+	}
+	else {
+		$('#day-label').hide();
+		$('#day-element').hide();
+	}
+});
+</script>
+

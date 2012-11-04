@@ -1,0 +1,35 @@
+	<script>
+	$(function() {
+		$('body').removeClass('layout1280');
+		$('body').addClass('layout980');
+	});
+	</script>
+
+	<?= $this->partial('_breadcrumbs.phtml', array('breadcrumb' => $this->breadcrumb())); ?>
+		
+	<div id="page-layout" class="fixed">
+	<div id="page-content">
+		<div id="page-content-wrapper">
+			<div class="inner-page-title">
+				<h3><?= $this->t->_('Site Statistics'); ?></h3>
+			</div>
+			<div class="content-box content-box-header ui-corner-all">
+				<div class="ui-state-default ui-corner-top ui-box-header">
+					<span class="ui-icon float-left ui-icon-signal"></span>
+					<?= $this->t->_('Application Statistics'); ?>
+				</div>
+				<div class="content-box-wrapper">
+					<p><?= $this->t->_('Total user count'); ?> <b><?= $this->users; ?></b>.<br />
+					<?= $this->t->_('Total excercise count'); ?> <b><?= $this->exercises; ?></b>. <br />
+					<?= $this->t->_('Total workout count'); ?> <b><?= $this->workouts; ?></b>.</p>
+				</div>
+			</div>
+					
+	<?= $this->partial('layout-sidebar.phtml', array('t' => $this->t, 'refreshLink' => $this->adminUrl('refresh', 'index'))); ?>
+					
+	<div class="clear"></div>			
+			</div>
+		<div class="clear"></div>
+	</div>
+	</div>
+	<div class="clear"></div>

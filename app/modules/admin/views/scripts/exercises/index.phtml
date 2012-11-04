@@ -1,0 +1,102 @@
+<script type="text/javascript">
+$(document).ready(function() {
+	$('body').removeClass('layout1280');
+	$('body').addClass('layout980');
+	
+	$("#sort-table")
+	.tablesorter({
+		widgets: ['zebra'],
+		headers: { 
+            6: { sorter: false } 
+        } 
+	})
+	
+	$(".header").append('<span class="ui-icon ui-icon-carat-2-n-s"></span>');
+
+	$('.tooltip').tooltip({
+			track: true,
+			delay: 0,
+			showURL: false,
+			showBody: " - ",
+			fade: 250
+	});
+
+	var no = '<?= $this->t->_('Close'); ?>';
+	var title = '<?= $this->t->_('Viewing Exercise Details'); ?>';
+	
+	$('.showDetails').bind('click', function() {
+		lnk_showDetails(no, $(this).attr('rel'), '/admin/exercises/show-detail', 'instructions', title);
+	});
+});
+</script>
+
+<?= $this->partial('_breadcrumbs.phtml', array('breadcrumb' => $this->breadcrumb())); ?>
+
+<div id="page-layout" class="fixed">
+	<div id="page-content">
+		<div id="page-content-wrapper">
+			<div class="inner-page-title">
+				<h2><?= $this->t->_('Exercise Management'); ?></h2>
+				<span><?= $this->t->_('Here you can add/update or delete exercises in the system'); ?></span>
+			</div>
+			<div class="hastable">
+					<form action="" method="post" class="pager-form" name="myform">
+						<table id="sort-table"> 
+							<thead> 
+								<tr>
+									<th style="width:23px" class="header">#</th>
+								    <th class="header"><?= $this->t->_('Exercise Name'); ?></th>
+								    <th class="header"><?= $this->t->_('Instructions'); ?></th>  
+								    <th class="header"><?= $this->t->_('Primary Muscle'); ?></th> 
+								    <th class="header"><?= $this->t->_('Secondary Muscle'); ?></th> 
+								    <th class="header"><?= $this->t->_('Mechanics'); ?></th>
+								    <th class="header"><?= $this->t->_('Equipment Used'); ?></th>
+									<th style="width:70px"><?= $this->t->_('Actions'); ?></th> 
+								</tr> 
+							</thead> 
+						<tbody>
+						<?php 
+							if (count($this->exercises)) :
+								$i = 0;
+								foreach($this->exercises as $exercise) :	
+						?>
+							<tr id="exercise-<?= $exercise->exerciseId; ?>" class="<?php ($i % 2 == 0) ? 'even' : 'odd'; ?>">
+								<td class="center"><?= $exercise->exerciseId; ?></td> 
+							    <td><?= $this->escape($exercise->name); ?></td> 
+							    <td><a class="showDetails" rel="<?= $exercise->exerciseId; ?>" href="javascript:void(0);"><?= $this->t->_('View'); ?></a></td> 
+							    <td><?= $this->escape($exercise->primaryMuscle); ?></td>
+							    <td><?= $this->escape($exercise->secondaryMuscle); ?></td>  
+							    <td><?= $this->escape($exercise->mechanics); ?></td> 
+							    <td><?= $this->escape($exercise->equipmentUsed); ?></td> 
+							    <td>
+									<a onclick="btn_editexercise('<?= $this->t->_('Save'); ?>', '<?= $this->t->_('Cancel'); ?>', '<?= $this->adminUrl('edit', 'exercises'); ?>', <?= $exercise->exerciseId; ?>, '<?= $this->t->_('Exercise is being edited'); ?>');" href="javascript:void(0);" class="btn_no_text btn ui-state-default ui-corner-all tooltip" title="<?= $this->t->_('Edit this exercise'); ?>">
+										<span class="ui-icon ui-icon-wrench"></span>
+									</a>
+									<a onclick="btn_deleteexercise('<?= $this->t->_('Yes'); ?>', '<?= $this->t->_('No'); ?>', <?= $exercise->exerciseId; ?>);" href="javascript:void(0);" class="btn_no_text btn ui-state-default ui-corner-all tooltip" title="<?= $this->t->_('Delete this exercise'); ?>">
+										<span class="ui-icon ui-icon-trash"></span>
+									</a>
+								</td>
+							</tr>
+						<?php 
+							    $i++;
+								endforeach;
+							endif;
+						?>						
+						</tbody>
+						</table>
+					</form>
+					
+					<div class="clear"></div>
+					
+					<?= $this->paginationControl($this->exercises, 'Sliding', '_paginator.phtml'); ?>
+					
+				</div>
+			
+			<?= $this->partial('layout-sidebar.phtml', array('section' => 'exercises', 't' => $this->t, 'refreshLink' => $this->adminUrl(null, 'exercises'))); ?>	
+					
+	<div class="clear"></div>			
+			</div>
+		<div class="clear"></div>
+	</div>
+	</div>
+	<div class="clear"></div>

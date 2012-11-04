@@ -1,0 +1,102 @@
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#sort-table")
+	.tablesorter({
+		widgets: ['zebra'],
+		headers: { 
+            6: { sorter: false } 
+        } 
+	})
+	
+	$(".header").append('<span class="ui-icon ui-icon-carat-2-n-s"></span>');
+
+	$('.tooltip').tooltip({
+			track: true,
+			delay: 0,
+			showURL: false,
+			showBody: " - ",
+			fade: 250
+	});
+});
+</script>
+
+<?= $this->partial('_breadcrumbs.phtml', array('breadcrumb' => $this->breadcrumb())); ?>
+
+<div id="page-layout" class="fixed">
+	<div id="page-content">
+		<div id="page-content-wrapper">
+			<div class="inner-page-title">
+				<h2><?= $this->t->_('Foods Management'); ?></h2>
+				<span><?= $this->t->_('Here you can add/update or delete foods in the system'); ?></span>
+			</div>
+			<div class="hastable">
+					<form action="" method="post" class="pager-form" name="myform">
+						<table id="sort-table"> 
+							<thead> 
+								<tr>
+									<th style="width:23px" class="header">#</th>
+								    <th class="header"><?= $this->t->_('Name'); ?></th>
+								    <th class="header"><?= $this->t->_('Serving Size'); ?></th>
+								    <th class="header"><?= $this->t->_('Serving Size Type'); ?></th>
+								    <th class="header"><?= $this->t->_('Protein'); ?></th>
+								    <th class="header"><?= $this->t->_('Calories'); ?></th>
+								    <th class="header"><?= $this->t->_('Carbs'); ?></th>
+								    <th class="header"><?= $this->t->_('Fat'); ?></th>
+								    <th class="header"><?= $this->t->_('Sugar'); ?></th>
+								    <th class="header"><?= $this->t->_('Sodium'); ?></th>
+								    <th class="header"><?= $this->t->_('Fiber'); ?></th>
+								    <th class="header"><?= $this->t->_('Cholesterol'); ?></th>
+								    <th style="width:100px"><?= $this->t->_('Actions'); ?></th> 
+								</tr> 
+							</thead> 
+						<tbody>
+						<?php 
+							if (count($this->foods)) :
+								$i = 0;
+								foreach($this->foods as $food) :	
+						?>
+							<tr id="food-<?= $food->foodId; ?>" class="<?php ($i % 2 == 0) ? 'even' : 'odd'; ?>">
+								<td class="center"><?= $food->foodId; ?></td> 
+							    <td><?= $this->escape($food->name); ?></td> 
+							    <td><?= $this->escape($food->servingSize); ?></td> 
+							    <td><?= $this->escape($food->servingSizeType); ?></td> 
+							    <td><?= $this->escape($food->protein); ?></td> 
+							    <td><?= $this->escape($food->calories); ?></td> 
+							    <td><?= $this->escape($food->carbs); ?></td> 
+							    <td><?= $this->escape($food->fat); ?></td> 
+							    <td><?= $this->escape($food->sugar); ?></td> 
+							    <td><?= $this->escape($food->sodium); ?></td> 
+							    <td><?= $this->escape($food->fiber); ?></td> 
+							    <td><?= $this->escape($food->cholesterol); ?></td> 
+							    <td>
+									<a onclick="btn_editfood('<?= $this->t->_('Save'); ?>', '<?= $this->t->_('Cancel'); ?>', '<?= $this->adminUrl('edit', 'foods'); ?>', <?= $food->foodId; ?>, '<?= $this->t->_('Food is being edited'); ?>');" href="javascript:void(0);" class="btn_no_text btn ui-state-default ui-corner-all tooltip" title="<?= $this->t->_('Edit this food'); ?>">
+										<span class="ui-icon ui-icon-wrench"></span>
+									</a>
+									<a onclick="btn_deletefood('<?= $this->t->_('Yes'); ?>', '<?= $this->t->_('No'); ?>', <?= $food->foodId; ?>);" href="javascript:void(0);" class="btn_no_text btn ui-state-default ui-corner-all tooltip" title="<?= $this->t->_('Delete this food'); ?>">
+										<span class="ui-icon ui-icon-trash"></span>
+									</a>
+								</td>
+							</tr>
+						<?php 
+							    $i++;
+								endforeach;
+							endif;
+						?>						
+						</tbody>
+						</table>
+					</form>
+					
+					<div class="clear"></div>
+					
+					<?= $this->paginationControl($this->foods, 'Sliding', '_paginator.phtml'); ?>
+					
+				</div>
+			
+			<?= $this->partial('layout-sidebar.phtml', array('section' => 'foods', 't' => $this->t, 'refreshLink' => $this->adminUrl(null, 'foods'))); ?>	
+					
+	<div class="clear"></div>			
+			</div>
+		<div class="clear"></div>
+	</div>
+	</div>
+	<div class="clear"></div>
