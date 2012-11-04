@@ -8,30 +8,30 @@
       <zfdebug>ZFDebug</zfdebug>
     </autoloaderNamespaces>
     <bootstrap>
-      <path>/var/www/gym/public/../app/Bootstrap.php</path>
+      <path><zf:const zf:name="SERVER_PATH"/>/public/../app/Bootstrap.php</path>
       <class>Bootstrap</class>
     </bootstrap>
     <cache>
       <use>0</use>
       <type>file</type>
-      <dir>/var/www/gym/public/../app/../tmp/cache</dir>
+      <dir><zf:const zf:name="SERVER_PATH"/>/public/../app/../tmp/cache</dir>
       <lifetime>7200</lifetime>
     </cache>
     <assets>
-      <path>/var/www/gym/public/../_assets</path>
+      <path><zf:const zf:name="SERVER_PATH"/>/public/../_assets</path>
     </assets>
     <language>
       <locale>en</locale>
       <file>
         <en>
           <name>English</name>
-          <master>/var/www/gym/public/../languages/en/lang.csv</master>
-          <app>/var/www/gym/public/../languages/en/app.csv</app>
+          <master><zf:const zf:name="SERVER_PATH"/>/public/../languages/en/lang.csv</master>
+          <app><zf:const zf:name="SERVER_PATH"/>/public/../languages/en/app.csv</app>
         </en>
         <tr>
           <name>Turkish</name>
-          <master>/var/www/gym/public/../languages/tr/lang.csv</master>
-          <app>/var/www/gym/public/../languages/tr/app.csv</app>
+          <master><zf:const zf:name="SERVER_PATH"/>/public/../languages/tr/lang.csv</master>
+          <app><zf:const zf:name="SERVER_PATH"/>/public/../languages/tr/app.csv</app>
         </tr>
       </file>
     </language>
@@ -77,14 +77,14 @@
       </locale>
       <frontController>
         <defaultModule>public</defaultModule>
-        <controllerDirectory>/var/www/gym/public/../app/controllers</controllerDirectory>
-        <moduleDirectory>/var/www/gym/public/../app/modules</moduleDirectory>
+        <controllerDirectory><zf:const zf:name="SERVER_PATH"/>/public/../app/controllers</controllerDirectory>
+        <moduleDirectory><zf:const zf:name="SERVER_PATH"/>/public/../app/modules</moduleDirectory>
       </frontController>
       <view>
-        <helperPath>/var/www/gym/public/../app/views/helpers</helperPath>
+        <helperPath><zf:const zf:name="SERVER_PATH"/>/public/../app/views/helpers</helperPath>
       </view>
       <layout>
-        <layoutPath>/var/www/gym/public/../app/views/layouts</layoutPath>
+        <layoutPath><zf:const zf:name="SERVER_PATH"/>/public/../app/views/layouts</layoutPath>
       </layout>
     </resources>
   </global>
@@ -126,13 +126,7 @@
           <host>localhost</host>
           <username>root</username>
           <password></password>
-<<<<<<< .mine
           <dbname>gym</dbname>
-          <!--<unix_socket>/usr/local/zend/mysql/tmp/mysql.sock</unix_socket> -->
-=======
-          <dbname>gym</dbname>  
-          <unix_socket>/usr/local/zend/mysql/tmp/mysql.sock</unix_socket>       
->>>>>>> .r249
         </params>
       </db>
     </resources>
