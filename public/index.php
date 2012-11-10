@@ -13,7 +13,7 @@ switch(APPLICATION_ENV) {
 		break;	
 	case 'production':
 	case '':		
-		set_include_path(implode(PATH_SEPARATOR, array(realpath(APPLICATION_PATH . '/../../../'), get_include_path(), )));
+		set_include_path(implode(PATH_SEPARATOR, array(realpath(APPLICATION_PATH . '/../../../../'), get_include_path(), )));
 		set_include_path(implode(PATH_SEPARATOR, array(realpath(APPLICATION_PATH . '/../library'), get_include_path(), )));
 		
 		require_once 'Zend/Application.php';
