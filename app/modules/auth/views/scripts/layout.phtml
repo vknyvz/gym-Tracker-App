@@ -4,20 +4,20 @@ define('IN_DEVELOPMENT', APPLICATION_ENV === 'development');
 echo $this->doctype() . "\n";
 
 $this->headLink()
-		->prependStylesheet($this->baseUrl('/css/reset.css'))
+		->prependStylesheet($this->baseUrl('/css/bootstrap/css/bootstrap.min.css'))
 		->headLink(array('rel' => 'icon', 'href' => $this->baseUrl('dumbbell.ico'), 'type' => 'image/x-icon', 'PREPEND'))
-		->appendStylesheet($this->baseUrl('/css/icons.css'))
-		->appendStylesheet($this->baseUrl('/css/formalize.css'))
-		->appendStylesheet($this->baseUrl('/css/fonts.css'))
-	 	->appendStylesheet($this->baseUrl('/css/style.css'))
-	 	->appendStylesheet($this->baseUrl('/css/portrait.css'), 'all and (orientation:portrait)')
+		->appendStylesheet($this->baseUrl('/css/font-awesome/css/font-awesome.css'))
+		->appendStylesheet($this->baseUrl('/css/css/style.css'))
+		->appendStylesheet($this->baseUrl('/css/style_responsive.css'))
+	 	->appendStylesheet($this->baseUrl('/css/style_default.css'))
+	 	->appendStylesheet($this->baseUrl('/css/uniform/css/uniform.default.css'))
 	 	->headLink(array('rel' => 'apple-touch-icon', 'href' => '/V.ico'));
-	 			 
+
 $this->headScript()
-	 	->prependFile($this->baseUrl('/js/jquery-1.7.1.js'))
-	 	->appendFile($this->baseUrl('/js/form.js'))
-	 	->appendFile($this->baseUrl('/js/public/dialog.js'))
-	 	->appendFile($this->baseUrl('/js/public/html5.js'), 'text/javascript', array('conditional' => 'lt IE 9'));
+	 	->prependFile($this->baseUrl('/js/jquery-1.8.2.min.js'))
+	 	->appendFile($this->baseUrl('/js/public/bootstrap/js/bootstrap.min.js'))
+	 	->appendFile($this->baseUrl('/js/public/jquery.blockui.js'))
+	 	->appendFile($this->baseUrl('/js/public/app.js'));
 
 $this->headMeta()
      	->appendHttpEquiv('Content-Type', 'text/html; charset=UTF-8')
@@ -26,9 +26,13 @@ $this->headMeta()
 		->appendHttpEquiv('Cache-Control', 'no-cache')
         ->appendName('apple-mobile-web-app-capable', 'yes')
 		->appendName('apple-mobile-web-app-status-bar-style', 'black')
-		->appendName('viewport', 'user-scalable=no');
+		->appendName('viewport', 'width=device-width, initial-scale=1.0');
 ?>
-<html lang="en">
+
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+
 <head>
 
 <?= $this->headTitle() . "\n"; ?>
@@ -41,8 +45,6 @@ $this->headMeta()
 
 <body id="login">
 	<?php echo $this->layout()->content; ?>
-	
-	<div class="footer"></div>
 </body>
 
 </html>	

@@ -1,30 +1,55 @@
-<div id="login_container">
-  <div id="login_form">
-    <form action="/auth/login" method="post" enctype="application/x-www-form-urlencoded" name="publicFormLogin" id="publicFormLogin">
-      <p>
-        <?= $this->form->username; ?>
-        <span class="error" style="display:none">
-			<label class="error" for="username" style="display: block;">
-				<?= $this->t->_('Username is required'); ?>
-			<span class="tip"></span>
-			</label>
-		</span>
-		<span class="icon tick valid success" style="display:none"></span>
-      </p>
-      <p>
-        <?= $this->form->password; ?>
-        <span class="error" style="display:none">
-			<label class="error" for="username" style="display: block;">
-				<?= $this->t->_('Password is required'); ?>
-			<span class="tip"></span>
-			</label>
-		</span>
-		<span class="icon tick valid success" style="display:none"></span>
-      </p>
-      <button type="submit" class="button blue lowercase"><span class="glyph key"></span> <?= $this->t->_('Login'); ?></button>
-    </form>
+<!-- BEGIN LOGO -->
+  <div id="logo" class="center">
+    <img src="assets/img/logo.png" alt="logo" class="center" /> 
   </div>
-</div>
+  <!-- END LOGO -->
+  <!-- BEGIN LOGIN -->
+  <div id="login">
+    <!-- BEGIN LOGIN FORM -->
+    <form action="/auth/login" method="post" enctype="application/x-www-form-urlencoded" name="publicFormLogin" id="loginform" class="form-vertical no-padding no-margin">
+      <p class="center">Enter your username and password.</p>
+      <div class="control-group">
+        <div class="controls">
+          <div class="input-prepend">
+            <span class="add-on"><i class="icon-user"></i></span><?= $this->form->username; ?>
+          </div>
+        </div>
+      </div>
+      <div class="control-group">
+        <div class="controls">
+          <div class="input-prepend">
+            <span class="add-on"><i class="icon-lock"></i></span><?= $this->form->password; ?>             
+          </div>
+          <div class="block-hint pull-right">
+            <a href="javascript:;" class="" id="forget-password">Forgot Password?</a>
+          </div>
+          <div class="clearfix space5"></div>
+        </div>
+      </div>
+      <input type="submit" id="login-btn" class="btn btn-block btn-inverse" value="<?= $this->t->_('Login'); ?>" />
+    </form>
+    <!-- END LOGIN FORM -->        
+    <!-- BEGIN FORGOT PASSWORD FORM -->
+    <form id="forgotform" class="form-vertical no-padding no-margin hide" action="http://www.keenthemes.com/preview/conquer/index.html">
+      <p class="center">Enter your e-mail address below to reset your password.</p>
+      <div class="control-group">
+        <div class="controls">
+          <div class="input-prepend">
+            <span class="add-on"><i class="icon-envelope"></i></span><input id="input-email" type="text" placeholder="Email" />
+          </div>
+        </div>
+        <div class="space10"></div>
+      </div>
+      <input type="button" id="forget-btn" class="btn btn-block btn-inverse" value="Submit" />
+    </form>
+    <!-- END FORGOT PASSWORD FORM -->
+  </div>
+  <!-- END LOGIN -->
+  <!-- BEGIN COPYRIGHT -->
+  <div id="login-copyright">
+    2012 &copy; Conquer. Admin Dashboard Template.
+  </div>
+
 
 <script>
 	$("#username").focus();
