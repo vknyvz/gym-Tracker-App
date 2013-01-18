@@ -276,16 +276,14 @@ function btn_add_selected_workouts(yes, no){
 	}
 }
 
-function loginHandler(data)
-{
+function loginHandler(data) {
 	if(!data.success){
-		$('.error').show();
-		$('#username').addClass('error');
-		$('#password').addClass('error');
+		$('#username').closest('.control-group').addClass('error');
+		$('#password').closest('.control-group').addClass('error');
 	}
 	else {
-		$('.error').hide();
-		$('.success').show();
+		$('#username').closest('.control-group').addClass('success');
+		$('#password').closest('.control-group').addClass('success');		
 		window.top.location = data.href;
 	}
 }

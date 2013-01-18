@@ -6,8 +6,6 @@ class Auth_LoginController extends vkNgine_Auth_Controller
     public function init()
     {
     	parent::init();
-    	
-    	$this->config = vkNgine_Config::getSystemConfig();
     }
     
     public function indexAction()

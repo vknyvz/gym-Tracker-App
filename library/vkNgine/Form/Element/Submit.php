@@ -19,7 +19,7 @@ class vkNgine_Form_Element_Submit extends Zend_Form_Element_Submit
 		$this->removeDecorator('DtDdWrapper')
 			 ->setLabel($options['value'])
        		 ->setAttribs(array('class' => $options['class'], 
-       		 				    'id'	=> null,
+       		 				    'id'	=> (isset($options['id'])) ? $options['id'] : null,
        		 					'type'  => (isset($options['type'])) ? $options['type'] : 'submit'));
        		 
 		

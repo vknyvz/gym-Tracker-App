@@ -4,10 +4,10 @@ define('IN_DEVELOPMENT', APPLICATION_ENV === 'development');
 echo $this->doctype() . "\n";
 
 $this->headLink()
-		->prependStylesheet($this->baseUrl('/css/bootstrap/css/bootstrap.min.css'))
+		->prependStylesheet($this->baseUrl('/js/public/bootstrap/css/bootstrap.min.css'))
 		->headLink(array('rel' => 'icon', 'href' => $this->baseUrl('dumbbell.ico'), 'type' => 'image/x-icon', 'PREPEND'))
 		->appendStylesheet($this->baseUrl('/css/font-awesome/css/font-awesome.css'))
-		->appendStylesheet($this->baseUrl('/css/css/style.css'))
+		->appendStylesheet($this->baseUrl('/css/styles.css'))
 		->appendStylesheet($this->baseUrl('/css/style_responsive.css'))
 	 	->appendStylesheet($this->baseUrl('/css/style_default.css'))
 	 	->appendStylesheet($this->baseUrl('/css/uniform/css/uniform.default.css'))
@@ -17,7 +17,9 @@ $this->headScript()
 	 	->prependFile($this->baseUrl('/js/jquery-1.8.2.min.js'))
 	 	->appendFile($this->baseUrl('/js/public/bootstrap/js/bootstrap.min.js'))
 	 	->appendFile($this->baseUrl('/js/public/jquery.blockui.js'))
-	 	->appendFile($this->baseUrl('/js/public/app.js'));
+	 	->appendFile($this->baseUrl('/js/public/dialog.js'))
+	 	->appendFile($this->baseUrl('/js/form.js'))	 	 
+	 	->appendFile($this->baseUrl('/js/public/vkNgine.js'));
 
 $this->headMeta()
      	->appendHttpEquiv('Content-Type', 'text/html; charset=UTF-8')
@@ -36,14 +38,13 @@ $this->headMeta()
 <head>
 
 <?= $this->headTitle() . "\n"; ?>
-
 <?= $this->headMeta() . "\n"; ?>
-
 <?= $this->headLink()  . "\n"; ?>
-<?= $this->headScript(). "\n"; ?>	
+<?= $this->headScript(). "\n"; ?>
+	
 </head> 
 
-<body id="login">
+<body>
 	<?php echo $this->layout()->content; ?>
 </body>
 
