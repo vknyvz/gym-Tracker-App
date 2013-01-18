@@ -1,4 +1,4 @@
-var vkNgine = function ($) {
+var vkNgine = function () {
 
     var isMainPage = false;
     var isMapPage = false;
@@ -1655,8 +1655,8 @@ var vkNgine = function ($) {
 
     var handleDeviceWidth = function () {
         function fixWidth(e) {
-            var winHeight = $(window).height();
-            var winWidth = $(window).width();
+            var winHeight = jQuery(window).height();
+            var winWidth = jQuery(window).width();
             //alert(winWidth);
             //for tablet and small desktops
             if (winWidth < 1125 && winWidth > 767) {

@@ -5,36 +5,37 @@ define('IN_DEVELOPMENT', APPLICATION_ENV === 'development');
 echo $this->doctype() . "\n";
 
 $this->headLink()
-		->prependStylesheet($this->baseUrl('/css/reset.css'))
+		->prependStylesheet($this->baseUrl('/js/public/bootstrap/css/bootstrap.min.css'))
 		->headLink(array('rel' => 'icon', 'href' => $this->baseUrl('dumbbell.ico'), 'type' => 'image/x-icon', 'PREPEND'))
-		->appendStylesheet($this->baseUrl('/css/icons.css'))
-		->appendStylesheet($this->baseUrl('/css/formalize.css'))
-		->appendStylesheet($this->baseUrl('/css/fonts.css'))
-		->appendStylesheet($this->baseUrl('/css/style.css'))
-		->appendStylesheet($this->baseUrl('/css/portrait.css'), 'all and (orientation:portrait)')
-		->appendStylesheet($this->baseUrl('/css/ui-1.8.17.custom.css'))
-		->appendStylesheet($this->baseUrl('/css/admin/gritter.css'))
-		->appendStylesheet($this->baseUrl('/css/960.css'))
-		->appendStylesheet($this->baseUrl('/css/checkboxes.css'))
-		->appendStylesheet($this->baseUrl('/css/autosuggest.css'))
-		->appendStylesheet($this->baseUrl('/css/vkNgine-calendar.css'));
-	 
+		->appendStylesheet($this->baseUrl('/js/public/bootstrap/css/bootstrap-responsive.min.css'))
+		->appendStylesheet($this->baseUrl('/css/font-awesome/css/font-awesome.css'))
+		->appendStylesheet($this->baseUrl('/css/styles.css'))
+		->appendStylesheet($this->baseUrl('/css/style_responsive.css'))
+	 	->appendStylesheet($this->baseUrl('/css/style_default.css'))
+		->appendStylesheet($this->baseUrl('/css/vkNgine-calendar.css'))
+		->appendStylesheet($this->baseUrl('/css/gritter/css/jquery.gritter.css'))
+		->appendStylesheet($this->baseUrl('/css/uniform/css/uniform.default.css'))
+		->appendStylesheet($this->baseUrl('/js/public/bootstrap-daterangepicker/daterangepicker.css'))		
+		->appendStylesheet($this->baseUrl('/js/public/fullcalendar/bootstrap-fullcalendar.css'))
+		->appendStylesheet($this->baseUrl('/js/public/jqvmap/jqvmap.css'));
+	
 $this->headScript()
-	     ->prependFile($this->baseUrl('/js/jquery-1.7.1.js'))
-	     ->appendFile($this->baseUrl('/js/public/ui/jquery-ui-1.8.17.custom.js'))
-	     ->appendFile($this->baseUrl('/js/public/ui/jquery.slider.js'))
-	     ->appendFile($this->baseUrl('/js/public/ui/jquery.prettyPhoto.js'))
-	     ->appendFile($this->baseUrl('/js/form.js'))
-	     ->appendFile($this->baseUrl('/js/admin/gritter.js'))
+	     ->prependFile($this->baseUrl('/js/jquery-1.8.2.min.js'))
+	     ->appendFile($this->baseUrl('/js/jquery-ui-1.9.2.custom.min.js'))
+	     ->appendFile($this->baseUrl('/js/public/slimScroll/slimScroll.min.js'))	     
+	     ->appendFile($this->baseUrl('/js/public/fullcalendar/fullcalendar.min.js'))
+	     ->appendFile($this->baseUrl('/js/form.js'))	     
+	     ->appendFile($this->baseUrl('/js/public/bootstrap/js/bootstrap.min.js'))
 	     ->appendFile($this->baseUrl('/js/public/bsn.AutoSuggest_2.1.3_comp.js'))
-	     ->appendFile($this->baseUrl('/js/vkNgine.js'))
-	     ->appendFile($this->baseUrl('/js/public/dialog.js'))
-	     ->appendFile($this->baseUrl('/js/public/jquery.selectskin.js'))
-	     ->appendFile($this->baseUrl('/js/public/jquery.checkboxes.js'))
-	     ->appendFile($this->baseUrl('/js/public/jquery.dataTables.js'))
-	     ->appendFile($this->baseUrl('/js/public/jquery.tipsy.js'))
-	     ->appendFile($this->baseUrl('/js/public/html5.js'), 'text/javascript', array('conditional' => 'lt IE 9'));
-
+	     ->appendFile($this->baseUrl('/js/public/jquery.blockui.js'))
+	     ->appendFile($this->baseUrl('/js/public/jquery.cookie.js'))
+	     ->appendFile($this->baseUrl('/js/public/html5.js'), 'text/javascript', array('conditional' => 'lt IE 9'))
+	     ->appendFile($this->baseUrl('/js/public/excanvas.js'), 'text/javascript', array('conditional' => 'lt IE 9'))
+		 ->appendFile($this->baseUrl('/js/public/respond.js'), 'text/javascript', array('conditional' => 'lt IE 9'))
+		 ->appendFile($this->baseUrl('/js/gritter/js/jquery.gritter.js'))
+		 ->appendFile($this->baseUrl('/css/uniform/jquery.uniform.min.js'))
+		 ->appendFile($this->baseUrl('/js/public/vkNgine.js'));
+		 	 	
 $this->headMeta()
 		->appendHttpEquiv('Content-Type', 'text/html; charset=UTF-8')
 		->appendHttpEquiv('expires', 'Oct, 31 Sun 1982 06:66:66 GMT')
@@ -48,7 +49,13 @@ if('tr' == vkNgine_Config::getSystemConfig()->language->locale) {
 }
 
 ?>
-<html xmlns="http://www.w3.org/1999/xhtml">
+
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if IE 10]> <html lang="en" class="ie10"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<!-- BEGIN HEAD -->
+
 <head>
 <?= $this->headTitle() . "\n"; ?>
 
@@ -59,7 +66,101 @@ if('tr' == vkNgine_Config::getSystemConfig()->language->locale) {
 <?= $this->headScript(). "\n"; ?>
 </head>
 		
-<body vkNgine_version="<?= vkNgine_Version::VERSION; ?>" >
+<body class="fixed-top" vkNgine_version="<?= vkNgine_Version::VERSION; ?>" >
+
+<div id="header" class="navbar navbar-inverse navbar-fixed-top">		
+		<div class="navbar-inner">
+			<div class="container-fluid">
+				<a class="brand" href="index.html">
+					<img src="/dumbbell.png" alt="<?= $this->t->_('GYM Tracker lower'); ?>" width="45"/>
+				</a>
+				
+				<a class="btn btn-navbar collapsed" id="main_menu_trigger" data-toggle="collapse" data-target=".nav-collapse">
+				
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="arrow"></span>
+				</a>          
+				<div class="top-nav">
+					<form class="navbar-search hidden-phone">
+						<div class="search-input-icon">
+							<input type="text" class="search-query dropdown-toggle" id="quick_search" placeholder="Search" data-toggle="dropdown" />
+							<i class="icon-search"></i>
+							<ul class="dropdown-menu extended">
+								<li>
+									<span class="arrow"></span>
+									<p>Found 23 results</p>
+								</li>
+								<li>
+									<a href="#">
+									<span class="label label-success"><i class="icon-user"></i></span>
+									Nick Kim, Technical Mana...<i class="icon icon-arrow-right"></i>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+									<span class="label label-info"><i class="icon-money"></i></span>
+									Anual Report,Dec 20...<i class="icon icon-arrow-right"></i>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+									<span class="label label-warning"><i class="icon-comment"></i></span>
+									Re: Nick Dalton, Sep 11:...<i class="icon icon-arrow-right"></i>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+									<span class="label label-important"><i class="icon-bullhorn"></i></span>
+									Office Setup, Mar 12...<i class="icon icon-arrow-right"></i>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+									<span class="label label-info"><i class="icon-envelope"></i></span>
+									Re: Order Status, Jan 12...<i class="icon icon-arrow-right"></i>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+									<span class="label label-info"><i class="icon-paper-clip"></i></span>
+									project_2011.docx, Feb 12...<i class="icon icon-arrow-right"></i>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+									See all results...
+									</a>
+								</li>
+							</ul>
+						</div>
+					</form>
+						
+					<ul class="nav pull-right" id="top_menu">												
+						<li class="divider-vertical hidden-phone hidden-tablet"></li>					
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							<i class="icon-user"></i>
+							<b class="caret"></b>
+							</a>
+							<ul class="dropdown-menu">
+								<li><a href="#"><i class="icon-user"></i> <?= $this->user->getFullName(); ?></a></li>
+								<li><a href="#"><i class="icon-envelope-alt"></i> Inbox</a></li>
+								<li><a href="#"><i class="icon-tasks"></i> Tasks</a></li>
+								<li><a href="#"><i class="icon-ok"></i> Calendar</a></li>
+								<li class="divider"></li>
+								<li><a href="<?= $this->publicUrl('login', 'auth'); ?>/logout"><i class="icon-key"></i> Log Out</a></li>
+							</ul>
+						</li>
+						
+					</ul>
+					
+				</div>
+			</div>
+		</div>		
+	</div>
+	
 	<nav id="primary">
       <ul>
         <li <?= ($this->params['controller'] == 'index') ? 'class="active"' : ''; ?>>
@@ -152,6 +253,13 @@ if('tr' == vkNgine_Config::getSystemConfig()->language->locale) {
     <section id="maincontainer">
       <?php echo $this->layout()->content; ?>
     </section>
+    
+  	<script>
+	jQuery(document).ready(function() {
+	 	vkNgine.setMainPage(true);
+		vkNgine.init();
+	});
+	</script>
     
     <?php if(vkNgine_Config::getSystemConfig()->settings->ga->enabled) : ?>	
 	<script type="text/javascript">
