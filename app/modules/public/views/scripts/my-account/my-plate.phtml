@@ -9,7 +9,7 @@
 		    
 <?= $this->partial('_breadcrumbs.phtml', 
 				array('t' 		  => $this->t,
-					  'pageTitle' => $this->t->_('My Plate') . ' :: ' . $pageTitle,
+					  'pageTitle' => null,
 					  'page'	  => $this->t->_('My Plate'),
 	)); 
 ?>
@@ -20,12 +20,7 @@
                      <div class="widget">
                         <div class="widget-title">
                            <h4><i class="icon-food"></i> <?= $this->t->_('My Plate') . ' :: ' . $pageTitle; ?></h4>
-                           <span class="tools">
-                           <a href="javascript:;" class="icon-chevron-down"></a>
-                           <a href="#widget-config" data-toggle="modal" class="icon-wrench"></a>
-                           <a href="javascript:;" class="icon-refresh"></a>		
-                           <a href="javascript:;" class="icon-remove"></a>
-                           </span>							
+                           							
                         </div>
                         <div class="widget-body form">
                         
@@ -78,13 +73,8 @@
 		
 		<div class="widget">
 			<div class="widget-title">
-				<h4><i class="icon-food"></i> <?= $this->t->_('Foods'); ?> :: <?= $this->t->_('Daily Intake'); ?> :: <?= $date; ?></h4>
-				<span class="tools">
-				<a href="javascript:;" class="icon-chevron-down"></a>
-				<a href="#widget-config" data-toggle="modal" class="icon-wrench"></a>
-				<a href="javascript:;" class="icon-refresh"></a>		
-				<a href="javascript:;" class="icon-remove"></a>
-				</span>							
+				<h4><i class="icon-food"></i> <?= $this->t->_('Foods'); ?> :: <?= $this->t->_('Summary of Daily Consumption'); ?> :: <?= $date; ?></h4>
+									
 			</div>
 			<div class="widget-body">
 				<table class="table table-condensed table-hover">

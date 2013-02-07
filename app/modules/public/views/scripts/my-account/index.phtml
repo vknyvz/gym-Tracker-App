@@ -1,6 +1,6 @@
 <?= $this->partial('_breadcrumbs.phtml', 
 				array('t' 		  => $this->t,
-					  'pageTitle' => $this->t->_($this->user->getFullname()),
+					  'pageTitle' => null,
 					  'page'	  => $this->t->_('My Settings'),
 	)); 
 ?>
@@ -11,12 +11,6 @@
                      <div class="widget">
                         <div class="widget-title">
                            <h4><i class="icon-edit"></i> <?= $this->t->_('My Settings'); ?></h4>
-                           <span class="tools">
-                           <a href="javascript:;" class="icon-chevron-down"></a>
-                           <a href="#widget-config" data-toggle="modal" class="icon-wrench"></a>
-                           <a href="javascript:;" class="icon-refresh"></a>		
-                           <a href="javascript:;" class="icon-remove"></a>
-                           </span>							
                         </div>
                         <div class="widget-body form">
                            <h5><?= $this->t->_('Default Calendar View'); ?></h5>

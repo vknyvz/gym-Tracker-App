@@ -33,7 +33,15 @@
 				<a href="<?= $this->publicUrl(); ?>"><?= $this->t->_('Home'); ?></a> <span class="divider">/</span>
 			</li>
 			
-			<li><a href="<?= $this->request; ?>"><?= $this->page; ?></a></li>
+			<?php if(isset($this->page2) && isset($this->page2href)) : ?>
+			<li>
+				<a href="<?= $this->page2href?>"><?= $this->t->_($this->page2); ?></a> <span class="divider">/</span>
+			</li>
+			<?php endif; ?>
+			
+			<li>
+				<a href="<?= $this->request; ?>"><?= $this->page; ?></a>
+			</li>
 			
 			<?php if(isset($this->calendar)) : ?>
 			<li class="pull-right dashboard-report-li">

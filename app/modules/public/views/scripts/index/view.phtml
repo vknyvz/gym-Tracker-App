@@ -1,161 +1,130 @@
 <script>
-$(document).ready(function(){
-	$("#view-slides").slides({
-		effect: 'fade',
-		crossfade: true,
-		fadeSpeed: 400,
-		pause: 10,
-		preload: true,
-		pagination: true,
-		generatePagination: true,
-		generateNextPrev: false,
-		
-		play: 4000,
-		autoHeight: true
+	$(document).ready(function(){
+		$("#view-slides").slides({
+			effect: 'fade',
+			crossfade: true,
+			fadeSpeed: 400,
+			pause: 10,
+			preload: true,
+			pagination: true,
+			generatePagination: true,
+			generateNextPrev: false,		
+			play: 4000,
+			autoHeight: true
+		});
+		$("a[rel^='prettyPhoto']").prettyPhoto({
+			theme: 'pp_default', // light_rounded / dark_rounded / light_square / dark_square / facebook */
+			animation_speed:'normal',
+			allow_resize: true,
+			keyboard_shortcuts: true,
+			show_title: false,
+			slideshow:3000,
+			social_tools: false,
+			autoplay_slideshow: false,
+			overlay_gallery: false
+		});
+	
 	});
-	$("a[rel^='prettyPhoto']").prettyPhoto({
-		theme: 'pp_default', // light_rounded / dark_rounded / light_square / dark_square / facebook */
-		animation_speed:'normal',
-		allow_resize: true,
-		keyboard_shortcuts: true,
-		show_title: false,
-		slideshow:3000,
-		social_tools: false,
-		autoplay_slideshow: false,
-		overlay_gallery: false
-	});
-
-});
 </script>
 
-<style>
-.box-content ul li {
-	list-style:none;
-}
-.pagination {
-    padding-left: 65px;
-    padding-top: 6px;
-    text-align: center;
-    width: 100%;
-}
-.pagination li {
-    float: left;
-    margin: 0 1px;
-}
-.pagination li a {
-    background-image: url("/images/pagination.png");
-    background-position: 0 0;
-    display: block;
-    float: left;
-    height: 0;
-    overflow: hidden;
-    padding-top: 12px;
-    width: 12px;
-}
-.pagination li.current a {
-    background-position: 0 -12px;
-}
-a.download:hover, a.download:active {
-    background-position: 0 -55px;
-}
-</style>
+<?= $this->partial('_breadcrumbs.phtml', 
+				array('t' 		  => $this->t,
+					  'pageTitle' => null,
+					  'page'	  => $this->t->_('Exercise Details'),
+					  'page2'     => $this->exercise['primaryMuscle'],
+					  'page2href' => '/index/exercises/type/' . $this->exercise['primaryMuscle']
+	)); 
+?>
 
-<section id="maincontainer">
-	<div id="main">
-	<?php 
-		if(!$this->ajax) :
-	?>
-		<div class="box">
-		  <div class="box-header">
-		    <h1><?= $this->exercise['name']; ?></h1>
-		  </div>
-		 </div>
-	<?php 
-		endif;
-	?> 
-		 <div class="box">
-		   <div class="box-header">
-		   <?php 
-				if(!$this->ajax) :
-		   ?>
-				<h1><?= $this->t->_('Exercise Details'); ?></h1>
-		   <?php else: ?>
-		   		<h1><?= $this->exercise['name']; ?></h1>
-		   <?php endif; ?>
-		   </div>
-				<div class="box-content">
-					<table>
-					    <thead>
-					      <tr>
-					        <th><?= $this->t->_('Primary Muscle'); ?></th>
-					        <th><?= $this->t->_('Secondary Muscle'); ?></th>
-					        <th><?= $this->t->_('Mechanics'); ?></th>
-					        <th><?= $this->t->_('Equipment Used'); ?></th>
-					      </tr>
-					    </thead>
-					    <tbody>
-					    	<tr>
-								<td><?= $this->t->_($this->exercise['primaryMuscle']); ?></td>
-				                <td><?= $this->t->_($this->exercise['secondaryMuscle']); ?></td>
-				                <td><?= $this->t->_($this->exercise['mechanics']); ?></td>
-				                <td><?=	$this->t->_($this->exercise['equipmentUsed']); ?></td>
-		 					</tr>
-					    </tbody>
-					</table>
+<div id="page">
+	<!--BEGIN:BODY-->	
+	<div class="row-fluid">
+		<div class="span12">
+			<!-- BEGIN GALLERY MANAGER PORTLET-->
+			<div class="widget">
+				<div class="widget-title">
+					<h4><i class="icon-camera"></i> <?= $this->exercise['name']; ?></h4>										
+				</div>
+				<div class="widget-body">					
+					<div class="row-fluid">
+						<h5><?= $this->t->_('Technical Data'); ?></h5>
+						<hr class="clearfix" />
+						<div class="span9">						
+							<table class="table table-condensed table-hover">
+								<thead>
+									<tr>
+								        <th><?= $this->t->_('Primary Muscle'); ?></th>
+								        <th><?= $this->t->_('Secondary Muscle'); ?></th>
+								        <th><?= $this->t->_('Mechanics'); ?></th>
+								        <th><?= $this->t->_('Equipment Used'); ?></th>
+								    </tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><?= $this->t->_($this->exercise['primaryMuscle']); ?></td>
+						                <td><?= $this->t->_($this->exercise['secondaryMuscle']); ?></td>
+						                <td><?= $this->t->_($this->exercise['mechanics']); ?></td>
+						                <td><?=	$this->t->_($this->exercise['equipmentUsed']); ?></td>
+				 					</tr>							
+								</tbody>
+							</table>
+						</div>
+					</div>
 					
-					<br />
-					
-					<h6><?= $this->t->_('Instructions'); ?></h6>
-		    
-				    <?php if($this->exercise['instructions']): 
-						    $newstring = $this->exercise['instructions'];
-						    $findWhat  = 'Tips';
-						    $posUntilTips = strpos($newstring, $findWhat, 1);
-				    ?>
-				    
-				    <p><?= substr($newstring, 0, $posUntilTips); ?></p>
-				    	
-				    <h6><?= $findWhat?></h6>
-				    
-				    <p><?= substr($newstring, $posUntilTips + 5)?></p>
-				    
-				    <?php else: 
-			    		echo '<p>' . $this->t->_('No instructions yet') . '</p>';
-				    endif; ?>
-		 			
+					<div class="row-fluid">
+						<h5><?= $this->t->_('Instructions'); ?></h5>
+						<hr class="clearfix" />
+						<div class="span11">
+							<?php if($this->exercise['instructions']): 
+								    $newstring = $this->exercise['instructions'];
+								    $findWhat  = 'Tips';
+								    $posUntilTips = strpos($newstring, $findWhat, 1);
+							?>
+								    
+						    <p><?= substr($newstring, 0, $posUntilTips); ?></p>				    	
+						    
+						    <h6><?= $findWhat?></h6>				    
+						    
+						    <p><?= substr($newstring, $posUntilTips + 5)?></p>
+						    
+						    <?php else: 
+					    		echo '<p>' . $this->t->_('No instructions yet') . '</p>';
+						    	endif; 
+						    ?>
+						</div>
+						
+						<h5><?= $this->t->_('Exercise Images'); ?></h5>
+						<hr class="clearfix" />
+						
+						<?php foreach($this->exerciseAssets as $image) : ?>
+						<div class="span2">
+							<div class="thumbnail">
+								<div class="item">
+									<?= '<a class="fancybox-button" 
+						  					     data-rel="fancybox-button" 
+											     href="' . $this->assetUrl(array('assetType'  => 'picture',
+																				 'type' 	  => 'full',
+																				 'kind' 	  => strtolower($this->exercise['primaryMuscle']),
+																				 'file' 	  => $image['file'])) . '"
+			    							 title="' . $this->exercise['name'] .'" rel="prettyPhoto[' . $this->exercise['name'] . ']">';
+									?>
+										<div class="zoom">
+											<?= '<img src="' . $this->assetUrl(array('assetType' => 'picture',
+																				  	 'type' 	  => 'thumb',
+																				  	 'kind' 	  => strtolower($this->exercise['primaryMuscle']),
+																				  	 'file' 	  => $image['file'])) . '">';
+											?>										
+											<div class="zoom-icon"></div>
+										</div>
+									</a>									
+								</div>
+							</div>
+						</div>
+						<?php endforeach; ?>						
+					</div>
 				</div>
 			</div>
-			
-			 <div class="box grid_3" style="width:228px;">
-			   <div class="box-header">
-						<h1><?= $this->t->_('Exercise Images'); ?></h1>
-			   </div>
-			   <div class="box-content">
-			   	<div id="view-slider-wrap-slider-wrap">
-					    <div id="view-slides" class="slides">
-					    	<div class="slides_container">
-			   		<?php foreach($this->exerciseAssets as $image) :
-	    					echo '<a href="' . $this->assetUrl(array('assetType' => 'picture',
-																	  'type' 	  => 'full',
-				 													  'kind' 	  => strtolower($this->exercise['primaryMuscle']),
-				 													  'file' 	  => $image['file'])) . '" 
-	    							 title="' . $this->exercise['name'] .'" rel="prettyPhoto[' . $this->exercise['name'] . ']">';
-		    				echo '<div id="slide">'; 
-				 			echo '<img src="' . $this->assetUrl(array('assetType' => 'picture',
-																	  'type' 	  => 'thumb',
-				 													  'kind' 	  => strtolower($this->exercise['primaryMuscle']),
-				 													  'file' 	  => $image['file'])) . '">';
-				 			echo '</div>';
-				 			echo '</a>';
-						  endforeach; 
-					?>
-							</div>
-							
-					</div>
-					
-					</div>
-			   </div>
-			 </div>
 		</div>
-		
-</section>
+	</div>
+</div>
+

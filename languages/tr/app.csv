@@ -137,8 +137,8 @@
 "Equipment Used Capital";"Ekİpman"
 
 "No instructions yet";"Bunun için henüz açıklama yok"
-"Exercise Details";"Egzersİz Bİlgİlerİ"
-"Exercise Images";"Egzersİz Resİmlerİ"
+"Exercise Details";"Egzersiz Bilgileri"
+"Exercise Images";"Egzersiz Resimleri"
 
 "Search exercises";"Egzersiz ara"
 "Search results";"Arama sonuçları"
@@ -261,8 +261,6 @@
 "add day details";"gün detayı ekle"
 "view day";"günü görüntüle"
 
-"Exercise Details lower";"Egzersiz Bilgileri"
-"Exercise Images lower";"Egzersiz Resimleri"
 
 "Calendar lower";"Takvim"
 
@@ -327,8 +325,6 @@
 "consumed %s gr sugar";"%s gr şeker tüketildi"
 "consumed %s gr fiber";"%s gr fiber tüketildi"
 
-"Daily Intake";"Günlük Tüketİm"
-
 "How much?";"Ne kadar?"
 "Serving";"Miktar"
 "cup";"kap"
@@ -343,3 +339,5 @@
 
 "Forgot Password?";"Şifremi Unuttum"
 "Go back to login form";"Giriş formuna geri dön"
+
+"Technical Data";"Teknik Bilgiler"
