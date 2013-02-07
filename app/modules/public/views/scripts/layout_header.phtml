@@ -1,0 +1,93 @@
+<div id="header" class="navbar navbar-inverse navbar-fixed-top">		
+		<div class="navbar-inner">
+			<div class="container-fluid">
+				<a class="brand" href="<?= $this->publicUrl(); ?>">
+					<img src="/dumbbell.png" alt="<?= $this->t->_('GYM Tracker lower'); ?>" width="45"/>
+			</a>
+			
+			<a class="btn btn-navbar collapsed" id="main_menu_trigger" data-toggle="collapse" data-target=".nav-collapse">
+			
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="arrow"></span>
+			</a>          
+			<div class="top-nav">
+				<form class="navbar-search hidden-phone">
+					<div class="search-input-icon">
+						<input type="text" class="search-query dropdown-toggle" id="quick_search" placeholder="<?= $this->t->_('Search'); ?>" data-toggle="dropdown" />
+						<i class="icon-search"></i>
+						<ul class="dropdown-menu extended">
+							<li>
+								<span class="arrow"></span>
+								<p>Found 23 results</p>
+							</li>
+							<li>
+								<a href="#">
+								<span class="label label-success"><i class="icon-user"></i></span>
+								Nick Kim, Technical Mana...<i class="icon icon-arrow-right"></i>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+								<span class="label label-info"><i class="icon-money"></i></span>
+								Anual Report,Dec 20...<i class="icon icon-arrow-right"></i>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+								<span class="label label-warning"><i class="icon-comment"></i></span>
+								Re: Nick Dalton, Sep 11:...<i class="icon icon-arrow-right"></i>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+								<span class="label label-important"><i class="icon-bullhorn"></i></span>
+								Office Setup, Mar 12...<i class="icon icon-arrow-right"></i>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+								<span class="label label-info"><i class="icon-envelope"></i></span>
+								Re: Order Status, Jan 12...<i class="icon icon-arrow-right"></i>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+								<span class="label label-info"><i class="icon-paper-clip"></i></span>
+								project_2011.docx, Feb 12...<i class="icon icon-arrow-right"></i>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+								See all results...
+								</a>
+							</li>
+						</ul>
+					</div>
+				</form>
+					
+				<ul class="nav pull-right" id="top_menu">												
+					<li class="divider-vertical hidden-phone hidden-tablet"></li>					
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						<i class="icon-user"></i>
+						<b class="caret"></b>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="<?= $this->publicUrl(null, 'my-account'); ?>"><i class="icon-user"></i> <?= $this->user->getFullName(); ?></a></li>
+							<?php
+								$calendarLink = ('weekly' == strtolower($this->user->calendarView)) ? $this->publicUrl('weekly', 'calendar') : $this->publicUrl(null, 'calendar');
+							?>
+							<li><a href="<?= $calendarLink; ?>"><i class="icon-calendar"></i> <?= $this->t->_('Exercise Calendar'); ?></a></li>
+							<li class="divider"></li>
+							<li><a href="<?= $this->publicUrl('login', 'auth'); ?>/logout"><i class="icon-key"></i> Log Out</a></li>
+						</ul>
+					</li>
+					
+				</ul>
+				
+			</div>
+		</div>
+	</div>		
+</div>

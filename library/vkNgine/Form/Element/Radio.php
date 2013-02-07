@@ -18,8 +18,7 @@ class vkNgine_Form_Element_Radio extends Zend_Form_Element_Radio
 		
 		$this->addFilter('StringTrim')
 			 ->setRequired($required)
-			 ->setRegisterInArrayValidator(false)
-			 
+			 ->setRegisterInArrayValidator(false)			 
 			 ->addMultiOptions($values);
 		
 		if(isset($options['label'])){
@@ -36,6 +35,11 @@ class vkNgine_Form_Element_Radio extends Zend_Form_Element_Radio
 		
 		if(isset($options['label'])){
 			$this->setLabel($options['label']);
+		}
+		
+		if(isset($options['removeDecorators'])){
+			$this->removeDecorator('HtmlTag')
+				 ->removeDecorator('Label');
 		}
 	}
 }

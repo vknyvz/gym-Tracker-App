@@ -1,38 +1,55 @@
-<section id="maincontainer">
-	<div id="main">
-		<div class="box">
-		  <div class="box-header">
-		    <h1><?= $this->t->_('My Settings'); ?></h1>
-		  </div>
-		  
-		  <div class="box-content">
-		    <div>
-		      <h3><?= $this->t->_('My Settings'); ?></h3>
-		      <p>
-		      	<?= $this->formSettings; ?>
-		      </p>
-		    </div>
-		  </div>
-		  
-		  <div class="box-content">
-		    <div>
-		      <h3><?= $this->t->_('Language'); ?></h3>
-		      <p>
-				<a class="language" href="javascript:void(0);" rel="tr"><img src="/images/Turkey.png" width="32"></a>
-				<a class="language" href="javascript:void(0);" rel="en"><img src="/images/Us.png" width="32"></a>
-			  </p>
-			  <p class="warning"><?= $this->t->_('Clicking a flag will change the language for the current session'); ?> </p>
-		    </div>
-		  </div>
-		</div>
-    </div>
-</section>
+<?= $this->partial('_breadcrumbs.phtml', 
+				array('t' 		  => $this->t,
+					  'pageTitle' => $this->t->_($this->user->getFullname()),
+					  'page'	  => $this->t->_('My Settings'),
+	)); 
+?>
 
-<style>
-.description {margin-top:20px;}
-dt { padding-bottom:15px; font-size:14px;}
-</style>
-
+		 <div id="page">
+               <div class="row-fluid">
+                  <div class="span12">                     
+                     <div class="widget">
+                        <div class="widget-title">
+                           <h4><i class="icon-edit"></i> <?= $this->t->_('My Settings'); ?></h4>
+                           <span class="tools">
+                           <a href="javascript:;" class="icon-chevron-down"></a>
+                           <a href="#widget-config" data-toggle="modal" class="icon-wrench"></a>
+                           <a href="javascript:;" class="icon-refresh"></a>		
+                           <a href="javascript:;" class="icon-remove"></a>
+                           </span>							
+                        </div>
+                        <div class="widget-body form">
+                           <h5><?= $this->t->_('Default Calendar View'); ?></h5>
+                           <form action="<?= $this->formSettings->getAction(); ?>" class="form-inline">
+                              <div class="control-group">
+                                 <div class="controls">
+                                    <?= $this->formSettings->calendarView; ?>
+                                 </div>
+                              </div>            
+                           </form>
+                           
+                           <h5><?= $this->t->_('Notifications'); ?></h5>
+                           <form action="<?= $this->formSettings->getAction(); ?>" class="form-inline">
+                                 <div class="controls">
+                                    <?= $this->formSettings->notifications; ?>
+                                 </div>                               
+                           </form>
+                           
+                           <h5><?= $this->t->_('Language'); ?></h5>
+                           <p>
+						   	  <a class="language" href="javascript:void(0);" rel="tr"><img src="/images/Turkey.png" width="32"></a>
+							  <a class="language" href="javascript:void(0);" rel="en"><img src="/images/Us.png" width="32"></a>
+						   </p>
+						   <p class="warning">
+						   	  <?= $this->t->_('Clicking a flag will change the language for the current session'); ?>
+						   </p>
+                           
+                        </div>
+                     </div>                     
+                  </div>
+               </div>
+			</div>	
+			
 <script>
 $('.description').addClass('warning');
 

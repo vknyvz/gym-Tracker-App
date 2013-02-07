@@ -70,12 +70,10 @@ class vkNgine_Form_Element_Decorator_Text extends Zend_Form_Decorator_Abstract
         $desc      = $this->buildDescription();
         
         $output = '
-					<p>
 						' . $label . '
 						' . $input . '
 						' . $desc . '
-					</p>			   
-				   ';
+					';
         
     	return $output;
     }

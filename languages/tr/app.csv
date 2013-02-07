@@ -5,7 +5,6 @@
 "English";"İngilizce"
 
 "Exercises";"Egzersizler" 
-"Exercises Capital";"Egzersİzler"
 "Workouts";"Workoutlar"
 "Measurements";"Ölçüler"
 "Exercise Management";"Egzersizler"
@@ -158,7 +157,7 @@
 
 "Not entered";"Girilmemiş"
 "Edit";"Denetle"
-"Delete Capital";"Sİl"
+"Delete";"Sil"
 "Delete Measurement";"Ölçü Sİl"
 "Manage";"Ayarla"
 
@@ -173,7 +172,6 @@
 "You don't have any measurement data";"Şu an için bir ölçü bilgiliniz yok"
 
 "Value";"Değer"
-"Record Date Capital";"Kayıt Tarİhİ"
 "Record Date";"Kayıt Tarihi"
 
 "Weight";"Ağırlık"
@@ -230,13 +228,14 @@
 
 "App Details";"App Ayrıntıları"
 "App version";"App Sürümü"
+"vkNgine version";"vkNgine Sürümü" 
 
-"My Account";"Benİm Hesabım"
-"My Statistics";"İstatİstİklerİm"
-"My Statistics lower";"İstatistiklerim"
+"About";"Hakkında"
+"My Account";"Hesabım"
+"My Statistics";"İstatistiklerim"
 "My Settings";"Ayarlarım"
 "My Workouts";"Workoutlarım"
-"My Measurements";"Ölçülerİm"
+"My Measurements";"Ölçülerim"
 "My Body Measurements";"Vücut Ölçülerim"
 
 "Daily details";"Günlük detaylar"

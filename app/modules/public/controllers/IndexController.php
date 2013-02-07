@@ -24,6 +24,11 @@ class IndexController extends vkNgine_Public_Controller
     	$this->view->statistics = $statistics;
     }
     
+    public function aboutAction()
+    {
+    	
+    }
+    
     public function exercisesAction()
     {  
     	parent::ajaxEnabled();

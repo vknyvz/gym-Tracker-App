@@ -1,0 +1,47 @@
+<div class="row-fluid">
+	<div class="span12">
+		<div id="styler" class="hidden-phone">
+			<i class="icon-cog"></i>
+			<span class="settings">
+				<span class="text">Style:</span>
+				<span class="colors">
+					<span class="color-default" data-style="default"></span>
+					<span class="color-grey" data-style="grey"></span>
+					<span class="color-navygrey" data-style="navygrey"></span>											
+					<span class="color-red" data-style="red"></span>
+				</span>
+				<span class="layout">
+					<label class="hidden-phone">
+						<input type="checkbox" class="header" checked value="" />Sticky Header
+					</label><br />
+					<label>
+						<input type="checkbox" class="metro" value="" />Metro Style
+					</label>
+				</span>
+			</span>
+		</div>
+		
+		<?php if(isset($this->pageTitle)) : ?>					
+			<h3 class="page-title">
+				<?= $this->pageTitle; ?>
+			</h3>
+		<?php endif; ?>
+		
+		<ul class="breadcrumb">
+			<li>
+				<i class="icon-home"></i>
+				<a href="<?= $this->publicUrl(); ?>"><?= $this->t->_('Home'); ?></a> <span class="divider">/</span>
+			</li>
+			
+			<li><a href="<?= $this->request; ?>"><?= $this->page; ?></a></li>
+			
+			<?php if(isset($this->calendar)) : ?>
+			<li class="pull-right dashboard-report-li">
+				<div id="dashboard-report-range" class="dashboard-report-range-container no-text-shadow tooltips" data-placement="top" data-original-title="<?= $this->t->_('Change dashboard date range'); ?>"><i class="icon-calendar icon-large"></i><span></span>
+					<b class="caret"></b>
+				</div>
+			</li>
+			<?php endif; ?>
+		</ul>
+	</div>
+</div>	

@@ -26,5 +26,10 @@ class vkNgine_Form_Element_Select extends Zend_Form_Element_Select
 		
 		if(!isset($options['style']))
         	 $this->setDecorators(array(new vkNgine_Form_Element_Decorator_Text()));
+		
+		if(isset($options['removeDecorators'])){
+			$this->removeDecorator('HtmlTag')
+			     ->removeDecorator('Label');
+		}
     }
 }

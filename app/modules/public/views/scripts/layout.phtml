@@ -11,14 +11,15 @@ $this->headLink()
 		->appendStylesheet($this->baseUrl('/css/font-awesome/css/font-awesome.css'))
 		->appendStylesheet($this->baseUrl('/css/styles.css'))
 		->appendStylesheet($this->baseUrl('/css/style_responsive.css'))
-	 	->appendStylesheet($this->baseUrl('/css/style_default.css'))
-		->appendStylesheet($this->baseUrl('/css/vkNgine-calendar.css'))
+	 	->appendStylesheet($this->baseUrl('/css/style_default.css'), 'screen', true, array('id' => 'style_color'))
+	 	->appendStylesheet($this->baseUrl('#'), '', true, array('id' => 'style_metro'))
+	 	->appendStylesheet($this->baseUrl('/css/vkNgine-calendar.css'))
 		->appendStylesheet($this->baseUrl('/css/gritter/css/jquery.gritter.css'))
 		->appendStylesheet($this->baseUrl('/css/uniform/css/uniform.default.css'))
 		->appendStylesheet($this->baseUrl('/js/public/bootstrap-daterangepicker/daterangepicker.css'))		
 		->appendStylesheet($this->baseUrl('/js/public/fullcalendar/bootstrap-fullcalendar.css'))
-		->appendStylesheet($this->baseUrl('/js/public/jqvmap/jqvmap.css'));
-	
+		->appendStylesheet($this->baseUrl('/css/data-tables/DT_bootstrap.css'));
+
 $this->headScript()
 	     ->prependFile($this->baseUrl('/js/jquery-1.8.2.min.js'))
 	     ->appendFile($this->baseUrl('/js/jquery-ui-1.9.2.custom.min.js'))
@@ -28,12 +29,18 @@ $this->headScript()
 	     ->appendFile($this->baseUrl('/js/public/bootstrap/js/bootstrap.min.js'))
 	     ->appendFile($this->baseUrl('/js/public/bsn.AutoSuggest_2.1.3_comp.js'))
 	     ->appendFile($this->baseUrl('/js/public/jquery.blockui.js'))
+	     ->appendFile($this->baseUrl('/js/admin/gritter.js'))
 	     ->appendFile($this->baseUrl('/js/public/jquery.cookie.js'))
+	     ->appendFile($this->baseUrl('/js/public/jquery.knob.js'))
+	     ->appendFile($this->baseUrl('/js/public/bootstrap-daterangepicker/date.js'))
+	     ->appendFile($this->baseUrl('/js/public/bootstrap-daterangepicker/daterangepicker.js'))
 	     ->appendFile($this->baseUrl('/js/public/html5.js'), 'text/javascript', array('conditional' => 'lt IE 9'))
 	     ->appendFile($this->baseUrl('/js/public/excanvas.js'), 'text/javascript', array('conditional' => 'lt IE 9'))
 		 ->appendFile($this->baseUrl('/js/public/respond.js'), 'text/javascript', array('conditional' => 'lt IE 9'))
 		 ->appendFile($this->baseUrl('/js/gritter/js/jquery.gritter.js'))
 		 ->appendFile($this->baseUrl('/css/uniform/jquery.uniform.min.js'))
+		 ->appendFile($this->baseUrl('/css/data-tables/jquery.dataTables.js'))
+		 ->appendFile($this->baseUrl('/css/data-tables/DT_bootstrap.js'))
 		 ->appendFile($this->baseUrl('/js/public/vkNgine.js'));
 		 	 	
 $this->headMeta()
@@ -58,202 +65,43 @@ if('tr' == vkNgine_Config::getSystemConfig()->language->locale) {
 
 <head>
 <?= $this->headTitle() . "\n"; ?>
-
-<?= $this->headMeta() . "\n"; ?>
-	
+<?= $this->headMeta() . "\n"; ?>	
 <?= $this->headLink()  . "\n"; ?>
-
 <?= $this->headScript(). "\n"; ?>
 </head>
 		
 <body class="fixed-top" vkNgine_version="<?= vkNgine_Version::VERSION; ?>" >
 
-<div id="header" class="navbar navbar-inverse navbar-fixed-top">		
-		<div class="navbar-inner">
+	<?= $this->partial('layout_header.phtml', 
+						array('user' => $this->user,
+						      't'    => $this->t,
+		));
+ 	?>
+	
+	<div id="container" class="row-fluid">
+		
+		<?= $this->partial('layout_nav.phtml',
+							array('user' 		=> $this->user,
+						      	  't'    		=> $this->t,	
+								  'params'  	=> $this->params,
+								  'exercises' 	=> $this->exercises, 
+			));
+		?>
+		
+		<div id="body">
 			<div class="container-fluid">
-				<a class="brand" href="index.html">
-					<img src="/dumbbell.png" alt="<?= $this->t->_('GYM Tracker lower'); ?>" width="45"/>
-				</a>
-				
-				<a class="btn btn-navbar collapsed" id="main_menu_trigger" data-toggle="collapse" data-target=".nav-collapse">
-				
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="arrow"></span>
-				</a>          
-				<div class="top-nav">
-					<form class="navbar-search hidden-phone">
-						<div class="search-input-icon">
-							<input type="text" class="search-query dropdown-toggle" id="quick_search" placeholder="Search" data-toggle="dropdown" />
-							<i class="icon-search"></i>
-							<ul class="dropdown-menu extended">
-								<li>
-									<span class="arrow"></span>
-									<p>Found 23 results</p>
-								</li>
-								<li>
-									<a href="#">
-									<span class="label label-success"><i class="icon-user"></i></span>
-									Nick Kim, Technical Mana...<i class="icon icon-arrow-right"></i>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-									<span class="label label-info"><i class="icon-money"></i></span>
-									Anual Report,Dec 20...<i class="icon icon-arrow-right"></i>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-									<span class="label label-warning"><i class="icon-comment"></i></span>
-									Re: Nick Dalton, Sep 11:...<i class="icon icon-arrow-right"></i>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-									<span class="label label-important"><i class="icon-bullhorn"></i></span>
-									Office Setup, Mar 12...<i class="icon icon-arrow-right"></i>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-									<span class="label label-info"><i class="icon-envelope"></i></span>
-									Re: Order Status, Jan 12...<i class="icon icon-arrow-right"></i>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-									<span class="label label-info"><i class="icon-paper-clip"></i></span>
-									project_2011.docx, Feb 12...<i class="icon icon-arrow-right"></i>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-									See all results...
-									</a>
-								</li>
-							</ul>
-						</div>
-					</form>
-						
-					<ul class="nav pull-right" id="top_menu">												
-						<li class="divider-vertical hidden-phone hidden-tablet"></li>					
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							<i class="icon-user"></i>
-							<b class="caret"></b>
-							</a>
-							<ul class="dropdown-menu">
-								<li><a href="#"><i class="icon-user"></i> <?= $this->user->getFullName(); ?></a></li>
-								<li><a href="#"><i class="icon-envelope-alt"></i> Inbox</a></li>
-								<li><a href="#"><i class="icon-tasks"></i> Tasks</a></li>
-								<li><a href="#"><i class="icon-ok"></i> Calendar</a></li>
-								<li class="divider"></li>
-								<li><a href="<?= $this->publicUrl('login', 'auth'); ?>/logout"><i class="icon-key"></i> Log Out</a></li>
-							</ul>
-						</li>
-						
-					</ul>
-					
-				</div>
+	      	 	<?php echo $this->layout()->content; ?>
 			</div>
-		</div>		
+		</div>
+	</div>	
+		
+	<div id="footer" class="center">
+			<?= date('Y'); ?> &copy; <img src="/images/admin/vkn_v2_powered_by.png">
+		<div class="span pull-right">
+			<span class="go-top"><i class="icon-arrow-up"></i></span>
+		</div>
 	</div>
 	
-	<nav id="primary">
-      <ul>
-        <li <?= ($this->params['controller'] == 'index') ? 'class="active"' : ''; ?>>
-          <a href="<?= $this->publicUrl(); ?>">
-            <span class="glyph dashboard"></span>
-            <?= $this->t->_('Dashboard'); ?>
-          </a>
-        </li>
-        <li <?= ($this->params['controller'] == 'my-account') ? 'class="active"' : ''; ?>>
-          <a href="<?= $this->publicUrl(null, 'my-account'); ?>">
-            <span class="glyph user"></span>
-            <?= $this->user->getFullName(); ?>
-          </a>
-        </li>
-        <li <?= ($this->params['controller'] == 'calendar') ? 'class="active"' : ''; ?>>
-        <?php
-			$calendarLink = ('weekly' == strtolower($this->user->calendarView)) ? $this->publicUrl('weekly', 'calendar') : $this->publicUrl(null, 'calendar');
-		?>
-          <a href="<?= $calendarLink; ?>">
-            <span class="glyph calendar"></span>
-            <?= $this->t->_('Exercise Calendar'); ?>
-          </a>
-        </li>
-        <li <?= ($this->params['controller'] == 'calorie-calendar' && ($this->params['action'] == 'weekly' or $this->params['action'] == 'monthly')) ? 'class="active"' : ''; ?>>
-        <?php
-			$calendarLink = ('weekly' == strtolower($this->user->calendarView)) ? $this->publicUrl('weekly', 'calorie-calendar') : $this->publicUrl(null, 'calorie-calendar');
-		?>
-          <a href="<?= $calendarLink; ?>">
-            <span class="glyph calendar"></span>
-            <?= $this->t->_('Calorie Calendar'); ?>
-          </a>
-        </li>
-        <li <?= ($this->params['controller'] == 'index' && $this->params['action'] == 'exercises') ? 'class="active"' : ''; ?>>
-          <a href="<?= $this->publicUrl('exercises', null); ?>/type/Abs">
-            <span class="glyph note"></span>
-            <?= $this->t->_('Exercises'); ?>
-          </a>
-        </li>
-        <li class="bottom">
-          <a href="<?= $this->publicUrl('login', 'auth'); ?>/logout">
-            <span class="glyph quit"></span>
-            <?= $this->t->_('Logout'); ?>
-          </a>
-        </li>
-      </ul>
-    </nav>
-    <?php if($this->params['controller'] == 'calendar' or $this->params['controller'] == 'calorie-calendar' or
-    			($this->params['controller'] == 'index' and $this->params['action'] == 'index'))
-    	   :
-    	  else:
-    ?>
-    <nav id="secondary">
-        <ul>
-    	<?php if($this->params['controller'] == 'my-account'): ?>
-			<li <?= ($this->params['controller'] == 'my-account' && $this->params['action'] == 'index') ? 'class="active"' : ''; ?>><a href="<?= $this->publicUrl(null, 'my-account'); ?>"><?= $this->t->_('My Settings'); ?></a></li>
-			<li <?= ($this->params['controller'] == 'my-account' && $this->params['action'] == 'my-plate') ? 'class="active"' : ''; ?>><a href="<?= $this->publicUrl('my-plate', 'my-account'); ?>"><?= $this->t->_('My Plate'); ?></a></li>
-			<li <?= ($this->params['controller'] == 'my-account' && $this->params['action'] == 'my-workouts') ? 'class="active"' : ''; ?>><a href="<?= $this->publicUrl('my-workouts', 'my-account'); ?>"><?= $this->t->_('My Workouts'); ?></a></li>
-			<li <?= ($this->params['controller'] == 'my-account' && $this->params['action'] == 'my-measurements') ? 'class="active"' : ''; ?>><a href="<?= $this->publicUrl('my-measurements', 'my-account'); ?>"><?= $this->t->_('My Measurements'); ?></a></li>
-		<?php elseif($this->params['controller'] == 'index' && $this->params['action'] == 'exercises'): ?>
-		<?php 
-			if(vkNgine_Config::getSystemConfig()->language->locale == 'en') :
-		?>
-			<li <?= ($this->params['type'] == 'Abs') ? 'class="active"' : ''; ?>><a href="<?= $this->publicUrl('exercises', null); ?>/type/Abs"><?= $this->t->_('Abdominals'); ?><sup class="red" style="vertical-align:super;font-size:10px"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Abs%'")) . '' ?></sup></a></li>
-			<li <?= ($this->params['type'] == 'Back') ? 'class="active"' : ''; ?>><a href="<?= $this->publicUrl('exercises', null); ?>/type/Back"><?= $this->t->_('Back'); ?><sup class="red" style="vertical-align:super;font-size:10px"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Back%'")) . '' ?></sup></a></li>
-			<li <?= ($this->params['type'] == 'Biceps') ? 'class="active"' : ''; ?>><a href="<?= $this->publicUrl('exercises', null); ?>/type/Biceps"><?= $this->t->_('Biceps'); ?><sup class="red" style="vertical-align:super;font-size:10px"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Biceps%'")) . '' ?></sup></a></li>
-			<li <?= ($this->params['type'] == 'Calves') ? 'class="active"' : ''; ?>><a href="<?= $this->publicUrl('exercises', null); ?>/type/Calves"><?= $this->t->_('Calves'); ?><sup class="red" style="vertical-align:super;font-size:10px"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Calves%'")) . '' ?></sup></a></li>
-			<li <?= ($this->params['type'] == 'Chest') ? 'class="active"' : ''; ?>><a href="<?= $this->publicUrl('exercises', null); ?>/type/Chest"><?= $this->t->_('Chest'); ?><sup class="red" style="vertical-align:super;font-size:10px"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Chest%'")) . '' ?></sup></a></li>
-			<li <?= ($this->params['type'] == 'Forearms') ? 'class="active"' : ''; ?>><a href="<?= $this->publicUrl('exercises', null); ?>/type/Forearms"><?= $this->t->_('Forearms'); ?><sup class="red" style="vertical-align:super;font-size:10px"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Forearms%'")) . '' ?></sup></a></li>
-			<li <?= ($this->params['type'] == 'Legs') ? 'class="active"' : ''; ?>><a href="<?= $this->publicUrl('exercises', null); ?>/type/Legs"><?= $this->t->_('Legs'); ?><sup class="red" style="vertical-align:super;font-size:10px"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Hamstrings%' or primaryMuscle LIKE '%Glutes, Hamstrings, Quadriceps%' or primaryMuscle LIKE '%Quadriceps%' or primaryMuscle LIKE '%Glutes%'")) . '' ?></sup></a></li>
-			<li <?= ($this->params['type'] == 'Shoulders') ? 'class="active"' : ''; ?>><a href="<?= $this->publicUrl('exercises', null); ?>/type/Shoulders"><?= $this->t->_('Shoulders'); ?><sup class="red" style="vertical-align:super;font-size:10px"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Shoulders%'")) . '' ?></sup></a></li>
-			<li <?= ($this->params['type'] == 'Traps') ? 'class="active"' : ''; ?>><a href="<?= $this->publicUrl('exercises', null); ?>/type/Traps"><?= $this->t->_('Traps'); ?><sup class="red" style="vertical-align:super;font-size:10px"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Traps%'")) . '' ?></sup></a></li>
-			<li <?= ($this->params['type'] == 'Triceps') ? 'class="active"' : ''; ?>><a href="<?= $this->publicUrl('exercises', null); ?>/type/Triceps"><?= $this->t->_('Triceps'); ?><sup class="red" style="vertical-align:super;font-size:10px"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Triceps%'")) . '' ?></sup></a></li>
-		<?php else :?>
-			<li <?= ($this->params['type'] == 'Abs') ? 'class="active"' : ''; ?>><a href="<?= $this->publicUrl('exercises', null); ?>/type/Abs"><?= $this->t->_('Abdominals'); ?><sup class="red" style="vertical-align:super;font-size:10px"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Abs%'")) . '' ?></sup></a></li>
-			<li <?= ($this->params['type'] == 'Legs') ? 'class="active"' : ''; ?>><a href="<?= $this->publicUrl('exercises', null); ?>/type/Legs"><?= $this->t->_('Legs'); ?><sup class="red" style="vertical-align:super;font-size:10px"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Hamstrings%' or primaryMuscle LIKE '%Glutes, Hamstrings, Quadriceps%' or primaryMuscle LIKE '%Quadriceps%' or primaryMuscle LIKE '%Glutes%'")) . '' ?></sup></a></li>
-			<li <?= ($this->params['type'] == 'Calves') ? 'class="active"' : ''; ?>><a href="<?= $this->publicUrl('exercises', null); ?>/type/Calves"><?= $this->t->_('Calves'); ?><sup class="red" style="vertical-align:super;font-size:10px"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Calves%'")) . '' ?></sup></a></li>
-			<li <?= ($this->params['type'] == 'Chest') ? 'class="active"' : ''; ?>><a href="<?= $this->publicUrl('exercises', null); ?>/type/Chest"><?= $this->t->_('Chest'); ?><sup class="red" style="vertical-align:super;font-size:10px"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Chest%'")) . '' ?></sup></a></li>
-			<li <?= ($this->params['type'] == 'Shoulders') ? 'class="active"' : ''; ?>><a href="<?= $this->publicUrl('exercises', null); ?>/type/Shoulders"><?= $this->t->_('Shoulders'); ?><sup class="red" style="vertical-align:super;font-size:10px"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Shoulders%'")) . '' ?></sup></a></li>
-			<li <?= ($this->params['type'] == 'Forearms') ? 'class="active"' : ''; ?>><a href="<?= $this->publicUrl('exercises', null); ?>/type/Forearms"><?= $this->t->_('Forearms'); ?><sup class="red" style="vertical-align:super;font-size:10px"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Forearms%'")) . '' ?></sup></a></li>
-			<li <?= ($this->params['type'] == 'Biceps') ? 'class="active"' : ''; ?>><a href="<?= $this->publicUrl('exercises', null); ?>/type/Biceps"><?= $this->t->_('Biceps'); ?><sup class="red" style="vertical-align:super;font-size:10px"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Biceps%'")) . '' ?></sup></a></li>
-			<li <?= ($this->params['type'] == 'Triceps') ? 'class="active"' : ''; ?>><a href="<?= $this->publicUrl('exercises', null); ?>/type/Triceps"><?= $this->t->_('Triceps'); ?><sup class="red" style="vertical-align:super;font-size:10px"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Triceps%'")) . '' ?></sup></a></li>
-			<li <?= ($this->params['type'] == 'Back') ? 'class="active"' : ''; ?>><a href="<?= $this->publicUrl('exercises', null); ?>/type/Back"><?= $this->t->_('Back'); ?><sup class="red" style="vertical-align:super;font-size:10px"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Back%'")) . '' ?></sup></a></li>
-			<li <?= ($this->params['type'] == 'Traps') ? 'class="active"' : ''; ?>><a href="<?= $this->publicUrl('exercises', null); ?>/type/Traps"><?= $this->t->_('Traps'); ?><sup class="red" style="vertical-align:super;font-size:10px"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Traps%'")) . '' ?></sup></a></li>
-		<?php endif; ?>
-		<?php endif; ?>
-		</ul>
-    </nav>
-    <?php endif; ?>
-    
-    <section id="maincontainer">
-      <?php echo $this->layout()->content; ?>
-    </section>
-    
   	<script>
 	jQuery(document).ready(function() {
 	 	vkNgine.setMainPage(true);
