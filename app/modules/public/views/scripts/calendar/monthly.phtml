@@ -51,7 +51,8 @@
 			$('.vkNgine-calendar-button-today').addClass('vkNgine-calendar-state-disabled');
 		<?php endif; ?>
 							
-		$("table.vkNgine-calendar-border-separate tr:last").addClass('vkNgine-calendar-last');
+		$("table.fc-border-separate tbody tr:first").addClass('fc-first');	
+		$("table.fc-border-separate tbody tr:last").addClass('fc-last');
 
 		$('.addExercise').bind('click', function() {
 			day = $(this).attr('rel');
@@ -94,38 +95,42 @@
 		<div class="span12">			
 			<div class="widget">
 				<div class="widget-title">
-					<h4><i class="icon-table"></i> <?= $this->t->_(date('F', $this->calendar->getTimeStamp())); ?> <?= date('Y', $this->calendar->getTimeStamp()); ?></h4>											
+					<h4><i class="icon-table"></i> <?= $this->t->_(date('F', $this->calendar->getTimeStamp())); ?> <?= date('Y', $this->calendar->getTimeStamp()); ?></h4>
+					<span class="tools">
+	                    <a href="javascript:;" class="icon-refresh"></a>	
+                    </span>											
 				</div>
 				<div class="widget-body">
+				<div class="row-fluid">
 				
 			<div id="calendar" class="has-toolbar fc">
-			<table class="vkNgine-calendar-header" style="width: 100%;">
+			<table class="fc-header" style="width: 100%;">
 			<tbody>
 			<tr>
-				<td class="vkNgine-calendar-header-left"></td>
-				<td class="vkNgine-calendar-header-center">						
+				<td class="fc-header-left"></td>
+				<td class="fc-header-center">						
 				</td>
 				<td class="fc-header-right"><span class="fc-button fc-button-prev fc-state-default fc-corner-left"><span class="fc-button-inner"><span class="fc-button-content">&nbsp;◄&nbsp;</span><span class="fc-button-effect"><span></span></span></span></span><span class="fc-button fc-button-next fc-state-default"><span class="fc-button-inner"><span class="fc-button-content">&nbsp;►&nbsp;</span><span class="fc-button-effect"><span></span></span></span></span><span class="fc-button fc-button-today fc-state-default fc-state-disabled"><span class="fc-button-inner"><span class="fc-button-content">today</span><span class="fc-button-effect"><span></span></span></span></span><span class="fc-button fc-button-month fc-state-default fc-state-active"><span class="fc-button-inner"><span class="fc-button-content">month</span><span class="fc-button-effect"><span></span></span></span></span><span class="fc-button fc-button-agendaWeek fc-state-default"><span class="fc-button-inner"><span class="fc-button-content">week</span><span class="fc-button-effect"><span></span></span></span></span><span class="fc-button fc-button-agendaDay fc-state-default fc-corner-right"><span class="fc-button-inner"><span class="fc-button-content">day</span><span class="fc-button-effect"><span></span></span></span></span></td>
 		</tr>
 	</tbody>
 	</table>
-	<div class="vkNgine-calendar-content" style="position: relative; min-height: 1px;">
-		<div class="vkNgine-calendar-view vkNgine-calendar-grid" style="position: relative; -moz-user-select: none;">
-			<table class="vkNgine-calendar-border-separate" style="width:100%">
+	<div class="fc-content" style="position: relative; min-height: 1px;">
+		<div class="fc-view fc-view-month fc-grid" style="position: relative; -moz-user-select: none;">
+			<table class="fc-border-separate" style="width:100%">
 				<thead>
-					<tr class="vkNgine-calendar-first">
-						<th style="width: 127px;" class="vkNgine-calendar-mon vkNgine-calendar-widget-header vkNgine-calendar-first"><?= $this->t->_('Monday'); ?></th>
-						<th style="width: 127px;" class="vkNgine-calendar-tue vkNgine-calendar-widget-header"><?= $this->t->_('Tuesday'); ?></th>
-						<th style="width: 127px;" class="vkNgine-calendar-wed vkNgine-calendar-widget-header"><?= $this->t->_('Wednesday'); ?></th>
-						<th style="width: 127px;" class="vkNgine-calendar-thu vkNgine-calendar-widget-header"><?= $this->t->_('Thursday'); ?></th>
-						<th style="width: 127px;" class="vkNgine-calendar-fri vkNgine-calendar-widget-header"><?= $this->t->_('Friday'); ?></th>
-						<th style="width: 127px;" class="vkNgine-calendar-sat vkNgine-calendar-widget-header"><?= $this->t->_('Saturday'); ?></th>
-						<th style="width: 127px;" class="vkNgine-calendar-sun vkNgine-calendar-widget-header vkNgine-calendar-last"><?= $this->t->_('Sunday'); ?></th>
+					<tr class="fc-first fc-last">
+						<th style="width: 127px;" class="fc-widget-header fc-first"><?= $this->t->_('Monday'); ?></th>
+						<th style="width: 127px;" class="fc-widget-header"><?= $this->t->_('Tuesday'); ?></th>
+						<th style="width: 127px;" class="fc-widget-header"><?= $this->t->_('Wednesday'); ?></th>
+						<th style="width: 127px;" class="fc-widget-header"><?= $this->t->_('Thursday'); ?></th>
+						<th style="width: 127px;" class="fc-widget-header"><?= $this->t->_('Friday'); ?></th>
+						<th style="width: 127px;" class="fc-widget-header"><?= $this->t->_('Saturday'); ?></th>
+						<th style="width: 127px;" class="fc-widget-header fc-last"><?= $this->t->_('Sunday'); ?></th>
 					</tr>
 				</thead>
 				<tbody>
 					<?php
-						while ( $day = $this->calendar->fetch() ) {							
+						while($day = $this->calendar->fetch()) {
 							$modelDailyExercises = new Public_Model_Daily_Exercises();
 							$modelDailyDetails = new Public_Model_Daily_Details();
 							$days = $modelDailyExercises->fetchByDate($day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay(), $this->user);							
@@ -133,16 +138,16 @@
 							
 							$firstLast = null;
 					    	if($day->isLast()) {
-					    		$firstLast = 'vkNgine-calendar-last';
+					    		$firstLast = 'fc-last';
 					    	}
 					    	if($day->isFirst()) {
-					    		$firstLast = 'vkNgine-calendar-first';
+					    		$firstLast = 'fc-first';
 					    	}
 						       	
 						    if($day->isFirst())
-						    	echo "<tr>\n";
+						    	echo "<tr>\n";	
 						        	
-						    if($day->isSelected() ) {
+						    if($day->isSelected()) {
 						    	
 						   	 	$cssBgColor = null;
 						    	$j = null;
@@ -152,10 +157,10 @@
 						    		}
 						    	}
 						    	
-						        echo "<td {$cssBgColor} rel=\"{$day->thisYear()}-{$day->thisMonth()}-{$day->thisDay()}\" class=\"vkNgine-calendar-state-highlight vkNgine-calendar-widget-content addExercise {$firstLast}\">
+						        echo "<td {$cssBgColor} rel=\"{$day->thisYear()}-{$day->thisMonth()}-{$day->thisDay()}\" class=\"vkNgine-calendar-state-highlight fc-widget-content addExercise {$firstLast}\">
 										  <div>
-											  <div class=\"vkNgine-calendar-day-number dayDetail\" rel=\"{$day->thisYear()}-{$day->thisMonth()}-{$day->thisDay()}\">{$day->thisDay()}</div>
-											  	  <div class=\"vkNgine-calendar-day-content\">
+											  <div class=\"fc-day-number dayDetail\" rel=\"{$day->thisYear()}-{$day->thisMonth()}-{$day->thisDay()}\">{$day->thisDay()}</div>
+											  	  <div class=\"fc-day-content\">
 												  <div style=\"position:relative\">
 												  ";
 													for($i=0; $i<count($days); $i++) {
@@ -222,10 +227,10 @@
 						    		}
 						    	}
 						    	
-						        echo "<td {$cssBgColor} rel=\"{$day->thisYear()}-{$day->thisMonth()}-{$day->thisDay()}\" class=\"vkNgine-calendar-widget-content vkNgine-calendar-other-month addExercise {$firstLast}\">
+						        echo "<td {$cssBgColor} rel=\"{$day->thisYear()}-{$day->thisMonth()}-{$day->thisDay()}\" class=\"fc-other-month fc-widget-content addExercise {$firstLast}\">
 						        			<div style=\"min-height: 106px;\">
-												<div class=\"vkNgine-calendar-day-number dayDetail\" rel=\"{$day->thisYear()}-{$day->thisMonth()}-{$day->thisDay()}\">{$day->thisDay()}</div>
-													<div class=\"vkNgine-calendar-day-content\">
+												<div class=\"fc-day-number dayDetail\" rel=\"{$day->thisYear()}-{$day->thisMonth()}-{$day->thisDay()}\">{$day->thisDay()}</div>
+													<div class=\"fc-day-content\">
 													<div style=\"position:relative\">
 												  ";
 													for($i=0; $i<count($days); $i++) {
@@ -292,10 +297,10 @@
 						    		}
 						    	}
 						    	
-						        echo "<td {$cssBgColor} rel=\"{$day->thisYear()}-{$day->thisMonth()}-{$day->thisDay()}\" class=\"vkNgine-calendar-widget-content addExercise {$firstLast}\">
+						        echo "<td {$cssBgColor} rel=\"{$day->thisYear()}-{$day->thisMonth()}-{$day->thisDay()}\" class=\"fc-widget-content addExercise {$firstLast}\">
 						        		  <div style=\"min-height: 107px;\">
-											  <div class=\"vkNgine-calendar-day-number dayDetail\" rel=\"{$day->thisYear()}-{$day->thisMonth()}-{$day->thisDay()}\">{$day->thisDay()}</div>
-												  <div class=\"vkNgine-calendar-day-content\">
+											  <div class=\"fc-day-number dayDetail\" rel=\"{$day->thisYear()}-{$day->thisMonth()}-{$day->thisDay()}\">{$day->thisDay()}</div>
+												  <div class=\"fc-day-content\">
 												  <div style=\"position:relative\">
 												  ";
 													for($i=0; $i<count($days); $i++) {
@@ -352,13 +357,14 @@
 										  </div>
 						       		  </td>";
 						    }
-						    
+						    					    
 						    if ( $day->isLast() )
 						        echo ( "</tr>\n" );						        
 					   	}						
 					?>
 				</tbody>	
 		</table>
+	</div>
 	</div>
 	</div>
 	</div>

@@ -8,8 +8,7 @@
 ?>
 		    
 <?= $this->partial('_breadcrumbs.phtml', 
-				array('t' 		  => $this->t,
-					  'pageTitle' => null,
+				array('t' 		  => $this->t,					 
 					  'page'	  => $this->t->_('My Plate'),
 	)); 
 ?>
@@ -19,8 +18,7 @@
                   <div class="span12">                     
                      <div class="widget">
                         <div class="widget-title">
-                           <h4><i class="icon-food"></i> <?= $this->t->_('My Plate') . ' :: ' . $pageTitle; ?></h4>
-                           							
+                           <h4><i class="icon-food"></i> <?= $this->t->_('My Plate') . ' :: ' . $pageTitle; ?></h4>                           							
                         </div>
                         <div class="widget-body form">
                         
@@ -29,7 +27,7 @@
                               <div class="control-group">
                                  <div class="controls">
                                     <?= $this->formMeals; ?>
-                                    <a class="button lowercase addmeal" href="#">
+                                    <a class="addmeal" href="#">
 								        <span class="glyph plus"></span><?= $this->t->_('Add Meal'); ?>
 								    </a>
                                  </div>
@@ -45,10 +43,10 @@
                                  </div>                               
                                  <div class="controls">
                                  	<?= $this->formFoods->servingSize; ?>
-		  				<?= $this->formFoods->servingSizes; ?>
+		  							<?= $this->formFoods->servingSizes; ?>
                                  </div>
                                  
-                                 <a class="button lowercase addfood" href="#">				  
+                                 <a class="addfood" href="#">				  
 							         <span class="glyph plus"></span><?= $this->t->_('Add Food'); ?>
 							     </a>
                            </form>

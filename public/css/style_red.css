@@ -1,7 +1,7 @@
 body { 
   color: #222; 
   background-color:#5a3128 !important;
-  background-image: url(../img/bg-red.png);
+  background-image: url(/images/bg-red.png);
 }
 
 #header .navbar-inner .nav .dropdown-toggle:hover, .navbar-inner .nav .dropdown.open .dropdown-toggle {

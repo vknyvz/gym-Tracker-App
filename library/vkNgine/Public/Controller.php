@@ -34,7 +34,7 @@ class vkNgine_Public_Controller extends Zend_Controller_Action
     	$this->view->searchForm = $searchForm;
     	
     	$view = Zend_Registry::get('view');
-    	$appTitle = Zend_Registry::get('t')->_('GYM Tracker lower');
+    	$appTitle = Zend_Registry::get('t')->_('GYM Tracker');
     	$view->headTitle($appTitle, Zend_View_Helper_Placeholder_Container_Abstract::SET);
     	
     	if (!vkNgine_Auth::isAuthenticated()) {

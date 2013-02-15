@@ -1,7 +1,7 @@
 body { 
   color: #222; 
   background-color:#515255 !important;
-  background-image: url(../img/bg-grey.png) !important;
+  background-image: url(/images/bg-grey.png) !important;
 }
 
 #header.navbar-inverse .navbar-inner {
