@@ -1,6 +1,5 @@
 <?= $this->partial('_breadcrumbs.phtml', 
-				array('t' 		  => $this->t,
-					  'pageTitle' => null,
+				array('t' 		  => $this->t,					  
 					  'page'	  => $this->t->_('My Body Measurements'),
 	)); 
 ?>
@@ -9,9 +8,6 @@
 	<div class="row-fluid">
 		<div class="span12">			
 			<div class="widget">
-				<div class="widget-title">
-					<h4><i class="icon-table"></i> <?= $this->t->_('My Body Measurements'); ?></h4>										
-				</div>
 				<div class="widget-body">
 					<table class="table table-striped table-bordered" id="sample_1">
 						<thead>

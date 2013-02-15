@@ -53,17 +53,17 @@
 
 "Access denied!";"Girişiniz Yasak!"
 
-"Calendar";"Takvİm"
+"Calendar";"Takvim"
 "Exercise Calendar";"Egzersiz Takvimi"
 "Username";"Kullanıcı adı"
-"GYM Tracker";"GYM Takİpçİsİ"
-"GYM Tracker lower";"GYM Takipçisi"
+"GYM Tracker";"GYM Takipçisi"
 
 "Select an option above";"Üstten bir seçenek seçin"
 
 "Exercise-s";"Egzersiz"
 
 "Abdominals";"Abdomen"
+"Abs";"Abdomen"
 "Back";"Sırt"
 "Biceps";"Pazı"
 "Calves";"Baldır"
@@ -218,10 +218,8 @@
 "Weekly";"Haftalık"
 "Monthly";"Aylık"
 
-"Monthly Calendar";"Aylık Takvİm"
-"Weekly Calendar";"Haftalık Takvİm"
-"Weekly Calendar lower";"Haftalık Takvim"
-"Monthly Calendar lower";"Aylık Takvim"
+"Monthly Calendar";"Aylık Takvim"
+"Weekly Calendar";"Haftalık Takvim"
 
 "Username is required";"Kullanıcı adı girilmelidir"
 "Password is required";"Şifre girilmelidir"
@@ -341,3 +339,23 @@
 "Go back to login form";"Giriş formuna geri dön"
 
 "Technical Data";"Teknik Bilgiler"
+
+"Dumbbells";"Dumbell"
+"Barbell";"Barbel"
+"Bodyweight";"Vücut Ağırlığı"
+"Cables";"Kablo"
+"Exercise Ball";"Egzersiz Topu"
+"Machines";"Makine"
+"Other";"Diğer"
+"Compound";"Karışık"
+"Isolation";"İzole"
+"Core";"Kor Bölgeler"
+"Lower Back";"Aşağı Sırt"
+"Glutes, Hamstrings, Quadriceps";"Glütler, Arka Bacak, Ön Bacak"
+"Hamstrings";"Arka Bacak"
+"Glutes, Lower Back";"Glütler, Aşağı Sırt" 
+"Back, Glutes, Hamstrings";"Sırt, Glütler"
+"Core, Forearms, Lower Back, Traps";"Karın, Ön Kol, Aşağı Sırt"
+"Quadriceps";"Ön Bacak"
+"Hamstrings, Quadriceps";"Arka Bacak, Ön Bacak"
+"Glutes";"Glütler"

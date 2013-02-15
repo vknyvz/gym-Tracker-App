@@ -28,23 +28,21 @@
 </script>
 
 <?= $this->partial('_breadcrumbs.phtml', 
-				array('t' 		  => $this->t,
-					  'pageTitle' => null,
-					  'page'	  => $this->t->_('Exercise Details'),
+				array('t' 		  => $this->t,					  
+					  'page'	  => $this->exercise['name'],
+					  'pageHref'  => false,
 					  'page2'     => $this->exercise['primaryMuscle'],
 					  'page2href' => '/index/exercises/type/' . $this->exercise['primaryMuscle']
 	)); 
 ?>
 
 <div id="page">
-	<!--BEGIN:BODY-->	
+	
 	<div class="row-fluid">
 		<div class="span12">
-			<!-- BEGIN GALLERY MANAGER PORTLET-->
+			
 			<div class="widget">
-				<div class="widget-title">
-					<h4><i class="icon-camera"></i> <?= $this->exercise['name']; ?></h4>										
-				</div>
+				
 				<div class="widget-body">					
 					<div class="row-fluid">
 						<h5><?= $this->t->_('Technical Data'); ?></h5>
@@ -56,13 +54,13 @@
 								        <th><?= $this->t->_('Primary Muscle'); ?></th>
 								        <th><?= $this->t->_('Secondary Muscle'); ?></th>
 								        <th><?= $this->t->_('Mechanics'); ?></th>
-								        <th><?= $this->t->_('Equipment Used'); ?></th>
+								        <th><?= $this->t->_('Equipment Used'); ?></th>								        
 								    </tr>
 								</thead>
 								<tbody>
 									<tr>
 										<td><?= $this->t->_($this->exercise['primaryMuscle']); ?></td>
-						                <td><?= $this->t->_($this->exercise['secondaryMuscle']); ?></td>
+						                <td><?= (($this->exercise['secondaryMuscle'] != 'None') ? $this->t->_($this->exercise['secondaryMuscle']) : ''); ?></td>
 						                <td><?= $this->t->_($this->exercise['mechanics']); ?></td>
 						                <td><?=	$this->t->_($this->exercise['equipmentUsed']); ?></td>
 				 					</tr>							
@@ -83,7 +81,7 @@
 								    
 						    <p><?= substr($newstring, 0, $posUntilTips); ?></p>				    	
 						    
-						    <h6><?= $findWhat?></h6>				    
+						    <h6><?= $this->t->_($findWhat); ?></h6>				    
 						    
 						    <p><?= substr($newstring, $posUntilTips + 5)?></p>
 						    
@@ -92,7 +90,8 @@
 						    	endif; 
 						    ?>
 						</div>
-						
+					</div>
+					<div class="row-fluid">
 						<h5><?= $this->t->_('Exercise Images'); ?></h5>
 						<hr class="clearfix" />
 						

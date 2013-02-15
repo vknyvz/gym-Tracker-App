@@ -79,67 +79,33 @@
 		});
 	});
 </script>
-		
-<section id="maincontainer">
-   <div id="main">
-      <div class="box">
-	  	 <div class="box-header">
-		    <h1><?= $this->t->_('Monthly Calendar'); ?></h1>
-		 </div>
-		 <div id="calendar" class="vkNgine-calendar">
+
+<?= $this->partial('_breadcrumbs.phtml', 
+				array('t' 		  => $this->t,
+					  'pageTitle' => null,
+					  'page'	  => $this->t->_('Monthly Calendar'),
+					  'page2'     => $this->t->_('Exercise Calendar'),
+					  'page2href' => '',
+	)); 
+?>
+
+<div id="page" class="dashboard">
+	<div class="row-fluid">
+		<div class="span12">			
+			<div class="widget">
+				<div class="widget-title">
+					<h4><i class="icon-table"></i> <?= $this->t->_(date('F', $this->calendar->getTimeStamp())); ?> <?= date('Y', $this->calendar->getTimeStamp()); ?></h4>											
+				</div>
+				<div class="widget-body">
+				
+			<div id="calendar" class="has-toolbar fc">
 			<table class="vkNgine-calendar-header" style="width: 100%;">
 			<tbody>
 			<tr>
 				<td class="vkNgine-calendar-header-left"></td>
-				<td class="vkNgine-calendar-header-center">
-					<span class="vkNgine-calendar-header-title">
-						<h2><?= $this->t->_(date('F', $this->calendar->getTimeStamp())); ?> <?= date('Y', $this->calendar->getTimeStamp()); ?></h2>
-					</span>	
+				<td class="vkNgine-calendar-header-center">						
 				</td>
-				<td class="vkNgine-calendar-header-right">
-				<span class="vkNgine-calendar-button vkNgine-calendar-button-prev vkNgine-calendar-state-default vkNgine-calendar-corner-left">
-					<span class="vkNgine-calendar-button-inner">
-						<span class="vkNgine-calendar-button-content">
-							<span class="glyph left"></span>
-						</span>
-						<span class="vkNgine-calendar-button-effect">
-							<span></span>
-						</span>
-					</span>
-				</span><span class="vkNgine-calendar-button vkNgine-calendar-button-today vkNgine-calendar-state-default <?= $state; ?>">
-					<span class="vkNgine-calendar-button-inner">
-						<span class="vkNgine-calendar-button-content"><?= $this->t->_('today'); ?></span>
-						<span class="vkNgine-calendar-button-effect">
-							<span></span>
-						</span>
-					</span>
-				</span><span class="vkNgine-calendar-button vkNgine-calendar-button-next vkNgine-calendar-state-default vkNgine-calendar-corner-right">
-					<span class="vkNgine-calendar-button-inner">
-						<span class="vkNgine-calendar-button-content">
-							<span class="glyph right"></span>
-						</span>
-						<span class="vkNgine-calendar-button-effect">
-							<span></span>
-						</span>
-					</span>
-				</span>
-				<span class="vkNgine-calendar-header-space"></span>
-					<span class="vkNgine-calendar-button vkNgine-calendar-button-month vkNgine-calendar-state-default vkNgine-calendar-corner-left vkNgine-calendar-state-active">
-						<span class="vkNgine-calendar-button-inner">
-							<span class="vkNgine-calendar-button-content"><?= $this->t->_('month'); ?></span>
-							<span class="vkNgine-calendar-button-effect">
-								<span></span>
-							</span>
-						</span>
-				</span><span class="vkNgine-calendar-button vkNgine-calendar-button-basicDay vkNgine-calendar-state-default vkNgine-calendar-corner-right">
-				<span class="vkNgine-calendar-button-inner">
-					<span class="vkNgine-calendar-button-content"><?= $this->t->_('week'); ?></span>
-					<span class="vkNgine-calendar-button-effect">
-						<span></span>
-					</span>
-				</span>
-				</span>
-			</td>
+				<td class="fc-header-right"><span class="fc-button fc-button-prev fc-state-default fc-corner-left"><span class="fc-button-inner"><span class="fc-button-content">&nbsp;◄&nbsp;</span><span class="fc-button-effect"><span></span></span></span></span><span class="fc-button fc-button-next fc-state-default"><span class="fc-button-inner"><span class="fc-button-content">&nbsp;►&nbsp;</span><span class="fc-button-effect"><span></span></span></span></span><span class="fc-button fc-button-today fc-state-default fc-state-disabled"><span class="fc-button-inner"><span class="fc-button-content">today</span><span class="fc-button-effect"><span></span></span></span></span><span class="fc-button fc-button-month fc-state-default fc-state-active"><span class="fc-button-inner"><span class="fc-button-content">month</span><span class="fc-button-effect"><span></span></span></span></span><span class="fc-button fc-button-agendaWeek fc-state-default"><span class="fc-button-inner"><span class="fc-button-content">week</span><span class="fc-button-effect"><span></span></span></span></span><span class="fc-button fc-button-agendaDay fc-state-default fc-corner-right"><span class="fc-button-inner"><span class="fc-button-content">day</span><span class="fc-button-effect"><span></span></span></span></span></td>
 		</tr>
 	</tbody>
 	</table>
@@ -396,8 +362,12 @@
 	</div>
 	</div>
 	</div>
+				
+				</div>
+			</div>
+		</div>
 	</div>
-</section>		
+</div>		
 			
 	<?php 
 		if(0 != count($this->otherdata)) :

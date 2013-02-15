@@ -40,7 +40,11 @@
 			<?php endif; ?>
 			
 			<li>
+			<?php if(!$this->pageHref) : ?>	
+				<?= $this->page; ?>				
+			<?php else: ?>
 				<a href="<?= $this->request; ?>"><?= $this->page; ?></a>
+			<?php endif; ?>				
 			</li>
 			
 			<?php if(isset($this->calendar)) : ?>

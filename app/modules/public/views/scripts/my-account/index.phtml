@@ -1,6 +1,5 @@
 <?= $this->partial('_breadcrumbs.phtml', 
-				array('t' 		  => $this->t,
-					  'pageTitle' => null,
+				array('t' 		  => $this->t,					  
 					  'page'	  => $this->t->_('My Settings'),
 	)); 
 ?>
@@ -8,10 +7,7 @@
 		 <div id="page">
                <div class="row-fluid">
                   <div class="span12">                     
-                     <div class="widget">
-                        <div class="widget-title">
-                           <h4><i class="icon-edit"></i> <?= $this->t->_('My Settings'); ?></h4>
-                        </div>
+                     <div class="widget">                       
                         <div class="widget-body form">
                            <h5><?= $this->t->_('Default Calendar View'); ?></h5>
                            <form action="<?= $this->formSettings->getAction(); ?>" class="form-inline">
