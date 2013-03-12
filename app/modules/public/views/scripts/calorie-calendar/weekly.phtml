@@ -2,7 +2,7 @@
 $state = null;
 if(isset($this->params['day'])) {
 	if (date('d') == $this->params['day']){
-		$state = 'vkNgine-calendar-state-disabled';
+		$state = 'fc-state-disabled';
 	}
 }
 
@@ -18,148 +18,118 @@ $next = '/calorie-calendar/weekly/year/' . $nextWeek['year'] . '/month/' . $next
 
 <script>
 	$(function() {
-		$('.vkNgine-calendar-button-prev').bind('click', function() {
+		$('.fc-button-prev').bind('click', function() {
 			window.top.location = '<?= $prev; ?>';
 		});
-		$('.vkNgine-calendar-button-next').bind('click', function() {
+		$('.fc-button-next').bind('click', function() {
 			window.top.location = '<?= $next; ?>';
 		});
-		$('.vkNgine-calendar-button-today').bind('click', function() {
+		$('.fc-button-today').bind('click', function() {
 			window.top.location = '<?= $today; ?>';
 		});
-		$('.vkNgine-calendar-button-month').bind('click', function() {
+		$('.fc-button-month').bind('click', function() {
 			window.top.location = '<?= $this->publicUrl('monthly', 'calendar'); ?>';
 		});
-		$('.vkNgine-calendar-button-agendaWeek').bind('click', function() {
+		$('.fc-button-agendaWeek').bind('click', function() {
 			window.top.location = '<?= $this->publicUrl('weekly', 'calendar'); ?>';
 		});
 
 		<?php
 			if(!isset($this->params['month'])) :
 		?>
-			$('.vkNgine-calendar-button-today').addClass('vkNgine-calendar-state-disabled');
+			$('.fc-button-today').addClass('fc-state-disabled');
 		<?php endif; ?>
 	});	
 </script>
-		
-<section id="maincontainer">
-   <div id="main">
-      <div class="box">
-	  	 <div class="box-header">
-		    <h1><?= $this->t->_('Weekly Calorie Calendar'); ?></h1>
-		 </div>
-		 <div id="calendar" class="vkNgine-calendar">
-			<table class="vkNgine-calendar-header" style="width: 100%;">
+
+<?= $this->partial('_breadcrumbs.phtml', 
+				array('t' 		  => $this->t,
+					  'pageTitle' => null,
+					  'page'	  => $this->t->_('Weekly Calendar'),
+					  'page2'     => $this->t->_('Calorie Calendar'),
+					  'page2href' => '',
+	)); 
+?>
+
+<div id="page" class="dashboard">
+	<div class="row-fluid">
+		<div class="span12">			
+			<div class="widget">
+				<div class="widget-title">
+					<h4><i class="icon-table"></i>
+						<?php
+					    	$language = new Zend_Session_Namespace('language');
+					    	$config = Zend_Registry::get('config');					    	
+					    	
+					    	while ($day = $this->calendar->fetch()) {
+					    		if(date('D',$day->thisDay(true)) == 'Mon'){
+					    			if($language->lang) {
+					    				if($language->lang == 'tr') {
+					    					echo date('j', $day->thisDay(true));
+					    					echo ' ' . $this->t->_(date('F', $day->thisDay(true))) . ' &mdash; ';
+					    				}
+					    				else{
+					    					echo date('F j', $day->thisDay(true)) . ' &mdash; ';
+					    				}
+					    			}
+					    			else {
+					    				if($config->language->locale == 'tr') {
+					    					echo date('j', $day->thisDay(true));
+					    					echo ' ' . $this->t->_(date('F', $day->thisDay(true))) . ' &mdash; ';
+					    				}
+					    				else {
+					    					echo date('F j', $day->thisDay(true)) . ' &mdash; ';
+					    				}
+					    			}
+					    		}
+					    		if(date('D',$day->thisDay(true)) == 'Sun'){
+					    			if($language->lang) {
+					    				if($language->lang == 'tr') {
+					    					echo date('j', $day->thisDay(true));
+					    					echo ' ' . $this->t->_(date('F', $day->thisDay(true)));
+					    				}
+					    				else{
+					    					echo date('F j', $day->thisDay(true));
+					    				}
+					    			}
+					    			else {
+					    				if($config->language->locale == 'tr') {
+					    					echo date('j', $day->thisDay(true));
+					    					echo ' ' . $this->t->_(date('F', $day->thisDay(true)));
+					    				}
+					    				else {
+					    					echo date('F j', $day->thisDay(true));
+					    				}
+					    			}
+					    			
+					    			echo ' ' . date('Y');
+					    		}
+					    	}					    	
+					   	?>
+					   	</h4>					   	
+					<span class="tools">
+	                    <a href="javascript:;" class="icon-refresh"></a>	
+                    </span>											
+				</div>
+				<div class="widget-body">
+				<div class="row-fluid">
+				
+			<div id="calendar" class="has-toolbar fc">
+			<table class="fc-header" style="width: 100%;">
 			<tbody>
 			<tr>
-				<td class="vkNgine-calendar-header-left"></td>
-				<td class="vkNgine-calendar-header-center">
-					<span class="vkNgine-calendar-header-title">
-				<?php
-			    	$language = new Zend_Session_Namespace('language');
-			    	$config = Zend_Registry::get('config');
-			    	
-			    	echo '<h2>';
-			    	while ($day = $this->calendar->fetch()) {
-			    		if(date('D',$day->thisDay(true)) == 'Mon'){
-			    			if($language->lang) {
-			    				if($language->lang == 'tr') {
-			    					echo date('j', $day->thisDay(true));
-			    					echo ' ' . $this->t->_(date('F', $day->thisDay(true))) . ' &mdash; ';
-			    				}
-			    				else{
-			    					echo date('F j', $day->thisDay(true)) . ' &mdash; ';
-			    				}
-			    			}
-			    			else {
-			    				if($config->language->locale == 'tr') {
-			    					echo date('j', $day->thisDay(true));
-			    					echo ' ' . $this->t->_(date('F', $day->thisDay(true))) . ' &mdash; ';
-			    				}
-			    				else {
-			    					echo date('F j', $day->thisDay(true)) . ' &mdash; ';
-			    				}
-			    			}
-			    		}
-			    		if(date('D',$day->thisDay(true)) == 'Sun'){
-			    			if($language->lang) {
-			    				if($language->lang == 'tr') {
-			    					echo date('j', $day->thisDay(true));
-			    					echo ' ' . $this->t->_(date('F', $day->thisDay(true)));
-			    				}
-			    				else{
-			    					echo date('F j', $day->thisDay(true));
-			    				}
-			    			}
-			    			else {
-			    				if($config->language->locale == 'tr') {
-			    					echo date('j', $day->thisDay(true));
-			    					echo ' ' . $this->t->_(date('F', $day->thisDay(true)));
-			    				}
-			    				else {
-			    					echo date('F j', $day->thisDay(true));
-			    				}
-			    			}
-			    			
-			    			echo ' ' . date('Y');
-			    		}
-			    	}
-			    	echo '</h2>';
-			   	?>
-				</span>
-			</td>
-			<td class="vkNgine-calendar-header-right">
-				<span class="vkNgine-calendar-button vkNgine-calendar-button-prev vkNgine-calendar-state-default vkNgine-calendar-corner-left">
-					<span class="vkNgine-calendar-button-inner">
-						<span class="vkNgine-calendar-button-content">
-							<span class="glyph left"></span>
-						</span>
-						<span class="vkNgine-calendar-button-effect">
-							<span></span>
-						</span>
-					</span>
-				</span><span class="vkNgine-calendar-button vkNgine-calendar-button-today vkNgine-calendar-state-default <?= $state; ?>">
-					<span class="vkNgine-calendar-button-inner">
-						<span class="vkNgine-calendar-button-content"><?= $this->t->_('today'); ?></span>
-						<span class="vkNgine-calendar-button-effect">
-							<span></span>
-						</span>
-					</span>
-				</span><span class="vkNgine-calendar-button vkNgine-calendar-button-next vkNgine-calendar-state-default vkNgine-calendar-corner-right">
-					<span class="vkNgine-calendar-button-inner">
-						<span class="vkNgine-calendar-button-content">
-							<span class="glyph right"></span>
-						</span>
-						<span class="vkNgine-calendar-button-effect">
-							<span></span>
-						</span>
-					</span>
-				</span>
-				<span class="vkNgine-calendar-header-space"></span>
-					<span class="vkNgine-calendar-button vkNgine-calendar-button-month vkNgine-calendar-state-default vkNgine-calendar-corner-left">
-						<span class="vkNgine-calendar-button-inner">
-							<span class="vkNgine-calendar-button-content"><?= $this->t->_('month'); ?></span>
-							<span class="vkNgine-calendar-button-effect">
-								<span></span>
-							</span>
-						</span>
-				</span><span class="vkNgine-calendar-button vkNgine-calendar-button-basicDay vkNgine-calendar-state-default vkNgine-calendar-corner-right vkNgine-calendar-state-active">
-				<span class="vkNgine-calendar-button-inner">
-					<span class="vkNgine-calendar-button-content"><?= $this->t->_('week'); ?></span>
-					<span class="vkNgine-calendar-button-effect">
-						<span></span>
-					</span>
-				</span>
-				</span>
-			</td>
+				<td class="fc-header-left"></td>
+				<td class="fc-header-center"></td>
+				<td class="fc-header-right">
+					<span class="fc-button fc-button-prev fc-state-default fc-corner-left"><span class="fc-button-inner"><span class="fc-button-content">&nbsp;◄&nbsp;</span><span class="fc-button-effect"><span></span></span></span></span><span class="fc-button fc-button-next fc-state-default"><span class="fc-button-inner"><span class="fc-button-content">&nbsp;►&nbsp;</span><span class="fc-button-effect"><span></span></span></span></span><span class="fc-button fc-button-today fc-state-default <?= $state; ?>"><span class="fc-button-inner"><span class="fc-button-content"><?= $this->t->_('today'); ?></span><span class="fc-button-effect"><span></span></span></span></span><span class="fc-button fc-button-month fc-state-default"><span class="fc-button-inner"><span class="fc-button-content"><?= $this->t->_('month'); ?></span><span class="fc-button-effect"><span></span></span></span></span><span class="fc-button fc-button-agendaWeek fc-state-default fc-state-active"><span class="fc-button-inner"><span class="fc-button-content"><?= $this->t->_('week'); ?></span><span class="fc-button-effect"><span></span></span></span></span></td>
 		</tr>
 	</tbody>
-	</table>
-	<div class="vkNgine-calendar-content" style="position: relative; min-height: 1px;">
-	<div class="vkNgine-calendar-view vkNgine-calendar-view-agendaWeek vkNgine-calendar-agenda" style="position: relative; -moz-user-select: none; display: block;" unselectable="on">
-		<table class="vkNgine-calendar-agenda-days vkNgine-calendar-border-separate" cellspacing="0" style="width:100%">
+	</table>	
+	<div class="fc-content" style="position: relative; min-height: 1px;">
+	<div class="fc-view fc-view-agendaWeek fc-agenda" style="position: relative; -moz-user-select: none; display: block;" unselectable="on">
+		<table class="fc-agenda-days fc-border-separate" cellspacing="0" style="width:100%">
 			<thead>
-				<tr class="vkNgine-calendar-first vkNgine-calendar-last">
+				<tr class="fc-first fc-last">
 				<?php 
 			    	$this->calendar->build();
 			    	$language = new Zend_Session_Namespace('language');
@@ -169,48 +139,48 @@ $next = '/calorie-calendar/weekly/year/' . $nextWeek['year'] . '/month/' . $next
 			    		if($language->lang) {
 			    			if($language->lang == 'tr') {
 				    			if(date('D', $day->thisDay(true)) == 'Mon'){
-				    				echo '<th rel="' . $day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay() . '" class="vkNgine-calendar-mon vkNgine-calendar-widget-header vkNgine-calendar-first dayDetail" style="width: 97px;">' . str_replace('Monday', $this->t->_('Monday'), date('j l', $day->thisDay(true))) . '</th>';
+				    				echo '<th rel="' . $day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay() . '" class="fc-mon fc-widget-header fc-first dayDetail" style="width: 97px;">' . str_replace('Monday', $this->t->_('Monday'), date('j l', $day->thisDay(true))) . '</th>';
 				    			}
 				    			elseif(date('D', $day->thisDay(true)) == 'Sun'){
-				    				echo '<th rel="' . $day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay() . '" class="vkNgine-calendar-sun vkNgine-calendar-widget-header vkNgine-calendar-agenda-gutter vkNgine-calendar-last dayDetail" style="width: 97px;">' . str_replace('Sunday', $this->t->_('Sunday'), date('j l', $day->thisDay(true))) . '</th>';
+				    				echo '<th rel="' . $day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay() . '" class="fc-sun fc-widget-header fc-agenda-gutter fc-last dayDetail" style="width: 97px;">' . str_replace('Sunday', $this->t->_('Sunday'), date('j l', $day->thisDay(true))) . '</th>';
 				    			}
 				    			else {
-				    				echo '<th rel="' . $day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay() . '" class="vkNgine-calendar-widget-header dayDetail" style="width: 97px;">' . date('j', $day->thisDay(true)) . ' ' . $this->t->_(date('l', $day->thisDay(true))) . ' </th>';
+				    				echo '<th rel="' . $day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay() . '" class="fc-widget-header dayDetail" style="width: 97px;">' . date('j', $day->thisDay(true)) . ' ' . $this->t->_(date('l', $day->thisDay(true))) . ' </th>';
 				    			}
 			    			}
 			    			else {
 			    				if(date('D', $day->thisDay(true)) == 'Mon'){
-			    					echo '<th rel="' . $day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay() . '" class="vkNgine-calendar-mon vkNgine-calendar-widget-header vkNgine-calendar-first dayDetail" style="width: 97px;">' . date('l jS', $day->thisDay(true)) . '</th>';
+			    					echo '<th rel="' . $day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay() . '" class="fc-mon fc-widget-header fc-first dayDetail" style="width: 97px;">' . date('l jS', $day->thisDay(true)) . '</th>';
 			    				}
 			    				elseif(date('D', $day->thisDay(true)) == 'Sun'){
-			    					echo '<th rel="' . $day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay() . '" class="vkNgine-calendar-sun vkNgine-calendar-widget-header vkNgine-calendar-agenda-gutter vkNgine-calendar-last dayDetail" style="width: 97px;">' . date('l jS', $day->thisDay(true)) . '</th>';
+			    					echo '<th rel="' . $day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay() . '" class="fc-sun fc-widget-header fc-agenda-gutter fc-last dayDetail" style="width: 97px;">' . date('l jS', $day->thisDay(true)) . '</th>';
 			    				}
 			    				else {
-			    					echo '<th rel="' . $day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay() . '" class="vkNgine-calendar-widget-header dayDetail" style="width: 97px;">' . date('l jS', $day->thisDay(true)) . '</th>';
+			    					echo '<th rel="' . $day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay() . '" class="fc-widget-header dayDetail" style="width: 97px;">' . date('l jS', $day->thisDay(true)) . '</th>';
 			    				}
 			    			}
 			    		}
 			    		else {
 			    			if($config->language->locale == 'tr') {
 			    				if(date('D', $day->thisDay(true)) == 'Mon'){
-				    				echo '<th rel="' . $day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay() . '" class="vkNgine-calendar-mon vkNgine-calendar-widget-header vkNgine-calendar-first dayDetail" style="width: 97px;">' . str_replace('Monday', $this->t->_('Monday'), date('j l', $day->thisDay(true))) . '</th>';
+				    				echo '<th rel="' . $day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay() . '" class="fc-mon fc-widget-header fc-first dayDetail" style="width: 97px;">' . str_replace('Monday', $this->t->_('Monday'), date('j l', $day->thisDay(true))) . '</th>';
 				    			}
 				    			elseif(date('D', $day->thisDay(true)) == 'Sun'){
-				    				echo '<th rel="' . $day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay() . '" class="vkNgine-calendar-sun vkNgine-calendar-widget-header vkNgine-calendar-agenda-gutter vkNgine-calendar-last dayDetail" style="width: 97px;">' . str_replace('Sunday', $this->t->_('Sunday'), date('j l', $day->thisDay(true))) . '</th>';
+				    				echo '<th rel="' . $day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay() . '" class="fc-sun fc-widget-header fc-agenda-gutter fc-last dayDetail" style="width: 97px;">' . str_replace('Sunday', $this->t->_('Sunday'), date('j l', $day->thisDay(true))) . '</th>';
 				    			}
 				    			else {
-				    				echo '<th rel="' . $day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay() . '" class="vkNgine-calendar-widget-header dayDetail" style="width: 97px;">' . date('j', $day->thisDay(true)) . ' ' . $this->t->_(date('l', $day->thisDay(true))) . ' </th>';
+				    				echo '<th rel="' . $day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay() . '" class="fc-widget-header dayDetail" style="width: 97px;">' . date('j', $day->thisDay(true)) . ' ' . $this->t->_(date('l', $day->thisDay(true))) . ' </th>';
 				    			}
 			    			}
 			    			else {
 			    				if(date('D', $day->thisDay(true)) == 'Mon'){
-			    					echo '<th rel="' . $day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay() . '" class="vkNgine-calendar-mon vkNgine-calendar-widget-header vkNgine-calendar-first dayDetail" style="width: 97px;">' . date('l jS', $day->thisDay(true)) . '</th>';
+			    					echo '<th rel="' . $day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay() . '" class="fc-mon fc-widget-header fc-first dayDetail" style="width: 97px;">' . date('l jS', $day->thisDay(true)) . '</th>';
 			    				}
 			    				elseif(date('D', $day->thisDay(true)) == 'Sun'){
-			    					echo '<th rel="' . $day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay() . '" class="vkNgine-calendar-sun vkNgine-calendar-widget-header vkNgine-calendar-agenda-gutter vkNgine-calendar-last dayDetail" style="width: 97px;">' . date('l jS', $day->thisDay(true)) . '</th>';
+			    					echo '<th rel="' . $day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay() . '" class="fc-sun fc-widget-header fc-agenda-gutter fc-last dayDetail" style="width: 97px;">' . date('l jS', $day->thisDay(true)) . '</th>';
 			    				}
 			    				else {
-			    					echo '<th rel="' . $day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay() . '" class="vkNgine-calendar-widget-header dayDetail" style="width: 97px;">' . date('l jS', $day->thisDay(true)) . '</th>';
+			    					echo '<th rel="' . $day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay() . '" class="fc-widget-header dayDetail" style="width: 97px;">' . date('l jS', $day->thisDay(true)) . '</th>';
 			    				}
 			    			}
 			    		}
@@ -219,7 +189,7 @@ $next = '/calorie-calendar/weekly/year/' . $nextWeek['year'] . '/month/' . $next
 				</tr>
 			</thead>
 			<tbody>
-				<tr class="vkNgine-calendar-first vkNgine-calendar-last">
+				<tr class="fc-first fc-last">
 				<?php
 					while ($day = $this->calendar->fetch()) {
 						$modelDailyIntake = new Public_Model_Daily_Intake();
@@ -228,21 +198,21 @@ $next = '/calorie-calendar/weekly/year/' . $nextWeek['year'] . '/month/' . $next
 						$highlightedCss = null;
 						$today = date('Y').'-'.date('n').'-'.date('j');
 						$highlighted = $day->thisYear().'-'.$day->thisMonth().'-'.$day->thisDay();
-						$highlightedCss = ($highlighted == $today) ? 'vkNgine-calendar-state-highlight' : '';
+						$highlightedCss = ($highlighted == $today) ? 'fc-state-highlight' : '';
 						
 						if(date('D', $day->thisDay(true)) == 'Mon'){
 		    	?>
-		    		<td rel="<?= $day->thisYear()?>-<?= $day->thisMonth()?>-<?= $day->thisDay()?>" class="vkNgine-calendar-mon vkNgine-calendar-widget-content vkNgine-calendar-first <?= $highlightedCss; ?> addExercise">
+		    		<td rel="<?= $day->thisYear()?>-<?= $day->thisMonth()?>-<?= $day->thisDay()?>" class="fc-mon fc-widget-content fc-first <?= $highlightedCss; ?> addExercise">
 						<div style="height: 300px;">
-							<div class="vkNgine-calendar-day-content">
+							<div class="fc-day-content">
 								<div style="position:relative">
 									<?php 
 									if($dailyValues){ 
 											echo '
-											<div rel="" class="viewDetail vkNgine-calendar-event vkNgine-calendar-event-skin vkNgine-calendar-event-hori vkNgine-calendar-corner-left vkNgine-calendar-corner-right" style="background-color: rgb(71, 125, 174); border-color: rgb(14, 105, 161); top: 30px; -moz-user-select: none;">
-												<div class="vkNgine-calendar-event-inner vkNgine-calendar-event-skin" style="background-color:#477dae;border-color:#0E69A1">
-													<span class="vkNgine-calendar-event-time">' . $this->t->_('Summary of Daily Consumption') . '</span>
-													<span class="vkNgine-calendar-event-title">  			
+											<div rel="" class="viewDetail fc-event fc-event-skin fc-event-hori fc-corner-left fc-corner-right" style="background-color: rgb(71, 125, 174); border-color: rgb(14, 105, 161); top: 30px; -moz-user-select: none;">
+												<div class="fc-event-inner fc-event-skin" style="background-color:#477dae;border-color:#0E69A1">
+													<span class="fc-event-time">' . $this->t->_('Summary of Daily Consumption') . '</span>
+													<span class="fc-event-title">  			
 														' . (sprintf($this->t->_('consumed %s calories'), $dailyValues['calories'])) . ' <br />
 														' . (sprintf($this->t->_('consumed %s gr protein'), $dailyValues['protein'])) . ' <br />
 														' . (sprintf($this->t->_('consumed %s gr fat'), $dailyValues['fat'])) . ' <br />
@@ -263,17 +233,17 @@ $next = '/calorie-calendar/weekly/year/' . $nextWeek['year'] . '/month/' . $next
 		    			}
 		    			elseif(date('D', $day->thisDay(true)) == 'Sun') {
 		    	?>
-    				<td rel="<?= $day->thisYear()?>-<?= $day->thisMonth()?>-<?= $day->thisDay()?>" class="vkNgine-calendar-sun vkNgine-calendar-widget-content vkNgine-calendar-agenda-gutter vkNgine-calendar-last <?= $highlightedCss; ?> addExercise">
+    				<td rel="<?= $day->thisYear()?>-<?= $day->thisMonth()?>-<?= $day->thisDay()?>" class="fc-sun fc-widget-content fc-agenda-gutter fc-last <?= $highlightedCss; ?> addExercise">
 	    				<div>
-		    				<div class="vkNgine-calendar-day-content">
+		    				<div class="fc-day-content">
 		    					<div style="position:relative">
 									<?php 
 									if($dailyValues){ 
 											echo '
-											<div rel="" class="viewDetail vkNgine-calendar-event vkNgine-calendar-event-skin vkNgine-calendar-event-hori vkNgine-calendar-corner-left vkNgine-calendar-corner-right" style="background-color: rgb(71, 125, 174); border-color: rgb(14, 105, 161); top: 30px; -moz-user-select: none;">
-												<div class="vkNgine-calendar-event-inner vkNgine-calendar-event-skin" style="background-color:#477dae;border-color:#0E69A1">
-													<span class="vkNgine-calendar-event-time">' . $this->t->_('Summary of Daily Consumption') . '</span>
-													<span class="vkNgine-calendar-event-title">  			
+											<div rel="" class="viewDetail fc-event fc-event-skin fc-event-hori fc-corner-left fc-corner-right" style="background-color: rgb(71, 125, 174); border-color: rgb(14, 105, 161); top: 30px; -moz-user-select: none;">
+												<div class="fc-event-inner fc-event-skin" style="background-color:#477dae;border-color:#0E69A1">
+													<span class="fc-event-time">' . $this->t->_('Summary of Daily Consumption') . '</span>
+													<span class="fc-event-title">  			
 														' . (sprintf($this->t->_('consumed %s calories'), $dailyValues['calories'])) . ' <br />
 														' . (sprintf($this->t->_('consumed %s gr protein'), $dailyValues['protein'])) . ' <br />
 														' . (sprintf($this->t->_('consumed %s gr fat'), $dailyValues['fat'])) . ' <br />
@@ -294,17 +264,17 @@ $next = '/calorie-calendar/weekly/year/' . $nextWeek['year'] . '/month/' . $next
 		    			}
 		    			else {
 		    	?>
-		    		<td rel="<?= $day->thisYear()?>-<?= $day->thisMonth()?>-<?= $day->thisDay()?>" class="vkNgine-calendar-widget-content <?= $highlightedCss; ?> addExercise ">
+		    		<td rel="<?= $day->thisYear()?>-<?= $day->thisMonth()?>-<?= $day->thisDay()?>" class="fc-widget-content <?= $highlightedCss; ?> addExercise ">
 						<div>
-							<div class="vkNgine-calendar-day-content">
+							<div class="fc-day-content">
 								<div style="position:relative">
 									<?php 
 									if($dailyValues){ 
 											echo '
-											<div rel="" class="viewDetail vkNgine-calendar-event vkNgine-calendar-event-skin vkNgine-calendar-event-hori vkNgine-calendar-corner-left vkNgine-calendar-corner-right" style="background-color: rgb(71, 125, 174); border-color: rgb(14, 105, 161); top: 30px; -moz-user-select: none;">
-												<div class="vkNgine-calendar-event-inner vkNgine-calendar-event-skin" style="background-color:#477dae;border-color:#0E69A1">
-													<span class="vkNgine-calendar-event-time">' . $this->t->_('Summary of Daily Consumption') . '</span>
-													<span class="vkNgine-calendar-event-title">  			
+											<div rel="" class="viewDetail fc-event fc-event-skin fc-event-hori fc-corner-left fc-corner-right" style="background-color: rgb(71, 125, 174); border-color: rgb(14, 105, 161); top: 30px; -moz-user-select: none;">
+												<div class="fc-event-inner fc-event-skin" style="background-color:#477dae;border-color:#0E69A1">
+													<span class="fc-event-time">' . $this->t->_('Summary of Daily Consumption') . '</span>
+													<span class="fc-event-title">  			
 														' . (sprintf($this->t->_('consumed %s calories'), $dailyValues['calories'])) . ' <br />
 														' . (sprintf($this->t->_('consumed %s gr protein'), $dailyValues['protein'])) . ' <br />
 														' . (sprintf($this->t->_('consumed %s gr fat'), $dailyValues['fat'])) . ' <br />
@@ -326,12 +296,14 @@ $next = '/calorie-calendar/weekly/year/' . $nextWeek['year'] . '/month/' . $next
 		    		}
 		    	?>
 				</tr>
-			</tbody>
-</table>
-<div style="position: absolute; z-index: 8; top: 0pt; left: 0pt;"></div>
+				</tbody>
+			</table>
+			</div>
+		</div>
+	</div>
 </div>
 </div>
 </div>
 </div>
 </div>
-</section>		
+</div>

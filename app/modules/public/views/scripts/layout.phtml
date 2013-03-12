@@ -1,5 +1,4 @@
 <?php
-
 define('IN_DEVELOPMENT', APPLICATION_ENV === 'development');
 
 echo $this->doctype() . "\n";
@@ -18,18 +17,17 @@ $this->headLink()
 		->appendStylesheet($this->baseUrl('/css/uniform/css/uniform.default.css'))
 		->appendStylesheet($this->baseUrl('/js/public/bootstrap-daterangepicker/daterangepicker.css'))		
 		->appendStylesheet($this->baseUrl('/js/public/fullcalendar/bootstrap-fullcalendar.css'))
-		->appendStylesheet($this->baseUrl('/css/data-tables/DT_bootstrap.css'));
+		->appendStylesheet($this->baseUrl('/css/data-tables/DT_bootstrap.css'))
+		->appendStylesheet($this->baseUrl('/css/autosuggest.css'));
 
 $this->headScript()
 	     ->prependFile($this->baseUrl('/js/jquery-1.8.2.min.js'))
 	     ->appendFile($this->baseUrl('/js/jquery-ui-1.9.2.custom.min.js'))
 	     ->appendFile($this->baseUrl('/js/public/slimScroll/slimScroll.min.js'))	     
-	     ->appendFile($this->baseUrl('/js/public/fullcalendar/fullcalendar.min.js'))
 	     ->appendFile($this->baseUrl('/js/form.js'))	     
 	     ->appendFile($this->baseUrl('/js/public/bootstrap/js/bootstrap.min.js'))
 	     ->appendFile($this->baseUrl('/js/public/bsn.AutoSuggest_2.1.3_comp.js'))
 	     ->appendFile($this->baseUrl('/js/public/jquery.blockui.js'))
-	     ->appendFile($this->baseUrl('/js/admin/gritter.js'))
 	     ->appendFile($this->baseUrl('/js/public/jquery.cookie.js'))
 	     ->appendFile($this->baseUrl('/js/public/jquery.knob.js'))
 	     ->appendFile($this->baseUrl('/js/public/bootstrap-daterangepicker/date.js'))
@@ -37,7 +35,7 @@ $this->headScript()
 	     ->appendFile($this->baseUrl('/js/public/html5.js'), 'text/javascript', array('conditional' => 'lt IE 9'))
 	     ->appendFile($this->baseUrl('/js/public/excanvas.js'), 'text/javascript', array('conditional' => 'lt IE 9'))
 		 ->appendFile($this->baseUrl('/js/public/respond.js'), 'text/javascript', array('conditional' => 'lt IE 9'))
-		 ->appendFile($this->baseUrl('/js/gritter/js/jquery.gritter.js'))
+		 ->appendFile($this->baseUrl('/js/admin/gritter.js'))
 		 ->appendFile($this->baseUrl('/css/uniform/jquery.uniform.min.js'))
 		 ->appendFile($this->baseUrl('/css/data-tables/jquery.dataTables.js'))
 		 ->appendFile($this->baseUrl('/css/data-tables/DT_bootstrap.js'))

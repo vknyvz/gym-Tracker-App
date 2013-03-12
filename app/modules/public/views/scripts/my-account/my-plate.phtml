@@ -1,6 +1,7 @@
 <?php 
-   	if('tr' == vkNgine_Config::getSystemConfig()->language->locale) {	 
-   		$pageTitle = date('j ') . ' ' . $this->t->_(date('F') . ' Capital') . ' ' . date(' Y');
+	$language = new Zend_Session_Namespace('language');
+   	if('tr' == vkNgine_Config::getSystemConfig()->language->locale || 'tr' == $language->lang) {	 
+   		$pageTitle = date('j ') . ' ' . $this->t->_(date('F')) . ' ' . date(' Y');
    	}
    	else {
    		$pageTitle = date('F j, Y');
@@ -13,7 +14,7 @@
 	)); 
 ?>
 
-<div id="page">
+			<div id="page">
                <div class="row-fluid">
                   <div class="span12">                     
                      <div class="widget">
@@ -23,32 +24,33 @@
                         <div class="widget-body form">
                         
                            <h5><?= $this->t->_('My Meals'); ?></h5>
+                           
                            <form action="<?= $this->formMeals->getAction(); ?>" class="form-inline">
                               <div class="control-group">
                                  <div class="controls">
                                     <?= $this->formMeals; ?>
-                                    <a class="addmeal" href="#">
-								        <span class="glyph plus"></span><?= $this->t->_('Add Meal'); ?>
-								    </a>
+							        <button class="btn btn-inverse addmeal">
+										<i class="icon-plus icon-white"></i> <?= $this->t->_('Add Meal'); ?>
+									</button>								        
                                  </div>
                               </div>            
                            </form>
                            
                            <h5><?= $this->t->_('Foods'); ?></h5>
+                           
                            <form action="<?= $this->formFoods->getAction(); ?>" class="form-inline">
                                  <div class="controls">
                                     <?= $this->formFoods->foodId; ?>
                                     <?= $this->formFoods->foodSearch; ?>
-                                    <div id="servingSize" style="padding-top:10px;padding-left:3px">Serving Size: <span id="servingSizeValue"></span></div>
+                                    <div id="servingSize" style="padding-top:10px;padding-left:3px"><?= $this->t->_('Serving Size'); ?>: <span id="servingSizeValue"></span></div>
                                  </div>                               
                                  <div class="controls">
                                  	<?= $this->formFoods->servingSize; ?>
-		  							<?= $this->formFoods->servingSizes; ?>
-                                 </div>
-                                 
-                                 <a class="addfood" href="#">				  
-							         <span class="glyph plus"></span><?= $this->t->_('Add Food'); ?>
-							     </a>
+  									<?= $this->formFoods->servingSizes; ?>
+                                 </div>                                 
+							     <button class="btn btn-inverse addfood">
+										<i class="icon-plus icon-white"></i> <?= $this->t->_('Add Food'); ?>
+	 							 </button>
                            </form>
                            
                         </div>
@@ -57,14 +59,14 @@
                </div>
 			</div>	
 			 
-		    <?php 
-		    	if('tr' == vkNgine_Config::getSystemConfig()->language->locale) {	 
-		    		$date = date('j ') . ' ' . $this->t->_(date('F') . ' Capital') . ' ' . date(' Y');
-		    	}
-		    	else {
-		    		$date =  date('F j, Y');
-		    	}
-		    ?>
+    <?php 
+    	if('tr' == vkNgine_Config::getSystemConfig()->language->locale || 'tr' == $language->lang) {	 
+    		$date = date('j ') . ' ' . $this->t->_(date('F')) . ' ' . date(' Y');
+    	}
+    	else {
+    		$date =  date('F j, Y');
+    	}
+    ?>
 		    
 <div class="row-fluid">
 	<div class="span12">
@@ -79,7 +81,7 @@
 				<thead>
 					<tr>
 						<th><?= $this->t->_('Name'); ?></th>
-		      			<th><?= $this->t->_('Servings'); ?></th>
+		      			<th><?= $this->t->_('Serving'); ?></th>
 		      			<th><?= $this->t->_('Calories'); ?></th>
 		      			<th><?= $this->t->_('Fat'); ?></th>
 		      			<th><?= $this->t->_('Cholesterol'); ?></th>
@@ -87,7 +89,7 @@
 		      			<th><?= $this->t->_('Carbs'); ?></th>
 		      			<th><?= $this->t->_('Fiber'); ?></th>
 		      			<th><?= $this->t->_('Protein'); ?></th>
-		      			<th><?= $this->t->_('Sugars'); ?></th>
+		      			<th><?= $this->t->_('Sugar'); ?></th>
 					</tr>
 				</thead>	
 	      		<tbody>
@@ -145,7 +147,7 @@
 		      	   ?>
 		      	   
 			      	   <tr>
-			      	  		<td><span style="float:right">Total</span></td>
+			      	  		<td><span style="float:right"><?= $this->t->_('Total'); ?></span></td>
 			      	  		<td>-</td>
 			      	  		<td><?= $this->dailyTotals['calories']; ?></td>
 			      	  		<td><?= $this->dailyTotals['fat']; ?></td>
@@ -185,7 +187,8 @@
 $(function(){			
 	var date = '<?= date('Y-m-d'); ?>';
 	
-	$('.addmeal').bind('click', function() {
+	$('.addmeal').bind('click', function(e) {
+		e.preventDefault();
 		var mealId = $('#meals').val();
 		
 		$.ajax( {
@@ -206,7 +209,8 @@ $(function(){
 	    );
 	});
 
-	$('.addfood').bind('click', function() {
+	$('.addfood').bind('click', function(e) {
+		e.preventDefault();
 		var foodId = $('#foodId').val();
 		var servingSize = $('#servingSize').val();
 		var servingSizes = $('#servingSizes').val();

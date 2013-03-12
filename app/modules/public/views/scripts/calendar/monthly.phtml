@@ -2,7 +2,7 @@
 	$state = null;
 	if(isset($this->params['day'])) {
 		if (date('d') == $this->params['day']){
-			$state = 'vkNgine-calendar-state-disabled';
+			$state = 'fc-state-disabled';
 		}
 	}
 	
@@ -29,26 +29,26 @@
 	
 <script>
 	$(function() {
-		$('.vkNgine-calendar-button-prev').bind('click', function() {
+		$('.fc-button-prev').bind('click', function() {
 			window.top.location = '<?= $prev; ?>';
 		});
-		$('.vkNgine-calendar-button-next').bind('click', function() {
+		$('.fc-button-next').bind('click', function() {
 			window.top.location = '<?= $next; ?>';
 		});
-		$('.vkNgine-calendar-button-today').bind('click', function() {
+		$('.fc-button-today').bind('click', function() {
 			window.top.location = '<?= $today; ?>';
 		});
-		$('.vkNgine-calendar-button-month').bind('click', function() {
+		$('.fc-button-month').bind('click', function() {
 			window.top.location = '<?= $this->publicUrl('monthly', 'calendar'); ?>';
 		});
-		$('.vkNgine-calendar-button-basicDay').bind('click', function() {
+		$('.fc-button-agendaWeek').bind('click', function() {
 			window.top.location = '<?= $this->publicUrl('weekly', 'calendar'); ?>';
 		});
 
 		<?php
 			if(!isset($this->params['month'])) :
 		?>
-			$('.vkNgine-calendar-button-today').addClass('vkNgine-calendar-state-disabled');
+			$('.fc-button-today').addClass('fc-state-disabled');
 		<?php endif; ?>
 							
 		$("table.fc-border-separate tbody tr:first").addClass('fc-first');	
@@ -108,9 +108,9 @@
 			<tbody>
 			<tr>
 				<td class="fc-header-left"></td>
-				<td class="fc-header-center">						
-				</td>
-				<td class="fc-header-right"><span class="fc-button fc-button-prev fc-state-default fc-corner-left"><span class="fc-button-inner"><span class="fc-button-content">&nbsp;◄&nbsp;</span><span class="fc-button-effect"><span></span></span></span></span><span class="fc-button fc-button-next fc-state-default"><span class="fc-button-inner"><span class="fc-button-content">&nbsp;►&nbsp;</span><span class="fc-button-effect"><span></span></span></span></span><span class="fc-button fc-button-today fc-state-default fc-state-disabled"><span class="fc-button-inner"><span class="fc-button-content">today</span><span class="fc-button-effect"><span></span></span></span></span><span class="fc-button fc-button-month fc-state-default fc-state-active"><span class="fc-button-inner"><span class="fc-button-content">month</span><span class="fc-button-effect"><span></span></span></span></span><span class="fc-button fc-button-agendaWeek fc-state-default"><span class="fc-button-inner"><span class="fc-button-content">week</span><span class="fc-button-effect"><span></span></span></span></span><span class="fc-button fc-button-agendaDay fc-state-default fc-corner-right"><span class="fc-button-inner"><span class="fc-button-content">day</span><span class="fc-button-effect"><span></span></span></span></span></td>
+				<td class="fc-header-center"></td>
+				<td class="fc-header-right">
+					<span class="fc-button fc-button-prev fc-state-default fc-corner-left"><span class="fc-button-inner"><span class="fc-button-content">&nbsp;◄&nbsp;</span><span class="fc-button-effect"><span></span></span></span></span><span class="fc-button fc-button-next fc-state-default"><span class="fc-button-inner"><span class="fc-button-content">&nbsp;►&nbsp;</span><span class="fc-button-effect"><span></span></span></span></span><span class="fc-button fc-button-today fc-state-default <?= $state; ?>"><span class="fc-button-inner"><span class="fc-button-content"><?= $this->t->_('today'); ?></span><span class="fc-button-effect"><span></span></span></span></span><span class="fc-button fc-button-month fc-state-active fc-state-default"><span class="fc-button-inner"><span class="fc-button-content"><?= $this->t->_('month'); ?></span><span class="fc-button-effect"><span></span></span></span></span><span class="fc-button fc-button-agendaWeek fc-state-default"><span class="fc-button-inner"><span class="fc-button-content"><?= $this->t->_('week'); ?></span><span class="fc-button-effect"><span></span></span></span></span></td>
 		</tr>
 	</tbody>
 	</table>

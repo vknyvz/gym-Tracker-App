@@ -331,8 +331,6 @@
 "tbsp";"çorba kaşığı"
 "tsp";"çay kaşığı"
 
-"May Capital";"MAYIS"
-
 "Serving Size Type";"Miktar Ölçüsü"
 
 "Meal";"Öğün"
@@ -361,3 +359,5 @@
 "Quadriceps";"Ön Bacak"
 "Hamstrings, Quadriceps";"Arka Bacak, Ön Bacak"
 "Glutes";"Glütler"
+
+"Total";"Toplam"
