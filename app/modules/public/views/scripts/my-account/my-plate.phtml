@@ -1,11 +1,11 @@
 <?php 
-	$language = new Zend_Session_Namespace('language');
-   	if('tr' == vkNgine_Config::getSystemConfig()->language->locale || 'tr' == $language->lang) {	 
-   		$pageTitle = date('j ') . ' ' . $this->t->_(date('F')) . ' ' . date(' Y');
-   	}
-   	else {
-   		$pageTitle = date('F j, Y');
-   	}
+		$language = new Zend_Session_Namespace('language');
+	   	if('tr' == vkNgine_Config::getSystemConfig()->language->locale || 'tr' == $language->lang) {	 
+	   		$pageTitle = date('j ') . ' ' . $this->t->_(date('F')) . ' ' . date(' Y');
+	   	}
+	   	else {
+	   		$pageTitle = date('F j, Y');
+	   	}
 ?>
 		    
 <?= $this->partial('_breadcrumbs.phtml', 
@@ -66,18 +66,16 @@
     	else {
     		$date =  date('F j, Y');
     	}
-    ?>
-		    
+?>
+
 <div class="row-fluid">
-	<div class="span12">
-		
+	<div class="span12">		
 		<div class="widget">
 			<div class="widget-title">
-				<h4><i class="icon-food"></i> <?= $this->t->_('Foods'); ?> :: <?= $this->t->_('Summary of Daily Consumption'); ?> :: <?= $date; ?></h4>
-									
+				<h4><i class="icon-food"></i> <?= $this->t->_('Foods'); ?> :: <?= $this->t->_('Summary of Daily Consumption'); ?> :: <?= $date; ?></h4>								
 			</div>
 			<div class="widget-body">
-				<table class="table table-condensed table-hover">
+				<table id="dailyFoods" class="table table-condensed table-hover">
 				<thead>
 					<tr>
 						<th><?= $this->t->_('Name'); ?></th>
@@ -110,7 +108,7 @@
 		      	  					$modelFoods = new Model_Foods();
 		      	  					$foodDetail = $modelFoods->fetch($food['foodId']);
 		      	  					
-		      	  					echo $foodDetail->getName() . ' x ' . $food['servingSize'] . '  <br> ';
+		      	  					echo $foodDetail->getName() . ' x ' . $foodDetail['servingSize'] . '  <br> ';
 		      	  				}
 		      	  		    ?>
 		      	  		</td>
@@ -131,7 +129,7 @@
 		      	    
 		      	    <tr>
 		      			<td><?= $food['name']; ?></td>
-		      	  		<td><?= $intake['servingSize']; ?> <?= $food['servingSizeType']?></td>
+		      	  		<td><?= $intake['servingSize']; ?> <?= $this->t->_($food['servingSizeType']); ?></td>
 		      			<td><?= ($food['calories']) ? $food['calories'] * $intake['servingSize'] : 'N/A'; ?></td>
 		      			<td><?= ($food['fat']) ? $food['fat'] * $intake['servingSize'] : 'N/A'; ?></td>
 		      			<td><?= ($food['cholesterol']) ? $food['cholesterol'] * $intake['servingSize'] : 'N/A'; ?></td>
@@ -184,7 +182,7 @@
 </script>
 
 <script>
-$(function(){			
+$(function() {
 	var date = '<?= date('Y-m-d'); ?>';
 	
 	$('.addmeal').bind('click', function(e) {
@@ -195,18 +193,11 @@ $(function(){
 	        url: '/my-account/my-plate/mealId/' + mealId + '/date/' + date,
 	        dataType : 'json',
 	        success: function(data) { 
-		        if(data.success){
-		        	$.gritter.add({
-						title: data.title,
-						text: data.message,
-						image: '/images/admin/icons/success.png',
-						sticky: false,
-						time: 3000
-					});
-		        }
+		        if(data.success) {
+		        	window.top.location = '/my-account/my-plate';
+		        }		        
 			}
-	       }
-	    );
+	   });
 	});
 
 	$('.addfood').bind('click', function(e) {
@@ -225,13 +216,7 @@ $(function(){
 	        dataType : 'json',
 	        success: function(data) { 
 		        if(data.success){
-		        	$.gritter.add({
-						title: data.title,
-						text: data.message,
-						image: '/images/admin/icons/success.png',
-						sticky: false,
-						time: 3000
-					});
+		        	window.top.location = '/my-account/my-plate';
 		        }
 			}
 	       }

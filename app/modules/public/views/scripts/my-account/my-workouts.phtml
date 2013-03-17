@@ -41,16 +41,18 @@
 						</tbody>
 					</table>
 					<div>
-						<a class="editworkout" href="#">							
-							<?= $this->t->_('Add New Workout');?>
-						</a>
-				      </div>
+						<a class="btn btn-inverse editworkout" data-toggle="modal" role="button" href="#edit_workout_dialog"><i class="icon-plus"></i> <?= $this->t->_('Add New Workout'); ?></a>
+						<a class="btn btn-warning" data-toggle="modal" role="button" href="#myModal3">Confirm</a>						
+				    </div>
 				</div>
 			</div>			
 		</div>
 	</div>
 </div>
-					
+
+				
+
+
 <script>
 $('.editworkout').bind('click', function() {
 	var id = $(this).attr('rel');

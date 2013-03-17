@@ -302,7 +302,7 @@ function vkNgineDialogHandler(_class, width, buttons){
 		buttons: buttons
 	});
 	
-    $("." + _class + "").dialog('option', 'position', 'top');
+    $("." + _class + "").dialog('option', 'position', 'center');
 	$("." + _class + "").dialog('open');
 }
 

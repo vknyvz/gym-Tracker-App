@@ -60,7 +60,7 @@ class MyAccountController extends vkNgine_Public_Controller
 	public function myPlateAction()
 	{
 		$request = $this->getRequest();
-		
+						
 		if($request->isGet()) {
 			$food = $this->_getParam('food');
 			$date = $this->_getParam('date');
@@ -123,9 +123,7 @@ class MyAccountController extends vkNgine_Public_Controller
 					}
 				}
 				
-				echo Zend_Json::encode(array('success' => 1, 
-											 'title'   => $this->t->_('Success Message'), 
-											 'message' => $this->t->_($what . ' was successfully added')));
+				echo Zend_Json::encode(array('success' => 1));
 				exit;
 			}
 		}
