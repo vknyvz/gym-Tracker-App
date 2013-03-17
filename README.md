@@ -20,10 +20,13 @@ Application has an admin panel to manage its content. It has the following featu
         - Exercise and Calorie Calendar, Exercise List
         - iOS (iPhone & iPad) specific interface
 
-This is a private application as I am tracking my gym activity with this application, so no live demo.
+[Currently working on the 2.0]
+
+This is a private application as I am tracking my gym activity with this application, so no live demo for now.
 
 Admin Username: vkn@vknyvz.com
 Admin Password: 1
+(if you use the fresh-install.sql in the sql folder)
 
 v1.1 build 264, 11/4/2012
 
