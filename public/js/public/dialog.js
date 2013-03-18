@@ -24,21 +24,11 @@ function lnk_addExercise(yes, no, date, title, action) {
     );
 }
 
-function btn_editworkout(yes, no, id) {
-	var dialog_buttons = {};
-	dialog_buttons[no] = function() { 
-		$(this).dialog('close'); 
-	}
-	dialog_buttons[yes] = function() { 
-		$('#publicFormEditWorkout').submit();
-	}
-	
-	vkNgineDialogHandler('btn_edit_workout_dialog', 425, dialog_buttons);
-	
+function btn_editworkout(id) {
 	$.ajax({ 
 		url: '/my-account/edit-workout/workoutId/' + ((id) ? id : 0),
 		success: function(returnData) {
-			$('.btn_edit_workout_dialog').html(returnData);
+			$('.editworkout_dialog').html(returnData);
 		}
 	})
 }
@@ -100,24 +90,18 @@ function btn_exerciseDetail(no, id)
 	
 }
 
-function btn_deleteworkout(yes, no, id) {	
-	var dialog_buttons = {};
-	dialog_buttons[no] = function() { 
-		$(this).dialog('close'); 
-	}
-	dialog_buttons[yes] = function() { 
+function btn_deleteworkout(id) {
+	$('#deleteworkout_dialog').attr('rel', id);
+	$('#deleteworkout_dialog .btn-primary').bind('click', function() {
 		$.ajax( {
 			url: "/my-account/delete-workout/id/" + id,
 			dataType : 'json',
 			success: function(returnData) {
-				$('.btn-deleteworkout-dialog').dialog('close');
-				
-				window.top.location = '/my-account';
+				$('.btn-deleteworkout-dialog').dialog('close');				
+				window.top.location = '/my-account/my-workouts';
 			}
-		}) 
-	}
-	
-	vkNgineDialogHandler('btn-deleteworkout-dialog', 400, dialog_buttons);
+		});	
+	});
 }
 
 function btn_deletemeasurement(yes, no, id) {
@@ -289,7 +273,7 @@ function loginHandler(data) {
 }
 
 function vkNgineDialogHandler(_class, width, buttons){
-	$("." + _class + "").dialog({
+	$("#" + _class + "").dialog({
 		autoOpen: false,
 		bgiframe: true,
 		resizable: false,
@@ -302,8 +286,8 @@ function vkNgineDialogHandler(_class, width, buttons){
 		buttons: buttons
 	});
 	
-    $("." + _class + "").dialog('option', 'position', 'center');
-	$("." + _class + "").dialog('open');
+    $("#" + _class + "").dialog('option', 'position', 'center');
+	$("#" + _class + "").dialog('open');
 }
 
 function vkNgineAjaxFormSubmit(data) {

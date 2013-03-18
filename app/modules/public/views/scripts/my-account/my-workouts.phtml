@@ -29,9 +29,9 @@
 						        <td><?= ($workout['startDate'] != '0000-00-00') ? $this->escape($this->dateFormat($workout['startDate'], Zend_Date::DATE_FULL)) : $this->t->_('Not entered') ?></td>
 						        <td><?= ($workout['endDate'] != '0000-00-00') ? $this->escape($this->dateFormat($workout['endDate'], Zend_Date::DATE_FULL)) : $this->t->_('Not entered') ?></td>
 						        <td>
-									<a href="javascript:void(0);" class="icon huge manageworkout" rel="<?= $workout['workoutId']; ?>"><i class="icon-cog"></i> <?= $this->t->_('Manage'); ?></a> 	
-									<a href="javascript:void(0);" class="icon huge editworkout" rel="<?= $workout['workoutId']; ?>"><i class="icon-pencil"></i> <?= $this->t->_('Edit'); ?></a> 
-									<a href="javascript:void(0);" class="icon huge deleteworkout" rel="<?= $workout['workoutId']; ?>"><i class="icon-remove"></i> <?= $this->t->_('Delete'); ?></a> 		
+									<a href="javascript:void(0);" class="icon huge manageworkout" rel="<?= $workout['workoutId']; ?>" data-toggle="modal"><i class="icon-cog"></i> <?= $this->t->_('Manage'); ?></a> 	
+									<a href="#editworkout_dialog" class="icon huge editworkout" rel="<?= $workout['workoutId']; ?>" data-toggle="modal"><i class="icon-pencil"></i> <?= $this->t->_('Edit'); ?></a> 
+									<a href="#deleteworkout_dialog" class="icon huge deleteworkout" rel="<?= $workout['workoutId']; ?>" data-toggle="modal"><i class="icon-remove"></i> <?= $this->t->_('Delete'); ?></a> 		
 								</td>						        
 						      </tr>
 						    <?php 
@@ -41,22 +41,17 @@
 						</tbody>
 					</table>
 					<div>
-						<a class="btn btn-inverse editworkout" data-toggle="modal" role="button" href="#edit_workout_dialog"><i class="icon-plus"></i> <?= $this->t->_('Add New Workout'); ?></a>
-						<a class="btn btn-warning" data-toggle="modal" role="button" href="#myModal3">Confirm</a>						
-				    </div>
+						<a class="btn btn-inverse editworkout" data-toggle="modal" href="#editworkout_dialog"><i class="icon-plus"></i> <?= $this->t->_('Add New Workout'); ?></a>
+				    </div>				    
 				</div>
 			</div>			
 		</div>
 	</div>
 </div>
 
-				
-
-
 <script>
 $('.editworkout').bind('click', function() {
-	var id = $(this).attr('rel');
-	btn_editworkout('<?= $this->t->_('Save'); ?>', '<?= $this->t->_('Cancel'); ?>', id);
+	btn_editworkout($(this).attr('rel'));
 });
 
 $('.manageworkout').bind('click', function() {
@@ -64,8 +59,7 @@ $('.manageworkout').bind('click', function() {
 	btn_manageworkout('<?= $this->t->_('Close'); ?>', id);
 });
 
-$('.deleteworkout').bind('click', function() {
-	var id = $(this).attr('rel');
-	btn_deleteworkout('<?= $this->t->_('Delete'); ?>', '<?= $this->t->_('Cancel'); ?>', id);
+$('.deleteworkout').bind('click', function() {	
+	btn_deleteworkout($(this).attr('rel'));
 });
 </script>

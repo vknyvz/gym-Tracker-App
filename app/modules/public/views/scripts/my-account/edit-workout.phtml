@@ -1,33 +1,26 @@
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-		<h3 id="myModalLabel3"><?= $this->t->_('Edit Workout'); ?></h3>
-	</div>
-	<div class="modal-body">
-		<?= $this->form; ?>
-	</div>
-	<div class="modal-footer">
-		<button class="btn" data-dismiss="modal" aria-hidden="true"><?= $this->t->_('Cancel'); ?></button>
-		<button data-dismiss="modal" class="btn btn-primary"><?= $this->t->_('Save'); ?></button>
-	</div>	
-
+<?= $this->partial('_modals.phtml', 
+				array('t' 		  => $this->t,					  
+					  'headline'  => 'Edit Workout',
+					  'content'   => $this->form
+	)); 
+?>
 
 <script>
 $(document).ready(function(){
-	$("#name").focus();
-
+	$('.btn-primary').bind('click', function() {
+		$('#<?= $this->form->getId(); ?>').submit();
+	});
+	
 	var options = {  
 		url: '<?= $this->form->getAction(); ?>',
         success: vkNgineAjaxFormSubmit,
 		dataType : 'json'
     };
-    
-	$('#<?= $this->form->getId(); ?>').ajaxForm(options);
+	   
+	$('#<?= $this->form->getId(); ?>').ajaxForm(options);	
 
-	$('.datePicker').datepicker({
-		changeMonth: true,
-		changeYear: true,
-		showButtonPanel: true,
-		dateFormat: 'yy-mm-dd'
+	$('.date-picker').datepicker({
+		format: 'yyyy-mm-dd'	
 	});
 });
 </script>

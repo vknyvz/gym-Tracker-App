@@ -587,7 +587,7 @@ var vkNgine = function () {
     var handleDateTimePickers = function () {
 
         if (!jQuery().daterangepicker) {
-            return;
+            console.log('vkNgine couldn\'t init date range picker');
         }
 
         $('.date-range').daterangepicker();
@@ -697,19 +697,11 @@ var vkNgine = function () {
         }).toString('MMMM d, yyyy') + ' - ' + Date.today().toString('MMMM d, yyyy'));
 
 
-        if (!jQuery().datepicker || !jQuery().timepicker) {
-            return;
+        if (!jQuery().datepicker) {
+        	console.log('vkNgine couldn\'t init date picker');
         }
-        $('.date-picker').datepicker();
-
-        $('.timepicker-default').timepicker();
-
-        $('.timepicker-24').timepicker({
-            minuteStep: 1,
-            showSeconds: true,
-            showMeridian: false
-        });
-
+        
+        $('.date-picker').datepicker();        
     }
 
     var handleColorPicker = function () {
