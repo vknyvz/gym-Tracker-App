@@ -1,46 +1,75 @@
-<div class="accordion">
-	<?php for($i=1; $i<=$this->workout['day']; $i++) :?>
-		<h3><a href="#"><?= $this->t->_('Day'); ?> <?= $i?></a></h3>
-		<div>
-		<?php foreach($this->exercises->fetchAllPerDay($this->workout['workoutId'], $i) as $exercise) :
-		?>
-		<div style="padding:5px;">
-			<a href="javascript:void(0);" rel="<?= $exercise['exerciseId']; ?>" class="exercisedetail">
-				<?= $this->exerciseDetail[$exercise['exerciseId']]; ?>
-			</a>
-			
-			<span style="padding-left:5px;">
-			|
-			<label for="sets"><?= $this->t->_('Sets'); ?></label>
-			<input id="sets" class="setField" rel="<?= $exercise['id']; ?>" style="width:25px;" ref="sets" type="text" value="<?= $exercise['sets']; ?>" placeholder="<?= $this->t->_('Sets'); ?>" >
-			</span>
-			
-			<span style="padding-left:5px;">
-			|
-			<label for="reps"><?= $this->t->_('Reps'); ?></label>
-			<input id="reps" class="setField" rel="<?= $exercise['id']; ?>" style="width:25px;" ref="reps" type="text" value="<?= $exercise['reps']; ?>" placeholder="<?= $this->t->_('Reps'); ?>" >
-			</span>
-			
-			<span style="padding-left:5px;">
-			|
-			<label for="order"><?= $this->t->_('Order'); ?></label>
-			<input id="order" class="setField" rel="<?= $exercise['id']; ?>" style="width:25px;" ref="order" type="text" value="<?= $exercise['order']; ?>" placeholder="<?= $this->t->_('Reps'); ?>" >
-			<span id="set-saved-<?= $exercise['id']; ?>"></span>
-			<span id="rep-saved-<?= $exercise['id']; ?>"></span>
-			<span id="order-saved-<?= $exercise['id']; ?>"></span>
-			</span>
-		</div>
-		<?php endforeach; ?>
-		</div>
-	<?php endfor; ?>
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+	<h3 id="myModalLabel3"><?= $this->t->_($this->workout['name']); ?></h3>
+</div>
+<div class="modal-body">	
+	<div class="accordion" id="days">	
+		<?php for($i=1; $i<=$this->workout['day']; $i++) : ?>
+        <div class="accordion-group">		
+        	<div class="accordion-heading">
+                 <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#days" href="#day_<?= $i; ?>">
+                 	<i class="icon-chevron-left"></i>
+                 		<?= $this->t->_('Day'); ?> <?= $i; ?>
+                 </a>
+            </div>            
+            <div id="day_<?= $i; ?>" class="accordion-body collapse">
+            	<div class="accordion-inner">
+            		<?php
+            			$exercises = $this->exercises->fetchAllPerDay($this->workout['workoutId'], $i);  
+            			if(count($exercises) > 0) :
+            		?>
+            			<table class="table table-striped table-bordered table-advance table-hover">
+            			  <thead>
+                              <tr>
+                                 <th style="width:150px;"><?= $this->t->_('Exercise'); ?></th>
+                                 <th style="width:50px;"><?= $this->t->_('Sets'); ?></th>
+                                 <th style="width:50px;"><?= $this->t->_('Reps'); ?></th>
+                                 <th style="width:50px;"><?= $this->t->_('Order'); ?></th>
+                                 <th style="width:50px;"></th>
+                              </tr>
+                           </thead>
+					<?php foreach($exercises as $exercise) : ?>
+							<tbody>
+                              <tr>
+                                 <td>
+                                    <a href="javascript:void(0);" rel="<?= $exercise['exerciseId']; ?>" class="exercisedetail">
+										<?= $this->exerciseDetail[$exercise['exerciseId']]; ?>
+									</a>
+                                 </td>
+                                 <td>
+			 						 <input id="sets" class="input-mini setField" rel="<?= $exercise['id']; ?>" style="width:20px;" ref="sets" type="text" value="<?= $exercise['sets']; ?>" placeholder="<?= $this->t->_('Sets'); ?>" >
+                                 </td>
+                                 <td>
+								     <input id="reps" class="input-mini setField" rel="<?= $exercise['id']; ?>" style="width:20px;" ref="reps" type="text" value="<?= $exercise['reps']; ?>" placeholder="<?= $this->t->_('Reps'); ?>" >
+								 </td>
+								 <td>
+								 	<input id="order" class="input-mini setField" rel="<?= $exercise['id']; ?>" style="width:20px;" ref="order" type="text" value="<?= $exercise['order']; ?>" placeholder="<?= $this->t->_('Order'); ?>" >
+								 </td>
+								 <td>	
+									<span id="set-saved-<?= $exercise['id']; ?>"></span>
+									<span id="rep-saved-<?= $exercise['id']; ?>"></span>
+									<span id="order-saved-<?= $exercise['id']; ?>"></span>										 	
+								 </td>
+                              </tr>	
+							</tbody>						
+					<?php endforeach; ?>
+					<?php else: ?>
+						<small><?= $this->t->_('No Exercises added yet, go to Exercises list and add an exercise to this workout to this day'); ?></small>
+					<?php endif; ?>
+					</table>
+                </div>
+            </div>
+        </div>				
+		<?php endfor; ?>        
+	</div>
+</div>
+<div class="modal-footer">
+	<button class="btn" data-dismiss="modal" aria-hidden="true"><?= $this->t->_('Close'); ?></button>
 </div>
 
 <script type="text/javascript">		
-	$(".accordion").accordion({collapsible: true, active: false, autoHeight:false});
-
 	$('.exercisedetail').bind('click', function() {
-		var id = $(this).attr('rel');
-		btn_exerciseDetail('<?= $this->t->_('Close'); ?>', id);
+		btn_exerciseDetail($(this).attr('rel'));
 	});
 
 	$('.setField').bind('mouseleave', function() {

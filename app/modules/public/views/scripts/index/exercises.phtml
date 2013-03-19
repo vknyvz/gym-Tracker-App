@@ -46,11 +46,9 @@
 							?>
 		    			</tbody>
 					</table>
-					<div>
-						<a class="btn_add_selected_workouts" href="#">
-							<?= $this->t->_('Add Selected Exercises to a Workout');?>
-						</a>
-				    </div>
+				    <div>
+						<a class="btn btn-inverse add_selected_workouts" data-toggle="modal" href="#add_selected_workouts_dialog"><i class="icon-plus"></i> <?= $this->t->_('Add Selected Exercises to a Workout'); ?></a>
+				    </div>	
 				</div>
 			</div>
 		</div>
@@ -58,7 +56,7 @@
 </div>
 
 <script>
-$('.btn_add_selected_workouts').bind('click', function() {
-	btn_add_selected_workouts('<?= $this->t->_('Add'); ?>', '<?= $this->t->_('Cancel'); ?>');
+$('.add_selected_workouts').bind('click', function() {
+	btn_add_selected_workouts();
 });	
 </script>

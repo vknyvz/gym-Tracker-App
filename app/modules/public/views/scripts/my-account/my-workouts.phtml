@@ -29,7 +29,7 @@
 						        <td><?= ($workout['startDate'] != '0000-00-00') ? $this->escape($this->dateFormat($workout['startDate'], Zend_Date::DATE_FULL)) : $this->t->_('Not entered') ?></td>
 						        <td><?= ($workout['endDate'] != '0000-00-00') ? $this->escape($this->dateFormat($workout['endDate'], Zend_Date::DATE_FULL)) : $this->t->_('Not entered') ?></td>
 						        <td>
-									<a href="javascript:void(0);" class="icon huge manageworkout" rel="<?= $workout['workoutId']; ?>" data-toggle="modal"><i class="icon-cog"></i> <?= $this->t->_('Manage'); ?></a> 	
+									<a href="#manageworkout_dialog" class="icon huge manageworkout" rel="<?= $workout['workoutId']; ?>" data-toggle="modal"><i class="icon-cog"></i> <?= $this->t->_('Manage'); ?></a> 	
 									<a href="#editworkout_dialog" class="icon huge editworkout" rel="<?= $workout['workoutId']; ?>" data-toggle="modal"><i class="icon-pencil"></i> <?= $this->t->_('Edit'); ?></a> 
 									<a href="#deleteworkout_dialog" class="icon huge deleteworkout" rel="<?= $workout['workoutId']; ?>" data-toggle="modal"><i class="icon-remove"></i> <?= $this->t->_('Delete'); ?></a> 		
 								</td>						        
@@ -55,8 +55,7 @@ $('.editworkout').bind('click', function() {
 });
 
 $('.manageworkout').bind('click', function() {
-	var id = $(this).attr('rel');
-	btn_manageworkout('<?= $this->t->_('Close'); ?>', id);
+	btn_manageworkout($(this).attr('rel'));
 });
 
 $('.deleteworkout').bind('click', function() {	

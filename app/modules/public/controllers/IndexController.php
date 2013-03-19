@@ -131,7 +131,7 @@ class IndexController extends vkNgine_Public_Controller
        			}
     			
     			echo Zend_Json::encode(array('success' => 1,
-					    					 'dialog'  => 'btn_add_selected_workouts',
+					    					 'dialog'  => 'add_selected_workouts_dialog',
 					    					 'title'   => $this->t->_('Success Message'),
 					    					 'message' => $this->t->_('Exercise was successfully added'),
 					    					 'icon'    => 'success'

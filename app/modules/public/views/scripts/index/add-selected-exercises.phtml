@@ -1,7 +1,19 @@
-<?= $this->form; ?>
+<?= $this->partial('_modals.phtml', 
+				array('t' 		  => $this->t,					  
+					  'headline'  => 'Add Selected Exercises to Workouts',
+					  'content'   => $this->form
+	)); 
+?>
+
 <script>
 $(document).ready(function(){
-	$('select#workoutId').select_skin();
+	$('.btn-primary').bind('click', function() {
+		$('#add_selected_workouts_dialog').hide();
+		$('#add_selected_workouts_dialog').removeClass('in');
+		$('#add_selected_workouts_dialog').attr('aria-hidden', 'true');
+		$('div.modal-backdrop').hide();		
+		$('#<?= $this->form->getId(); ?>').submit();
+	});
 	
 	var options = {  
 		url: '<?= $this->form->getAction(); ?>',
@@ -26,7 +38,6 @@ $(".setdays").change(function(){
 			url: '/index/set-day/id/' + selected.val(),
 			success: function(returnData) {
 				$('dd#day-element').html(returnData);
-				$('select#day').select_skin();
 			}
 		})
 	}

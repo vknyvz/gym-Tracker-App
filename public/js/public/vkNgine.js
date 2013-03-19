@@ -715,7 +715,7 @@ var vkNgine = function () {
     }
 
     var handleAccordions = function () {
-        $(".accordion").collapse().height('auto');
+    	$(".accordion").collapse().height('auto');
     }
 
     var handleScrollers = function () {
@@ -777,7 +777,7 @@ var vkNgine = function () {
             handleMainMenu(); // handles main menu
             handleFixInputPlaceholderForIE(); // fixes/enables html5 placeholder attribute for IE9, IE8
             handleGoTop(); //handles scroll to top functionality in the footer
-            handleAccordions();
+            handleAccordions();            
         },
 
         // login page setup

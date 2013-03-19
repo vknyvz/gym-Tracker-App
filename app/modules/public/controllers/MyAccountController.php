@@ -208,6 +208,8 @@ class MyAccountController extends vkNgine_Public_Controller
 						
 			if (count($workout) > 0) {
 				$populateData = $workout->toArray();
+				$populateData['startDate'] = ($workout->startDate == '0000-00-00') ? '' : $workout->startDate;				
+				$populateData['endDate'] = ($workout->endDate == '0000-00-00') ? '' : $workout->endDate;				
 			}
 			
 			$form->populate($populateData);

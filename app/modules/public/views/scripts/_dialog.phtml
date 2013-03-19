@@ -3,14 +3,15 @@
 <div class="lnk-viewDayDetails-dialog" style="display:none"></div>
 <div class="lnk-dailyDetails-dialog" style="display:none"></div>
 
-<div class="btn_add_selected_workouts_dialog" title="<?= $this->t->_('Add exercises to Workouts'); ?>" style="display:none"></div>
+<div id="add_selected_workouts_dialog" class="modal hide fade add_selected_workouts_dialog" title="<?= $this->t->_('Add exercises to Workouts'); ?>" tabindex="-1" role="dialog" aria-hidden="true"></div>
 
 <div class="btn_edit_measurements_dialog" title="<?= $this->t->_('Edit Measurement'); ?>" style="display:none"></div>
-<div class="btn_manageworkout_dialog" title="<?= $this->t->_('Edit Workout'); ?>" style="display:none"></div>
+<div id="manageworkout_dialog" class="modal hide fade manageworkout_dialog" title="<?= $this->t->_('Edit Workout'); ?>" tabindex="-1" role="dialog" aria-hidden="true" style="width:600px;"></div>
+
 
 <div class="btn_exerciseDetail_dialog" title="<?= $this->t->_('Exercise Detail'); ?>" style="display:none"></div>
 
-<div id="deleteworkout_dialog" class="modal hide fade #deleteworkout_dialog" title="<?= $this->t->_('Delete Workout'); ?>" tabindex="-1" role="dialog" aria-hidden="true">
+<div id="deleteworkout_dialog" class="modal hide fade" title="<?= $this->t->_('Delete Workout'); ?>" tabindex="-1" role="dialog" aria-hidden="true">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
 		<h3 id="myModalLabel3"><?= $this->t->_('Delete Workout'); ?></h3>

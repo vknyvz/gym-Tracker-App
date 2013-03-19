@@ -56,23 +56,16 @@ function btn_editmeasurements(yes, no, id) {
 	})
 }
 
-function btn_manageworkout(no, id) {
-	var dialog_buttons = {};
-	dialog_buttons[no] = function() { 
-		$(this).dialog('close'); 
-	}
-	
-	vkNgineDialogHandler('btn_manageworkout_dialog', 500, dialog_buttons);
-	
+function btn_manageworkout(id) {
 	$.ajax({ 
 		url: '/my-account/manage-workout/id/' + id,
 		success: function(returnData) {
-			$('.btn_manageworkout_dialog').html(returnData);
+			$('.manageworkout_dialog').html(returnData);
 		}
 	})
 }
 
-function btn_exerciseDetail(no, id)
+function btn_exerciseDetail(id)
 {
 	var dialog_buttons = {};
 	dialog_buttons[no] = function() { 
@@ -228,35 +221,21 @@ function lnk_dayDetail(yes, no, date, title, action){
     );
 }
 
-function btn_add_selected_workouts(yes, no){
-	var dialog_buttons = {};
-	
-	dialog_buttons[no] = function() { 
-		$(this).dialog('close'); 
-	}
-	
-	dialog_buttons[yes] = function() { 
-		$('input:checked').each(function(){
-			$(this).prop('checked', false);
-		 });
-
-		$('#publicFormAddSelectedExercises').submit();		
-	}
-	
-	var userIdsString = '';
-
-	exerciseIdsString = $('input:checked').map(function(i,n) {
+function btn_add_selected_workouts(){					
+	exerciseIdsString = $('input[name="exercises[]"]').filter(':checked').map(function(i,n) {
          return $(n).val();
 	}).get();
 	
 	if(exerciseIdsString.length != 0) {
-		vkNgineDialogHandler('btn_add_selected_workouts_dialog', 400, dialog_buttons);
-		
 		$.ajax( {
 	        url: '/index/add-selected-exercises/exerciseIds/' + exerciseIdsString,
 	        success: function(returnData) { 
-		        $('.btn_add_selected_workouts_dialog').html(returnData);		           
+		        $('.add_selected_workouts_dialog').html(returnData);		           
 	    }});
+	}
+	else{
+		alert('Select at least one exercise');
+		return;
 	}
 }
 
@@ -308,7 +287,7 @@ function vkNgineAjaxFormSubmit(data) {
 			});
 		}
 		else {
-			$('#' + data.dialog).dialog('close');
+			//$('#' + data.dialog).dialog('close');
 			
 			if(data.row) {
 				if(data.newRow.mode == 'add'){
