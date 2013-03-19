@@ -33,25 +33,15 @@ function btn_editworkout(id) {
 	})
 }
 
-function btn_editmeasurements(yes, no, id) {
-	var dialog_buttons = {};
-	dialog_buttons[no] = function() { 
-		$(this).dialog('close'); 
-	}
-	dialog_buttons[yes] = function() { 
-		$('#publicFormEditMeasurements').submit();
-	}
-	
+function btn_editmeasurements(id) {
 	if(!id) {
 		id = 0;
 	}
-	
-	vkNgineDialogHandler('btn_edit_measurements_dialog', 300, dialog_buttons);
-	
+
 	$.ajax({ 
 		url: '/my-account/edit-measurement/id/' + id,
 		success: function(returnData) {
-			$('.btn_edit_measurements_dialog').html(returnData);
+			$('.editmeasurements_dialog').html(returnData);
 		}
 	})
 }

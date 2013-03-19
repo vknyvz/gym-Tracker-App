@@ -1,11 +1,12 @@
-<?= $this->form; ?>
+<?= $this->partial('_modals.phtml', 
+				array('t' 		  => $this->t,					  
+					  'headline'  => 'Edit Measurements ',
+					  'content'   => $this->form
+	)); 
+?>
 
 <script>
 $(document).ready(function(){
-	$("#value").focus();
-
-	$('select').select_skin();
-	
 	var options = {  
 		url: '<?= $this->form->getAction(); ?>',
         success: vkNgineAjaxFormSubmit,

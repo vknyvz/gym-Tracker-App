@@ -18,12 +18,11 @@
 						        <th><?= $this->t->_('Actions'); ?></th>
 						     </tr>
 						</thead>
-						<tbody>
-						
+						<tbody>						
 							<?php
 								foreach($this->measurements as $measurements) :
 							?>	
-						      <tr class="odd gradeX">
+						      <tr>
 						        <td><?= $this->escape($measurements['value']); ?></td>
 						        <td><?= ($measurements['type'] == 'WEIGHT') ? $this->t->_('Weight') : $this->t->_('Not Entered'); ?></td>
 						        <td><?= $this->escape($this->dateFormat($measurements['date'], Zend_Date::DATE_FULL)); ?></td>
@@ -35,15 +34,12 @@
 						      </tr>
 						    <?php 
 								endforeach;
-							?>
-							
+							?>							
 						</tbody>
 					</table>
 					<div>
-						<a class="editmeasurements" href="#">							
-							<?= $this->t->_('Add New Measurement');?>
-						</a>
-				      </div>
+						<a class="btn btn-inverse editmeasurements" data-toggle="modal" href="#editmeasurements_dialog"><i class="icon-plus"></i> <?= $this->t->_('Add New Measurement'); ?></a>
+				    </div>				      
 				</div>
 			</div>			
 		</div>
@@ -52,8 +48,7 @@
 
 <script>
 $('.editmeasurements').bind('click', function() {
-	var id = $(this).attr('rel');
-	btn_editmeasurements('<?= $this->t->_('Save'); ?>', '<?= $this->t->_('Cancel'); ?>', id);
+	btn_editmeasurements($(this).attr('rel'));
 });
 
 $('.deletemeasurement').bind('click', function() {
