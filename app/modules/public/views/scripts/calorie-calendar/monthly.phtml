@@ -1,1 +1,101 @@
-montly calorie calendar currently unavailable 
+<?php 
+	$state = null;
+	if(isset($this->params['day'])) {
+		if (date('d') == $this->params['day']){
+			$state = 'fc-state-disabled';
+		}
+	}
+	
+	$prevMonth = $this->links['prev'];
+	if($prevMonth->thisMonth() == date('n')){
+		$dayPrev = date('d');
+	}
+	else {
+		$dayPrev = 0;
+	}
+	
+	$nextMonth = $this->links['next'];
+	if($nextMonth->thisMonth() == date('n')){
+		$dayNext = date('d');
+	}
+	else {
+		$dayNext = 0;
+	}
+	
+	$today =  '/calorie-calendar';
+	$prev = '/calorie-calendar/index/year/' . $prevMonth->thisYear().'/month/'.$prevMonth->thisMonth().'/day/'.$dayPrev;
+	$next = '/calorie-calendar/index/year/' . $nextMonth->thisYear().'/month/'.$nextMonth->thisMonth().'/day/'.$dayNext;
+?>
+
+<script>
+	$(function() {
+		$('.fc-button-prev').bind('click', function() {
+			window.top.location = '<?= $prev; ?>';
+		});
+		$('.fc-button-next').bind('click', function() {
+			window.top.location = '<?= $next; ?>';
+		});
+		$('.fc-button-today').bind('click', function() {
+			window.top.location = '<?= $today; ?>';
+		});
+		$('.fc-button-month').bind('click', function() {
+			window.top.location = '<?= $this->publicUrl('monthly', 'calorie-calendar'); ?>';
+		});
+		$('.fc-button-agendaWeek').bind('click', function() {
+			window.top.location = '<?= $this->publicUrl('weekly', 'calorie-calendar'); ?>';
+		});
+
+		<?php
+			if(!isset($this->params['month'])) :
+		?>
+			$('.fc-button-today').addClass('fc-state-disabled');
+		<?php endif; ?>
+							
+		$("table.fc-border-separate tbody tr:first").addClass('fc-first');	
+		$("table.fc-border-separate tbody tr:last").addClass('fc-last');
+	});
+</script>
+		
+<?= $this->partial('_breadcrumbs.phtml', 
+				array('t' 		  => $this->t,
+					  'pageTitle' => null,
+					  'page'	  => $this->t->_('Monthly Calendar'),
+					  'page2'     => $this->t->_('Calorie Calendar'),
+					  'page2href' => '',
+	)); 
+?>
+
+<div id="page" class="dashboard">
+	<div class="row-fluid">
+		<div class="span12">			
+			<div class="widget">
+				<div class="widget-title">
+					<h4><i class="icon-table"></i> <?= $this->t->_(date('F', $this->calendar->getTimeStamp())); ?> <?= date('Y', $this->calendar->getTimeStamp()); ?></h4>
+					<span class="tools">
+	                    <a href="javascript:;" class="icon-refresh"></a>	
+                    </span>											
+				</div>
+				<div class="widget-body">
+					<div class="row-fluid">
+					
+						<div id="calendar" class="has-toolbar fc">
+							<table class="fc-header" style="width: 100%;">
+								<tbody>
+									<tr>
+										<td class="fc-header-left"></td>
+										<td class="fc-header-center"></td>
+										<td class="fc-header-right">
+											<span class="fc-button fc-button-prev fc-state-default fc-corner-left"><span class="fc-button-inner"><span class="fc-button-content">&nbsp;◄&nbsp;</span><span class="fc-button-effect"><span></span></span></span></span><span class="fc-button fc-button-next fc-state-default"><span class="fc-button-inner"><span class="fc-button-content">&nbsp;►&nbsp;</span><span class="fc-button-effect"><span></span></span></span></span><span class="fc-button fc-button-today fc-state-default <?= $state; ?>"><span class="fc-button-inner"><span class="fc-button-content"><?= $this->t->_('today'); ?></span><span class="fc-button-effect"><span></span></span></span></span><span class="fc-button fc-button-month fc-state-active fc-state-default"><span class="fc-button-inner"><span class="fc-button-content"><?= $this->t->_('month'); ?></span><span class="fc-button-effect"><span></span></span></span></span><span class="fc-button fc-button-agendaWeek fc-state-default"><span class="fc-button-inner"><span class="fc-button-content"><?= $this->t->_('week'); ?></span><span class="fc-button-effect"><span></span></span></span></span></td>
+									</tr>
+								</tbody>
+							</table>
+							<div class="fc-content" style="position: relative; min-height: 1px;">
+								<strong>Monthly Calendar is not available at this time.</strong>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

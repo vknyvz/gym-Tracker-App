@@ -41,10 +41,8 @@ $next = '/calendar/weekly/year/' . $nextWeek['year'] . '/month/' . $nextWeek['mo
 		<?php endif; ?>
 							
 		$('.addExercise').bind('click', function() {
-			day = $(this).attr('rel');
-			date = explode('-', $(this).attr('rel'));
-			dateStr = date[1] + '/' + date[2] + '/' + date[0];
-			lnk_addExercise('<?= $this->t->_('Save'); ?>', '<?= $this->t->_('Cancel'); ?>', day, '<?= $this->t->_('Adding Daily Workout: '); ?> ' + dateStr, '<?= $this->param['action']; ?>');
+			$('#addexercise_dialog').modal('show');
+			lnk_addExercise($(this).attr('rel'), '<?= $this->t->_('Adding Daily Workout: '); ?> ' + $(this).attr('rel'), '<?= $this->param['action']; ?>');
 		});	
 
 		$('.viewDetail').bind('click', function() {
