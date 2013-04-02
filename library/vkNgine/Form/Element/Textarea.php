@@ -18,14 +18,11 @@ class vkNgine_Form_Element_Textarea extends Zend_Form_Element_Textarea
     	
     	$this->setLabel($options['label'])
        		 ->setRequired($required);
-    	 
-    	if($options['style']) {
+
+    	if(isset($options['style'])) {
     		$this->setAttrib('style', $options['style']);
     	}
-    	else {
-    		$this->setAttrib('style', 'width: 384px; height: 110px;');
-    	}
-    	
+    	    	
     	if($required && isset($options['notEmptyErrorMessage'])){
     		$this->addValidator('NotEmpty', false, array('messages' => $options['notEmptyErrorMessage']));
     	}

@@ -1,24 +1,8 @@
-function lnk_addExercise(yes, no, date, title, action) {
-	var dialog_buttons = {};
-	
-	dialog_buttons[no] = function() { 
-		$(this).dialog('close'); 
-	}
-	
-	dialog_buttons[yes] = function() { 
-		$('#publicFormDailyExercises').submit();		
-	}
-	
-	$('.lnk-addexercise-dialog').dialog({
-		title: title,
-	});
-    
-    vkNgineDialogHandler('lnk-addexercise-dialog', 350, dialog_buttons);
-    
+function lnk_addExercise(date, title, action) {
 	$.ajax( {
         url: '/calendar/add-daily/forward/' + action + '/date/' + date,
         success: function(returnData) { 
-	        $('.lnk-addexercise-dialog').html(returnData);		           
+	        $('.addexercise_dialog').html(returnData);		           
     	}
        }
     );
@@ -107,17 +91,13 @@ function btn_deletemeasurement(yes, no, id) {
 	vkNgineDialogHandler('btn_deletemeasurement-dialog', 400, dialog_buttons);
 }
 
-function lnk_viewDetail(yes, no, id, title, successTitle, successMessage){
-	var dialog_buttons = {};
+function lnk_viewDetail(id, successTitle, successMessage){
 	
-	dialog_buttons[no] = function() { 
-		$(this).dialog('close'); 
-	}
-	dialog_buttons[yes] = function() { 
-		$.ajax( {
+	
+	if(false) {
+		$.ajax({
 	        url: '/calendar/delete-daily-log/id/' + id,
 	        success: function(returnData) { 
-		       $('#lnk-viewDetails-dialog').dialog('close');	
 		       $.gritter.add({
 					title: successTitle,
 					text: successMessage,
@@ -127,24 +107,16 @@ function lnk_viewDetail(yes, no, id, title, successTitle, successMessage){
 				});
 		       window.top.location = '/calendar';
 	    	}
-	       }
-	    );
+		});
 	}
-	
-	$('.lnk-viewDetails-dialog').dialog({
-		title: title,
-	});
-	
-	vkNgineDialogHandler('lnk-viewDetails-dialog', 450, dialog_buttons);
-	
-	
+
 	$.ajax( {
         url: '/calendar/view-detail/id/' + id,
         success: function(returnData) { 
-	        $('.lnk-viewDetails-dialog').html(returnData);		           
+        	
+	        $('.viewDetails-dialog').html(returnData);	       
     	}
-       }
-    );
+    });		
 }
 
 function lnk_viewDayDetail(yes, no, id, title, successTitle, successMessage){

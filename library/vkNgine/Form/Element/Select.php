@@ -24,7 +24,7 @@ class vkNgine_Form_Element_Select extends Zend_Form_Element_Select
         	 ->setDescription((isset($options['desc'])) ? $options['desc'] : null)
         	 ->addMultiOptions($values);
 		
-		if(!isset($options['style']))
+		if(!isset($options['style']) || $options['style'] != 'none')
         	 $this->setDecorators(array(new vkNgine_Form_Element_Decorator_Text()));
 		
 		if(isset($options['removeDecorators'])){

@@ -701,7 +701,9 @@ var vkNgine = function () {
         	console.log('vkNgine couldn\'t init date picker');
         }
         
-        $('.date-picker').datepicker();        
+        $('.date-picker').datepicker({
+    		format: 'yyyy-mm-dd'	
+    	});        
     }
 
     var handleColorPicker = function () {
