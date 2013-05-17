@@ -64,36 +64,26 @@ function btn_deleteworkout(id) {
 			url: "/my-account/delete-workout/id/" + id,
 			dataType : 'json',
 			success: function(returnData) {
-				$('.btn-deleteworkout-dialog').dialog('close');				
 				window.top.location = '/my-account/my-workouts';
 			}
 		});	
 	});
 }
 
-function btn_deletemeasurement(yes, no, id) {
-	var dialog_buttons = {};
-	dialog_buttons[no] = function() { 
-		$(this).dialog('close'); 
-	}
-	dialog_buttons[yes] = function() { 
+function btn_deletemeasurement(id) {	
+	$('#deletemeasurement_dialog').attr('rel', id);
+	$('#deletemeasurement_dialog .btn-primary').bind('click', function() {	
 		$.ajax( {
 			url: "/my-account/delete-measurement/id/" + id,
 			dataType : 'json',
 			success: function(returnData) {
-				$('.btn_deletemeasurement').dialog('close');
-				
-				window.top.location = '/my-account';
+				window.top.location = '/my-account/my-measurements';
 			}
-		}) 
-	}
-	
-	vkNgineDialogHandler('btn_deletemeasurement-dialog', 400, dialog_buttons);
+		});
+	});
 }
 
 function lnk_viewDetail(id, successTitle, successMessage){
-	
-	
 	if(false) {
 		$.ajax({
 	        url: '/calendar/delete-daily-log/id/' + id,

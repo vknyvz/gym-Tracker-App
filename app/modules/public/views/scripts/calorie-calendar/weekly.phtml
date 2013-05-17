@@ -111,19 +111,20 @@ $next = '/calorie-calendar/weekly/year/' . $nextWeek['year'] . '/month/' . $next
 	                    <a href="javascript:;" class="icon-refresh"></a>	
                     </span>											
 				</div>
-				<div class="widget-body">
-				<div class="row-fluid">
+	<div class="widget-body">
+	<div class="row-fluid">
 				
-			<div id="calendar" class="has-toolbar fc">
-			<table class="fc-header" style="width: 100%;">
-			<tbody>
+	<div id="calendar" class="has-toolbar fc">
+	<table class="fc-header" style="width: 100%;">
+		<tbody>
 			<tr>
 				<td class="fc-header-left"></td>
 				<td class="fc-header-center"></td>
 				<td class="fc-header-right">
-					<span class="fc-button fc-button-prev fc-state-default fc-corner-left"><span class="fc-button-inner"><span class="fc-button-content">&nbsp;◄&nbsp;</span><span class="fc-button-effect"><span></span></span></span></span><span class="fc-button fc-button-next fc-state-default"><span class="fc-button-inner"><span class="fc-button-content">&nbsp;►&nbsp;</span><span class="fc-button-effect"><span></span></span></span></span><span class="fc-button fc-button-today fc-state-default <?= $state; ?>"><span class="fc-button-inner"><span class="fc-button-content"><?= $this->t->_('today'); ?></span><span class="fc-button-effect"><span></span></span></span></span><span class="fc-button fc-button-month fc-state-default"><span class="fc-button-inner"><span class="fc-button-content"><?= $this->t->_('month'); ?></span><span class="fc-button-effect"><span></span></span></span></span><span class="fc-button fc-button-agendaWeek fc-state-default fc-state-active"><span class="fc-button-inner"><span class="fc-button-content"><?= $this->t->_('week'); ?></span><span class="fc-button-effect"><span></span></span></span></span></td>
-		</tr>
-	</tbody>
+					<span class="fc-button fc-button-prev fc-state-default fc-corner-left"><span class="fc-button-inner"><span class="fc-button-content">&nbsp;◄&nbsp;</span><span class="fc-button-effect"><span></span></span></span></span><span class="fc-button fc-button-next fc-state-default"><span class="fc-button-inner"><span class="fc-button-content">&nbsp;►&nbsp;</span><span class="fc-button-effect"><span></span></span></span></span><span class="fc-button fc-button-today fc-state-default <?= $state; ?>"><span class="fc-button-inner"><span class="fc-button-content"><?= $this->t->_('today'); ?></span><span class="fc-button-effect"><span></span></span></span></span><span class="fc-button fc-button-month fc-state-default"><span class="fc-button-inner"><span class="fc-button-content"><?= $this->t->_('month'); ?></span><span class="fc-button-effect"><span></span></span></span></span><span class="fc-button fc-button-agendaWeek fc-state-default fc-state-active"><span class="fc-button-inner"><span class="fc-button-content"><?= $this->t->_('week'); ?></span><span class="fc-button-effect"><span></span></span></span></span>
+				</td>
+			</tr>
+		</tbody>
 	</table>	
 	<div class="fc-content" style="position: relative; min-height: 1px;">
 	<div class="fc-view fc-view-agendaWeek fc-agenda" style="position: relative; -moz-user-select: none; display: block;" unselectable="on">
@@ -202,17 +203,19 @@ $next = '/calorie-calendar/weekly/year/' . $nextWeek['year'] . '/month/' . $next
 						
 						if(date('D', $day->thisDay(true)) == 'Mon'){
 		    	?>
-		    		<td rel="<?= $day->thisYear()?>-<?= $day->thisMonth()?>-<?= $day->thisDay()?>" class="fc-mon fc-widget-content fc-first <?= $highlightedCss; ?> addExercise">
+		    		<td rel="<?= $day->thisYear()?>-<?= $day->thisMonth()?>-<?= $day->thisDay()?>" class="fc-mon fc-widget-content fc-first <?= $highlightedCss; ?>">
 						<div style="height: 300px;">
 							<div class="fc-day-content">
 								<div style="position:relative">
 									<?php 
+									
 									if($dailyValues){ 
 											echo '
 											<div rel="" class="viewDetail fc-event fc-event-skin fc-event-hori fc-corner-left fc-corner-right" style="background-color: rgb(71, 125, 174); border-color: rgb(14, 105, 161); top: 30px; -moz-user-select: none;">
-												<div class="fc-event-inner fc-event-skin" style="background-color:#477dae;border-color:#0E69A1">
-													<span class="fc-event-time">' . $this->t->_('Summary of Daily Consumption') . '</span>
-													<span class="fc-event-title">  			
+												<div class="fc-event-inner fc-event-skin" style="background-color:#477dae;border-color:#0E69A1;color:#000000">
+													<span class="fc-event-time"><strong>' . $this->t->_('Daily Consumption') . '</strong></span>
+													<span class="fc-event-title">
+												        <br /> 			
 														' . (sprintf($this->t->_('consumed %s calories'), $dailyValues['calories'])) . ' <br />
 														' . (sprintf($this->t->_('consumed %s gr protein'), $dailyValues['protein'])) . ' <br />
 														' . (sprintf($this->t->_('consumed %s gr fat'), $dailyValues['fat'])) . ' <br />
@@ -233,7 +236,7 @@ $next = '/calorie-calendar/weekly/year/' . $nextWeek['year'] . '/month/' . $next
 		    			}
 		    			elseif(date('D', $day->thisDay(true)) == 'Sun') {
 		    	?>
-    				<td rel="<?= $day->thisYear()?>-<?= $day->thisMonth()?>-<?= $day->thisDay()?>" class="fc-sun fc-widget-content fc-agenda-gutter fc-last <?= $highlightedCss; ?> addExercise">
+    				<td rel="<?= $day->thisYear()?>-<?= $day->thisMonth()?>-<?= $day->thisDay()?>" class="fc-sun fc-widget-content fc-agenda-gutter fc-last <?= $highlightedCss; ?>">
 	    				<div>
 		    				<div class="fc-day-content">
 		    					<div style="position:relative">
@@ -241,9 +244,10 @@ $next = '/calorie-calendar/weekly/year/' . $nextWeek['year'] . '/month/' . $next
 									if($dailyValues){ 
 											echo '
 											<div rel="" class="viewDetail fc-event fc-event-skin fc-event-hori fc-corner-left fc-corner-right" style="background-color: rgb(71, 125, 174); border-color: rgb(14, 105, 161); top: 30px; -moz-user-select: none;">
-												<div class="fc-event-inner fc-event-skin" style="background-color:#477dae;border-color:#0E69A1">
-													<span class="fc-event-time">' . $this->t->_('Summary of Daily Consumption') . '</span>
-													<span class="fc-event-title">  			
+												<div class="fc-event-inner fc-event-skin" style="background-color:#477dae;border-color:#0E69A1;color:#000000">
+													<span class="fc-event-time"><strong>' . $this->t->_('Daily Consumption') . '</strong></span>
+													<span class="fc-event-title">
+														<br />  			
 														' . (sprintf($this->t->_('consumed %s calories'), $dailyValues['calories'])) . ' <br />
 														' . (sprintf($this->t->_('consumed %s gr protein'), $dailyValues['protein'])) . ' <br />
 														' . (sprintf($this->t->_('consumed %s gr fat'), $dailyValues['fat'])) . ' <br />
@@ -251,6 +255,7 @@ $next = '/calorie-calendar/weekly/year/' . $nextWeek['year'] . '/month/' . $next
 														' . (sprintf($this->t->_('consumed %s gr sugar'), $dailyValues['sugar'])) . ' <br />
 														' . (sprintf($this->t->_('consumed %s gr fiber'), $dailyValues['fiber'])) . ' 
 													 </span>
+				
 												</div>
 											</div>
 											';
@@ -264,17 +269,18 @@ $next = '/calorie-calendar/weekly/year/' . $nextWeek['year'] . '/month/' . $next
 		    			}
 		    			else {
 		    	?>
-		    		<td rel="<?= $day->thisYear()?>-<?= $day->thisMonth()?>-<?= $day->thisDay()?>" class="fc-widget-content <?= $highlightedCss; ?> addExercise ">
+		    		<td rel="<?= $day->thisYear()?>-<?= $day->thisMonth()?>-<?= $day->thisDay()?>" class="fc-widget-content <?= $highlightedCss; ?>">
 						<div>
 							<div class="fc-day-content">
 								<div style="position:relative">
 									<?php 
 									if($dailyValues){ 
 											echo '
-											<div rel="" class="viewDetail fc-event fc-event-skin fc-event-hori fc-corner-left fc-corner-right" style="background-color: rgb(71, 125, 174); border-color: rgb(14, 105, 161); top: 30px; -moz-user-select: none;">
-												<div class="fc-event-inner fc-event-skin" style="background-color:#477dae;border-color:#0E69A1">
-													<span class="fc-event-time">' . $this->t->_('Summary of Daily Consumption') . '</span>
-													<span class="fc-event-title">  			
+											<div class="viewDetail fc-event fc-event-skin fc-event-hori fc-corner-left fc-corner-right" style="background-color: rgb(71, 125, 174); border-color: rgb(14, 105, 161); top: 30px; -moz-user-select: none;">
+												<div class="fc-event-inner fc-event-skin" style="background-color:#477dae;border-color:#0E69A1;color:#000000">
+													<span class="fc-event-time"><strong>' . $this->t->_('Daily Consumption') . '</strong></span>
+													<span class="fc-event-title">
+														<br />
 														' . (sprintf($this->t->_('consumed %s calories'), $dailyValues['calories'])) . ' <br />
 														' . (sprintf($this->t->_('consumed %s gr protein'), $dailyValues['protein'])) . ' <br />
 														' . (sprintf($this->t->_('consumed %s gr fat'), $dailyValues['fat'])) . ' <br />

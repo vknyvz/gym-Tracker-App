@@ -76,19 +76,19 @@
 "Traps";"Trapler"
 "Triceps";"Pazı arkası"
 
-"A New Exercise is being added";"Yenİ bİr egzersİz eklenİyor"
-"A New Workout is being added";"Yenİ bİr workout eklenİyor"
-"A New Meal is being added";"Yenİ bİr öğün eklenİyor"
-"A New Food is being added";"Yenİ bİr yiyecek eklenİyor"
+"A New Exercise is being added";"Yeni bir egzersiz ekleniyor"
+"A New Workout is being added";"Yeni bir workout ekleniyor"
+"A New Meal is being added";"Yeni bir öğün ekleniyor"
+"A New Food is being added";"Yeni bir yiyecek ekleniyor"
 
-"Exercise is being deleted";"Egzersİz sİlİnİyor"
-"Exercise is being edited";"Egzersİz denetlenİyor"
-"Workout is being edited";"Workout denetlenİyor"
-"Workout is being deleted";"Workout sİlİnİyor"
-"Meal is being edited";"Öğün denetlenİyor"
-"Meal is being deleted";"Öğün sİlİnİyor"
-"Food is being edited";"Yiyecek denetlenİyor"
-"Food is being deleted";"Yiyecek sİlİnİyor"
+"Exercise is being deleted";"Egzersiz siliniyor"
+"Exercise is being edited";"Egzersiz denetleniyor"
+"Workout is being edited";"Workout denetleniyor"
+"Workout is being deleted";"Workout siliniyor"
+"Meal is being edited";"Öğün denetleniyor"
+"Meal is being deleted";"Öğün siliniyor"
+"Food is being edited";"Yiyecek denetleniyor"
+"Food is being deleted";"Yiyecek siliniyor"
 
 "Delete this exercise";"Egzersizi sil"
 "Delete this workout";"Workoutu sil"
@@ -100,7 +100,7 @@
 "Edit this meal";"Öğünü denetle"
 "Edit this food";"Yiyeceği denetle"
 
-"Viewing Exercise Details";"Egzersİz ayrıntıları görüntülenİyor"
+"Viewing Exercise Details";"Egzersİz ayrıntıları görüntüleniyor"
 
 "Here you can add/update or delete exercises in the system";"Buradan sistemdeki tüm egzersizlerin ayarlarını degiştirebilirsiniz"
 "Here you can add/update or delete workouts in the system";"Buradan sistemdeki tüm workoutların ayarlarını degiştirebilirsiniz"
@@ -125,18 +125,8 @@
 "Start Date";"Başlangıç Tarihi"
 "End Date";"Bitiş Tarihi"
 
-"Workout Name Capital";"Workout İsmİ"
-"Start Date Capital";"Başlangıç Tarİhİ"
-"End Date Capital";"Bİtİş Tarİhİ"
-
 "Add Exercise to this Workout";"Bu workouta egzersiz ekle"
 "Add Food to this Meal";"Bu öğüne yiyecek ekle"
-
-"Exercise Name Capital";"Egzersİz"
-"Primary Muscle Capital";"Bİrİncİl Kas"
-"Secondary Muscle Capital";"İkincİl Kas"
-"Mechanics Capital";"Mekanİk"
-"Equipment Used Capital";"Ekİpman"
 
 "No instructions yet";"Bunun için henüz açıklama yok"
 "Exercise Details";"Egzersiz Bilgileri"
@@ -150,8 +140,7 @@
 "More details for this";"Daha fazla ayrıntılar"
 "Additional Details";"Ayrıntılar"
 
-
-"Add exercises to Workouts";"Egzersİzlerİ workout'a ekle"
+"Add exercises to Workouts";"Egzersizleri workout'a ekle"
 "Choose a workout to add selected exercises";"Seçilen egzersizleri eklemek için bir workout seçin"
 
 "Workout will be added to this user";"Workout bu kullanıcıya eklenecektir"
@@ -160,7 +149,7 @@
 "Not entered";"Girilmemiş"
 "Edit";"Denetle"
 "Delete";"Sil"
-"Delete Measurement";"Ölçü Sİl"
+"Delete Measurement";"Ölçü Sil"
 "Manage";"Ayarla"
 
 "click a flag to change the locale of the app";"uygulamanın dilini değiştirmek için bir bayrağa tıklayın"
@@ -168,7 +157,7 @@
 
 "Edit Workout";"Workout'u Denetle"
 "Delete Workout";"Workout'u Sil"
-"Edit Measurement";"Vücut Ölçülerİmİ Denetle"
+"Edit Measurement";"Vücut Ölçülerimi Denetle"
 
 "You don't have any workouts";"Şu an için bir workout'unuz yok"
 "You don't have any measurement data";"Şu an için bir ölçü bilgiliniz yok"
@@ -189,7 +178,7 @@
 
 "Exercise Detail";"Egzersiz Detayları"
 "Saved";"Kaydedildi"
-"Viewing Workout";"Workout gÖrÜntÜlenİYor"
+"Viewing Workout";"Workout Görüntüleniyor"
 "Workout Days";"Workout Günleri"
 "Workout Day";"Workout Günü"
 
@@ -312,7 +301,7 @@
 "Calendar view was successfully updated";"Takvim ayarları başarıyla kaydedildi"
 
 "Calorie Calendar";"Kalori Takvimi"
-"Weekly Calorie Calendar";"Haftalik Kalorİ Takvİmİ"
+"Weekly Calorie Calendar";"Haftalık Kalori Takvimi"
 
 "Enter a food";"Yiyecek gir"
 

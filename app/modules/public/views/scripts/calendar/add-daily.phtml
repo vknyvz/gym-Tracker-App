@@ -45,6 +45,16 @@ $(document).ready(function(){
 			$('#workoutDay-element').hide();
 		}
 	});
+
+	$("#type").change(function(){
+		var selected = $("#type option:selected");  
+		if(selected.val()){
+			$(".setdays").hide();
+		}
+		else {
+			$(".setdays").show();
+		}
+	});
 });
 </script>
 

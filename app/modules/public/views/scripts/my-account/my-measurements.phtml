@@ -27,7 +27,7 @@
 						        <td><?= ($measurements['type'] == 'WEIGHT') ? $this->t->_('Weight') : $this->t->_('Not Entered'); ?></td>
 						        <td><?= $this->escape($this->dateFormat($measurements['date'], Zend_Date::DATE_FULL)); ?></td>
 						        <td>
-						          <a href="javascript:void(0);" class="icon huge deletemeasurement" rel="<?= $measurements['id']; ?>">
+						          <a href="#deletemeasurement_dialog" class="icon huge deletemeasurement" rel="<?= $measurements['id']; ?>" data-toggle="modal">
 						          	<i class="icon-remove"></i> <?= $this->t->_('Delete'); ?>
 						          </a>
 						        </td>						        
@@ -52,7 +52,6 @@ $('.editmeasurements').bind('click', function() {
 });
 
 $('.deletemeasurement').bind('click', function() {
-	var id = $(this).attr('rel');
-	btn_deletemeasurement('<?= $this->t->_('Delete'); ?>', '<?= $this->t->_('Cancel'); ?>', id);
+	btn_deletemeasurement($(this).attr('rel'));
 });
 </script>
