@@ -53,7 +53,8 @@ class Model_Meals extends vkNgine_DbTable_Abstract
 	{
 		$sql = "
 			SELECT *
-				FROM meals m LEFT JOIN meals_foods ON m.mealId = meals_foods.mealId
+				FROM `" . $this->_name . "` m 
+					 LEFT JOIN meals_foods ON m.mealId = meals_foods.mealId
 					 LEFT JOIN foods ON meals_foods.foodId = foods.foodId
 						WHERE m.mealId = " . (int) $mealId . " 
 		";

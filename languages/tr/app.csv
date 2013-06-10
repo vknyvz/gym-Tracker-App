@@ -305,7 +305,7 @@
 
 "Enter a food";"Yiyecek gir"
 
-"Summary of Daily Consumption";"Günlük Tüketim"
+"Daily Consumption";"Günlük Tüketim"
 
 "consumed %s calories";"%s kalori tüketildi"
 "consumed %s gr protein";"%s gr protein tüketildi"
@@ -350,3 +350,5 @@
 "Glutes";"Glütler"
 
 "Total";"Toplam"
+
+"No Exercises added yet, go to Exercises list and add an exercise to this workout and day";"Henüz bu gün için herhangi bir egzersiz eklemediniz, egzersizler listesinden egzersiz ekliyebilirsiniz"

@@ -136,12 +136,10 @@ class MyAccountController extends vkNgine_Public_Controller
 		$formFoods = self::getMyaccountFoodsForm();
 		
 		$modelDailyIntake = new Public_Model_Daily_Intake();
-		$a = $modelDailyIntake->fetchDailyTotalFoodIntake(date('Y-m-d'), $this->user);
-		
+				
 		$this->view->dailyIntake = $modelDailyIntake->fetchAll("date = '" . date('Y-m-d') . "' and userId = " . (int) $this->user->getId() . "")->toArray();
 		$this->view->formMeals = $formMeals;
-		$this->view->formFoods = $formFoods;
-		$this->view->dailyTotals = $modelDailyIntake->fetchDailyTotalFoodIntake(date('Y-m-d'), $this->user);
+		$this->view->formFoods = $formFoods;		
 	}
 	
 	public function myWorkoutsAction()

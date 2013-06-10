@@ -51,14 +51,6 @@ class CalorieCalendarController extends vkNgine_Public_Controller
 		);
 		$calendar = vkNgine_Calendar::buildWeekly($options);
 	
-		$modelWorkouts = new Model_Workouts();
-			
-		$workoutDetail = array();
-		foreach($modelWorkouts->fetchAll() as $workout){
-			$workoutDetail[$workout['workoutId']] = $workout['name'];
-		}
-	
-		$this->view->workoutDetail = $workoutDetail;
 		$this->view->calendar = $calendar;
 	}
 }

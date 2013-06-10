@@ -194,34 +194,59 @@ $next = '/calorie-calendar/weekly/year/' . $nextWeek['year'] . '/month/' . $next
 				<?php
 					while ($day = $this->calendar->fetch()) {
 						$modelDailyIntake = new Public_Model_Daily_Intake();
-						$dailyValues = $modelDailyIntake->fetchDailyTotalFoodIntake($day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay(), $this->user);
 						
+						$thisMonth = ((strlen($day->thisMonth()) == 1) ? '0'. $day->thisMonth() : $day->thisMonth());
+						$thisDay = ((strlen($day->thisDay()) == 1) ? '0'. $day->thisDay() : $day->thisDay());
+												
+						$date = $day->thisYear() . '-' . $thisMonth . '-' . $thisDay;	
+						
+						$dailyIntake = $modelDailyIntake->fetchAll("date = '" . $date . "' and userId = " . (int) $this->user->getId() . "");
+												
 						$highlightedCss = null;
-						$today = date('Y').'-'.date('n').'-'.date('j');
-						$highlighted = $day->thisYear().'-'.$day->thisMonth().'-'.$day->thisDay();
-						$highlightedCss = ($highlighted == $today) ? 'fc-state-highlight' : '';
+						$highlightedCss = ($date == date('Y-m-d')) ? 'fc-state-highlight' : '';
 						
+						$macros = array('protein', 'fat', 'carbs', 'sugar', 'fiber', 'cholesterol');
+						
+						$calories = $protein = 0;
+						
+						if(0 < count($dailyIntake)){
+							foreach($dailyIntake as $intake) {
+								if($intake['mealId']){
+									$modelMeals = new Model_Meals();
+									$meal = $modelMeals->fetchMealTotal($intake['mealId']);
+									$calories += $meal['calories'];
+									$protein += $meal['protein'];
+								}
+								else {
+									$modelFoods = new Model_Foods();
+										
+									$food = $modelFoods->fetch($intake['foodId'])->toArray();
+									$calories += ($food['calories']) ? ($food['calories'] / $food['servingSize']) * $intake['servingSize'] : '0';
+									$protein += ($food['protein']) ? ($food['protein'] / $food['servingSize']) * $intake['servingSize'] : '0';
+								}
+							}
+						}
+												
 						if(date('D', $day->thisDay(true)) == 'Mon'){
 		    	?>
-		    		<td rel="<?= $day->thisYear()?>-<?= $day->thisMonth()?>-<?= $day->thisDay()?>" class="fc-mon fc-widget-content fc-first <?= $highlightedCss; ?>">
+		    		<td rel="<?= $date; ?>" class="fc-mon fc-widget-content fc-first <?= $highlightedCss; ?>">
 						<div style="height: 300px;">
 							<div class="fc-day-content">
 								<div style="position:relative">
-									<?php 
-									
-									if($dailyValues){ 
+									<?php 									
+									if(0 < count($dailyIntake)){ 
 											echo '
 											<div rel="" class="viewDetail fc-event fc-event-skin fc-event-hori fc-corner-left fc-corner-right" style="background-color: rgb(71, 125, 174); border-color: rgb(14, 105, 161); top: 30px; -moz-user-select: none;">
 												<div class="fc-event-inner fc-event-skin" style="background-color:#477dae;border-color:#0E69A1;color:#000000">
 													<span class="fc-event-time"><strong>' . $this->t->_('Daily Consumption') . '</strong></span>
 													<span class="fc-event-title">
 												        <br /> 			
-														' . (sprintf($this->t->_('consumed %s calories'), $dailyValues['calories'])) . ' <br />
-														' . (sprintf($this->t->_('consumed %s gr protein'), $dailyValues['protein'])) . ' <br />
-														' . (sprintf($this->t->_('consumed %s gr fat'), $dailyValues['fat'])) . ' <br />
-														' . (sprintf($this->t->_('consumed %s gr carbs'), $dailyValues['carbs'])) . ' <br />
-														' . (sprintf($this->t->_('consumed %s gr sugar'), $dailyValues['sugar'])) . ' <br />
-														' . (sprintf($this->t->_('consumed %s gr fiber'), $dailyValues['fiber'])) . ' 
+														' . (sprintf($this->t->_('consumed %s calories'), $protein['calories'])) . ' <br />
+														' . (sprintf($this->t->_('consumed %s gr protein'), $protein['protein'])) . ' <br />
+														' . (sprintf($this->t->_('consumed %s gr fat'), $protein['fat'])) . ' <br />
+														' . (sprintf($this->t->_('consumed %s gr carbs'), $protein['carbs'])) . ' <br />
+														' . (sprintf($this->t->_('consumed %s gr sugar'), $protein['sugar'])) . ' <br />
+														' . (sprintf($this->t->_('consumed %s gr fiber'), $protein['fiber'])) . ' 
 													 </span>
 												</div>
 											</div>
@@ -235,25 +260,26 @@ $next = '/calorie-calendar/weekly/year/' . $nextWeek['year'] . '/month/' . $next
 		    	<?php
 		    			}
 		    			elseif(date('D', $day->thisDay(true)) == 'Sun') {
+
 		    	?>
-    				<td rel="<?= $day->thisYear()?>-<?= $day->thisMonth()?>-<?= $day->thisDay()?>" class="fc-sun fc-widget-content fc-agenda-gutter fc-last <?= $highlightedCss; ?>">
+    				<td rel="<?= $date; ?>" class="fc-sun fc-widget-content fc-agenda-gutter fc-last <?= $highlightedCss; ?>">
 	    				<div>
 		    				<div class="fc-day-content">
 		    					<div style="position:relative">
 									<?php 
-									if($dailyValues){ 
+									if(0 < count($dailyIntake)){  
 											echo '
 											<div rel="" class="viewDetail fc-event fc-event-skin fc-event-hori fc-corner-left fc-corner-right" style="background-color: rgb(71, 125, 174); border-color: rgb(14, 105, 161); top: 30px; -moz-user-select: none;">
 												<div class="fc-event-inner fc-event-skin" style="background-color:#477dae;border-color:#0E69A1;color:#000000">
 													<span class="fc-event-time"><strong>' . $this->t->_('Daily Consumption') . '</strong></span>
 													<span class="fc-event-title">
 														<br />  			
-														' . (sprintf($this->t->_('consumed %s calories'), $dailyValues['calories'])) . ' <br />
-														' . (sprintf($this->t->_('consumed %s gr protein'), $dailyValues['protein'])) . ' <br />
-														' . (sprintf($this->t->_('consumed %s gr fat'), $dailyValues['fat'])) . ' <br />
-														' . (sprintf($this->t->_('consumed %s gr carbs'), $dailyValues['carbs'])) . ' <br />
-														' . (sprintf($this->t->_('consumed %s gr sugar'), $dailyValues['sugar'])) . ' <br />
-														' . (sprintf($this->t->_('consumed %s gr fiber'), $dailyValues['fiber'])) . ' 
+														' . (sprintf($this->t->_('consumed %s calories'), $calories)) . ' <br />
+														' . (sprintf($this->t->_('consumed %s gr protein'), $protein)) . ' <br />
+														' . (sprintf($this->t->_('consumed %s gr fat'), $protein['fat'])) . ' <br />
+														' . (sprintf($this->t->_('consumed %s gr carbs'), $protein['carbs'])) . ' <br />
+														' . (sprintf($this->t->_('consumed %s gr sugar'), $protein['sugar'])) . ' <br />
+														' . (sprintf($this->t->_('consumed %s gr fiber'), $protein['fiber'])) . ' 
 													 </span>
 				
 												</div>
@@ -274,19 +300,19 @@ $next = '/calorie-calendar/weekly/year/' . $nextWeek['year'] . '/month/' . $next
 							<div class="fc-day-content">
 								<div style="position:relative">
 									<?php 
-									if($dailyValues){ 
+									if(0 < count($dailyIntake)){ 
 											echo '
 											<div class="viewDetail fc-event fc-event-skin fc-event-hori fc-corner-left fc-corner-right" style="background-color: rgb(71, 125, 174); border-color: rgb(14, 105, 161); top: 30px; -moz-user-select: none;">
 												<div class="fc-event-inner fc-event-skin" style="background-color:#477dae;border-color:#0E69A1;color:#000000">
 													<span class="fc-event-time"><strong>' . $this->t->_('Daily Consumption') . '</strong></span>
 													<span class="fc-event-title">
 														<br />
-														' . (sprintf($this->t->_('consumed %s calories'), $dailyValues['calories'])) . ' <br />
-														' . (sprintf($this->t->_('consumed %s gr protein'), $dailyValues['protein'])) . ' <br />
-														' . (sprintf($this->t->_('consumed %s gr fat'), $dailyValues['fat'])) . ' <br />
-														' . (sprintf($this->t->_('consumed %s gr carbs'), $dailyValues['carbs'])) . ' <br />
-														' . (sprintf($this->t->_('consumed %s gr sugar'), $dailyValues['sugar'])) . ' <br />
-														' . (sprintf($this->t->_('consumed %s gr fiber'), $dailyValues['fiber'])) . ' 
+														' . (sprintf($this->t->_('consumed %s calories'), $protein['calories'])) . ' <br />
+														' . (sprintf($this->t->_('consumed %s gr protein'), $protein['protein'])) . ' <br />
+														' . (sprintf($this->t->_('consumed %s gr fat'), $protein['fat'])) . ' <br />
+														' . (sprintf($this->t->_('consumed %s gr carbs'), $protein['carbs'])) . ' <br />
+														' . (sprintf($this->t->_('consumed %s gr sugar'), $protein['sugar'])) . ' <br />
+														' . (sprintf($this->t->_('consumed %s gr fiber'), $protein['fiber'])) . ' 
 													 </span>
 												</div>
 											</div>
