@@ -205,126 +205,30 @@ $next = '/calorie-calendar/weekly/year/' . $nextWeek['year'] . '/month/' . $next
 						$highlightedCss = null;
 						$highlightedCss = ($date == date('Y-m-d')) ? 'fc-state-highlight' : '';
 						
-						$macros = array('protein', 'fat', 'carbs', 'sugar', 'fiber', 'cholesterol');
-						
-						$calories = $protein = 0;
-						
-						if(0 < count($dailyIntake)){
-							foreach($dailyIntake as $intake) {
-								if($intake['mealId']){
-									$modelMeals = new Model_Meals();
-									$meal = $modelMeals->fetchMealTotal($intake['mealId']);
-									$calories += $meal['calories'];
-									$protein += $meal['protein'];
-								}
-								else {
-									$modelFoods = new Model_Foods();
-										
-									$food = $modelFoods->fetch($intake['foodId'])->toArray();
-									$calories += ($food['calories']) ? ($food['calories'] / $food['servingSize']) * $intake['servingSize'] : '0';
-									$protein += ($food['protein']) ? ($food['protein'] / $food['servingSize']) * $intake['servingSize'] : '0';
-								}
-							}
-						}
-												
-						if(date('D', $day->thisDay(true)) == 'Mon'){
+						if(date('D', $day->thisDay(true)) == 'Mon') {
 		    	?>
-		    		<td rel="<?= $date; ?>" class="fc-mon fc-widget-content fc-first <?= $highlightedCss; ?>">
-						<div style="height: 300px;">
-							<div class="fc-day-content">
-								<div style="position:relative">
-									<?php 									
-									if(0 < count($dailyIntake)){ 
-											echo '
-											<div rel="" class="viewDetail fc-event fc-event-skin fc-event-hori fc-corner-left fc-corner-right" style="background-color: rgb(71, 125, 174); border-color: rgb(14, 105, 161); top: 30px; -moz-user-select: none;">
-												<div class="fc-event-inner fc-event-skin" style="background-color:#477dae;border-color:#0E69A1;color:#000000">
-													<span class="fc-event-time"><strong>' . $this->t->_('Daily Consumption') . '</strong></span>
-													<span class="fc-event-title">
-												        <br /> 			
-														' . (sprintf($this->t->_('consumed %s calories'), $protein['calories'])) . ' <br />
-														' . (sprintf($this->t->_('consumed %s gr protein'), $protein['protein'])) . ' <br />
-														' . (sprintf($this->t->_('consumed %s gr fat'), $protein['fat'])) . ' <br />
-														' . (sprintf($this->t->_('consumed %s gr carbs'), $protein['carbs'])) . ' <br />
-														' . (sprintf($this->t->_('consumed %s gr sugar'), $protein['sugar'])) . ' <br />
-														' . (sprintf($this->t->_('consumed %s gr fiber'), $protein['fiber'])) . ' 
-													 </span>
-												</div>
-											</div>
-											';
-									}
-									?>
-								</div>
-							</div>
-						</div>
-					</td>
-		    	<?php
-		    			}
+		    		<td rel="<?= $date; ?>" class="fc-widget-content fc-first <?= $highlightedCss; ?>">						
+				<?php
+		    			} 
 		    			elseif(date('D', $day->thisDay(true)) == 'Sun') {
-
 		    	?>
-    				<td rel="<?= $date; ?>" class="fc-sun fc-widget-content fc-agenda-gutter fc-last <?= $highlightedCss; ?>">
-	    				<div>
-		    				<div class="fc-day-content">
-		    					<div style="position:relative">
-									<?php 
-									if(0 < count($dailyIntake)){  
-											echo '
-											<div rel="" class="viewDetail fc-event fc-event-skin fc-event-hori fc-corner-left fc-corner-right" style="background-color: rgb(71, 125, 174); border-color: rgb(14, 105, 161); top: 30px; -moz-user-select: none;">
-												<div class="fc-event-inner fc-event-skin" style="background-color:#477dae;border-color:#0E69A1;color:#000000">
-													<span class="fc-event-time"><strong>' . $this->t->_('Daily Consumption') . '</strong></span>
-													<span class="fc-event-title">
-														<br />  			
-														' . (sprintf($this->t->_('consumed %s calories'), $calories)) . ' <br />
-														' . (sprintf($this->t->_('consumed %s gr protein'), $protein)) . ' <br />
-														' . (sprintf($this->t->_('consumed %s gr fat'), $protein['fat'])) . ' <br />
-														' . (sprintf($this->t->_('consumed %s gr carbs'), $protein['carbs'])) . ' <br />
-														' . (sprintf($this->t->_('consumed %s gr sugar'), $protein['sugar'])) . ' <br />
-														' . (sprintf($this->t->_('consumed %s gr fiber'), $protein['fiber'])) . ' 
-													 </span>
-				
-												</div>
-											</div>
-											';
-									}
-									?>
-								</div>
-		    				</div>
-		    			</div>
-    				</td>
-		    	<?php 			
+    				<td rel="<?= $date; ?>" class="fc-widget-content fc-last <?= $highlightedCss; ?>">
+	    		<?php 			
 		    			}
 		    			else {
 		    	?>
-		    		<td rel="<?= $day->thisYear()?>-<?= $day->thisMonth()?>-<?= $day->thisDay()?>" class="fc-widget-content <?= $highlightedCss; ?>">
-						<div>
-							<div class="fc-day-content">
-								<div style="position:relative">
-									<?php 
-									if(0 < count($dailyIntake)){ 
-											echo '
-											<div class="viewDetail fc-event fc-event-skin fc-event-hori fc-corner-left fc-corner-right" style="background-color: rgb(71, 125, 174); border-color: rgb(14, 105, 161); top: 30px; -moz-user-select: none;">
-												<div class="fc-event-inner fc-event-skin" style="background-color:#477dae;border-color:#0E69A1;color:#000000">
-													<span class="fc-event-time"><strong>' . $this->t->_('Daily Consumption') . '</strong></span>
-													<span class="fc-event-title">
-														<br />
-														' . (sprintf($this->t->_('consumed %s calories'), $protein['calories'])) . ' <br />
-														' . (sprintf($this->t->_('consumed %s gr protein'), $protein['protein'])) . ' <br />
-														' . (sprintf($this->t->_('consumed %s gr fat'), $protein['fat'])) . ' <br />
-														' . (sprintf($this->t->_('consumed %s gr carbs'), $protein['carbs'])) . ' <br />
-														' . (sprintf($this->t->_('consumed %s gr sugar'), $protein['sugar'])) . ' <br />
-														' . (sprintf($this->t->_('consumed %s gr fiber'), $protein['fiber'])) . ' 
-													 </span>
-												</div>
-											</div>
-											';
-									}
-									?>
-								</div>
-							</div>
-						</div>
+		    		<td rel="<?= $day->thisYear(); ?>-<?= $day->thisMonth(); ?>-<?= $day->thisDay(); ?>" class="fc-widget-content <?= $highlightedCss; ?>">
+		    	<?php 
+		    		 	}
+		    	?>
+						<?= 
+						    $this->partial('calorie-calendar/_renderMacros.phtml',
+								array('t' 		   	=> $this->t,
+									  'dailyIntake' => $dailyIntake
+							));
+						?>
 					</td>
 		    	<?php
-		    			}
 		    		}
 		    	?>
 				</tr>

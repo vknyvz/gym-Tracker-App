@@ -50,7 +50,7 @@ class CalorieCalendarController extends vkNgine_Public_Controller
 						 'day'   => $this->_getParam('day')
 		);
 		$calendar = vkNgine_Calendar::buildWeekly($options);
-	
+				
 		$this->view->calendar = $calendar;
 	}
 }

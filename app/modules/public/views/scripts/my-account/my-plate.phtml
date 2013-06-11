@@ -1,16 +1,17 @@
 <?php 
-		$language = new Zend_Session_Namespace('language');
-	   	if('tr' == vkNgine_Config::getSystemConfig()->language->locale || 'tr' == $language->lang) {	 
-	   		$pageTitle = date('j ') . ' ' . $this->t->_(date('F')) . ' ' . date(' Y');
-	   	}
-	   	else {
-	   		$pageTitle = date('F j, Y');
-	   	}
+	$language = new Zend_Session_Namespace('language');
+   	if('tr' == vkNgine_Config::getSystemConfig()->language->locale || 'tr' == $language->lang) {	 
+   		$pageTitle = date('j ') . ' ' . $this->t->_(date('F')) . ' ' . date(' Y');
+   	}
+   	else {
+   		$pageTitle = date('F j, Y');
+   	}
 ?>
 		    
-<?= $this->partial('_breadcrumbs.phtml', 
-				array('t' 		  => $this->t,					 
-					  'page'	  => $this->t->_('My Plate'),
+<?= 
+	$this->partial('_breadcrumbs.phtml', 
+		array('t' 		  => $this->t,					 
+			  'page'	  => $this->t->_('My Plate'),
 	)); 
 ?>
 
@@ -94,10 +95,8 @@
 	      			<?php 
 	      			$totals = 0;
 			      	    foreach($this->dailyIntake as $intake):
-			      	  		if($intake['mealId']):
-			      	  			
-			      	  		
-			      	    		$modelMeals = new Model_Meals();
+			      	    	if($intake['mealId']):
+			      	  			$modelMeals = new Model_Meals();
 							    $meal = $modelMeals->fetchMealTotal($intake['mealId']);
 							    
 							    $modelMealsFoods = new Model_Meals_Foods();
@@ -106,43 +105,73 @@
 					  ?>
 					<tr class="sum">
 		      			<td><?= $meal['title']; ?></td>
-		      	  		<td><?php 
+		      	  		<td>
+		      	  			<?php 
 		      	  				foreach($foods as $food) {
-		      	  					$modelFoods = new Model_Foods();
-		      	  					$foodDetail = $modelFoods->fetch($food['foodId']);
+		      	  					$foodDetail = $this->modelFoods->fetch($food['foodId']);
 		      	  					
 		      	  					echo $foodDetail->getName() . ' x ' . $foodDetail['servingSize'] . '  <br> ';
 		      	  				}
-		      	  				
-		      	  				
 		      	  		    ?>
 		      	  		</td>
-		      	  		<td data-calories="<?= $meal['calories']; ?>"><?= $meal['calories']; ?></td>
-		      	  		<td data-fat="<?= $meal['fat']; ?>"><?= $meal['fat']; ?></td>
-		      	  		<td data-cholesterol="<?= $meal['cholesterol']; ?>"><?= $meal['cholesterol']; ?></td>
-		      	  		<td data-sodium="<?= $meal['sodium']; ?>"><?= $meal['sodium']; ?></td>
-		      	  		<td data-carbs="<?= $meal['carbs']; ?>"><?= $meal['carbs']; ?></td>
-		      	  		<td data-fiber="<?= $meal['fiber']; ?>"><?= $meal['fiber']; ?></td>
-		      	  		<td data-protein="<?= $meal['protein']; ?>"><?= $meal['protein']; ?></td>
-		      	  		<td data-sugar="<?= $meal['sugar']; ?>"><?= $meal['sugar']; ?></td>
-		      		</tr>		
+		      	  		<td data-calories="<?= $meal['calories']; ?>">
+		      	  			<?= $meal['calories']; ?>
+		      	  		</td>
+		      	  		<td data-fat="<?= $meal['fat']; ?>">
+		      	  			<?= $meal['fat']; ?>
+		      	  		</td>
+		      	  		<td data-cholesterol="<?= $meal['cholesterol']; ?>">
+		      	  			<?= $meal['cholesterol']; ?>
+		      	  		</td>
+		      	  		<td data-sodium="<?= $meal['sodium']; ?>">
+		      	  			<?= $meal['sodium']; ?>
+		      	  		</td>
+		      	  		<td data-carbs="<?= $meal['carbs']; ?>">
+		      	  			<?= $meal['carbs']; ?>
+		      	  		</td>
+		      	  		<td data-fiber="<?= $meal['fiber']; ?>">
+		      	  			<?= $meal['fiber']; ?>
+		      	  		</td>
+		      	  		<td data-protein="<?= $meal['protein']; ?>">
+		      	  			<?= $meal['protein']; ?>
+		      	  		</td>
+		      	  		<td data-sugar="<?= $meal['sugar']; ?>">
+		      	  			<?= $meal['sugar']; ?>
+		      	  		</td>
+		      		</tr>
+		      				
 		      		<?php 	      	  			
 		      	  		else:
-		      	  			$modelFoods = new Model_Foods();
-		      	  			$food = $modelFoods->fetch($intake['foodId'])->toArray();
-		      	    ?>			
-		      	    
+		      	  			$food = $this->modelFoods->fetch($intake['foodId'])->toArray();
+		      	    ?>
+		      	    			
 		      	    <tr class="sum">
 		      			<td><?= $food['name']; ?></td>
 		      	  		<td><?= $intake['servingSize']; ?> <?= $this->t->_($food['servingSizeType']); ?></td>
-		      			<td data-calories="<?= ($food['calories']) ? ($food['calories'] / $food['servingSize']) * $intake['servingSize'] : '0'; ?>"><?= ($food['calories']) ? ($food['calories'] / $food['servingSize']) * $intake['servingSize'] : 'N/A'; ?></td>
-		      			<td data-fat="<?= ($food['fat']) ? ($food['fat'] / $food['servingSize']) * $intake['servingSize'] : '0'; ?>"><?= ($food['fat']) ? ($food['fat'] / $food['servingSize']) * $intake['servingSize'] : 'N/A'; ?></td>
-		      			<td data-cholesterol="<?= ($food['cholesterol']) ? ($food['cholesterol'] / $food['servingSize']) * $intake['servingSize'] : '0'; ?>"><?= ($food['cholesterol']) ? ($food['cholesterol'] / $food['servingSize']) * $intake['servingSize'] : 'N/A'; ?></td>
-		      			<td data-sodium="<?= ($food['sodium']) ? ($food['sodium'] / $food['servingSize']) * $intake['servingSize'] : '0'; ?>"><?= ($food['sodium']) ? ($food['sodium'] / $food['servingSize']) * $intake['servingSize'] : 'N/A'; ?></td>
-		      			<td data-carbs="<?= ($food['carbs']) ? ($food['carbs'] / $food['servingSize']) * $intake['servingSize'] : '0'; ?>"><?= ($food['carbs']) ? ($food['carbs'] / $food['servingSize']) * $intake['servingSize'] : 'N/A'; ?></td>
-		      			<td data-fiber="<?= ($food['fiber']) ? ($food['fiber'] / $food['servingSize']) * $intake['servingSize'] : '0'; ?>"><?= ($food['fiber']) ? ($food['fiber'] / $food['servingSize']) * $intake['servingSize'] : 'N/A'; ?></td>
-		      			<td data-protein="<?= ($food['protein']) ? ($food['protein'] / $food['servingSize']) * $intake['servingSize'] : '0'; ?>"><?= ($food['protein']) ? ($food['protein'] / $food['servingSize']) * $intake['servingSize'] : 'N/A'; ?></td>
-		      			<td data-sugar="<?= ($food['sugar']) ? ($food['sugar'] / $food['servingSize']) * $intake['servingSize'] : '0'; ?>"><?= ($food['sugar']) ? ($food['sugar'] / $food['servingSize']) * $intake['servingSize'] : 'N/A'; ?></td>
+		      	  		<td data-calories="<?= $this->modelFoods->calculateMacros($food['calories'], $food['servingSize'], $intake['servingSize'], 0); ?>">
+		      	  			<?= $this->modelFoods->calculateMacros($food['calories'], $food['servingSize'], $intake['servingSize'], 'N/A'); ?>
+		      	  		</td>
+		      			<td data-fat="<?= $this->modelFoods->calculateMacros($food['fat'], $food['servingSize'], $intake['servingSize'], 0); ?>">
+		      				<?= $this->modelFoods->calculateMacros($food['fat'], $food['servingSize'], $intake['servingSize'], 'N/A'); ?>
+		      			</td>
+		      			<td data-cholesterol="<?= $this->modelFoods->calculateMacros($food['cholesterol'], $food['servingSize'], $intake['servingSize'], 0); ?>">
+		      				<?= $this->modelFoods->calculateMacros($food['cholesterol'], $food['servingSize'], $intake['servingSize'], 'N/A'); ?>
+		      			</td>
+		      			<td data-sodium="<?= $this->modelFoods->calculateMacros($food['sodium'], $food['servingSize'], $intake['servingSize'], 0); ?>">
+		      				<?= $this->modelFoods->calculateMacros($food['sodium'], $food['servingSize'], $intake['servingSize'], 'N/A'); ?>
+		      			</td>
+		      			<td data-carbs="<?= $this->modelFoods->calculateMacros($food['carbs'], $food['servingSize'], $intake['servingSize'], 0); ?>">
+		      				<?= $this->modelFoods->calculateMacros($food['carbs'], $food['servingSize'], $intake['servingSize'], 'N/A'); ?>
+		      			</td>
+		      			<td data-fiber="<?= $this->modelFoods->calculateMacros($food['fiber'], $food['servingSize'], $intake['servingSize'], 0); ?>">
+		      				<?= $this->modelFoods->calculateMacros($food['fiber'], $food['servingSize'], $intake['servingSize'], 'N/A'); ?>
+		      			</td>
+		      			<td data-protein="<?= $this->modelFoods->calculateMacros($food['protein'], $food['servingSize'], $intake['servingSize'], 0); ?>">
+		      				<?= $this->modelFoods->calculateMacros($food['protein'], $food['servingSize'], $intake['servingSize'], 'N/A'); ?>
+		      			</td>
+		      			<td data-sugar="<?= $this->modelFoods->calculateMacros($food['sugar'], $food['servingSize'], $intake['servingSize'], 0); ?>">
+		      				<?= $this->modelFoods->calculateMacros($food['sugar'], $food['servingSize'], $intake['servingSize'], 'N/A'); ?>
+		      			</td>
 		      		</tr>
 		      	   <?php 
 		      	  	 	 endif;
