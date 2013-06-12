@@ -36,12 +36,13 @@ if(0 < count($this->dailyIntake)){
 		}
 	}
 }
-
-if($showMacros):
 ?>
 <div style="height: 300px;">
 	<div class="fc-day-content">
 		<div style="position:relative">	
+<?php 
+if($showMacros):
+?>
 			<div class="viewDetail fc-event fc-event-skin fc-event-hori fc-corner-left fc-corner-right" style="background-color: rgb(71, 125, 174); border-color: rgb(14, 105, 161); top: 30px; -moz-user-select: none;">
 				<div class="fc-event-inner fc-event-skin" style="background-color:#477dae;border-color:#0E69A1;color:#000000">
 					<span class="fc-event-time"><strong><?= $this->t->_('Daily Consumption'); ?></strong></span>
@@ -57,7 +58,7 @@ if($showMacros):
 					 </span>
 				</div>
 			</div>
+<?php endif; ?>
 		</div>
 	</div>
 </div>
-<?php endif; ?>

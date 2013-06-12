@@ -9,7 +9,7 @@ switch(APPLICATION_ENV) {
 		
 		require_once 'Zend/Application.php';
 		
-		define('SERVER_PATH', '/var/www/gym');
+		define('SERVER_PATH', '/var/www/gym.com');
 		break;	
 	case 'production':
 	case '':		
