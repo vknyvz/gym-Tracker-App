@@ -1,0 +1,21 @@
+<?php 
+$calories = $protein = $fat = $carbs = $sodium = $sugar = $fiber = $cholesterol = 0;
+
+echo '
+	<td rel="' . $this->day->thisYear() . '-' . $this->day->thisMonth(). '-' . $this->day->thisDay(). '" class="' . $this->class . ' fc-widget-content addExercise ' . $this->firstLast . '">	
+		<div>
+			<div class="fc-day-number dayDetail" rel="' . $this->day->thisYear(). '-' . $this->day->thisMonth(). '-' . $this->day->thisDay(). '">' . $this->day->thisDay(). '</div>
+			<div class="fc-day-content">
+				<div style="position:relative">
+					<div class="viewDetail vkNgine-calendar-event vkNgine-calendar-event-skin vkNgine-calendar-event-hori vkNgine-calendar-corner-left vkNgine-calendar-corner-right" style="background-color: rgb(71, 125, 174); border-color: rgb(14, 105, 161); top: 30px; -moz-user-select: none;">
+						<div class="vkNgine-calendar-event-inner vkNgine-calendar-event-skin" style="background-color:#477dae;border-color:#0E69A1">
+							<span class="vkNgine-calendar-event-time"></span>
+							<span class="vkNgine-calendar-event-title"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</td>
+';
+?>

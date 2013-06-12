@@ -1,30 +1,30 @@
 <?php 
-	$state = null;
-	if(isset($this->params['day'])) {
-		if (date('d') == $this->params['day']){
-			$state = 'fc-state-disabled';
-		}
+$state = null;
+if(isset($this->params['day'])) {
+	if (date('d') == $this->params['day']){
+		$state = 'fc-state-disabled';
 	}
-	
-	$prevMonth = $this->links['prev'];
-	if($prevMonth->thisMonth() == date('n')){
-		$dayPrev = date('d');
-	}
-	else {
-		$dayPrev = 0;
-	}
-	
-	$nextMonth = $this->links['next'];
-	if($nextMonth->thisMonth() == date('n')){
-		$dayNext = date('d');
-	}
-	else {
-		$dayNext = 0;
-	}
-	
-	$today =  '/calorie-calendar';
-	$prev = '/calorie-calendar/index/year/' . $prevMonth->thisYear().'/month/'.$prevMonth->thisMonth().'/day/'.$dayPrev;
-	$next = '/calorie-calendar/index/year/' . $nextMonth->thisYear().'/month/'.$nextMonth->thisMonth().'/day/'.$dayNext;
+}
+
+$prevMonth = $this->links['prev'];
+if($prevMonth->thisMonth() == date('n')){
+	$dayPrev = date('d');
+}
+else {
+	$dayPrev = 0;
+}
+
+$nextMonth = $this->links['next'];
+if($nextMonth->thisMonth() == date('n')){
+	$dayNext = date('d');
+}
+else {
+	$dayNext = 0;
+}
+
+$today = '/calorie-calendar';
+$prev = '/calorie-calendar/index/year/' . $prevMonth->thisYear().'/month/'.$prevMonth->thisMonth().'/day/'.$dayPrev;
+$next = '/calorie-calendar/index/year/' . $nextMonth->thisYear().'/month/'.$nextMonth->thisMonth().'/day/'.$dayNext;
 ?>
 
 <script>
@@ -90,7 +90,58 @@
 								</tbody>
 							</table>
 							<div class="fc-content" style="position: relative; min-height: 1px;">
-								<strong>Monthly Calendar is not available at this time.</strong>
+								<div class="fc-view fc-view-month fc-grid" style="position: relative; -moz-user-select: none;">
+									<table class="fc-border-separate" style="width:100%">
+										<thead>
+											<tr class="fc-first fc-last">
+												<th style="width: 127px;" class="fc-widget-header fc-first"><?= $this->t->_('Monday'); ?></th>
+												<th style="width: 127px;" class="fc-widget-header"><?= $this->t->_('Tuesday'); ?></th>
+												<th style="width: 127px;" class="fc-widget-header"><?= $this->t->_('Wednesday'); ?></th>
+												<th style="width: 127px;" class="fc-widget-header"><?= $this->t->_('Thursday'); ?></th>
+												<th style="width: 127px;" class="fc-widget-header"><?= $this->t->_('Friday'); ?></th>
+												<th style="width: 127px;" class="fc-widget-header"><?= $this->t->_('Saturday'); ?></th>
+												<th style="width: 127px;" class="fc-widget-header fc-last"><?= $this->t->_('Sunday'); ?></th>
+											</tr>
+										</thead>
+										<tbody>	
+										<?php
+											while($day = $this->calendar->fetch()) {
+												$firstLast = null;
+												
+												if($day->isLast()) {
+													$firstLast = 'fc-last';
+												}
+												if($day->isFirst()) {
+													$firstLast = 'fc-first';
+												}
+												
+												if($day->isFirst())
+													echo "<tr>\n";
+												
+												if($day->isSelected()) {
+													$class = 'vkNgine-calendar-state-highlight ';
+												}
+												elseif($day->isEmpty()) {
+													$class = 'fc-other-month';											
+												}
+												else {
+													$class = '';												
+												}
+												
+												echo $this->partial('calorie-calendar/_totalMacros.phtml',
+														array('t' 		  => $this->t,
+															  'day'       => $day,
+															  'firstLast' => $firstLast,
+															  'class'  	  => $class
+													 ));
+												
+												if($day->isLast())
+													echo "</tr>\n";
+											}
+										?>
+										</tbody>	
+									</table>
+								</div>
 							</div>
 						</div>
 					</div>

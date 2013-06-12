@@ -1,60 +1,23 @@
-<?php 
-$showMacros = false;
-
-if(0 < count($this->dailyIntake)){
-	$showMacros = true;
-	
-	$calories = $protein = $fat = $carbs = $sodium = $sugar = $fiber = $cholesterol = 0;
-
-	foreach($this->dailyIntake as $intake) {
-		if($intake['mealId']){
-			$modelMeals = new Model_Meals();
-				
-			$meal = $modelMeals->fetchMealTotal($intake['mealId']);
-				
-			$calories += $meal['calories'];
-			$protein += $meal['protein'];
-			$fat += $meal['fat'];
-			$sodium += $meal['sodium'];
-			$cholesterol += $meal['cholesterol'];
-			$carbs += $meal['carbs'];
-			$sugar += $meal['sugar'];
-			$fiber += $meal['fiber'];
-		}
-		else {
-			$modelFoods = new Model_Foods();
-			$food = $modelFoods->fetch($intake['foodId'])->toArray();
-			
-			$calories += $modelFoods->calculateMacros($food['calories'], $food['servingSize'], $intake['servingSize'], '0');
-			$protein += $modelFoods->calculateMacros($food['protein'], $food['servingSize'], $intake['servingSize'], '0');
-			$fat += $modelFoods->calculateMacros($food['fat'], $food['servingSize'], $intake['servingSize'], '0');
-			$sodium += $modelFoods->calculateMacros($food['sodium'], $food['servingSize'], $intake['servingSize'], '0');
-			$cholesterol += $modelFoods->calculateMacros($food['cholesterol'], $food['servingSize'], $intake['servingSize'], '0');
-			$carbs += $modelFoods->calculateMacros($food['carbs'], $food['servingSize'], $intake['servingSize'], '0');
-			$sugar += $modelFoods->calculateMacros($food['sugar'], $food['servingSize'], $intake['servingSize'], '0');
-			$fiber += $modelFoods->calculateMacros($food['fiber'], $food['servingSize'], $intake['servingSize'], '0');			
-		}
-	}
-}
-?>
 <div style="height: 300px;">
 	<div class="fc-day-content">
-		<div style="position:relative">	
+		<div style="position: relative">	
 <?php 
-if($showMacros):
+if(0 < count($this->macros[$this->date])) :
 ?>
-			<div class="viewDetail fc-event fc-event-skin fc-event-hori fc-corner-left fc-corner-right" style="background-color: rgb(71, 125, 174); border-color: rgb(14, 105, 161); top: 30px; -moz-user-select: none;">
-				<div class="fc-event-inner fc-event-skin" style="background-color:#477dae;border-color:#0E69A1;color:#000000">
+			<div
+				class="viewDetail fc-event fc-event-skin fc-event-hori fc-corner-left fc-corner-right"
+				style="background-color: rgb(71, 125, 174); border-color: rgb(14, 105, 161); top: 30px; -moz-user-select: none;">
+				<div class="fc-event-inner fc-event-skin"
+					style="background-color: #477dae; border-color: #0E69A1; color: #000000">
 					<span class="fc-event-time"><strong><?= $this->t->_('Daily Consumption'); ?></strong></span>
-					<span class="fc-event-title">
-				        <br /> 			
-						<?= (sprintf($this->t->_('consumed %s calories'), $calories)); ?> <br />
-						<?= (sprintf($this->t->_('consumed %s gr protein'), $protein)); ?> <br />
-						<?= (sprintf($this->t->_('consumed %s gr cholesterol'), $cholesterol)); ?> <br />
-						<?= (sprintf($this->t->_('consumed %s gr fat'), $fat)); ?> <br /> 
-						<?= (sprintf($this->t->_('consumed %s gr carbs'), $carbs)); ?> <br />
-						<?= (sprintf($this->t->_('consumed %s gr sugar'), $sugar)); ?> <br />
-						<?= (sprintf($this->t->_('consumed %s gr fiber'), $fiber));  ?> 
+					<span class="fc-event-title"> <br /> 			
+						<?= (sprintf($this->t->_('consumed %s calories'), $this->macros[$this->date]['macros']['calories'])); ?> <br />
+						<?= (sprintf($this->t->_('consumed %s gr protein'), $this->macros[$this->date]['macros']['protein'])); ?> <br />
+						<?= (sprintf($this->t->_('consumed %s gr cholesterol'), $this->macros[$this->date]['macros']['cholesterol'])); ?> <br />
+						<?= (sprintf($this->t->_('consumed %s gr fat'), $this->macros[$this->date]['macros']['fat'])); ?> <br /> 
+						<?= (sprintf($this->t->_('consumed %s gr carbs'), $this->macros[$this->date]['macros']['carbs'])); ?> <br />
+						<?= (sprintf($this->t->_('consumed %s gr sugar'), $this->macros[$this->date]['macros']['sugar'])); ?> <br />
+						<?= (sprintf($this->t->_('consumed %s gr fiber'), $this->macros[$this->date]['macros']['fiber']));  ?> 
 					 </span>
 				</div>
 			</div>

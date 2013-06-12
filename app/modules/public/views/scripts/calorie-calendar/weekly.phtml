@@ -28,10 +28,10 @@ $next = '/calorie-calendar/weekly/year/' . $nextWeek['year'] . '/month/' . $next
 			window.top.location = '<?= $today; ?>';
 		});
 		$('.fc-button-month').bind('click', function() {
-			window.top.location = '<?= $this->publicUrl('monthly', 'calendar'); ?>';
+			window.top.location = '<?= $this->publicUrl('monthly', 'calorie-calendar'); ?>';
 		});
 		$('.fc-button-agendaWeek').bind('click', function() {
-			window.top.location = '<?= $this->publicUrl('weekly', 'calendar'); ?>';
+			window.top.location = '<?= $this->publicUrl('weekly', 'calorie-calendar'); ?>';
 		});
 
 		<?php
@@ -200,8 +200,8 @@ $next = '/calorie-calendar/weekly/year/' . $nextWeek['year'] . '/month/' . $next
 												
 						$date = $day->thisYear() . '-' . $thisMonth . '-' . $thisDay;	
 						
-						$dailyIntake = $modelDailyIntake->fetchAll("date = '" . $date . "' and userId = " . (int) $this->user->getId() . "");
-												
+						$macros = $modelDailyIntake->fetchMacros($date, $this->user);
+						
 						$highlightedCss = null;
 						$highlightedCss = ($date == date('Y-m-d')) ? 'fc-state-highlight' : '';
 						
@@ -223,8 +223,9 @@ $next = '/calorie-calendar/weekly/year/' . $nextWeek['year'] . '/month/' . $next
 		    	?>
 						<?= 
 						    $this->partial('calorie-calendar/_renderMacros.phtml',
-								array('t' 		   	=> $this->t,
-									  'dailyIntake' => $dailyIntake
+								array('t'      => $this->t,
+									  'date'   => $date,
+									  'macros' => $macros
 							));
 						?>
 					</td>

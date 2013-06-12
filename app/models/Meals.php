@@ -74,8 +74,7 @@ class Model_Meals extends vkNgine_DbTable_Abstract
 				$totalValues['sugar'][] = $data['sugar'];
 			}
 			
-			return array(
-				'title'		  => $query[0]['title'],
+			$mealCalories = array(
 				'calories'    => array_sum($totalValues['calories']),
 				'fat' 		  => array_sum($totalValues['fat']),
 				'cholesterol' => array_sum($totalValues['cholesterol']),
@@ -85,6 +84,12 @@ class Model_Meals extends vkNgine_DbTable_Abstract
 				'protein'     => array_sum($totalValues['protein']),
 				'sugar'       => array_sum($totalValues['sugar']),
 			);
+			
+			return array(
+				'title'		 		 => $query[0]['title'],
+				'mealTotalCalories'  => array_sum($mealCalories),
+				'macros'             => $mealCalories
+			);	
 		}
 		
 		return false;

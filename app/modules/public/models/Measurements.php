@@ -19,7 +19,7 @@ class Public_Model_Measurements extends vkNgine_DbTable_Abstract
 	
 	public function fetchByDate($date, Model_User $user) 
 	{
-		$select = $this->select($date);
+		$select = $this->select();
 		$select->where('date = ?', $date);
 		$select->where('userId = ?', $user->getId());
 		
