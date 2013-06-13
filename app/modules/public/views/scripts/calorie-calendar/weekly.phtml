@@ -140,48 +140,48 @@ $next = '/calorie-calendar/weekly/year/' . $nextWeek['year'] . '/month/' . $next
 			    		if($language->lang) {
 			    			if($language->lang == 'tr') {
 				    			if(date('D', $day->thisDay(true)) == 'Mon'){
-				    				echo '<th rel="' . $day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay() . '" class="fc-mon fc-widget-header fc-first dayDetail" style="width: 97px;">' . str_replace('Monday', $this->t->_('Monday'), date('j l', $day->thisDay(true))) . '</th>';
+				    				echo '<th rel="' . $day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay() . '" class="fc-mon fc-widget-header fc-first" style="width: 97px;">' . str_replace('Monday', $this->t->_('Monday'), date('j l', $day->thisDay(true))) . '</th>';
 				    			}
 				    			elseif(date('D', $day->thisDay(true)) == 'Sun'){
-				    				echo '<th rel="' . $day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay() . '" class="fc-sun fc-widget-header fc-agenda-gutter fc-last dayDetail" style="width: 97px;">' . str_replace('Sunday', $this->t->_('Sunday'), date('j l', $day->thisDay(true))) . '</th>';
+				    				echo '<th rel="' . $day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay() . '" class="fc-sun fc-widget-header fc-agenda-gutter fc-last" style="width: 97px;">' . str_replace('Sunday', $this->t->_('Sunday'), date('j l', $day->thisDay(true))) . '</th>';
 				    			}
 				    			else {
-				    				echo '<th rel="' . $day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay() . '" class="fc-widget-header dayDetail" style="width: 97px;">' . date('j', $day->thisDay(true)) . ' ' . $this->t->_(date('l', $day->thisDay(true))) . ' </th>';
+				    				echo '<th rel="' . $day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay() . '" class="fc-widget-header" style="width: 97px;">' . date('j', $day->thisDay(true)) . ' ' . $this->t->_(date('l', $day->thisDay(true))) . ' </th>';
 				    			}
 			    			}
 			    			else {
 			    				if(date('D', $day->thisDay(true)) == 'Mon'){
-			    					echo '<th rel="' . $day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay() . '" class="fc-mon fc-widget-header fc-first dayDetail" style="width: 97px;">' . date('l jS', $day->thisDay(true)) . '</th>';
+			    					echo '<th rel="' . $day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay() . '" class="fc-mon fc-widget-header fc-first" style="width: 97px;">' . date('l jS', $day->thisDay(true)) . '</th>';
 			    				}
 			    				elseif(date('D', $day->thisDay(true)) == 'Sun'){
-			    					echo '<th rel="' . $day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay() . '" class="fc-sun fc-widget-header fc-agenda-gutter fc-last dayDetail" style="width: 97px;">' . date('l jS', $day->thisDay(true)) . '</th>';
+			    					echo '<th rel="' . $day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay() . '" class="fc-sun fc-widget-header fc-agenda-gutter fc-last" style="width: 97px;">' . date('l jS', $day->thisDay(true)) . '</th>';
 			    				}
 			    				else {
-			    					echo '<th rel="' . $day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay() . '" class="fc-widget-header dayDetail" style="width: 97px;">' . date('l jS', $day->thisDay(true)) . '</th>';
+			    					echo '<th rel="' . $day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay() . '" class="fc-widget-header" style="width: 97px;">' . date('l jS', $day->thisDay(true)) . '</th>';
 			    				}
 			    			}
 			    		}
 			    		else {
 			    			if($config->language->locale == 'tr') {
 			    				if(date('D', $day->thisDay(true)) == 'Mon'){
-				    				echo '<th rel="' . $day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay() . '" class="fc-mon fc-widget-header fc-first dayDetail" style="width: 97px;">' . str_replace('Monday', $this->t->_('Monday'), date('j l', $day->thisDay(true))) . '</th>';
+				    				echo '<th rel="' . $day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay() . '" class="fc-mon fc-widget-header fc-first" style="width: 97px;">' . str_replace('Monday', $this->t->_('Monday'), date('j l', $day->thisDay(true))) . '</th>';
 				    			}
 				    			elseif(date('D', $day->thisDay(true)) == 'Sun'){
-				    				echo '<th rel="' . $day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay() . '" class="fc-sun fc-widget-header fc-agenda-gutter fc-last dayDetail" style="width: 97px;">' . str_replace('Sunday', $this->t->_('Sunday'), date('j l', $day->thisDay(true))) . '</th>';
+				    				echo '<th rel="' . $day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay() . '" class="fc-sun fc-widget-header fc-agenda-gutter fc-last" style="width: 97px;">' . str_replace('Sunday', $this->t->_('Sunday'), date('j l', $day->thisDay(true))) . '</th>';
 				    			}
 				    			else {
-				    				echo '<th rel="' . $day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay() . '" class="fc-widget-header dayDetail" style="width: 97px;">' . date('j', $day->thisDay(true)) . ' ' . $this->t->_(date('l', $day->thisDay(true))) . ' </th>';
+				    				echo '<th rel="' . $day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay() . '" class="fc-widget-header" style="width: 97px;">' . date('j', $day->thisDay(true)) . ' ' . $this->t->_(date('l', $day->thisDay(true))) . ' </th>';
 				    			}
 			    			}
 			    			else {
 			    				if(date('D', $day->thisDay(true)) == 'Mon'){
-			    					echo '<th rel="' . $day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay() . '" class="fc-mon fc-widget-header fc-first dayDetail" style="width: 97px;">' . date('l jS', $day->thisDay(true)) . '</th>';
+			    					echo '<th rel="' . $day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay() . '" class="fc-mon fc-widget-header fc-first" style="width: 97px;">' . date('l jS', $day->thisDay(true)) . '</th>';
 			    				}
 			    				elseif(date('D', $day->thisDay(true)) == 'Sun'){
-			    					echo '<th rel="' . $day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay() . '" class="fc-sun fc-widget-header fc-agenda-gutter fc-last dayDetail" style="width: 97px;">' . date('l jS', $day->thisDay(true)) . '</th>';
+			    					echo '<th rel="' . $day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay() . '" class="fc-sun fc-widget-header fc-agenda-gutter fc-last" style="width: 97px;">' . date('l jS', $day->thisDay(true)) . '</th>';
 			    				}
 			    				else {
-			    					echo '<th rel="' . $day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay() . '" class="fc-widget-header dayDetail" style="width: 97px;">' . date('l jS', $day->thisDay(true)) . '</th>';
+			    					echo '<th rel="' . $day->thisYear() . '-' . $day->thisMonth() . '-' . $day->thisDay() . '" class="fc-widget-header" style="width: 97px;">' . date('l jS', $day->thisDay(true)) . '</th>';
 			    				}
 			    			}
 			    		}

@@ -128,11 +128,21 @@ $next = '/calorie-calendar/index/year/' . $nextMonth->thisYear().'/month/'.$next
 													$class = '';												
 												}
 												
+												$thisMonth = ((strlen($day->thisMonth()) == 1) ? '0'. $day->thisMonth() : $day->thisMonth());
+												$thisDay = ((strlen($day->thisDay()) == 1) ? '0'. $day->thisDay() : $day->thisDay());
+												
+												$modelDailyIntake = new Public_Model_Daily_Intake();
+												$date = $day->thisYear() . '-' . $thisMonth . '-' . $thisDay;
+												
+												$macros = $modelDailyIntake->fetchMacros($date, $this->user);
+												
 												echo $this->partial('calorie-calendar/_renderMonthlyMacros.phtml',
 														array('t' 		  => $this->t,
 															  'day'       => $day,
+													          'date'      => $date,
 															  'firstLast' => $firstLast,
-															  'class'  	  => $class
+															  'class'  	  => $class,
+															  'macros'    => $macros
 													 ));
 												
 												if($day->isLast())

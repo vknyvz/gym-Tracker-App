@@ -272,7 +272,7 @@ class MyAccountController extends vkNgine_Public_Controller
 				$id = $modelMeasurements->insert($values);
 				
 				echo Zend_Json::encode(array('success' => 1,
-											 'href'    => '/my-account',
+											 'href'    => '/my-account/my-measurements',
 											 'dialog'  => 'btn_edit_measurements_dialog',
 											 'title'   => $this->t->_('Success Message'),
 											 'message' => $this->t->_('Measurement data was successfully inserted'),
