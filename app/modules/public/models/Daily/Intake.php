@@ -67,23 +67,20 @@ class Public_Model_Daily_Intake extends vkNgine_DbTable_Abstract
 				}
 			}
 		
-			$values = array('mealTotalCalories' => $mealTotalCalories, 
-							'foodTotalCalories' => $foodTotalCalories,
-						    'macros' => 
-								array('calories'    => $calories, 
-							 		  'protein'     => $protein, 
-									  'fat' 		=> $fat, 
-									  'sodium'      => $sodium,
-									  'cholesterol' => $cholesterol,
-									  'carbs'       => $carbs,
-									  'sugar'       => $sugar,
-									  'fiber'       => $fiber
-								),	
+			$values = array('calories'    => $calories, 
+							'protein'     => $protein, 
+							'fat' 		  => $fat, 
+							'sodium'      => $sodium,
+							'cholesterol' => $cholesterol,
+							'carbs'       => $carbs,
+							'sugar'       => $sugar,
+							'fiber'       => $fiber
 			);
 			
-			$macros[$date] = $values;
-			
-			$macros[$date]['totalCalories'] = array_sum($values['macros']);
+			$macros[$date]['totalCalories'] = array_sum($values);
+			$macros[$date]['foodTotalCalories'] = $macros[$date]['totalCalories'] - $mealTotalCalories;
+			$macros[$date]['mealTotalCalories'] = $mealTotalCalories;
+			$macros[$date]['macros'] = $values;
 		}
 		
 		return $macros;

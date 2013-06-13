@@ -30,9 +30,9 @@
                               <div class="control-group">
                                  <div class="controls">
                                     <?= $this->formMeals; ?>
-							        <button class="btn btn-inverse addmeal">
-										<i class="icon-plus icon-white"></i> <?= $this->t->_('Add Meal'); ?>
-									</button>								        
+								        <button class="btn btn-inverse addmeal">
+											<i class="icon-plus icon-white"></i> <?= $this->t->_('Add Meal'); ?>
+										</button>								        
                                  </div>
                               </div>            
                            </form>
@@ -73,7 +73,11 @@
 	<div class="span12">		
 		<div class="widget">
 			<div class="widget-title">
-				<h4><i class="icon-food"></i> <?= $this->t->_('Foods'); ?> :: <?= $this->t->_('Summary of Daily Consumption'); ?> :: <?= $date; ?></h4>								
+				<h4><i class="icon-food"></i> <?= $this->t->_('Foods'); ?> :: <?= $this->t->_('Summary of Daily Consumption'); ?> :: <?= $date; ?></h4>
+				<span class="tools">
+					<span class="fc-button-content"> <i class="icon-backward"></i> </span>
+					<span class="fc-button-content"> <i class="icon-forward"></i> </span>
+				</span>								
 			</div>
 			<div class="widget-body">
 				<table id="dailyFoods" class="table table-condensed table-hover">
@@ -114,29 +118,29 @@
 		      	  				}
 		      	  		    ?>
 		      	  		</td>
-		      	  		<td data-calories="<?= $meal['calories']; ?>">
-		      	  			<?= $meal['calories']; ?>
+		      	  		<td data-calories="<?= $meal['macros']['calories']; ?>">
+		      	  			<?= $meal['macros']['calories']; ?>
 		      	  		</td>
-		      	  		<td data-fat="<?= $meal['fat']; ?>">
-		      	  			<?= $meal['fat']; ?>
+		      	  		<td data-fat="<?= $meal['macros']['fat']; ?>">
+		      	  			<?= $meal['macros']['fat']; ?>
 		      	  		</td>
-		      	  		<td data-cholesterol="<?= $meal['cholesterol']; ?>">
-		      	  			<?= $meal['cholesterol']; ?>
+		      	  		<td data-cholesterol="<?= $meal['macros']['cholesterol']; ?>">
+		      	  			<?= $meal['macros']['cholesterol']; ?>
 		      	  		</td>
-		      	  		<td data-sodium="<?= $meal['sodium']; ?>">
-		      	  			<?= $meal['sodium']; ?>
+		      	  		<td data-sodium="<?= $meal['macros']['sodium']; ?>">
+		      	  			<?= $meal['macros']['sodium']; ?>
 		      	  		</td>
-		      	  		<td data-carbs="<?= $meal['carbs']; ?>">
-		      	  			<?= $meal['carbs']; ?>
+		      	  		<td data-carbs="<?= $meal['macros']['carbs']; ?>">
+		      	  			<?= $meal['macros']['carbs']; ?>
 		      	  		</td>
-		      	  		<td data-fiber="<?= $meal['fiber']; ?>">
-		      	  			<?= $meal['fiber']; ?>
+		      	  		<td data-fiber="<?= $meal['macros']['fiber']; ?>">
+		      	  			<?= $meal['macros']['fiber']; ?>
 		      	  		</td>
-		      	  		<td data-protein="<?= $meal['protein']; ?>">
-		      	  			<?= $meal['protein']; ?>
+		      	  		<td data-protein="<?= $meal['macros']['protein']; ?>">
+		      	  			<?= $meal['macros']['protein']; ?>
 		      	  		</td>
-		      	  		<td data-sugar="<?= $meal['sugar']; ?>">
-		      	  			<?= $meal['sugar']; ?>
+		      	  		<td data-sugar="<?= $meal['macros']['sugar']; ?>">
+		      	  			<?= $meal['macros']['sugar']; ?>
 		      	  		</td>
 		      		</tr>
 		      				

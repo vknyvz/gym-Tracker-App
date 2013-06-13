@@ -128,7 +128,7 @@ $next = '/calorie-calendar/index/year/' . $nextMonth->thisYear().'/month/'.$next
 													$class = '';												
 												}
 												
-												echo $this->partial('calorie-calendar/_totalMacros.phtml',
+												echo $this->partial('calorie-calendar/_renderMonthlyMacros.phtml',
 														array('t' 		  => $this->t,
 															  'day'       => $day,
 															  'firstLast' => $firstLast,
