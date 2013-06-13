@@ -49,10 +49,6 @@ class vkNgine_Public_Controller extends Zend_Controller_Action
     	
     	$this->view->params = $this->_getAllParams();
     	
-    	if(Zend_Registry::get('mobile')) {
-    		Zend_Controller_Action_HelperBroker::getExistingHelper('ViewRenderer')->setViewSuffix('m.phtml');
-    	}
-    	
     	Zend_Registry::set('user', $user);
     	$this->view->assign('user', $user);
     	
