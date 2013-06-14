@@ -47,7 +47,7 @@ class vkNgine_Public_Controller extends Zend_Controller_Action
     	
     	$user = vkNgine_Public_Auth::revalidate();
     	
-    	$this->view->params = $this->_getAllParams();
+    	$this->view->params = $this->getAllParams();
     	
     	Zend_Registry::set('user', $user);
     	$this->view->assign('user', $user);

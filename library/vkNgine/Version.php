@@ -17,7 +17,7 @@ final class vkNgine_Version
 	 *
 	 * @var string
 	 */
-	const APP_VERSION = '1.1.264';
+	const APP_VERSION = '1.2.0';
 	
     /**
      * sets the current vkNgine version number

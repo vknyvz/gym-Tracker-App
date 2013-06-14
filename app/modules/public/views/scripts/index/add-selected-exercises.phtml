@@ -24,26 +24,29 @@ $(document).ready(function(){
 	$('#<?= $this->form->getId(); ?>').ajaxForm(options);
 });
 
-$('#day-label').hide();
-$('#day-element').hide();
+$('label[for="day"]').hide();
+$('#day').hide();
+$('#day').next().hide();
 
 $(".setdays").change(function(){
 	var selected = $(".setdays option:selected");    
 
 	if(selected.val()){
-		
-		$('#day-element').show();
+		$('label[for="day"]').show();
+		$('#day').show();
+		$('#day').next().show();
 		
 		$.ajax({ 
 			url: '/index/set-day/id/' + selected.val(),
 			success: function(returnData) {
-				$('dd#day-element').html(returnData);
+				$('#day').html(returnData);
 			}
 		})
 	}
 	else {
-		$('#day-label').hide();
-		$('#day-element').hide();
+		$('label[for="day"]').hide();
+		$('#day').hide();
+		$('#day').next().hide();
 	}
 });
 </script>

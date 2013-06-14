@@ -703,7 +703,7 @@ var vkNgine = function () {
         
         $('.date-picker').datepicker({
     		format: 'yyyy-mm-dd'	
-    	});        
+    	}); 
     }
 
     var handleColorPicker = function () {

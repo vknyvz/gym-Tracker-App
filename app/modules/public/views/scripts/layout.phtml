@@ -52,7 +52,14 @@ $this->headMeta()
 		->appendName('apple-mobile-web-app-status-bar-style', 'black')
 		->appendName('viewport', 'width=1024px, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no');
 
-if('tr' == vkNgine_Config::getSystemConfig()->language->locale) {
+$language = new Zend_Session_Namespace('language');
+ 
+$lang = null;
+if($language->__isset('session')){
+	$lang = $language->lang;
+}
+
+if('tr' == vkNgine_Config::getSystemConfig()->language->locale || 'tr' == $lang) {
 	$this->headScript()->appendFile($this->baseUrl('/js/admin/ui/locale/ui.datepicker-tr.js'));
 }
 

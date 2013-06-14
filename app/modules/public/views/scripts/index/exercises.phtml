@@ -26,12 +26,12 @@
 					    <tbody>
 						    <?php
 							    if($this->params['type'] != 'Legs'){
-							    	$this->params['type'] = "primaryMuscle LIKE '%" . $this->params['type'] . "%'";
+							    	$type = "primaryMuscle LIKE '%" . $this->params['type'] . "%'";
 							    }
 							    else {
-							    	$this->params['type'] = "primaryMuscle LIKE '%Hamstrings%' or primaryMuscle LIKE '%Glutes, Hamstrings, Quadriceps%' or primaryMuscle LIKE '%Quadriceps%' or primaryMuscle LIKE '%Glutes%'";
+							    	$type = "primaryMuscle LIKE '%Hamstrings%' or primaryMuscle LIKE '%Glutes, Hamstrings, Quadriceps%' or primaryMuscle LIKE '%Quadriceps%' or primaryMuscle LIKE '%Glutes%'";
 							    }
-								foreach($this->exercises->fetchAll($this->params['type'])->toArray() as $exercise):
+								foreach($this->exercises->fetchAll($type)->toArray() as $exercise):
 							?>	
 						      <tr>
 						        <td><input type="checkbox" name="exercises[]" value="<?= $exercise['exerciseId']; ?>"></td>

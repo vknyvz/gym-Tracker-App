@@ -163,6 +163,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 	    $options = $this->getOptions();
 	    
 	    $language = new Zend_Session_Namespace('language');
+	    
 	   	if($language->__isset('session')){
 	        $lang = $language->lang;
 	    }
@@ -184,7 +185,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     				'locale'  => $lang
     		)
 	    );
-	    
+		
 		Zend_Registry::set('t', $translate);
 		Zend_Locale::setDefault($lang);
 	}
