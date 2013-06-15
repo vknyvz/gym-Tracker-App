@@ -19,6 +19,15 @@ class Public_Model_Form_Myaccount_Settings extends vkNgine_Form_AjaxDesign
     	$this->setAttrib('class', 'form');
     	
     	$this->addElements(array(
+    		new vkNgine_Form_Element_Password(
+				'password', 
+				array('label'  => null,
+					  'id'     => null,
+					  'class'  => 'input-password',
+					  'autocomplete' => 'off',
+					  'desc'   => Zend_Registry::get('t')->_('Write a new password only if you want to change your current password'),
+					  'removeDecorators' => 1), 	
+				true),
     		new vkNgine_Form_Element_Select('calendarView',
     				array('label' 	=> null,
     					  'class' 	=> 'span6 setCalendarView',
@@ -42,10 +51,10 @@ class Public_Model_Form_Myaccount_Settings extends vkNgine_Form_AjaxDesign
     	));
     }
     
-    public function setMobile()
+    public function changePassword()
     {
-    	$this->getElement('calendarView')
-    		 ->setAttrib('disabled', 'disabled')
-    		 ->setDescription(Zend_Registry::get('t')->_('You can\'t change the layout of the calendar on the mobile app'));
+    	$this->removeElement('notifications');
+    	$this->removeElement('calendarView');
+    	
     }
 }

@@ -20,6 +20,7 @@ class vkNgine_Form_Element_Password extends Zend_Form_Element_Password
 			 ->setRequired($required)
        	     ->setAttrib('class', $options['class'])
         	 ->addValidator('Alnum')
+        	 ->setDescription((isset($options['desc'])) ? $options['desc'] : null)
        		 ->addValidator('StringLength', false, array(6, 256));
 		
 		if(isset($options['removeDecorators'])){

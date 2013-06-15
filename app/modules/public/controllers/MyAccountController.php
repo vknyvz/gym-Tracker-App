@@ -10,24 +10,16 @@ class MyAccountController extends vkNgine_Public_Controller
 	{
 		parent::ajaxEnabled();
 		
-		$formCalendar = self::getMyaccountSettingsForm();
+		$form = self::getMyaccountSettingsForm();
 		
 		$populateData = array();
 		
 		$modelUsers = new Model_Users();
 		
-		if(Zend_Registry::get('mobile')){
-			$formCalendar->setMobile();
-			$populateData['calendarView'] = 'Monthly';
-			$this->view->mobile = true;
-		}
-		else {
-			$populateData['calendarView'] = $this->user['calendarView'];
-		}
-		
+		$populateData['calendarView'] = $this->user['calendarView'];
 		$populateData['notifications'] = $this->user['notifications'];
 		
-		$formCalendar->populate($populateData);
+		$form->populate($populateData);
 		
 		$request = $this->getRequest();
 		
@@ -47,6 +39,31 @@ class MyAccountController extends vkNgine_Public_Controller
 					
 				$modelUsers->update($this->user->getId(), $data);
 			}
+			elseif($this->_getParam('password')) {
+				$what = 'Password';
+				
+				$form->changePassword();
+				
+				$request = $this->getRequest();
+				
+				if ($request->isPost()) {
+					$post = $request->getPost();
+					
+					if($form->isValid($post)) {
+						$values = $form->getValues();
+					}
+					else {
+						echo Zend_Json::encode(array('title'   => $this->t->_('Error Message'),
+												     'icon'    => 'error',
+										 			 'message' => $this->t->_($what . ' was not updated')));
+						exit;
+					}
+				}
+			
+				$data['password'] = $values['password'];
+					
+				$modelUsers->update($this->user->getId(), $data);
+			}
 			
 			echo Zend_Json::encode(array('success' => 1,
 										 'title'   => $this->t->_('Success Message'),
@@ -54,7 +71,7 @@ class MyAccountController extends vkNgine_Public_Controller
 			exit;
 		}
 		
-		$this->view->formSettings = $formCalendar;
+		$this->view->formSettings = $form;
 	}
 	
 	public function myPlateAction()

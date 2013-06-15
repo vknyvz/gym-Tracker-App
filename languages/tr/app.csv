@@ -352,3 +352,7 @@
 "Total";"Toplam"
 
 "No Exercises added yet, go to Exercises list and add an exercise to this workout and day";"Henüz bu gün için herhangi bir egzersiz eklemediniz, egzersizler listesinden egzersiz ekliyebilirsiniz"
+
+"Write a new password only if you want to change your current password";"Şifrenizi değiştirmek için buraya bir şifre girin"
+"Change Password";"Şifre Değiştir"
+"Password was not updated";"Şifre değiştirilirken hata oluştu"
