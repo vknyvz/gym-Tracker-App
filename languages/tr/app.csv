@@ -356,3 +356,9 @@
 "Write a new password only if you want to change your current password";"Şifrenizi değiştirmek için buraya bir şifre girin"
 "Change Password";"Şifre Değiştir"
 "Password was not updated";"Şifre değiştirilirken hata oluştu"
+
+"Login to your account";"Hesabınıza Girin"
+"Remember me";"Beni Hatırla"
+"Forgot your password?";"Şifrenizi mi Unuttunuz?"
+"Click %s to reset your password";"basarak sifrenizi degistirebilirsiniz"
+"here";"Buraya"

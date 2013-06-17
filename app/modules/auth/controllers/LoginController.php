@@ -24,7 +24,7 @@ class Auth_LoginController extends vkNgine_Auth_Controller
     
     public function loginAction()
     {    	
-    	if (vkNgine_Auth::isAuthenticated()){
+    	if (vkNgine_Auth::isAuthenticated()) {
             header("location:/");
             exit;
         }
@@ -38,6 +38,7 @@ class Auth_LoginController extends vkNgine_Auth_Controller
 		$this->view->error = false;
 		
     	if ($request->isPost()) {
+    		
     		if ($form->isValid($request->getPost())){
     			$info = $form->getValues();
 				

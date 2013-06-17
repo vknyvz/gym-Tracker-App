@@ -22,7 +22,7 @@ class Auth_Model_Form_Login extends vkNgine_Form_Design
 				array('label' => null,
 					  'placeholder' => Zend_Registry::get('t')->_('Username'),
 					  'id' => null,
-					  'class' => 'input-username',
+					  'class' => 'm-wrap placeholder-no-fix',
 					  'removeDecorators' => 1), 	
 		   		true),
 			new vkNgine_Form_Element_Password(
@@ -30,29 +30,10 @@ class Auth_Model_Form_Login extends vkNgine_Form_Design
 				array('label' => null,
 					  'placeholder' => Zend_Registry::get('t')->_('Password'),
 					  'id' => null,
-					  'class' => 'input-password',
+					  'class' => 'm-wrap placeholder-no-fix',
 					  'removeDecorators' => 1), 	
 				true),
-			new vkNgine_Form_Element_Submit(
-				'submit', 
-				array('value' => Zend_Registry::get('t')->_('Login'), 
-					  'ignore' => true,
-					  'id' => 'login-btn',
-					  'class' => 'btn btn-block btn-inverse',
-					  'removeDecorators' => 1)),
-		));	        			  
-		
-		if(Zend_Registry::get('mobile')){
-			$this->mobileSettings();
-		}
-    }
-    
-    public function mobileSettings()
-    {
-    	if(Zend_Registry::get('mobile')){
-    		$this->getElement('username')->setAttrib('class', 'text-input');
-    		$this->getElement('password')->setAttrib('class', 'text-input');
-    	}
+		));        			  
     }
 }
 

@@ -5,30 +5,39 @@ echo $this->doctype() . "\n";
 
 $this->headLink()
 		->prependStylesheet($this->baseUrl('/js/public/bootstrap/css/bootstrap.min.css'))
-		->headLink(array('rel' => 'icon', 'href' => $this->baseUrl('dumbbell.ico'), 'type' => 'image/x-icon', 'PREPEND'))
+		->prependStylesheet($this->baseUrl('/js/public/bootstrap/css/bootstrap-responsive.min.css'))
 		->appendStylesheet($this->baseUrl('/css/font-awesome/css/font-awesome.css'))
-		->appendStylesheet($this->baseUrl('/css/styles.css'))
-		->appendStylesheet($this->baseUrl('/css/style_responsive.css'))
-	 	->appendStylesheet($this->baseUrl('/css/style_default.css'))
-	 	->appendStylesheet($this->baseUrl('/css/uniform/css/uniform.default.css'))
-	 	->headLink(array('rel' => 'apple-touch-icon', 'href' => '/V.ico'));
-
+		->appendStylesheet($this->baseUrl('/css/style-metro.css'))
+		->appendStylesheet($this->baseUrl('/css/style.css'))
+		->appendStylesheet($this->baseUrl('/css/style-responsive.css'))
+	 	->appendStylesheet($this->baseUrl('/css/themes/default.css'), '', true, array('id' => 'style_color'))
+	 	->appendStylesheet($this->baseUrl('/js/public/uniform/css/uniform.default.css'))
+	 	->appendStylesheet($this->baseUrl('/css/pages/login.css'))
+	 	->headLink(array('rel' => 'apple-touch-icon', 'href' => '/V.ico'))
+		->headLink(array('rel' => 'icon', 'href' => $this->baseUrl('dumbbell.ico'), 'type' => 'image/x-icon', 'PREPEND'));
+		
 $this->headScript()
-	 	->prependFile($this->baseUrl('/js/jquery-1.8.2.min.js'))
+	 	->prependFile($this->baseUrl('/js/public/jquery-1.10.1.min.js'))
+	 	->appendFile($this->baseUrl('/js/public/jquery-migrate-1.2.1.min.js'))
+	 	->appendFile($this->baseUrl('/js/public/jquery-ui/jquery-ui-1.10.1.custom.min.js'))
 	 	->appendFile($this->baseUrl('/js/public/bootstrap/js/bootstrap.min.js'))
-	 	->appendFile($this->baseUrl('/js/public/jquery.blockui.js'))
+	 	->appendFile($this->baseUrl('/js/public/excanvas.min.js'), 'text/javascript', array('conditional' => 'lt IE 9'))
+	 	->appendFile($this->baseUrl('/js/public/respond.min.js'), 'text/javascript', array('conditional' => 'lt IE 9'))
+	 	->appendFile($this->baseUrl('/js/public/jquery-slimscroll/jquery.slimscroll.min.js'))
+	 	->appendFile($this->baseUrl('/js/public/jquery.blockui.min.js'))
+	 	->appendFile($this->baseUrl('/js/form.js'))
+	 	->appendFile($this->baseUrl('/js/public/jquery.cookie.min.js'))
+	 	->appendFile($this->baseUrl('/js/public/uniform/jquery.uniform.min.js'))
 	 	->appendFile($this->baseUrl('/js/public/dialog.js'))
-	 	->appendFile($this->baseUrl('/js/form.js'))	 	 
-	 	->appendFile($this->baseUrl('/js/public/vkNgine.js'));
-
+	 	->appendFile($this->baseUrl('/js/public/scripts/app.js'))
+	 	->appendFile($this->baseUrl('/js/public/scripts/login.js'));
+	 	
 $this->headMeta()
      	->appendHttpEquiv('Content-Type', 'text/html; charset=UTF-8')
 		->appendHttpEquiv('expires', 'Oct, 31 Sun 1982 06:66:66 GMT')
 		->appendHttpEquiv('pragma', 'no-cache')
 		->appendHttpEquiv('Cache-Control', 'no-cache')
-        ->appendName('apple-mobile-web-app-capable', 'yes')
-		->appendName('apple-mobile-web-app-status-bar-style', 'black')
-		->appendName('viewport', 'width=device-width, initial-scale=1.0');
+        ->appendName('viewport', 'width=device-width, initial-scale=1.0');
 ?>
 
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -36,16 +45,21 @@ $this->headMeta()
 <!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
 
 <head>
-
 <?= $this->headTitle() . "\n"; ?>
 <?= $this->headMeta() . "\n"; ?>
 <?= $this->headLink()  . "\n"; ?>
 <?= $this->headScript(). "\n"; ?>
-	
 </head> 
 
-<body>
+<body class="login">
 	<?php echo $this->layout()->content; ?>
 </body>
+
+<script>
+	jQuery(document).ready(function() {     
+	  App.init();
+	  Login.init();
+	});
+</script>
 
 </html>	

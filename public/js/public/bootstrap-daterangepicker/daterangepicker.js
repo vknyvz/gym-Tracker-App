@@ -81,13 +81,13 @@
                   '<div class="range_inputs">' +
                     '<div>' +
                       '<label for="daterangepicker_start">' + this.locale.fromLabel + '</label>' +
-                      '<input class="input-mini" type="text" name="daterangepicker_start" value="" disabled="disabled" />' +
+                      '<input class="m-wrap input-mini" type="text" name="daterangepicker_start" value="" disabled="disabled" />' +
                     '</div>' +
                     '<div>' +
                       '<label for="daterangepicker_end">' + this.locale.toLabel + '</label>' +
-                      '<input class="input-mini" type="text" name="daterangepicker_end" value="" disabled="disabled" />' +
+                      '<input class="m-wrap input-mini" type="text" name="daterangepicker_end" value="" disabled="disabled" />' +
                     '</div>' +
-                    '<button class="btn btn-small" disabled="disabled">' + this.locale.applyLabel + '</button>' +
+                    '<button class="btn " disabled="disabled">' + this.locale.applyLabel + '</button>' +
                   '</div>' +
                 '</div>' +
               '</div>';
@@ -492,7 +492,7 @@
             
             if (!minDate || minDate < calendar[1][1])
             {
-                html += '<th class="prev available"><i class="icon-arrow-left"></i></th>';
+                html += '<th class="prev available"><i class="icon-angle-left"></i></th>';
             }
             else
             {
@@ -501,7 +501,7 @@
             html += '<th colspan="5" style="width: auto">' + this.locale.monthNames[calendar[1][1].getMonth()] + calendar[1][1].toString(" yyyy") + '</th>';
             if (!maxDate || maxDate > calendar[1][1])
             {
-                html += '<th class="next available"><i class="icon-arrow-right"></i></th>';
+                html += '<th class="next available"><i class="icon-angle-right"></i></th>';
             }
             else
             {

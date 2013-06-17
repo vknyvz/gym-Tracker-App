@@ -191,17 +191,7 @@ function btn_add_selected_workouts(){
 	}
 }
 
-function loginHandler(data) {
-	if(!data.success){
-		$('#username').closest('.control-group').addClass('error');
-		$('#password').closest('.control-group').addClass('error');
-	}
-	else {
-		$('#username').closest('.control-group').addClass('success');
-		$('#password').closest('.control-group').addClass('success');		
-		window.top.location = data.href;
-	}
-}
+
 
 function vkNgineDialogHandler(_class, width, buttons){
 	$("#" + _class + "").dialog({

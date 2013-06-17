@@ -1,25 +1,35 @@
-<div id="sidebar" class="nav-collapse collapse">	
-	<div class="navbar-inverse">
-		<form class="navbar-search visible-phone">
-			<input type="text" class="search-query" placeholder="<?= $this->t->_('Search'); ?>" />
-		</form>
-	</div>
-	
-	<ul>
-		<!-- Dashboard -->
-		<li <?= ($this->params['controller'] == 'index') ? 'class="active"' : ''; ?>>
-			<a href="<?= $this->publicUrl(); ?>">
-				<i class="icon-home"></i> <?= $this->t->_('Dashboard'); ?>
-			</a>					
+<div class="page-sidebar nav-collapse collapse">	
+	<ul class="page-sidebar-menu">
+		<li>
+			<div class="sidebar-toggler hidden-phone"></div>
+		</li>
+		<li>
+			<form class="sidebar-search">
+				<div class="input-box">
+					<a href="javascript:;" class="remove"></a>
+					<input type="text" placeholder="Search..." />
+					<input type="button" class="submit" value=" " />
+				</div>
+			</form>
 		</li>
 		
-		<!-- FirstName LastName -->
-		<li class="has-sub <?= ($this->params['controller'] == 'my-account') ? 'active' : ''; ?>">
-			<a href="javascript:void(0);" class="">
-				<i class="icon-user"></i> <?= $this->user->getFullName(); ?>
-				<span class="arrow"></span>
+		<!-- Dashboard -->
+		<li class="start <?= ($this->params['controller'] == 'index') ? 'active' : ''; ?> ">
+			<a href="<?= $this->publicUrl(); ?>">
+				<i class="icon-home"></i> 
+				<span class="title"><?= $this->t->_('Dashboard'); ?></span>
+				<span class="selected"></span>
 			</a>
-			<ul class="sub">
+		</li>
+				
+		<!-- FirstName LastName -->
+		<li class="<?= ($this->params['controller'] == 'my-account') ? 'active' : ''; ?>">
+			<a href="javascript:;">
+				<i class="icon-cogs"></i> 
+				<span class="title"><?= $this->user->getFullName(); ?></span>
+				<span class="arrow "></span>
+			</a>
+			<ul class="sub-menu">
 				<li>
 					<a <?= ($this->params['controller'] == 'my-account' && $this->params['action'] == 'index') ? 'class="active"' : ''; ?> href="<?= $this->publicUrl(null, 'my-account'); ?>">
 						<?= $this->t->_('My Settings'); ?>
@@ -47,9 +57,11 @@
 		<?php
 			$calendarLink = ('weekly' == strtolower($this->user->calendarView)) ? $this->publicUrl('weekly', 'calendar') : $this->publicUrl(null, 'calendar');
 		?>
-		<li>
-			<a <?= ($this->params['controller'] == 'calendar') ? 'class="active"' : ''; ?> href="<?= $calendarLink; ?>">
-				<i class="icon-calendar"></i> <?= $this->t->_('Exercise Calendar'); ?>
+		<li class="<?= ($this->params['controller'] == 'calendar') ? 'class="active"' : ''; ?>">
+			<a href="<?= $calendarLink; ?>">
+				<i class="icon-calendar"></i> 
+				<span class="title"><?= $this->t->_('Exercise Calendar'); ?></span>
+				<span class="selected"></span>
 			</a>
 		</li>
 		
@@ -57,19 +69,22 @@
 		<?php
 			$calendarLink = ('weekly' == strtolower($this->user->calendarView)) ? $this->publicUrl('weekly', 'calorie-calendar') : $this->publicUrl(null, 'calorie-calendar');
 		?>
-		<li>
-			<a <?= ($this->params['controller'] == 'calorie-calendar' && ($this->params['action'] == 'weekly' or $this->params['action'] == 'monthly')) ? 'class="active"' : ''; ?> href="<?= $calendarLink; ?>">
-				<i class="icon-calendar"></i> <?= $this->t->_('Calorie Calendar'); ?>
+		<li class="<?= ($this->params['controller'] == 'calorie-calendar' && ($this->params['action'] == 'weekly' or $this->params['action'] == 'monthly')) ? 'active' : ''; ?>">
+			<a href="<?= $calendarLink; ?>">
+				<i class="icon-calendar"></i> 
+				<span class="title"><?= $this->t->_('Calorie Calendar'); ?></span>
+				<span class="selected"></span>
 			</a>
 		</li>
 		
 		<!-- Exercises -->
-		<li class="has-sub <?= ($this->params['controller'] == 'index' && $this->params['action'] == 'exercises') ? 'active' : ''; ?>">
-			<a href="javascript:void(0);" class="">
-				<i class="icon-camera"></i> <?= $this->t->_('Exercises'); ?>
-				<span class="arrow"></span>
+		<li class="<?= ($this->params['controller'] == 'index' && $this->params['action'] == 'exercises') ? 'active' : ''; ?>">
+			<a href="javascript:;">
+				<i class="icon-camera"></i> 
+				<span class="title"><?= $this->t->_('Exercises'); ?></span>
+				<span class="selected"></span>
 			</a>
-			<ul class="sub">
+			<ul class="sub-menu">
 				<?php
 					$type = (isset($this->params['type'])) ? $this->params['type'] : null;
 					
@@ -181,11 +196,13 @@
 		</li>
 		
 		<!-- About -->
-		<li>
-			<a <?= ($this->params['controller'] == 'index' && ($this->params['action'] == 'about')) ? 'class="active"' : ''; ?> href="<?= $this->publicUrl('about', null); ?>">
-				<i class="icon-book"></i> <?= $this->t->_('About'); ?>
-			</a>			
+		<li class="<?= ($this->params['controller'] == 'index' && ($this->params['action'] == 'about')) ? 'active' : ''; ?>" >
+			<a href="<?= $this->publicUrl('about', null); ?>">
+				<i class="icon-book"></i> 
+				<span class="title"><?= $this->t->_('About'); ?></span>
+				<span class="selected"></span>
+			</a>
 		</li>	
-			
+		
 	</ul>	
 </div>
