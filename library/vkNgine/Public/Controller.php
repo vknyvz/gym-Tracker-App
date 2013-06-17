@@ -60,7 +60,7 @@ class vkNgine_Public_Controller extends Zend_Controller_Action
     
     public function ajaxEnabled($dialog = false)
     {
-    	if(Zend_Registry::get('mobile') || $dialog) {
+    	if($dialog) {
     		$this->_helper->layout->disableLayout();
     	}
     }

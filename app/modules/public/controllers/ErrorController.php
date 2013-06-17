@@ -9,10 +9,6 @@ class ErrorController extends Zend_Controller_Action
 			case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ROUTE:
 			case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
 			case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
-				if(Zend_Registry::get('mobile')) {
-					Zend_Controller_Action_HelperBroker::getExistingHelper('ViewRenderer')->setViewSuffix('m.phtml');
-				}
-				
 				$this->getResponse()->setHttpResponseCode(404);
 				$this->view->headTitle('404 Error')->setSeparator(' - ');
 				$this->view->message = 'Page not found';

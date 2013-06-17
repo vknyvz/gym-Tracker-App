@@ -61,24 +61,6 @@ class Public_Model_Form_Daily_Exercises extends vkNgine_Form_AjaxDesign
     	));
     }
     
-    public function mobileSettings()
-    {
-    	if(Zend_Registry::get('mobile')){
-    		$this->getElement('workoutId')->setAttrib('class', 'text-input setdays');
-    		$this->getElement('workoutDay')->setAttrib('class', 'text-input');
-    		$this->getElement('activity')->setAttrib('class', 'text-input');
-    		$this->getElement('moreDetails')->setAttrib('class', 'select-input')->setAttrib('style', null);
-    		$this->getElement('type')->setAttrib('class', 'text-input');
-    		
-    		$submit = $this->createElement('submit', Zend_Registry::get('t')->_('Save'));
-    		$submit->setAttribs(array('class' => 'contactButton button grey',
-    								  'id' => 'contactSubmitBtn',
-    							      'value' => Zend_Registry::get('t')->_('Save')));
-    		
-    		$this->addElements(array($submit));
-    	}
-    }
-    
 	public function setWorkouts($workouts)
     {
     	$element = $this->getElement('workoutId');

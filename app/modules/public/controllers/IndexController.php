@@ -78,13 +78,8 @@ class IndexController extends vkNgine_Public_Controller
     {
     	$ajax = $this->_getParam('ajax', false);
     	
-    	if(Zend_Registry::get('mobile')) {
-    		parent::ajaxEnabled();
-    	}
-    	else {
-    		if($ajax){
-    			parent::ajaxEnabled(true);
-    		}
+   		if($ajax){
+    		parent::ajaxEnabled(true);
     	}
     	
     	$id = $this->_getParam('id');

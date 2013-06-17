@@ -1,86 +1,90 @@
 <?php 
 	$language = new Zend_Session_Namespace('language');
    	if('tr' == vkNgine_Config::getSystemConfig()->language->locale || 'tr' == $language->lang) {	 
-   		$pageTitle = date('j ') . ' ' . $this->t->_(date('F')) . ' ' . date(' Y');
+   		$date = date('j ') . ' ' . $this->t->_(date('F')) . ' ' . date(' Y');
    	}
    	else {
-   		$pageTitle = date('F j, Y');
+   		$date = date('F j, Y');
    	}
 ?>
 		    
 <?= 
 	$this->partial('_breadcrumbs.phtml', 
-		array('t' 		  => $this->t,					 
+		array('t' 		  => $this->t,		
+			  'pageTitle' => $this->t->_('My Plate') . ' :: ' . $date,				 
 			  'page'	  => $this->t->_('My Plate'),
 	)); 
 ?>
 
-			<div id="page">
-               <div class="row-fluid">
-                  <div class="span12">                     
-                     <div class="widget">
-                        <div class="widget-title">
-                           <h4><i class="icon-food"></i> <?= $this->t->_('My Plate') . ' :: ' . $pageTitle; ?></h4>                           							
-                        </div>
-                        <div class="widget-body form">
-                        
-                           <h5><?= $this->t->_('My Meals'); ?></h5>
-                           
-                           <form action="<?= $this->formMeals->getAction(); ?>" class="form-inline">
-                              <div class="control-group">
-                                 <div class="controls">
-                                    <?= $this->formMeals; ?>
-								        <button class="btn btn-inverse addmeal">
-											<i class="icon-plus icon-white"></i> <?= $this->t->_('Add Meal'); ?>
-										</button>								        
+			<div class="row-fluid">
+                  <div class="span12"> 
+                  <div class="portlet box blue">       
+                  	  	<div class="portlet-title">
+                  	  		<div class="caption">
+								<i class="icon-food"></i>
+								<span class="hidden-480"><?= $this->t->_('Meals'); ?></span>
+							</div>                       							
+						</div>	
+						<div class="portlet-body form">
+						 	<form action="<?= $this->formMeals->getAction(); ?>" class="horizontal-form">
+                              <div class="row-fluid">
+                               	   <div class="span6 ">
+		                              <div class="control-group">
+		                                 	<div class="controls">
+                                    			<?= $this->formMeals; ?>
+												<button class="btn blue addmeal">
+													<?= $this->t->_('Add Meal'); ?>
+													<i class="m-icon-swapright m-icon-white"></i>
+												</button>					        
+										    </div>
+										</div>
                                  </div>
                               </div>            
                            </form>
-                           
-                           <h5><?= $this->t->_('Foods'); ?></h5>
-                           
-                           <form action="<?= $this->formFoods->getAction(); ?>" class="form-inline">
-                                 <div class="controls">
-                                    <?= $this->formFoods->foodId; ?>
-                                    <?= $this->formFoods->foodSearch; ?>
-                                    <div id="servingSize" style="padding-top:10px;padding-left:3px"><?= $this->t->_('Serving Size'); ?>: <span id="servingSizeValue"></span></div>
-                                 </div>                               
-                                 <div class="controls">
-                                 	<?= $this->formFoods->servingSize; ?>
-  									<?= $this->formFoods->servingSizes; ?>
-                                 </div>                                 
-							     <button class="btn btn-inverse addfood">
-										<i class="icon-plus icon-white"></i> <?= $this->t->_('Add Food'); ?>
-	 							 </button>
+						</div>
+					</div>
+					
+					<div class="portlet box blue">       
+                  	  	<div class="portlet-title">
+                  	  		<div class="caption">
+								<i class="icon-food"></i>
+								<span class="hidden-480"><?= $this->t->_('Foods'); ?></span>
+							</div>                       							
+						</div>	
+						<div class="portlet-body form">
+						 	<form action="<?= $this->formFoods->getAction(); ?>" class="horizontal-form">
+                              <div class="row-fluid">
+                               	   <div class="span6 ">
+		                              <div class="control-group">
+		                                 	<div class="controls">
+		                                 		<?= $this->formFoods->foodId; ?>
+			                                    <?= $this->formFoods->foodSearch; ?>
+			                                    <div id="servingSize" style="padding-top:10px;padding-left:3px"><?= $this->t->_('Serving Size'); ?>: <span id="servingSizeValue"></span></div>
+										    </div>
+										    <div class="controls">
+			                                 	<?= $this->formFoods->servingSize; ?>
+			  									<?= $this->formFoods->servingSizes; ?>
+			  								</div>
+		  									<button class="btn blue addfood">
+												<?= $this->t->_('Add Food'); ?>
+												<i class="m-icon-swapright m-icon-white"></i>
+											</button>
+										</div>
+                                 </div>
+                              </div>            
                            </form>
-                           
-                        </div>
-                     </div>                     
-                  </div>
-               </div>
-			</div>	
-			 
-    <?php 
-    	if('tr' == vkNgine_Config::getSystemConfig()->language->locale || 'tr' == $language->lang) {	 
-    		$date = date('j ') . ' ' . $this->t->_(date('F')) . ' ' . date(' Y');
-    	}
-    	else {
-    		$date =  date('F j, Y');
-    	}
-?>
-
-<div class="row-fluid">
-	<div class="span12">		
-		<div class="widget">
-			<div class="widget-title">
-				<h4><i class="icon-food"></i> <?= $this->t->_('Foods'); ?> :: <?= $this->t->_('Summary of Daily Consumption'); ?> :: <?= $date; ?></h4>
-				<span class="tools">
-					<span class="fc-button-content"> <i class="icon-backward"></i> </span>
-					<span class="fc-button-content"> <i class="icon-forward"></i> </span>
-				</span>								
-			</div>
-			<div class="widget-body">
-				<table id="dailyFoods" class="table table-condensed table-hover">
+						</div>
+					</div>
+					
+					<div class="portlet box blue">       
+                  	  	<div class="portlet-title">
+                  	  		<div class="caption">
+								<i class="icon-food"></i>
+								<span class="hidden-480"><?= $this->t->_('Foods'); ?> :: <?= $this->t->_('Daily Consumption'); ?></span>
+							</div>                       							
+						</div>	
+						<div class="portlet-body">
+						 	<table id="dailyFoods" class="table table-condensed table-hover">
 				<thead>
 					<tr>
 						<th><?= $this->t->_('Name'); ?></th>
@@ -195,10 +199,10 @@
 		      	   </tr>
 				</tbody>
 			</table>
-			</div>
-		</div>		
-	</div>	
-</div>
+						</div>
+					</div>
+               </div>
+			</div>	
 
 <script type="text/javascript">
 	var total = function() {
@@ -214,7 +218,7 @@
 		    $('.total-' + macros[i] + '').text(macroValue);
 		}	
 	};
-	total();	
+	//total();	
   
  	var options = {
 		script:"/my-account/my-plate?food=1&",

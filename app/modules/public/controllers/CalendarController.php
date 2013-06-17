@@ -72,11 +72,7 @@ class CalendarController extends vkNgine_Public_Controller
 		$date = $this->_getParam('date');
 	
 		$form = self::getDailyExercisesForm();
-		
-		if(Zend_Registry::get('mobile')){
-			$form->mobileSettings();
-		}
-		 
+				 
 		$modelWorkouts = new Model_Workouts();
 		$modelDailyExcercises = new Public_Model_Daily_Exercises();
 		 
@@ -101,24 +97,14 @@ class CalendarController extends vkNgine_Public_Controller
 	
 				$modelDailyExcercises->insert($values);
 				
-				if(Zend_Registry::get('mobile')){
-					echo Zend_Json::encode(array('success'  => 1,
-											     'loadThis' => '/calendar/',
-												 'loadOn'	=> 'content',
-												 'title'    => $this->t->_('Success Message'),
-												 'message'  => $this->t->_('Exercise was successfully added'),
-												 'icon'     => 'success'
-					));
-				}
-				else {
-					echo Zend_Json::encode(array('success' => 1,
-							'href'    => '/calendar/' . $forward,
-							'dialog'  => 'lnk-addexercise-dialog',
-							'title'   => $this->t->_('Success Message'),
-							'message' => $this->t->_('Exercise was successfully added'),
-							'icon'    => 'success'
-					));
-				}
+				echo Zend_Json::encode(array('success' => 1,
+					'href'    => '/calendar/' . $forward,
+					'dialog'  => 'lnk-addexercise-dialog',
+					'title'   => $this->t->_('Success Message'),
+					'message' => $this->t->_('Exercise was successfully added'),
+					'icon'    => 'success'
+				));
+				
 				exit;
 			}
 			else {

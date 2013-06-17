@@ -66,20 +66,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 	}
 	
 	/**
-	 * initalize mobile app settings
-	 */
-	protected function _initMobileApp()
-	{
-		Zend_Registry::set('mobile', false);
-		
-		$browser = new vkNgine_Browser();
-		if($browser->isMobile() && $browser->getPlatform() == 'iPhone') {
-			Zend_Registry::set('mobile', true);
-			$this->getResource('layout')->setViewSuffix('m.' . $this->getResource('layout')->getViewSuffix());
-		}
-	}
-	
-	/**
 	 * initalize logging
 	 */
 	protected function _initLogger() 
