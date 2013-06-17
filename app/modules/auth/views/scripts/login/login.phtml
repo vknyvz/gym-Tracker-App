@@ -42,27 +42,26 @@
 		<div class="forget-password">
 				<h4><?= $this->t->_('Forgot your password?'); ?></h4>
 				<p>
-					<?= sprintf($this->t->_('Click %s to reset your password'), '<a href="javascript:;" class="" id="forget-password">' . $this->t->_('here') . '</a>'); ?>
-					
+					<?= sprintf($this->t->_('Click %s to reset your password'), '<a href="javascript:;" class="" id="forget-password">' . $this->t->_('here') . '</a>'); ?>					
 				</p>
 			</div>
       
     </form>
     
     <form class="form-vertical forget-form" action="">
-		<h3 class=""><?= $this->t->_('Forget Password?'); ?></h3>
+		<h3 class=""><?= $this->t->_('Forgot your password?'); ?></h3>
 		<p><?= $this->t->_('Enter your e-mail address below to reset your password.'); ?></p>
 		<div class="control-group">
 			<div class="controls">
 				<div class="input-icon left">
 					<i class="icon-envelope"></i>
-					<input class="m-wrap placeholder-no-fix" type="text" placeholder="Email" name="email" />
+					<input class="m-wrap placeholder-no-fix" type="text" placeholder="<?= $this->t->_('Email'); ?>" name="email" />
 				</div>
 			</div>
 		</div>
 		<div class="form-actions">
 			<button type="button" id="back-btn" class="btn">
-			<i class="m-icon-swapleft"></i> <?= $this->t->_('Back'); ?>
+			<i class="m-icon-swapleft"></i> <?= $this->t->_('Go back to login form'); ?>
 			</button>
 			<button type="submit" class="btn green pull-right">
 			<?= $this->t->_('Submit'); ?> <i class="m-icon-swapright m-icon-white"></i>

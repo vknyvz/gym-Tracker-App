@@ -1,53 +1,97 @@
 <?= $this->partial('_breadcrumbs.phtml', 
-				array('t' 		  => $this->t,					  
+				array('t' 		  => $this->t,
+					  'pageTitle' => $this->t->_($this->user->getFullname()),
 					  'page'	  => $this->t->_('My Settings'),
+						
 	)); 
 ?>
-
-		 <div id="page">
                <div class="row-fluid">
-                  <div class="span12">                     
-                     <div class="widget">                       
-                        <div class="widget-body form">
-                           <h5><?= $this->t->_('Change Password'); ?></h5>
-                           <form action="<?= $this->formSettings->getAction(); ?>" class="form-inline">
-                              <div class="control-group">
-                                 <div class="controls">
-                                    <?= $this->formSettings->password; ?>
-                                 </div>
+                  <div class="span12"> 
+                  	  <div class="portlet box blue">       
+                  	  	<div class="portlet-title">
+                  	  		<div class="caption">
+								<i class="icon-reorder"></i>
+								<span class="hidden-480"><?= $this->t->_('Change Password'); ?></span>
+							</div>
+						</div>
+                        <div class="portlet-body form">
+                           <form action="<?= $this->formSettings->getAction(); ?>" class="horizontal-form">
+                               <div class="row-fluid">
+                               	   <div class="span6 ">
+		                              <div class="control-group">
+		                                 	<div class="controls">
+		                                 		<?= $this->formSettings->password; ?>
+		                                 	</div> 
+		                              </div>
+		                           </div>
+		                       </div>            
+                           </form>
+                       </div>
+                     </div>  
+                     <div class="portlet box blue">  
+                     	<div class="portlet-title">
+                  	  		<div class="caption">
+								<i class="icon-reorder"></i>
+								<span class="hidden-480"><?= $this->t->_('Default Calendar View'); ?></span>
+							</div>
+						</div>
+						<div class="portlet-body form">
+						   <form action="<?= $this->formSettings->getAction(); ?>" class="horizontal-form">
+                              <div class="row-fluid">
+                               	   <div class="span6 ">
+		                              <div class="control-group">
+		                              	  <div class="controls">
+                                    		 <?= $this->formSettings->calendarView; ?>
+                                 		  </div>
+                                      </div>
+                                   </div>
                               </div>            
                            </form>
-                           
-                           <h5><?= $this->t->_('Default Calendar View'); ?></h5>
-                           <form action="<?= $this->formSettings->getAction(); ?>" class="form-inline">
-                              <div class="control-group">
-                                 <div class="controls">
-                                    <?= $this->formSettings->calendarView; ?>
-                                 </div>
-                              </div>            
-                           </form>
-                           
-                           <h5><?= $this->t->_('Notifications'); ?></h5>
-                           <form action="<?= $this->formSettings->getAction(); ?>" class="form-inline">
-                                 <div class="controls">
-                                    <?= $this->formSettings->notifications; ?>
+                        </div>
+                     </div>   
+                     
+                     <div class="portlet box blue">  
+                     	<div class="portlet-title">
+                  	  		<div class="caption">
+								<i class="icon-reorder"></i>
+								<span class="hidden-480"><?= $this->t->_('Notifications'); ?></span>
+							</div>
+						</div>
+						<div class="portlet-body form">
+                           <form action="<?= $this->formSettings->getAction(); ?>" class="horizontal-form">
+                           	     <div class="row-fluid">
+                               	   <div class="span6 ">
+		                              <div class="control-group">
+		                              	  <div class="controls">
+		                              	  		<?= $this->formSettings->notifications; ?>
+                                    	  </div>
+                                      </div>
+                                 	</div>
                                  </div>                               
                            </form>
-                           
-                           <h5><?= $this->t->_('Language'); ?></h5>
-                           <p>
+                        </div>
+                     </div>
+                     
+                     <div class="portlet box blue">  
+                     	<div class="portlet-title">
+                  	  		<div class="caption">
+								<i class="icon-reorder"></i>
+								<span class="hidden-480"><?= $this->t->_('Language'); ?></span>
+							</div>
+						</div>
+						<div class="portlet-body form">
+							<p align="center">
 						   	  <a class="language" href="javascript:void(0);" rel="tr"><img src="/images/Turkey.png" width="32"></a>
 							  <a class="language" href="javascript:void(0);" rel="en"><img src="/images/Us.png" width="32"></a>
 						   </p>
 						   <p class="warning">
 						   	  <?= $this->t->_('Clicking a flag will change the language for the current session'); ?>
 						   </p>
-                           
-                        </div>
-                     </div>                     
-                  </div>
+						</div>	
+				 	</div>       
+                  
                </div>
-			</div>	
+			</div>
 			
 <script>
 $('.description').addClass('warning');
