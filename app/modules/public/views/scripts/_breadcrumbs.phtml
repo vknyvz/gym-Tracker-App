@@ -25,8 +25,7 @@
 		<ul class="breadcrumb">
 			<li>
 				<i class="icon-home"></i>
-				<a href="<?= $this->publicUrl(); ?>"><?= $this->t->_('Home'); ?></a>
-				<i class="icon-angle-right"></i>
+				<a href="<?= $this->publicUrl(); ?>"><?= $this->t->_('Home'); ?></a>				
 			</li>
 			
 			<?php if(isset($this->page2) && isset($this->page2href)) : ?>
@@ -36,9 +35,11 @@
 			<?php endif; ?>
 			
 			<li>
-			<?php if(!$this->pageHref) : ?>	
+			<?php if(!$this->pageHref) : ?>
+				<i class="icon-angle-right"></i>	
 				<?= $this->page; ?>				
 			<?php else: ?>
+				<i class="icon-angle-right"></i>
 				<a href="<?= $this->request; ?>"><?= $this->page; ?></a>
 			<?php endif; ?>				
 			</li>

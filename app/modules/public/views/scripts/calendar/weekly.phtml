@@ -67,14 +67,14 @@ $next = '/calendar/weekly/year/' . $nextWeek['year'] . '/month/' . $nextWeek['mo
 
 <?= $this->partial('_breadcrumbs.phtml', 
 				array('t' 		  => $this->t,
-					  'pageTitle' => null,
+					  'pageTitle' => $this->t->_('Exercise Calendar'),
 					  'page'	  => $this->t->_('Weekly Calendar'),
 					  'page2'     => $this->t->_('Exercise Calendar'),
 					  'page2href' => '',
 	)); 
 ?>
 
-<div id="page" class="dashboard">
+
 	<div class="row-fluid">
 		<div class="span12">			
 			<div class="widget">
@@ -431,4 +431,4 @@ $next = '/calendar/weekly/year/' . $nextWeek['year'] . '/month/' . $nextWeek['mo
 </div>
 </div>
 </div>
-</div>
+
