@@ -33,8 +33,8 @@
 		                                 	<div class="controls">
                                     			<?= $this->formMeals; ?>
 												<button class="btn blue addmeal">
+													<i class="icon-plus"></i>
 													<?= $this->t->_('Add Meal'); ?>
-													<i class="m-icon-swapright m-icon-white"></i>
 												</button>					        
 										    </div>
 										</div>
@@ -66,8 +66,8 @@
 			  									<?= $this->formFoods->servingSizes; ?>
 			  								</div>
 		  									<button class="btn blue addfood">
+		  										<i class="icon-plus"></i>
 												<?= $this->t->_('Add Food'); ?>
-												<i class="m-icon-swapright m-icon-white"></i>
 											</button>
 										</div>
                                  </div>
@@ -85,120 +85,120 @@
 						</div>	
 						<div class="portlet-body">
 						 	<table id="dailyFoods" class="table table-condensed table-hover">
-				<thead>
-					<tr>
-						<th><?= $this->t->_('Name'); ?></th>
-		      			<th><?= $this->t->_('Serving'); ?></th>
-		      			<th><?= $this->t->_('Calories'); ?></th>
-		      			<th><?= $this->t->_('Fat'); ?></th>
-		      			<th><?= $this->t->_('Cholesterol'); ?></th>
-		      			<th><?= $this->t->_('Sodium'); ?></th>
-		      			<th><?= $this->t->_('Carbs'); ?></th>
-		      			<th><?= $this->t->_('Fiber'); ?></th>
-		      			<th><?= $this->t->_('Protein'); ?></th>
-		      			<th><?= $this->t->_('Sugar'); ?></th>
-					</tr>
-				</thead>	
-	      		<tbody>
-	      			<?php 
-	      			$totals = 0;
-			      	    foreach($this->dailyIntake as $intake):
-			      	    	if($intake['mealId']):
-			      	  			$modelMeals = new Model_Meals();
-							    $meal = $modelMeals->fetchMealTotal($intake['mealId']);
-							    
-							    $modelMealsFoods = new Model_Meals_Foods();
-							    $foods = $modelMealsFoods->fetchAll('mealId = ' . $intake['mealId']);
-							    
-					  ?>
-					<tr class="sum">
-		      			<td><?= $meal['title']; ?></td>
-		      	  		<td>
-		      	  			<?php 
-		      	  				foreach($foods as $food) {
-		      	  					$foodDetail = $this->modelFoods->fetch($food['foodId']);
-		      	  					
-		      	  					echo $foodDetail->getName() . ' x ' . $foodDetail['servingSize'] . '  <br> ';
-		      	  				}
-		      	  		    ?>
-		      	  		</td>
-		      	  		<td data-calories="<?= $meal['macros']['calories']; ?>">
-		      	  			<?= $meal['macros']['calories']; ?>
-		      	  		</td>
-		      	  		<td data-fat="<?= $meal['macros']['fat']; ?>">
-		      	  			<?= $meal['macros']['fat']; ?>
-		      	  		</td>
-		      	  		<td data-cholesterol="<?= $meal['macros']['cholesterol']; ?>">
-		      	  			<?= $meal['macros']['cholesterol']; ?>
-		      	  		</td>
-		      	  		<td data-sodium="<?= $meal['macros']['sodium']; ?>">
-		      	  			<?= $meal['macros']['sodium']; ?>
-		      	  		</td>
-		      	  		<td data-carbs="<?= $meal['macros']['carbs']; ?>">
-		      	  			<?= $meal['macros']['carbs']; ?>
-		      	  		</td>
-		      	  		<td data-fiber="<?= $meal['macros']['fiber']; ?>">
-		      	  			<?= $meal['macros']['fiber']; ?>
-		      	  		</td>
-		      	  		<td data-protein="<?= $meal['macros']['protein']; ?>">
-		      	  			<?= $meal['macros']['protein']; ?>
-		      	  		</td>
-		      	  		<td data-sugar="<?= $meal['macros']['sugar']; ?>">
-		      	  			<?= $meal['macros']['sugar']; ?>
-		      	  		</td>
-		      		</tr>
-		      				
-		      		<?php 	      	  			
-		      	  		else:
-		      	  			$food = $this->modelFoods->fetch($intake['foodId'])->toArray();
-		      	    ?>
-		      	    			
-		      	    <tr class="sum">
-		      			<td><?= $food['name']; ?></td>
-		      	  		<td><?= $intake['servingSize']; ?> <?= $this->t->_($food['servingSizeType']); ?></td>
-		      	  		<td data-calories="<?= $this->modelFoods->calculateMacros($food['calories'], $food['servingSize'], $intake['servingSize'], 0); ?>">
-		      	  			<?= $this->modelFoods->calculateMacros($food['calories'], $food['servingSize'], $intake['servingSize'], 'N/A'); ?>
-		      	  		</td>
-		      			<td data-fat="<?= $this->modelFoods->calculateMacros($food['fat'], $food['servingSize'], $intake['servingSize'], 0); ?>">
-		      				<?= $this->modelFoods->calculateMacros($food['fat'], $food['servingSize'], $intake['servingSize'], 'N/A'); ?>
-		      			</td>
-		      			<td data-cholesterol="<?= $this->modelFoods->calculateMacros($food['cholesterol'], $food['servingSize'], $intake['servingSize'], 0); ?>">
-		      				<?= $this->modelFoods->calculateMacros($food['cholesterol'], $food['servingSize'], $intake['servingSize'], 'N/A'); ?>
-		      			</td>
-		      			<td data-sodium="<?= $this->modelFoods->calculateMacros($food['sodium'], $food['servingSize'], $intake['servingSize'], 0); ?>">
-		      				<?= $this->modelFoods->calculateMacros($food['sodium'], $food['servingSize'], $intake['servingSize'], 'N/A'); ?>
-		      			</td>
-		      			<td data-carbs="<?= $this->modelFoods->calculateMacros($food['carbs'], $food['servingSize'], $intake['servingSize'], 0); ?>">
-		      				<?= $this->modelFoods->calculateMacros($food['carbs'], $food['servingSize'], $intake['servingSize'], 'N/A'); ?>
-		      			</td>
-		      			<td data-fiber="<?= $this->modelFoods->calculateMacros($food['fiber'], $food['servingSize'], $intake['servingSize'], 0); ?>">
-		      				<?= $this->modelFoods->calculateMacros($food['fiber'], $food['servingSize'], $intake['servingSize'], 'N/A'); ?>
-		      			</td>
-		      			<td data-protein="<?= $this->modelFoods->calculateMacros($food['protein'], $food['servingSize'], $intake['servingSize'], 0); ?>">
-		      				<?= $this->modelFoods->calculateMacros($food['protein'], $food['servingSize'], $intake['servingSize'], 'N/A'); ?>
-		      			</td>
-		      			<td data-sugar="<?= $this->modelFoods->calculateMacros($food['sugar'], $food['servingSize'], $intake['servingSize'], 0); ?>">
-		      				<?= $this->modelFoods->calculateMacros($food['sugar'], $food['servingSize'], $intake['servingSize'], 'N/A'); ?>
-		      			</td>
-		      		</tr>
-		      	   <?php 
-		      	  	 	 endif;
-		      		 endforeach; 
-		      	   ?>
-		      	   <tr id="totals">
-			      		<td><span style="float:right"><?= $this->t->_('Total'); ?></span></td>
-		      	  		<td></td>
-		      	  		<td class="total-calories"></td>
-		      	  		<td class="total-fat"></td>
-		      	  		<td class="total-cholesterol"></td>
-		      	  		<td class="total-sodium"></td>
-		      	  		<td class="total-carbs"></td>
-		      	  		<td class="total-fiber"></td>
-		      	  		<td class="total-protein"></td>
-		      	  		<td class="total-sugar"></td>
-		      	   </tr>
-				</tbody>
-			</table>
+								<thead>
+									<tr>
+										<th><?= $this->t->_('Name'); ?></th>
+						      			<th><?= $this->t->_('Serving'); ?></th>
+						      			<th><?= $this->t->_('Calories'); ?></th>
+						      			<th><?= $this->t->_('Fat'); ?></th>
+						      			<th><?= $this->t->_('Cholesterol'); ?></th>
+						      			<th><?= $this->t->_('Sodium'); ?></th>
+						      			<th><?= $this->t->_('Carbs'); ?></th>
+						      			<th><?= $this->t->_('Fiber'); ?></th>
+						      			<th class="hidden-480"><?= $this->t->_('Protein'); ?></th>
+						      			<th><?= $this->t->_('Sugar'); ?></th>
+									</tr>
+								</thead>	
+					      		<tbody>
+					      			<?php 
+					      			$totals = 0;
+							      	    foreach($this->dailyIntake as $intake):
+							      	    	if($intake['mealId']):
+							      	  			$modelMeals = new Model_Meals();
+											    $meal = $modelMeals->fetchMealTotal($intake['mealId']);
+											    
+											    $modelMealsFoods = new Model_Meals_Foods();
+											    $foods = $modelMealsFoods->fetchAll('mealId = ' . $intake['mealId']);
+											    
+									  ?>
+									<tr class="sum">
+						      			<td><?= $meal['title']; ?></td>
+						      	  		<td>
+						      	  			<?php 
+						      	  				foreach($foods as $food) {
+						      	  					$foodDetail = $this->modelFoods->fetch($food['foodId']);
+						      	  					
+						      	  					echo $foodDetail->getName() . ' x ' . $foodDetail['servingSize'] . '  <br> ';
+						      	  				}
+						      	  		    ?>
+						      	  		</td>
+						      	  		<td data-calories="<?= $meal['macros']['calories']; ?>">
+						      	  			<?= $meal['macros']['calories']; ?>
+						      	  		</td>
+						      	  		<td data-fat="<?= $meal['macros']['fat']; ?>">
+						      	  			<?= $meal['macros']['fat']; ?>
+						      	  		</td>
+						      	  		<td data-cholesterol="<?= $meal['macros']['cholesterol']; ?>">
+						      	  			<?= $meal['macros']['cholesterol']; ?>
+						      	  		</td>
+						      	  		<td data-sodium="<?= $meal['macros']['sodium']; ?>">
+						      	  			<?= $meal['macros']['sodium']; ?>
+						      	  		</td>
+						      	  		<td data-carbs="<?= $meal['macros']['carbs']; ?>">
+						      	  			<?= $meal['macros']['carbs']; ?>
+						      	  		</td>
+						      	  		<td data-fiber="<?= $meal['macros']['fiber']; ?>">
+						      	  			<?= $meal['macros']['fiber']; ?>
+						      	  		</td>
+						      	  		<td data-protein="<?= $meal['macros']['protein']; ?>">
+						      	  			<?= $meal['macros']['protein']; ?>
+						      	  		</td>
+						      	  		<td data-sugar="<?= $meal['macros']['sugar']; ?>">
+						      	  			<?= $meal['macros']['sugar']; ?>
+						      	  		</td>
+						      		</tr>
+						      				
+						      		<?php 	      	  			
+						      	  		else:
+						      	  			$food = $this->modelFoods->fetch($intake['foodId'])->toArray();
+						      	    ?>
+						      	    			
+						      	    <tr class="sum">
+						      			<td><?= $food['name']; ?></td>
+						      	  		<td><?= $intake['servingSize']; ?> <?= $this->t->_($food['servingSizeType']); ?></td>
+						      	  		<td data-calories="<?= $this->modelFoods->calculateMacros($food['calories'], $food['servingSize'], $intake['servingSize'], 0); ?>">
+						      	  			<?= $this->modelFoods->calculateMacros($food['calories'], $food['servingSize'], $intake['servingSize'], 'N/A'); ?>
+						      	  		</td>
+						      			<td data-fat="<?= $this->modelFoods->calculateMacros($food['fat'], $food['servingSize'], $intake['servingSize'], 0); ?>">
+						      				<?= $this->modelFoods->calculateMacros($food['fat'], $food['servingSize'], $intake['servingSize'], 'N/A'); ?>
+						      			</td>
+						      			<td data-cholesterol="<?= $this->modelFoods->calculateMacros($food['cholesterol'], $food['servingSize'], $intake['servingSize'], 0); ?>">
+						      				<?= $this->modelFoods->calculateMacros($food['cholesterol'], $food['servingSize'], $intake['servingSize'], 'N/A'); ?>
+						      			</td>
+						      			<td data-sodium="<?= $this->modelFoods->calculateMacros($food['sodium'], $food['servingSize'], $intake['servingSize'], 0); ?>">
+						      				<?= $this->modelFoods->calculateMacros($food['sodium'], $food['servingSize'], $intake['servingSize'], 'N/A'); ?>
+						      			</td>
+						      			<td data-carbs="<?= $this->modelFoods->calculateMacros($food['carbs'], $food['servingSize'], $intake['servingSize'], 0); ?>">
+						      				<?= $this->modelFoods->calculateMacros($food['carbs'], $food['servingSize'], $intake['servingSize'], 'N/A'); ?>
+						      			</td>
+						      			<td data-fiber="<?= $this->modelFoods->calculateMacros($food['fiber'], $food['servingSize'], $intake['servingSize'], 0); ?>">
+						      				<?= $this->modelFoods->calculateMacros($food['fiber'], $food['servingSize'], $intake['servingSize'], 'N/A'); ?>
+						      			</td>
+						      			<td data-protein="<?= $this->modelFoods->calculateMacros($food['protein'], $food['servingSize'], $intake['servingSize'], 0); ?>">
+						      				<?= $this->modelFoods->calculateMacros($food['protein'], $food['servingSize'], $intake['servingSize'], 'N/A'); ?>
+						      			</td>
+						      			<td data-sugar="<?= $this->modelFoods->calculateMacros($food['sugar'], $food['servingSize'], $intake['servingSize'], 0); ?>">
+						      				<?= $this->modelFoods->calculateMacros($food['sugar'], $food['servingSize'], $intake['servingSize'], 'N/A'); ?>
+						      			</td>
+						      		</tr>
+						      	   <?php 
+						      	  	 	 endif;
+						      		 endforeach; 
+						      	   ?>
+						      	   <tr id="totals">
+							      		<td><span style="float:right"><?= $this->t->_('Total'); ?></span></td>
+						      	  		<td></td>
+						      	  		<td class="total-calories"></td>
+						      	  		<td class="total-fat"></td>
+						      	  		<td class="total-cholesterol"></td>
+						      	  		<td class="total-sodium"></td>
+						      	  		<td class="total-carbs"></td>
+						      	  		<td class="total-fiber"></td>
+						      	  		<td class="total-protein"></td>
+						      	  		<td class="total-sugar"></td>
+						      	   </tr>
+								</tbody>
+							</table>
 						</div>
 					</div>
                </div>
@@ -218,7 +218,7 @@
 		    $('.total-' + macros[i] + '').text(macroValue);
 		}	
 	};
-	//total();	
+	total();	
   
  	var options = {
 		script:"/my-account/my-plate?food=1&",

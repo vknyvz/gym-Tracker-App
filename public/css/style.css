@@ -4448,7 +4448,7 @@ jQuery UI Datepicker(new in v1.2.2)
 }
 
 .ui-widget-header .ui-icon {
-  background-image: url(../plugins/jquery-ui/images/ui-icons_888888_256x240.png) !important;
+  background-image: url(/js/public/jquery-ui/images/ui-icons_888888_256x240.png) !important;
 }
 
 .ui-widget-header .ui-datepicker-next,

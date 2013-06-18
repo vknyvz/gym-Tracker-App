@@ -30,23 +30,23 @@
 				<span class="arrow "></span>
 			</a>
 			<ul class="sub-menu">
-				<li>
-					<a <?= ($this->params['controller'] == 'my-account' && $this->params['action'] == 'index') ? 'class="active"' : ''; ?> href="<?= $this->publicUrl(null, 'my-account'); ?>">
+				<li <?= ($this->params['controller'] == 'my-account' && $this->params['action'] == 'index') ? 'class="active"' : ''; ?>>
+					<a href="<?= $this->publicUrl(null, 'my-account'); ?>">
 						<?= $this->t->_('My Settings'); ?>
 					</a>
 				</li>
-				<li>
-					<a <?= ($this->params['controller'] == 'my-account' && $this->params['action'] == 'my-plate') ? 'class="active"' : ''; ?> href="<?= $this->publicUrl('my-plate', 'my-account'); ?>">
+				<li <?= ($this->params['controller'] == 'my-account' && $this->params['action'] == 'my-plate') ? 'class="active"' : ''; ?>>
+					<a href="<?= $this->publicUrl('my-plate', 'my-account'); ?>">
 						<?= $this->t->_('My Plate'); ?>
 					</a>
 				</li>
-				<li>
-					<a <?= ($this->params['controller'] == 'my-account' && $this->params['action'] == 'my-workouts') ? 'class="active"' : ''; ?> href="<?= $this->publicUrl('my-workouts', 'my-account'); ?>">
+				<li <?= ($this->params['controller'] == 'my-account' && $this->params['action'] == 'my-workouts') ? 'class="active"' : ''; ?>>
+					<a href="<?= $this->publicUrl('my-workouts', 'my-account'); ?>">
 						<?= $this->t->_('My Workouts'); ?>
 					</a>
 				</li>
-				<li>
-					<a <?= ($this->params['controller'] == 'my-account' && $this->params['action'] == 'my-measurements') ? 'class="active"' : ''; ?> href="<?= $this->publicUrl('my-measurements', 'my-account'); ?>">
+				<li <?= ($this->params['controller'] == 'my-account' && $this->params['action'] == 'my-measurements') ? 'class="active"' : ''; ?>>
+					<a href="<?= $this->publicUrl('my-measurements', 'my-account'); ?>">
 						<?= $this->t->_('My Measurements'); ?>
 					</a>
 				</li>						

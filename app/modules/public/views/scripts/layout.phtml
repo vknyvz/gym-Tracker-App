@@ -13,10 +13,14 @@ $this->headLink()
 	 	->appendStylesheet($this->baseUrl('/css/themes/default.css'), '', true, array('id' => 'style_color'))
 		->appendStylesheet($this->baseUrl('/js/public/uniform/css/uniform.default.css'))
 		->appendStylesheet($this->baseUrl('/js/public/gritter/css/jquery.gritter.css'))		
+		->appendStylesheet($this->baseUrl('/js/public/bootstrap-datepicker/css/datepicker.css'))
 		->appendStylesheet($this->baseUrl('/js/public/bootstrap-daterangepicker/daterangepicker.css'))
+		->appendStylesheet($this->baseUrl('/js/public/bootstrap-datetimepicker/css/datetimepicker.css'))
 		->appendStylesheet($this->baseUrl('/js/public/fullcalendar/fullcalendar.css'))
 		->appendStylesheet($this->baseUrl('/js/public/jqvmap/jqvmap/jqvmap.css'))
 		->appendStylesheet($this->baseUrl('/js/public/jquery-easy-pie-chart/jquery.easy-pie-chart.css'))
+ 		->appendStylesheet($this->baseUrl('/css/glyphicons/css/glyphicons.css'))
+ 		->appendStylesheet($this->baseUrl('/js/public/bootstrap-modal/css/bootstrap-modal.css'))
 		->headLink(array('rel' => 'icon', 'href' => $this->baseUrl('dumbbell.ico'), 'type' => 'image/x-icon', 'PREPEND'));
 
 $this->headScript()
@@ -30,17 +34,23 @@ $this->headScript()
 	     ->appendFile($this->baseUrl('/js/public/bsn.AutoSuggest_2.1.3_comp.js'))
 	     ->appendFile($this->baseUrl('/js/public/jquery.blockui.min.js'))
 	     ->appendFile($this->baseUrl('/js/public/jquery.cookie.min.js'))
-	     ->appendFile($this->baseUrl('/js/public/uniform/jquery.uniform.min.js'))	     
+	     ->appendFile($this->baseUrl('/js/public/uniform/jquery.uniform.min.js'))	 
+	     ->appendFile($this->baseUrl('/js/public/bootstrap-datepicker/js/bootstrap-datepicker.js'))
+	     ->appendFile($this->baseUrl('/js/public/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js'))
 	     ->appendFile($this->baseUrl('/js/public/bootstrap-daterangepicker/date.js'))
 	     ->appendFile($this->baseUrl('/js/public/bootstrap-daterangepicker/daterangepicker.js'))	  
-		 ->appendFile($this->baseUrl('/js/public/gritter/js/jquery.gritter.js'))		 
+	     ->appendFile($this->baseUrl('/js/public/bootstrap-modal/js/bootstrap-modal.js'))
+	     ->appendFile($this->baseUrl('/js/public/bootstrap-modal/js/bootstrap-modalmanager.js'))
+	     ->appendFile($this->baseUrl('/js/public/gritter/js/jquery.gritter.js'))		 
 		 ->appendFile($this->baseUrl('/js/public/uniform/jquery.uniform.min.js'))
 		 ->appendFile($this->baseUrl('/js/public/fullcalendar/fullcalendar.min.js'))
 		 ->appendFile($this->baseUrl('/js/public/jquery-easy-pie-chart/jquery.easy-pie-chart.js'))
 		 ->appendFile($this->baseUrl('/js/public/jquery.sparkline.min.js'))		 
 		 ->appendFile($this->baseUrl('/js/public/dialog.js'))
+		 ->appendFile($this->baseUrl('/js/form.js'))
 		 ->appendFile($this->baseUrl('/js/public/scripts/app.js'))
 		 ->appendFile($this->baseUrl('/js/public/scripts/index.js'))
+		 ->appendFile($this->baseUrl('/js/public/scripts/form-components.js'))
 		 ->appendFile($this->baseUrl('/js/public/vkNgine.js'));
 		 	 	
 $this->headMeta()
@@ -125,6 +135,8 @@ if('tr' == vkNgine_Config::getSystemConfig()->language->locale || 'tr' == $lang)
 		   Index.initMiniCharts();
 		   Index.initDashboardDaterange();
 		   Index.initIntro();
+		   FormComponents.init();
+		   
 		});
 	</script>
     
