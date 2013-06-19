@@ -1,0 +1,53 @@
+<?php 
+$language = new Zend_Session_Namespace('language');
+$config = Zend_Registry::get('config');
+
+if($this->mode == 'weekly') {
+	while ($day = $this->calendar->fetch()) {
+		if(date('D',$day->thisDay(true)) == 'Mon'){
+			if($language->lang) {
+				if($language->lang == 'tr') {
+					echo date('j', $day->thisDay(true));
+					echo ' ' . $this->t->_(date('F', $day->thisDay(true))) . ' &mdash; ';
+				}
+				else{
+					echo date('F j', $day->thisDay(true)) . ' &mdash; ';
+				}
+			}
+			else {
+				if($config->language->locale == 'tr') {
+					echo date('j', $day->thisDay(true));
+					echo ' ' . $this->t->_(date('F', $day->thisDay(true))) . ' &mdash; ';
+				}
+				else {
+					echo date('F j', $day->thisDay(true)) . ' &mdash; ';
+				}
+			}
+		}
+		if(date('D',$day->thisDay(true)) == 'Sun'){
+			if($language->lang) {
+				if($language->lang == 'tr') {
+					echo date('j', $day->thisDay(true));
+					echo ' ' . $this->t->_(date('F', $day->thisDay(true)));
+				}
+				else{
+					echo date('F j', $day->thisDay(true));
+				}
+			}
+			else {
+				if($config->language->locale == 'tr') {
+					echo date('j', $day->thisDay(true));
+					echo ' ' . $this->t->_(date('F', $day->thisDay(true)));
+				}
+				else {
+					echo date('F j', $day->thisDay(true));
+				}
+			}
+	
+			echo ' ' . date('Y');
+		}
+	}
+}
+else {
+	echo $this->t->_(date('F', $this->calendar->getTimeStamp())) . '  ' . date('Y', $this->calendar->getTimeStamp());
+}

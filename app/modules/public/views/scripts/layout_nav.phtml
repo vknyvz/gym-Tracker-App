@@ -58,7 +58,7 @@
 		<?php
 			$calendarLink = ('weekly' == strtolower($this->user->calendarView)) ? $this->publicUrl('weekly', 'calendar') : $this->publicUrl(null, 'calendar');
 		?>
-		<li class="<?= ($this->params['controller'] == 'calendar') ? 'class="active"' : ''; ?>">
+		<li class="<?= ($this->params['controller'] == 'calendar') ? 'active' : ''; ?>">
 			<a href="<?= $calendarLink; ?>">
 				<i class="icon-calendar"></i> 
 				<span class="title"><?= $this->t->_('Exercise Calendar'); ?></span>

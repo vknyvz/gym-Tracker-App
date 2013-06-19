@@ -1,0 +1,73 @@
+<?php 
+$language = new Zend_Session_Namespace('language');
+
+while ($day = $this->calendar->fetch()) {
+	$thisMonth = ((strlen($day->thisMonth()) == 1) ? '0'. $day->thisMonth() : $day->thisMonth());
+	$thisDay = ((strlen($day->thisDay()) == 1) ? '0'. $day->thisDay() : $day->thisDay());
+
+	$date = $day->thisYear() . '-' . $thisMonth . '-' . $thisDay;
+
+	$config = Zend_Registry::get('config');
+	if($language->lang) {
+		if($language->lang == 'tr') {
+			if(date('D', $day->thisDay(true)) == 'Mon') {
+				$class = 'fc-first';
+				$value = str_replace('Monday', $this->t->_('Monday'), date('j l', $day->thisDay(true)));
+			}
+			elseif(date('D', $day->thisDay(true)) == 'Sun') {
+				$class = 'fc-last';
+				$value = str_replace('Sunday', $this->t->_('Sunday'), date('j l', $day->thisDay(true)));
+			}
+			else {
+				$class = null;
+				$value = date('j', $day->thisDay(true)) . ' ' . $this->t->_(date('l', $day->thisDay(true)));
+			}
+		}
+		else {
+			if(date('D', $day->thisDay(true)) == 'Mon') {
+				$class = 'fc-first';
+				$value = date('l jS', $day->thisDay(true));
+			}
+			elseif(date('D', $day->thisDay(true)) == 'Sun') {
+				$class = 'fc-last';
+				$value = date('l jS', $day->thisDay(true));
+			}
+			else {
+				$class = null;
+				$value = date('l jS', $day->thisDay(true));
+			}
+		}
+	}
+	else {
+		if($config->language->locale == 'tr') {
+			if(date('D', $day->thisDay(true)) == 'Mon'){
+				$class = 'fc-first';
+				$value = str_replace('Monday', $this->t->_('Monday'), date('j l', $day->thisDay(true)));
+			}
+			elseif(date('D', $day->thisDay(true)) == 'Sun'){
+				$class = 'fc-last';
+				$value = str_replace('Sunday', $this->t->_('Sunday'), date('j l', $day->thisDay(true)));
+			}
+			else {
+				$class = null;
+				$value = date('j', $day->thisDay(true)) . ' ' . $this->t->_(date('l', $day->thisDay(true)));
+			}
+		}
+		else {
+			if(date('D', $day->thisDay(true)) == 'Mon') {
+				$class = 'fc-first';
+				$value = date('l jS', $day->thisDay(true));
+			}
+			elseif(date('D', $day->thisDay(true)) == 'Sun') {
+				$class = 'fc-last';
+				$value = date('l jS', $day->thisDay(true));
+			}
+			else {
+				$class = null;
+				$value = date('l jS', $day->thisDay(true));
+			}
+		}
+	}
+		
+	echo '<th rel="' . $date . '" class="fc-widget-header ' . $class . ' dayDetail" style="width: 97px;">' . $value . ' </th>';
+}
