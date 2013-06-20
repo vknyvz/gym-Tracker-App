@@ -1,7 +1,3 @@
-/***
-Error Pages
-***/
-
 /* 404 page option #1 */
 
 .page-404 {
@@ -63,8 +59,9 @@ Error Pages
 
 /* 500 page option #2*/
 .page-500-full-page {
+  text-align:center;
   padding: 20px;
-  background-color: #fafafa !important;
+  background-color: #fafafa !important;  
 }
 
 .page-500-full-page .details input {
@@ -72,7 +69,7 @@ Error Pages
 }
 
 .page-500-full-page .page-500 {
-  margin-top: 100px;
+  margin-top: 20px;
 }
 
 /* 404 page option #3*/

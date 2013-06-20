@@ -5,8 +5,11 @@ echo $this->doctype() . "\n";
 
 $this->headLink()
 	->prependStylesheet($this->baseUrl('/js/public/bootstrap/css/bootstrap.min.css'))
+	->appendStylesheet($this->baseUrl('/css/style-metro.css'))
 	->appendStylesheet($this->baseUrl('/css/style.css'))
 	->appendStylesheet($this->baseUrl('/css/pages/error.css'))
+	->appendStylesheet($this->baseUrl('/css/glyphicons/css/glyphicons.css'))
+	
 	->headLink(array('rel' => 'icon', 'href' => $this->baseUrl('dumbbell.ico'), 'type' => 'image/x-icon', 'PREPEND'));
 
 $this->headMeta()
