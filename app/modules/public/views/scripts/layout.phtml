@@ -51,6 +51,7 @@ $this->headScript()
 		 ->appendFile($this->baseUrl('/js/public/scripts/app.js'))
 		 ->appendFile($this->baseUrl('/js/public/scripts/index.js'))
 		 ->appendFile($this->baseUrl('/js/public/scripts/form-components.js'))
+		 ->appendFile($this->baseUrl('/js/public/scripts/ui-modals.js'))
 		 ->appendFile($this->baseUrl('/js/public/vkNgine.js'));
 		 	 	
 $this->headMeta()
@@ -127,13 +128,13 @@ if('tr' == vkNgine_Config::getSystemConfig()->language->locale || 'tr' == $lang)
   	<script>
 		jQuery(document).ready(function() {    
 		   App.init(); // initlayout and core plugins
-		   Index.init();
 		   Index.initCharts(); // init index page's custom scripts
 		   Index.initChat();
 		   Index.initMiniCharts();
 		   Index.initDashboardDaterange();
 		   Index.initIntro();
 		   FormComponents.init();
+		   UIModals.init();
 		   
 		});
 	</script>

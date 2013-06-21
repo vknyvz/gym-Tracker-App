@@ -58,52 +58,59 @@ $next = '/calorie-calendar/index/year/' . $nextMonth->thisYear().'/month/'.$next
 		
 <?= $this->partial('_breadcrumbs.phtml', 
 				array('t' 		  => $this->t,
-					  'pageTitle' => null,
+					  'pageTitle' => $this->t->_('Calorie Calendar'),
 					  'page'	  => $this->t->_('Monthly Calendar'),
 					  'page2'     => $this->t->_('Calorie Calendar'),
 					  'page2href' => '',
 	)); 
 ?>
 
-<div id="page" class="dashboard">
-	<div class="row-fluid">
-		<div class="span12">			
-			<div class="widget">
-				<div class="widget-title">
-					<h4><i class="icon-table"></i> <?= $this->t->_(date('F', $this->calendar->getTimeStamp())); ?> <?= date('Y', $this->calendar->getTimeStamp()); ?></h4>
-					<span class="tools">
-	                    <a href="javascript:;" class="icon-refresh"></a>	
-                    </span>											
-				</div>
-				<div class="widget-body">
-					<div class="row-fluid">
-					
-						<div id="calendar" class="has-toolbar fc">
-							<table class="fc-header" style="width: 100%;">
-								<tbody>
-									<tr>
-										<td class="fc-header-left"></td>
-										<td class="fc-header-center"></td>
-										<td class="fc-header-right">
-											<span class="fc-button fc-button-prev fc-state-default fc-corner-left"><span class="fc-button-inner"><span class="fc-button-content">&nbsp;◄&nbsp;</span><span class="fc-button-effect"><span></span></span></span></span><span class="fc-button fc-button-next fc-state-default"><span class="fc-button-inner"><span class="fc-button-content">&nbsp;►&nbsp;</span><span class="fc-button-effect"><span></span></span></span></span><span class="fc-button fc-button-today fc-state-default <?= $state; ?>"><span class="fc-button-inner"><span class="fc-button-content"><?= $this->t->_('today'); ?></span><span class="fc-button-effect"><span></span></span></span></span><span class="fc-button fc-button-month fc-state-active fc-state-default"><span class="fc-button-inner"><span class="fc-button-content"><?= $this->t->_('month'); ?></span><span class="fc-button-effect"><span></span></span></span></span><span class="fc-button fc-button-agendaWeek fc-state-default"><span class="fc-button-inner"><span class="fc-button-content"><?= $this->t->_('week'); ?></span><span class="fc-button-effect"><span></span></span></span></span></td>
+<div class="row-fluid">
+	<div class="span12">			
+		<div class="portlet box blue calendar">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="icon-calendar"></i>
+					<span class="hidden-480">
+					<?php
+						echo
+						$this->partial('calendar/_calendarHeader.phtml',
+								array('t'        => $this->t,
+									  'mode'     => 'monthly',
+									  'calendar' => $this->calendar
+								));
+			    	?>
+					</span>
+				</div> 							
+		</div>
+		<div class="portlet-body light-grey">
+			<div class="row-fluid">
+				<div id="calendar" class="has-toolbar">
+					<table class="fc-header" style="width: 100%;">
+						<tbody>
+							<tr>
+								<td class="fc-header-left"></td>
+								<td class="fc-header-center"></td>
+								<td class="fc-header-right">
+									<span class="fc-button fc-button-prev fc-state-default fc-corner-left" unselectable="on"><span class="fc-text-arrow">&lt;</span></span><span class="fc-button fc-button-next fc-state-default" unselectable="on"><span class="fc-text-arrow">&gt;</span></span><span class="fc-button fc-button-today fc-state-default <?= $state; ?>" unselectable="on"><?= $this->t->_('today'); ?></span><span class="fc-button fc-button-month fc-state-active fc-state-default" unselectable="on"><?= $this->t->_('month'); ?></span><span class="fc-button fc-button-agendaWeek fc-state-default" unselectable="on"><?= $this->t->_('week'); ?></span>
+							</tr>
+						</tbody>
+					</table>
+					<div class="fc-content" style="position: relative; min-height: 1px;">
+						<div class="fc-view fc-view-month fc-grid" style="position: relative; -moz-user-select: none;">
+							<table class="fc-border-separate" style="width:100%">
+								<thead>
+									<tr class="fc-first fc-last">
+										<th style="width: 127px;" class="fc-widget-header fc-first"><?= $this->t->_('Monday'); ?></th>
+										<th style="width: 127px;" class="fc-widget-header"><?= $this->t->_('Tuesday'); ?></th>
+										<th style="width: 127px;" class="fc-widget-header"><?= $this->t->_('Wednesday'); ?></th>
+										<th style="width: 127px;" class="fc-widget-header"><?= $this->t->_('Thursday'); ?></th>
+										<th style="width: 127px;" class="fc-widget-header"><?= $this->t->_('Friday'); ?></th>
+										<th style="width: 127px;" class="fc-widget-header"><?= $this->t->_('Saturday'); ?></th>
+										<th style="width: 127px;" class="fc-widget-header fc-last"><?= $this->t->_('Sunday'); ?></th>
 									</tr>
-								</tbody>
-							</table>
-							<div class="fc-content" style="position: relative; min-height: 1px;">
-								<div class="fc-view fc-view-month fc-grid" style="position: relative; -moz-user-select: none;">
-									<table class="fc-border-separate" style="width:100%">
-										<thead>
-											<tr class="fc-first fc-last">
-												<th style="width: 127px;" class="fc-widget-header fc-first"><?= $this->t->_('Monday'); ?></th>
-												<th style="width: 127px;" class="fc-widget-header"><?= $this->t->_('Tuesday'); ?></th>
-												<th style="width: 127px;" class="fc-widget-header"><?= $this->t->_('Wednesday'); ?></th>
-												<th style="width: 127px;" class="fc-widget-header"><?= $this->t->_('Thursday'); ?></th>
-												<th style="width: 127px;" class="fc-widget-header"><?= $this->t->_('Friday'); ?></th>
-												<th style="width: 127px;" class="fc-widget-header"><?= $this->t->_('Saturday'); ?></th>
-												<th style="width: 127px;" class="fc-widget-header fc-last"><?= $this->t->_('Sunday'); ?></th>
-											</tr>
-										</thead>
-										<tbody>	
+								</thead>
+								<tbody>	
 										<?php
 											while($day = $this->calendar->fetch()) {
 												$firstLast = null;
@@ -136,7 +143,7 @@ $next = '/calorie-calendar/index/year/' . $nextMonth->thisYear().'/month/'.$next
 												
 												$macros = $modelDailyIntake->fetchMacros($date, $this->user);
 												
-												echo $this->partial('calorie-calendar/_renderMonthlyMacros.phtml',
+												echo $this->partial('calorie-calendar/_renderDayMonthly.phtml',
 														array('t' 		  => $this->t,
 															  'day'       => $day,
 													          'date'      => $date,

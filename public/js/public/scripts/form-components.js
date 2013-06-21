@@ -81,7 +81,6 @@ var FormComponents = function () {
 
         if (jQuery().datepicker) {
             $('.date-picker').datepicker();
-            console.log('bla');
         }
 
         if (jQuery().timepicker) {

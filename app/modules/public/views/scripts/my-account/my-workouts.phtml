@@ -12,7 +12,7 @@
 			<div class="portlet box blue">
 				<div class="portlet-title">
                   	  		<div class="caption">
-								<i class="icon-food"></i>
+								<i class="icon-reorder"></i>
 								<span class="hidden-480"><?= $this->t->_('My Workouts'); ?></span>
 					</div>                       							
 				</div>	
@@ -65,6 +65,9 @@
 		</div>
 	</div>
 
+<a class=" btn red" id="modal_ajax_demo_btn" data-toggle="modal">View Demo</a>
+	
+<div id="ajax-modal" class="modal hide fade" tabindex="-1"></div>
 
 <script>
 $('.editworkout').bind('click', function() {

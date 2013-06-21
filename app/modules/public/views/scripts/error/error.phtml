@@ -9,9 +9,17 @@
 			<i></i>
 		</a>
 		
-		<h2><?= $this->message; ?></h2>
+		<h2><?= $this->t->_($this->message); ?></h2>
 		
 		<div class=" details">
+			<div class="menu">
+			<p>					
+				<a class="btn black btn-block" href="<?= $this->publicUrl(); ?>">
+					<?= $this->t->_('Home'); ?>
+					<i class="m-icon-swapleft m-icon-white"></i>
+				</a>	
+			</p>
+			</div>
 			<p>
 				<label><strong><?= $this->t->_('Message'); ?></strong></label>
 				<pre><?= $this->exception->getMessage(); ?></pre>
@@ -36,7 +44,7 @@
 			
 			<div class="menu">
 				<p>					
-					<a class="btn blue btn-block" href="<?= $this->publicUrl(); ?>">
+					<a class="btn black btn-block" href="<?= $this->publicUrl(); ?>">
 						<?= $this->t->_('Home'); ?>
 						<i class="m-icon-swapleft m-icon-white"></i>
 					</a>	

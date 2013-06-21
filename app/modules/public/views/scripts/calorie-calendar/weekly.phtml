@@ -44,7 +44,7 @@ $next = '/calorie-calendar/weekly/year/' . $nextWeek['year'] . '/month/' . $next
 
 <?= $this->partial('_breadcrumbs.phtml', 
 				array('t' 		  => $this->t,
-					  'pageTitle' => null,
+					  'pageTitle' => $this->t->_('Calorie Calendar'),
 					  'page'	  => $this->t->_('Weekly Calendar'),
 					  'page2'     => $this->t->_('Calorie Calendar'),
 					  'page2href' => '',

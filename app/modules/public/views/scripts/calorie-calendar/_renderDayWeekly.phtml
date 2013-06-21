@@ -9,6 +9,7 @@
 					<div class="fc-event-inner fc-event-skin" style="background-color: #477dae; border-color: #0E69A1; color: #000000">
 						<span class="fc-event-time"><strong><?= $this->t->_('Daily Consumption'); ?></strong></span>
 						<span class="fc-event-title"> <br /> 			
+							<strong><?= sprintf($this->t->_('%s total calories'), $this->macros[$this->date]['totalCalories']); ?></strong> <br />
 							<?= (sprintf($this->t->_('%s calories'), $this->macros[$this->date]['macros']['calories'])); ?> <br />
 							<?= (sprintf($this->t->_('%s gr protein'), $this->macros[$this->date]['macros']['protein'])); ?> <br />
 							<?= (sprintf($this->t->_('%s gr cholesterol'), $this->macros[$this->date]['macros']['cholesterol'])); ?> <br />
