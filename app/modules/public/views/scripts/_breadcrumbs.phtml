@@ -1,10 +1,11 @@
+<?php if(!$this->ajax): ?>
 <div class="row-fluid">
 	<div class="span12">
 		<div class="color-panel hidden-phone">
 			<div class="color-mode-icons icon-color"></div>
 			<div class="color-mode-icons icon-color-close"></div>
 			<div class="color-mode">
-				<p>THEME COLOR</p>
+				<p><?= $this->t->_('THEME COLOR'); ?></p>
 				<ul class="inline">
 					<li class="color-black current color-default" data-style="default"></li>
 					<li class="color-blue" data-style="blue"></li>
@@ -57,3 +58,4 @@
 		</ul>
 	</div>
 </div>	
+<?php endif; ?>

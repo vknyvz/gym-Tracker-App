@@ -1,49 +1,19 @@
-<script>
-	$(document).ready(function(){
-		$("#view-slides").slides({
-			effect: 'fade',
-			crossfade: true,
-			fadeSpeed: 400,
-			pause: 10,
-			preload: true,
-			pagination: true,
-			generatePagination: true,
-			generateNextPrev: false,		
-			play: 4000,
-			autoHeight: true
-		});
-		$("a[rel^='prettyPhoto']").prettyPhoto({
-			theme: 'pp_default', // light_rounded / dark_rounded / light_square / dark_square / facebook */
-			animation_speed:'normal',
-			allow_resize: true,
-			keyboard_shortcuts: true,
-			show_title: false,
-			slideshow:3000,
-			social_tools: false,
-			autoplay_slideshow: false,
-			overlay_gallery: false
-		});
-	
-	});
-</script>
-
 <?= $this->partial('_breadcrumbs.phtml', 
 				array('t' 		  => $this->t,					  
 					  'page'	  => $this->exercise['name'],
 					  'pageHref'  => false,
+					  'ajax'      => $this->ajax,
 					  'page2'     => $this->exercise['primaryMuscle'],
 					  'page2href' => '/index/exercises/type/' . $this->exercise['primaryMuscle']
 	)); 
 ?>
 
-<div id="page">
-	
 	<div class="row-fluid">
 		<div class="span12">
 			
 			<div class="widget">
 				
-				<div class="widget-body">					
+				<div class="portlet-body">					
 					<div class="row-fluid">
 						<h5><?= $this->t->_('Technical Data'); ?></h5>
 						<hr class="clearfix" />
@@ -125,5 +95,3 @@
 			</div>
 		</div>
 	</div>
-</div>
-

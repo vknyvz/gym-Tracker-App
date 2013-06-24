@@ -6,7 +6,6 @@
 	)); 
 ?>
 
-
 	<div class="row-fluid">
 		<div class="span12">			
 			<div class="portlet box blue">
@@ -14,71 +13,58 @@
                   	  		<div class="caption">
 								<i class="icon-reorder"></i>
 								<span class="hidden-480"><?= $this->t->_('My Workouts'); ?></span>
-					</div>                       							
-				</div>	
-				<div class="portlet-body">
-					<table class="table table-striped table-hover">
-						<thead>
-							<tr>
-								<th><?= $this->t->_('Workout Name'); ?></th>
-						        <th><?= $this->t->_('Days'); ?></th>
-						        <th><?= $this->t->_('Start Date'); ?></th>
-						        <th><?= $this->t->_('End Date'); ?></th>
-						        <th style="text-align:right"><?= $this->t->_('Actions'); ?></th>
-							</tr>
-						</thead>
-						<tbody>
-							<?php
-								foreach($this->workouts as $workout) :
-							?>	
-						      <tr class="odd gradeX">
-						        <td><a href="<?= $this->publicUrl('view-workout', 'my-account'); ?>/id/<?= $workout['workoutId']; ?>"><?= $this->escape($workout['name']); ?></a></td>
-						        <td><?= $this->escape($workout['day']); ?></td>
-						        <td><?= ($workout['startDate'] != '0000-00-00') ? $this->escape($this->dateFormat($workout['startDate'], Zend_Date::DATE_FULL)) : $this->t->_('Not entered') ?></td>
-						        <td><?= ($workout['endDate'] != '0000-00-00') ? $this->escape($this->dateFormat($workout['endDate'], Zend_Date::DATE_FULL)) : $this->t->_('Not entered') ?></td>
-						        <td style="text-align:right">
-									<a href="#manageworkout_dialog" class="glyphicons more_items manageworkout" rel="<?= $workout['workoutId']; ?>" data-toggle="modal">
-										<i></i>
-										<?= $this->t->_('Manage'); ?>
-									</a> 	
-									<a href="#editworkout_dialog" class="glyphicons edit editworkout" rel="<?= $workout['workoutId']; ?>" data-toggle="modal">
-										<i></i>
-										<?= $this->t->_('Edit'); ?>
-									</a> 
-									<a href="#deleteworkout_dialog" class="glyphicons bin deleteworkout" rel="<?= $workout['workoutId']; ?>" data-toggle="modal">
-										<i></i>
-										<?= $this->t->_('Delete'); ?>
-									</a> 		
-								</td>						        
-						      </tr>
-						    <?php 
-								endforeach;
-							?>
-							
-						</tbody>
-					</table>
-					<div>
-						<a class="btn blue editworkout" data-toggle="modal" href="#editworkout_dialog"><i class="icon-plus"></i> <?= $this->t->_('Add New Workout'); ?></a>
-				    </div>				    
-				</div>
-			</div>			
-		</div>
+				</div>                       							
+			</div>	
+			<div class="portlet-body">
+				<table class="table table-striped table-hover">
+					<thead>
+						<tr>
+							<th><?= $this->t->_('Workout Name'); ?></th>
+					        <th><?= $this->t->_('Days'); ?></th>
+					        <th><?= $this->t->_('Start Date'); ?></th>
+					        <th><?= $this->t->_('End Date'); ?></th>
+					        <th style="text-align:right"><?= $this->t->_('Actions'); ?></th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php
+							foreach($this->workouts as $workout) :
+						?>	
+					      <tr class="odd gradeX">
+					        <td><a href="<?= $this->publicUrl('view-workout', 'my-account'); ?>/id/<?= $workout['workoutId']; ?>"><?= $this->escape($workout['name']); ?></a></td>
+					        <td><?= $this->escape($workout['day']); ?></td>
+					        <td><?= ($workout['startDate'] != '0000-00-00') ? $this->escape($this->dateFormat($workout['startDate'], Zend_Date::DATE_FULL)) : $this->t->_('Not entered') ?></td>
+					        <td><?= ($workout['endDate'] != '0000-00-00') ? $this->escape($this->dateFormat($workout['endDate'], Zend_Date::DATE_FULL)) : $this->t->_('Not entered') ?></td>
+					        <td style="text-align:right">
+								<a class="glyphicons more_items vkNgine-modal" data-id="<?= $workout['workoutId']; ?>" data-toggle="modal" data-target="manageworkout">
+									<i></i>
+									<?= $this->t->_('Manage'); ?>
+								</a> 	
+								<a class="glyphicons edit vkNgine-modal" data-id="<?= $workout['workoutId']; ?>" data-toggle="modal" data-target="editworkout">
+									<i></i>
+									<?= $this->t->_('Edit'); ?>
+								</a> 
+								<a class="glyphicons bin vkNgine-modal" data-id="<?= $workout['workoutId']; ?>" data-toggle="modal" data-target="deleteworkout">
+									<i></i>
+									<?= $this->t->_('Delete'); ?>
+								</a> 		
+							</td>						        
+					      </tr>
+					    <?php 
+							endforeach;
+						?>
+						
+					</tbody>
+				</table>
+				<div>
+					<a class="btn blue vkNgine-modal" data-toggle="modal" data-target="editworkout"><i class="icon-plus"></i> <?= $this->t->_('Add New Workout'); ?></a>
+			    </div>				    
+			</div>
+		</div>			
 	</div>
-
-<a class=" btn red" id="modal_ajax_demo_btn" data-toggle="modal">View Demo</a>
-	
-<div id="ajax-modal" class="modal hide fade" tabindex="-1"></div>
+</div>
 
 <script>
-$('.editworkout').bind('click', function() {
-	btn_editworkout($(this).attr('rel'));
-});
-
-$('.manageworkout').bind('click', function() {
-	btn_manageworkout($(this).attr('rel'));
-});
-
-$('.deleteworkout').bind('click', function() {	
-	btn_deleteworkout($(this).attr('rel'));
-});
+UIModals.init();
+UIModals.myAccount();													
 </script>

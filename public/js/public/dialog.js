@@ -8,15 +8,6 @@ function lnk_addExercise(date, title, action) {
     );
 }
 
-function btn_editworkout(id) {
-	$.ajax({ 
-		url: '/my-account/edit-workout/workoutId/' + ((id) ? id : 0),
-		success: function(returnData) {
-			$('.editworkout_dialog').html(returnData);
-		}
-	})
-}
-
 function btn_editmeasurements(id) {
 	if(!id) {
 		id = 0;
@@ -31,12 +22,7 @@ function btn_editmeasurements(id) {
 }
 
 function btn_manageworkout(id) {
-	$.ajax({ 
-		url: '/my-account/manage-workout/id/' + id,
-		success: function(returnData) {
-			$('.manageworkout_dialog').html(returnData);
-		}
-	})
+	
 }
 
 function btn_exerciseDetail(id)
@@ -58,16 +44,7 @@ function btn_exerciseDetail(id)
 }
 
 function btn_deleteworkout(id) {
-	$('#deleteworkout_dialog').attr('rel', id);
-	$('#deleteworkout_dialog .btn-primary').bind('click', function() {
-		$.ajax( {
-			url: "/my-account/delete-workout/id/" + id,
-			dataType : 'json',
-			success: function(returnData) {
-				window.top.location = '/my-account/my-workouts';
-			}
-		});	
-	});
+	
 }
 
 function btn_deletemeasurement(id) {	

@@ -79,7 +79,7 @@ class IndexController extends vkNgine_Public_Controller
     	$ajax = $this->_getParam('ajax', false);
     	
    		if($ajax){
-    		parent::ajaxEnabled(true);
+    		parent::ajaxEnabled();
     	}
     	
     	$id = $this->_getParam('id');

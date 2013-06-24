@@ -58,10 +58,8 @@ class vkNgine_Public_Controller extends Zend_Controller_Action
 		$this->t = Zend_Registry::get('t');
     }
     
-    public function ajaxEnabled($dialog = false)
+    public function ajaxEnabled()
     {
-    	if($dialog) {
-    		$this->_helper->layout->disableLayout();
-    	}
+   		$this->_helper->layout->disableLayout();
     }
 }
