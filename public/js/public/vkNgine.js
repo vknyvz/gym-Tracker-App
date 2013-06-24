@@ -25,17 +25,16 @@ vkNgine.layout = vkNgine.layout || {};
         'yellow': '#ffb848'
     };
     
-    vkNgine.layout.editor = function() {
-    	
+    vkNgine.layout.template = function() {
     };
     
-    vkNgine.layout.editor.method = function( name, fn ) {
-		if ( 'undefined' !== typeof vkNgine && 'undefined' !== typeof vkNgine.layout && 'undefined' !== typeof vkNgine.layout.editor ) {
+    vkNgine.layout.template.method = function( name, fn ) {
+		if ( 'undefined' !== typeof vkNgine && 'undefined' !== typeof vkNgine.layout && 'undefined' !== typeof vkNgine.layout.template ) {
 			this.prototype[ name ] = fn;
 		}
 	};
 	
-	vkNgine.layout.editor.method( 'handleInit', function( rtag, rtype ) {
+	vkNgine.layout.template.method( 'handleInit', function( rtag, rtype ) {
 		vkNgine.layout.isIE8 = !! navigator.userAgent.match(/MSIE 8.0/);
         vkNgine.layout.isIE9 = !! navigator.userAgent.match(/MSIE 9.0/);
         vkNgine.layout.isIE10 = !! navigator.userAgent.match(/MSIE 10/);
@@ -43,11 +42,13 @@ vkNgine.layout = vkNgine.layout || {};
         if (vkNgine.layout.isIE10) {
             jQuery('html').addClass('ie10');
         }
+        
 	});
-    _(vkNgine.layout.editor);
-	
-	
 })();
+
+var layout = new vkNgine.layout.template();
+
+layout.handleInit();
 
 
 
