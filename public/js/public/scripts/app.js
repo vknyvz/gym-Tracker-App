@@ -718,7 +718,7 @@ var App = function () {
         init: function () {
 
             //IMPORTANT!!!: Do not modify the core handlers call order.
-
+        	
             //core handlers
             handleInit();
             handleResponsiveOnResize(); // set and handle responsive    

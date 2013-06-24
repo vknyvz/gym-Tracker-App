@@ -29,13 +29,6 @@
 				<a href="<?= $this->publicUrl(); ?>"><?= $this->t->_('Home'); ?></a>				
 			</li>
 			
-			<?php if(isset($this->page2) && isset($this->page2href)) : ?>
-			<li>
-				<i class="icon-angle-right"></i>	
-				<a href="<?= $this->page2href?>"><?= $this->t->_($this->page2); ?></a>
-			</li>
-			<?php endif; ?>
-			
 			<li>
 			<?php if(!$this->pageHref) : ?>
 				<i class="icon-angle-right"></i>	
@@ -45,6 +38,17 @@
 				<a href="<?= $this->pageHref; ?>"><?= $this->page; ?></a>
 			<?php endif; ?>				
 			</li>
+			
+			<?php if(isset($this->page2)): ?>
+			<li>
+				<i class="icon-angle-right"></i>
+				<?php if(isset($this->page2href)) : ?> 		
+					<a href="<?= $this->page2href?>"><?= $this->t->_($this->page2); ?></a>
+				<?php else: ?>
+					<?= $this->t->_($this->page2); ?>
+				<?php endif; ?>
+			</li>
+			<?php endif; ?>
 			
 			<?php if(isset($this->calendar)) : ?>
 			<li class="pull-right no-text-shadow">

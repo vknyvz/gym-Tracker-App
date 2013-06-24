@@ -1,6 +1,4 @@
 <?php
-define('IN_DEVELOPMENT', APPLICATION_ENV === 'development');
-
 echo $this->doctype() . "\n";
 
 $this->headLink()
@@ -31,7 +29,6 @@ $this->headScript()
 	     ->appendFile($this->baseUrl('/js/public/excanvas.min.js'), 'text/javascript', array('conditional' => 'lt IE 9'))
 	     ->appendFile($this->baseUrl('/js/public/respond.min.js'), 'text/javascript', array('conditional' => 'lt IE 9'))
 	     ->appendFile($this->baseUrl('/js/public/jquery-slimscroll/jquery.slimscroll.min.js'))
-	     ->appendFile($this->baseUrl('/js/public/bsn.AutoSuggest_2.1.3_comp.js'))
 	     ->appendFile($this->baseUrl('/js/public/jquery.blockui.min.js'))
 	     ->appendFile($this->baseUrl('/js/public/jquery.cookie.min.js'))
 	     ->appendFile($this->baseUrl('/js/public/uniform/jquery.uniform.min.js'))	 
@@ -83,7 +80,16 @@ if('tr' == vkNgine_Config::getSystemConfig()->language->locale || 'tr' == $lang)
 <?= $this->headTitle() . "\n"; ?>
 <?= $this->headMeta() . "\n"; ?>	
 <?= $this->headLink()  . "\n"; ?>
+
+<script type="text/javascript">
+	var vkNgine = vkNgine || {};
+
+	vkNgine.language = vkNgine.language || {};
+	vkNgine.language.lang = '<?= ($lang) ? $lang : vkNgine_Config::getSystemConfig()->language->locale ?>';
+</script>
+
 <?= $this->headScript(). "\n"; ?>
+
 </head>
 		
 <body class="page-header-fixed" vkNgine_version="<?= vkNgine_Version::VERSION; ?>" >
@@ -129,8 +135,6 @@ if('tr' == vkNgine_Config::getSystemConfig()->language->locale || 'tr' == $lang)
 		jQuery(document).ready(function() {    
 		   App.init(); // initlayout and core plugins
 		   Index.initCharts(); // init index page's custom scripts
-		   Index.initChat();
-		   Index.initMiniCharts();
 		   Index.initDashboardDaterange();
 		   Index.initIntro();
 		   FormComponents.init();

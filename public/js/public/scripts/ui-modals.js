@@ -1,12 +1,12 @@
-var UIModals = function () {
+var UIModals = function() {
     
-    var initModals = function () {
+    var initModals = function() {
        
        	$.fn.modalmanager.defaults.resize = true;
 		$.fn.modalmanager.defaults.spinner = '<div class="loading-spinner fade" style="width: 200px; margin-left: -100px;"><img src="/images/ajax-modal-loading.gif" align="middle">&nbsp;<span style="font-weight:300; color: #eee; font-size: 18px; font-family:Open Sans;">&nbsp;Loading...</div>';
     }
     
-    var myAccount = function () {
+    var myAccount = function() {
     	$('.vkNgine-modal').on('click', function() {
     		$id = $(this).data('id');
     		$target = $(this).data('target');
@@ -59,7 +59,7 @@ var UIModals = function () {
    
     return {        
         init: function () {
-            initModals();                        
+            initModals(); 
         },
     
         myAccount: function() {

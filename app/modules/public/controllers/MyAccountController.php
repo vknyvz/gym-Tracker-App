@@ -8,8 +8,6 @@ class MyAccountController extends vkNgine_Public_Controller
 	
 	public function indexAction()
 	{
-		parent::ajaxEnabled();
-		
 		$form = self::getMyaccountSettingsForm();
 		
 		$populateData = array();
@@ -310,7 +308,7 @@ class MyAccountController extends vkNgine_Public_Controller
 	
 	public function manageWorkoutAction()
 	{
-		parent::ajaxEnabled(true);
+		parent::ajaxEnabled();
 		
 		$id = (int) $this->_getParam('id');
 		
@@ -345,7 +343,7 @@ class MyAccountController extends vkNgine_Public_Controller
 		}
 		
 		$this->view->exerciseDetail = $exerciseDetail;
-		$this->view->exercises = $modelWorkoutsExercises;
+		$this->view->workoutsExercises = $modelWorkoutsExercises;
 		$this->view->workout = $modelWorkouts->fetchAll('workoutId = ' . $id)->current();
 	}
 	
