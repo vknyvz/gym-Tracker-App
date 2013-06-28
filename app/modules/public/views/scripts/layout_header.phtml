@@ -93,19 +93,18 @@
 			<li class="dropdown user">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 					<img alt="" src="/images/avatar1_small.jpg" />
-					<span class="username">Bob Nilson</span>
+					<span class="username"><?= $this->user->getFullName(); ?></span>
 					<i class="icon-angle-down"></i>
 				</a>
 				<ul class="dropdown-menu">
 					<?php
 						$calendarLink = ('weekly' == strtolower($this->user->calendarView)) ? $this->publicUrl('weekly', 'calendar') : $this->publicUrl(null, 'calendar');
+						$calorieCalendarLink = ('weekly' == strtolower($this->user->calendarView)) ? $this->publicUrl('weekly', 'calorie-calendar') : $this->publicUrl(null, 'calorie-calendar');
 					?>
-					<li><a href="<?= $this->publicUrl(null, 'my-account'); ?>"><i class="icon-user"></i> <?= $this->user->getFullName(); ?></a></li>
+					<li><a href="<?= $this->publicUrl(null, 'my-account'); ?>"><i class="icon-user"></i> <?= $this->t->_('My Account'); ?></a></li>
 					<li><a href="<?= $calendarLink; ?>"><i class="icon-calendar"></i> <?= $this->t->_('Exercise Calendar'); ?></a></li>
-					<li><a href="inbox.html"><i class="icon-envelope"></i> My Inbox(3)</a></li>
-					<li><a href="#"><i class="icon-tasks"></i> My Tasks</a></li>
+					<li><a href="<?= $calorieCalendarLink; ?>"><i class="icon-calendar"></i> <?= $this->t->_('Calorie Calendar'); ?></a></li>
 					<li class="divider"></li>
-					<li><a href="extra_lock.html"><i class="icon-lock"></i> Lock Screen</a></li>
 					<li><a href="<?= $this->publicUrl('login', 'auth'); ?>/logout"><i class="icon-key"></i> <?= $this->t->_('Log Out'); ?></a></li>
 				</ul>
 			</li>

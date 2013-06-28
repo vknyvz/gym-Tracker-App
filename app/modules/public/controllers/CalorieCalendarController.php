@@ -13,8 +13,6 @@ class CalorieCalendarController extends vkNgine_Public_Controller
 	
 	public function monthlyAction()
 	{
-		parent::ajaxEnabled();
-	
 		$options = array('month' => $this->_getParam('month'),
 						 'year'  => $this->_getParam('year'),
 						 'day'   => $this->_getParam('day')
@@ -42,9 +40,7 @@ class CalorieCalendarController extends vkNgine_Public_Controller
 	}
 	
 	public function weeklyAction()
-	{
-		parent::ajaxEnabled();
-	
+	{	
 		$options = array('month' => $this->_getParam('month'),
 						 'year'  => $this->_getParam('year'),
 						 'day'   => $this->_getParam('day')
