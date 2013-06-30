@@ -4,79 +4,89 @@
  */
 var vkNgine = vkNgine || {};
 
-vkNgine.layout = vkNgine.layout || {};
+vkNgine.core = vkNgine.core || {};
 
 (function () {
 	"use strict";
 	
-	vkNgine.layout.isIE8 = false;
-	vkNgine.layout.isIE9 = false;
-	vkNgine.layout.isIE10 = false;
-	vkNgine.layout.sidebarWidth = 225;
-	vkNgine.layout.sidebarCollapsedWidth = 35;
-    vkNgine.layout.responsiveHandlers = [];
-    vkNgine.layout.layoutColorCodes = {
-        'blue': '#4b8df8',
-        'red': '#e02222',
-        'green': '#35aa47',
-        'purple': '#852b99',
-        'grey': '#555555',
-        'light-grey': '#fafafa',
-        'yellow': '#ffb848'
+	vkNgine.core.engine = function() {
     };
-    
-    vkNgine.layout.template = function() {
-    };
-    
-    vkNgine.layout.template.method = function( name, fn ) {
-		if ( 'undefined' !== typeof vkNgine && 'undefined' !== typeof vkNgine.layout && 'undefined' !== typeof vkNgine.layout.template ) {
-			this.prototype[ name ] = fn;
-		}
-	};
-	
-	vkNgine.layout.template.method( 'handleInit', function( rtag, rtype ) {
-		vkNgine.layout.isIE8 = !! navigator.userAgent.match(/MSIE 8.0/);
-        vkNgine.layout.isIE9 = !! navigator.userAgent.match(/MSIE 9.0/);
-        vkNgine.layout.isIE10 = !! navigator.userAgent.match(/MSIE 10/);
-        
-        if (vkNgine.layout.isIE10) {
-            jQuery('html').addClass('ie10');
+     
+    vkNgine.core.engine.method = function (name, fn) {
+ 		if ( 'undefined' !== typeof vkNgine && 'undefined' !== typeof vkNgine.core && 'undefined' !== typeof vkNgine.core.engine ) {
+ 			this.prototype[ name ] = fn;
+ 		}
+ 	};
+ 	
+ 	vkNgine.core.engine.method( 'initLayout', function () {
+ 		var layout = new vkNgine.layout.template();
+
+ 		layout.handleInit();
+ 		layout.handleResponsiveOnResize();
+ 		layout.handleUniform();
+ 		layout.handleScrollers();
+ 		layout.handleResponsiveOnInit();
+
+ 		layout.handleFixedSidebar();
+ 		layout.handleFixedSidebarHoverable(); 
+ 		layout.handleSidebarMenu();
+ 		layout.handleHorizontalMenu();
+ 		layout.handleSidebarToggler(); 
+ 		layout.handleFixInputPlaceholderForIE();
+ 		layout.handleGoTop(); 
+ 		layout.handleTheme(); 
+
+ 		layout.handlePortletTools();
+ 		layout.handleDropdowns(); 
+ 		layout.handleTabs(); 
+ 		layout.handleTooltips(); 
+ 		layout.handlePopovers(); 
+ 		layout.handleAccordions(); 
+ 		layout.handleChoosenSelect();
+ 	});
+ 	
+ 	vkNgine.core.engine.method ( 'initDashboard', function () {
+ 		var dashboard = new vkNgine.page.dashboard();
+ 		
+ 		dashboard.dateRanger();
+ 	});
+ 	
+ 	vkNgine.core.engine.method( 'isTouchDevice', function () {
+ 		try {
+            document.createEvent("TouchEvent");
+            return true;
+        } catch (e) {
+            return false;
         }
-        
-	});
+ 	});	
+ 	
+ 	vkNgine.core.engine.method( 'blockUI', function (el, centerY) {
+ 	    var el = jQuery(el); 
+        el.block({
+            message: '<img src="/images/ajax-loading.gif" align="">',
+            centerY: centerY != undefined ? centerY : true,
+            css: {
+                top: '10%',
+                border: 'none',
+                padding: '2px',
+                backgroundColor: 'none'
+            },
+            overlayCSS: {
+                backgroundColor: '#000',
+                opacity: 0.05,
+                cursor: 'wait'
+            }
+        });
+ 	});	
+ 	
+ 	vkNgine.core.engine.method( 'unblockUI', function (el) {
+	 	jQuery(el).unblock({
+	        onUnblock: function () {
+	            jQuery(el).removeAttr("style");
+	        }
+	    });
+	});	
 })();
-
-var layout = new vkNgine.layout.template();
-
-layout.handleInit();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /**
  * debugging function, writes output to browser console
@@ -88,6 +98,6 @@ layout.handleInit();
  */
 function _(data) {
 	if ( window.console && window.console.log) {
-		window.console.log( data );
+		window.console.log( 'vkNgine message: ' + data );
 	}
 };

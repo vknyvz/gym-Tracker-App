@@ -5,7 +5,18 @@
 					  'calendar'  => true,
 	)); 
 ?>		
- <div id="dashboard">
+
+<?php
+	$this->headScript()
+		 	->appendFile($this->baseUrl('/js/public/vkNgine.dashboard.js'));
+?>     
+
+<script type="text/javascript">
+	var core = new vkNgine.core.engine();
+	core.initDashboard();
+</script>
+	
+<div id="dashboard">
 	<!-- BEGIN DASHBOARD STATS -->
 	<div class="row-fluid">
 		<div class="span3 responsive" data-tablet="span6" data-desktop="span3">
