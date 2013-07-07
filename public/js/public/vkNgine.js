@@ -51,6 +51,25 @@ vkNgine.core = vkNgine.core || {};
  		dashboard.dateRanger();
  	});
  	
+ 	vkNgine.core.engine.method ( 'initMyAccount', function (page) {
+ 		var data = new vkNgine.page.myaccount();
+ 		
+ 		switch( page ) {
+	 		case 'my-plate':
+	 			data.myplate();	
+	 			break;
+	 		case 'my-workouts':
+	 			data.myworkouts();
+	 			break;
+	 		case 'my-measurements':
+	 			data.mymeasurements();
+	 		case '':
+	 		default:
+	 			data.myaccount();
+	 			break;
+ 		}		
+ 	});
+ 	
  	vkNgine.core.engine.method( 'isTouchDevice', function () {
  		try {
             document.createEvent("TouchEvent");

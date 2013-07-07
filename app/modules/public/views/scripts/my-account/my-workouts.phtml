@@ -6,6 +6,11 @@
 	)); 
 ?>
 
+<?php
+	$this->headScript()
+		 	->appendFile($this->baseUrl('/js/public/vkNgine.myaccount.js'));
+?>  
+
 	<div class="row-fluid">
 		<div class="span12">			
 			<div class="portlet box blue">
@@ -65,6 +70,6 @@
 </div>
 
 <script>
-	UIModals.init();
-	UIModals.myAccount();													
+	var core = new vkNgine.core.engine();
+	core.initMyAccount('my-workouts');											
 </script>

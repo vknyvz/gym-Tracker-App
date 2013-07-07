@@ -6,6 +6,10 @@
 	)); 
 ?>
 
+<?php
+	$this->headScript()
+		 	->appendFile($this->baseUrl('/js/public/vkNgine.myaccount.js'));
+?>
 
 <div class="row-fluid">
 		<div class="span12">			
@@ -52,14 +56,9 @@
 				</div>
 			</div>			
 		</div>
-	</div>
-
+	</div>	
+	
 <script>
-$('.editmeasurements').bind('click', function() {
-	btn_editmeasurements($(this).attr('rel'));
-});
-
-$('.deletemeasurement').bind('click', function() {
-	btn_deletemeasurement($(this).attr('rel'));
-});
+	var core = new vkNgine.core.engine();
+	core.initMyAccount('my-measurements');											
 </script>

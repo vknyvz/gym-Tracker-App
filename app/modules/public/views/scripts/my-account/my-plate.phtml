@@ -16,6 +16,11 @@
 	)); 
 ?>
 
+<?php
+	$this->headScript()
+		 	->appendFile($this->baseUrl('/js/public/vkNgine.myaccount.js'));
+?>     
+
 			<div class="row-fluid">
                   <div class="span12"> 
                   <div class="portlet box blue">       
@@ -203,80 +208,8 @@
 					</div>
                </div>
 			</div>	
-
+			
 <script type="text/javascript">
-	var total = function() {
-		var macros = new Array("calories","fat","cholesterol","sodium","carbs","fiber","protein","sugar");
-
-		for(var i=0; i<macros.length; i++) {
-			var macroValue = 0;
-
-			$('.sum').each(function() {
-				macroValue += parseFloat($(this).find('td').eq(i+2).data(macros[i]));				
-		    });
-		    
-		    $('.total-' + macros[i] + '').text(macroValue);
-		}	
-	};
-	total();	
-  
- 	var options = {
-		script:"/my-account/my-plate?food=1&",
-		varname:"foodsearch",
-		json:true,
-		shownoresults:true,
-		maxresults:100,
-		maxentries:100,
-		delay:1,
-		callback: function (obj) { 
-			$('#foodId').val(obj.id);  
-			$('#servingSizeValue').html(obj.servingSize);		
-			$("#servingSizes option[value=" + obj.servingSizeType + "]").attr('selected', 'selected');			
-		}
-	};
-	var as_json = new bsn.AutoSuggest('foodSearch', options);
-</script>
-
-<script>
-$(function() {
-	var date = '<?= date('Y-m-d'); ?>';
-	
-	$('.addmeal').bind('click', function(e) {
-		e.preventDefault();
-		var mealId = $('#meals').val();
-		
-		$.ajax( {
-	        url: '/my-account/my-plate/mealId/' + mealId + '/date/' + date,
-	        dataType : 'json',
-	        success: function(data) { 
-		        if(data.success) {
-		        	window.top.location = '/my-account/my-plate';
-		        }		        
-			}
-	   });
-	});
-
-	$('.addfood').bind('click', function(e) {
-		e.preventDefault();
-		var foodId = $('#foodId').val();
-		var servingSize = $('#servingSize').val();
-		var servingSizes = $('#servingSizes').val();
-		
-		if(!foodId || !servingSize || !servingSizes) {
-			alert('Please enter a food, how much of it consumed, and consumed serving size.');
-			return false;
-		}
-
-		$.ajax( {
-	        url: '/my-account/my-plate/foodIds/' + foodId + '/servingSize/' + servingSize + '/servingSizes/' + servingSizes + '/date/' + date,
-	        dataType : 'json',
-	        success: function(data) { 
-		        if(data.success){
-		        	window.top.location = '/my-account/my-plate';
-		        }
-			}
-	       }
-	    );
-	});
-});
+	var core = new vkNgine.core.engine();
+	core.initMyAccount('my-plate');
 </script>
