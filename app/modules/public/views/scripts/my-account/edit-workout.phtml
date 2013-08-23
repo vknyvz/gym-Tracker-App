@@ -7,21 +7,6 @@
 ?>
 
 <script>
-$(document).ready(function(){
-	$('.btn-primary').bind('click', function() {
-		$('#<?= $this->form->getId(); ?>').submit();
-	});
-	
-	var options = {  
-		url: '<?= $this->form->getAction(); ?>',
-        success: vkNgineAjaxFormSubmit,
-		dataType : 'json'
-    };
-	   
-	$('#<?= $this->form->getId(); ?>').ajaxForm(options);	
-
-	$('.date-picker').datepicker({
-		format: 'yyyy-mm-dd'	
-	});
-});
+	UIModals.init();
+	UIModals.myAccount('edit-workout');
 </script>

@@ -6,7 +6,11 @@ var UIModals = function() {
 		$.fn.modalmanager.defaults.spinner = '<div class="loading-spinner fade" style="width: 200px; margin-left: -100px;"><img src="/images/ajax-modal-loading.gif" align="middle">&nbsp;<span style="font-weight:300; color: #eee; font-size: 18px; font-family:Open Sans;">&nbsp;Loading...</div>';
     }
     
-    var myAccount = function() {
+    var myAccount = function(mode, setsaved, repsaved, ordersaved) {
+    	$('.date-picker').datepicker({
+    		format: 'yyyy-mm-dd'
+    	});
+    	
     	$('.vkNgine-modal').on('click', function() {
     		$id = $(this).data('id');
     		$target = $(this).data('target');
@@ -55,15 +59,61 @@ var UIModals = function() {
 		  			break;
 	  		}
   		});
+    	
+    	switch(mode){
+	    	case 'manage-workout':
+	    		$('.setField').bind('mouseleave', function() {
+	    			var id = $(this).data('id') 
+	    			var val = $(this).val();
+	    			var field = $(this).data('field');
+	    			
+	    			if(val){
+	    				$.ajax({
+	    			        url: '/my-account/edit-setfield/field/' + field + '/id/' + id + '/value/' + val,
+	    			        dataType : 'json',
+	    			        success: function(data) {
+	    				        if(data.success) 	
+	    					        if(field == 'sets') {
+	    					        	$('#set-saved-' + id).show();
+	    				        		$('#set-saved-' + id).html(setsaved).fadeOut(3000);
+	    					        }
+	    					        else if(field == 'reps') {
+	    					        	$('#rep-saved-' + id).show();
+	    			        			$('#rep-saved-' + id).html(repsaved).fadeOut(3000);
+	    					        }
+	    					        else if(field == 'order') {
+	    					        	$('#order-saved-' + id).show();
+	    			        			$('#order-saved-' + id).html(ordersaved).fadeOut(3000);
+	    					        }
+	    			    	}
+	    			       }
+	    			    );
+	    			}
+	    		});	
+	    		break;
+	    	case 'edit-workout':
+	    		$('button.submit').bind('click', function(e) {
+	    			$('#vkNgine-modal-editworkout form').submit();
+	        	});
+	        	
+	        	var options = {  
+	        		url: '/my-account/edit-workout',
+	                //success: vkNgineAjaxFormSubmit,
+	        		dataType : 'json'
+	            };
+	        	   
+	        	$('#vkNgine-modal-editworkout form').ajaxForm(options);
+		        break;
+    	}
     }
-   
+    
     return {        
         init: function () {
             initModals(); 
         },
     
-        myAccount: function() {
-    		myAccount();
-    	}
+        myAccount: function(mode, setsaved, repsaved, ordersaved) {
+    		myAccount(mode, setsaved, repsaved, ordersaved);
+    	},
     };
 }();

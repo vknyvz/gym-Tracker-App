@@ -37,13 +37,13 @@
 									</a>
                                  </td>
                                  <td>
-			 						 <input id="sets" class="input-mini setField" rel="<?= $exercise['id']; ?>" style="width:20px;" ref="sets" type="text" value="<?= $exercise['sets']; ?>" placeholder="<?= $this->t->_('Sets'); ?>" >
+			 						 <input id="sets" class="input-mini setField" data-id="<?= $exercise['id']; ?>" style="width:20px;" data-field="sets" type="text" value="<?= $exercise['sets']; ?>" placeholder="<?= $this->t->_('Sets'); ?>" >
                                  </td>
                                  <td>
-								     <input id="reps" class="input-mini setField" rel="<?= $exercise['id']; ?>" style="width:20px;" ref="reps" type="text" value="<?= $exercise['reps']; ?>" placeholder="<?= $this->t->_('Reps'); ?>" >
+								     <input id="reps" class="input-mini setField" data-id="<?= $exercise['id']; ?>" style="width:20px;" data-field="reps" type="text" value="<?= $exercise['reps']; ?>" placeholder="<?= $this->t->_('Reps'); ?>" >
 								 </td>
 								 <td>
-								 	<input id="order" class="input-mini setField" rel="<?= $exercise['id']; ?>" style="width:20px;" ref="order" type="text" value="<?= $exercise['order']; ?>" placeholder="<?= $this->t->_('Order'); ?>" >
+								 	<input id="order" class="input-mini setField" data-id="<?= $exercise['id']; ?>" style="width:20px;" data-field="order" type="text" value="<?= $exercise['order']; ?>" placeholder="<?= $this->t->_('Order'); ?>" >
 								 </td>
 								 <td>	
 									<span id="set-saved-<?= $exercise['id']; ?>"></span>
@@ -68,34 +68,10 @@
 </div>
 
 <script type="text/javascript">		
-UIModals.init();
-UIModals.myAccount();
+	var setsaved = '<?= $this->t->_('Set saved'); ?>';
+	var repsaved = '<?= $this->t->_('Rep saved'); ?>';
+	var ordersaved = '<?= $this->t->_('Order saved'); ?>';
 
-	$('.setField').bind('mouseleave', function() {
-		var id = $(this).attr('rel') 
-		var val = $(this).val();
-		var field = $(this).attr('ref');
-		if(val){
-			$.ajax({
-		        url: '/my-account/edit-setfield/field/' + field + '/id/' + id + '/value/' + val,
-		        dataType : 'json',
-		        success: function(data) {
-			        if(data.success) 	
-				        if(field == 'sets') {
-				        	$('#set-saved-' + id).show();
-			        		$('#set-saved-' + id).html('<?= $this->t->_('Set saved'); ?>').fadeOut(3000);
-				        }
-				        else if(field == 'reps') {
-				        	$('#rep-saved-' + id).show();
-		        			$('#rep-saved-' + id).html('<?= $this->t->_('Rep saved'); ?>').fadeOut(3000);
-				        }
-				        else if(field == 'order') {
-				        	$('#order-saved-' + id).show();
-		        			$('#order-saved-' + id).html('<?= $this->t->_('Order saved'); ?>').fadeOut(3000);
-				        }
-		    	}
-		       }
-		    );
-		}
-	});
+	UIModals.init();
+	UIModals.myAccount('manage-workout', setsaved, repsaved, ordersaved);
 </script>
