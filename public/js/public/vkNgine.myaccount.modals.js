@@ -1,11 +1,4 @@
-var UIModals = function() {
-    
-    var initModals = function() {
-       
-       	$.fn.modalmanager.defaults.resize = true;
-		$.fn.modalmanager.defaults.spinner = '<div class="loading-spinner fade" style="width: 200px; margin-left: -100px;"><img src="/images/ajax-modal-loading.gif" align="middle">&nbsp;<span style="font-weight:300; color: #eee; font-size: 18px; font-family:Open Sans;">&nbsp;Loading...</div>';
-    }
-    
+var vkNgineModals = function() {
     var myAccount = function(mode, setsaved, repsaved, ordersaved) {
     	$('.date-picker').datepicker({
     		format: 'yyyy-mm-dd'
@@ -92,14 +85,15 @@ var UIModals = function() {
 	    		});	
 	    		break;
 	    	case 'edit-workout':
-	    		$('button.submit').bind('click', function(e) {
-	    			$('#vkNgine-modal-editworkout form').submit();
+	    		$('button.submit').bind('click', function(data) {
+	    			$('#vkNgine-modal-editworkout form').submit();	    			
+	    			
+	    			location.reload(true);
 	        	});
 	        	
 	        	var options = {  
 	        		url: '/my-account/edit-workout',
-	                //success: vkNgineAjaxFormSubmit,
-	        		dataType : 'json'
+	                dataType : 'json'
 	            };
 	        	   
 	        	$('#vkNgine-modal-editworkout form').ajaxForm(options);
@@ -108,11 +102,10 @@ var UIModals = function() {
     }
     
     return {        
-        init: function () {
-            initModals(); 
-        },
-    
         myAccount: function(mode, setsaved, repsaved, ordersaved) {
+           	$.fn.modalmanager.defaults.resize = true;
+    		$.fn.modalmanager.defaults.spinner = '<div class="loading-spinner fade" style="width: 200px; margin-left: -100px;"><img src="/images/ajax-modal-loading.gif" align="middle">&nbsp;<span style="font-weight:300; color: #eee; font-size: 18px; font-family:Open Sans;">&nbsp;Loading...</div>';
+
     		myAccount(mode, setsaved, repsaved, ordersaved);
     	},
     };

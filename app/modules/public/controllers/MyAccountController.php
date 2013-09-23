@@ -247,13 +247,7 @@ class MyAccountController extends vkNgine_Public_Controller
 					$id = $modelWorkouts->insert($values);
 				}
 				
-				echo Zend_Json::encode(array('success' => 1,
-											 'href'    => '/my-account/my-workouts',
-											 'dialog'  => 'btn_edit_workout_dialog',
-											 'title'   => $this->t->_('Success Message'),
-											 'message' => $this->t->_('Workout was successfully edited'),
-											 'icon'    => 'success'
-				));
+				echo Zend_Json::encode(array('success' => 1));
 				exit;
 			}
 			else {

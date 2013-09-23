@@ -158,14 +158,12 @@ vkNgine.page = vkNgine.page || {};
     		        	window.top.location = '/my-account/my-plate';
     		        }
     			}
-    	       }
-    	    );
+    	    });
     	});
     });
     
     vkNgine.page.myaccount.method( 'myworkouts', function () {
-    	UIModals.init();
-    	UIModals.myAccount();			
+    	vkNgineModals.myAccount();			
     });
     
     vkNgine.page.myaccount.method( 'mymeasurements', function () {
