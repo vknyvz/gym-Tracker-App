@@ -168,7 +168,7 @@ class MyAccountController extends vkNgine_Public_Controller
 	public function myMeasurementsAction()
 	{
 		$modelMeasurements = new Public_Model_Measurements();
-		$this->view->measurements = $modelMeasurements->fetchAll('userId = ' . $this->user->getId())->toArray();
+		$this->view->measurements = $modelMeasurements->fetchAll("userId = " . $this->user->getId(), "date DESC")->toArray();
 	}
 	
 	public function languageAction()
@@ -280,13 +280,7 @@ class MyAccountController extends vkNgine_Public_Controller
 				$values['userId'] = $this->user->getId();
 				$id = $modelMeasurements->insert($values);
 				
-				echo Zend_Json::encode(array('success' => 1,
-											 'href'    => '/my-account/my-measurements',
-											 'dialog'  => 'btn_edit_measurements_dialog',
-											 'title'   => $this->t->_('Success Message'),
-											 'message' => $this->t->_('Measurement data was successfully inserted'),
-											 'icon'    => 'success'
-				));
+				echo Zend_Json::encode(array('success' => 1));
 				exit;
 			}
 			else {

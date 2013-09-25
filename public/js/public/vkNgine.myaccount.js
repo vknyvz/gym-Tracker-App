@@ -167,12 +167,6 @@ vkNgine.page = vkNgine.page || {};
     });
     
     vkNgine.page.myaccount.method( 'mymeasurements', function () {
-	    $('.editmeasurements').bind('click', function() {
-	    	btn_editmeasurements($(this).attr('rel'));
-	    });
-	
-	    $('.deletemeasurement').bind('click', function() {
-	    	btn_deletemeasurement($(this).attr('rel'));
-	    });
+    	vkNgineModals.myAccount();
     });
 })();

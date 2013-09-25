@@ -39,7 +39,7 @@
 						        <td><?= ($measurements['type'] == 'WEIGHT') ? $this->t->_('Weight') : $this->t->_('Not Entered'); ?></td>
 						        <td><?= $this->escape($this->dateFormat($measurements['date'], Zend_Date::DATE_FULL)); ?></td>
 						        <td>
-						          <a href="#deletemeasurement_dialog" class="glyphicons bin deletemeasurement" rel="<?= $measurements['id']; ?>" data-toggle="modal">
+						          <a class="glyphicons bin vkNgine-modal" data-id="<?= $measurements['id']; ?>" data-target="deletemeasurement">
 						          	<i class="icon-remove"></i> <?= $this->t->_('Delete'); ?>
 						          </a>
 						        </td>						        
@@ -50,7 +50,7 @@
 						</tbody>
 					</table>
 					<div>
-						<a class="btn blue editmeasurements" data-toggle="modal" href="#editmeasurements_dialog"><i class="icon-plus"></i> <?= $this->t->_('Add New Measurement'); ?></a>
+						<a class="btn blue vkNgine-modal" data-id="0" data-target="editmeasurement"><i class="icon-plus"></i> <?= $this->t->_('Add New Measurement'); ?></a>
 				    </div>
 				    				      
 				</div>

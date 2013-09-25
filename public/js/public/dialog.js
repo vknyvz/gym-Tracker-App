@@ -9,20 +9,9 @@ function lnk_addExercise(date, title, action) {
 }
 
 function btn_editmeasurements(id) {
-	if(!id) {
-		id = 0;
-	}
-
-	$.ajax({ 
-		url: '/my-account/edit-measurement/id/' + id,
-		success: function(returnData) {
-			$('.editmeasurements_dialog').html(returnData);
-		}
-	})
 }
 
 function btn_manageworkout(id) {
-	
 }
 
 function btn_exerciseDetail(id)

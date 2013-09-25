@@ -41,15 +41,15 @@
 					        <td><?= ($workout['startDate'] != '0000-00-00') ? $this->escape($this->dateFormat($workout['startDate'], Zend_Date::DATE_FULL)) : $this->t->_('Not entered') ?></td>
 					        <td><?= ($workout['endDate'] != '0000-00-00') ? $this->escape($this->dateFormat($workout['endDate'], Zend_Date::DATE_FULL)) : $this->t->_('Not entered') ?></td>
 					        <td style="text-align:right">
-								<a class="glyphicons more_items vkNgine-modal" data-id="<?= $workout['workoutId']; ?>" data-toggle="modal" data-target="manageworkout">
+								<a class="glyphicons more_items vkNgine-modal" data-id="<?= $workout['workoutId']; ?>" data-target="manageworkout">
 									<i></i>
 									<?= $this->t->_('Manage'); ?>
 								</a> 	
-								<a class="glyphicons edit vkNgine-modal" data-id="<?= $workout['workoutId']; ?>" data-toggle="modal" data-target="editworkout">
+								<a class="glyphicons edit vkNgine-modal" data-id="<?= $workout['workoutId']; ?>" data-target="editworkout">
 									<i></i>
 									<?= $this->t->_('Edit'); ?>
 								</a> 
-								<a class="glyphicons bin vkNgine-modal" data-id="<?= $workout['workoutId']; ?>" data-toggle="modal" data-target="deleteworkout">
+								<a class="glyphicons bin vkNgine-modal" data-id="<?= $workout['workoutId']; ?>" data-target="deleteworkout">
 									<i></i>
 									<?= $this->t->_('Delete'); ?>
 								</a> 		
@@ -62,7 +62,7 @@
 					</tbody>
 				</table>
 				<div>
-					<a class="btn blue vkNgine-modal" data-toggle="modal" data-target="editworkout"><i class="icon-plus"></i> <?= $this->t->_('Add New Workout'); ?></a>
+					<a class="btn blue vkNgine-modal" data-target="editworkout"><i class="icon-plus"></i> <?= $this->t->_('Add New Workout'); ?></a>
 			    </div>				    
 			</div>
 		</div>			

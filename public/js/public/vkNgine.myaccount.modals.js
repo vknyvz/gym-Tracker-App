@@ -6,6 +6,8 @@ var vkNgineModals = function() {
     	
     	$('.vkNgine-modal').on('click', function() {
     		$id = $(this).data('id');
+    		$id = (($id) ? $id : 0);
+    		
     		$target = $(this).data('target');
     		$modal = $("#vkNgine-modal-" + $(this).data('target'));
     		
@@ -14,13 +16,22 @@ var vkNgineModals = function() {
 	  		switch($target) {
 	  			case 'editworkout':
 			  		$.ajax({ 
-			  		   url: '/my-account/edit-workout/workoutId/' + (($id) ? $id : 0),
+			  		   url: '/my-account/edit-workout/workoutId/' + $id,
 			  		   success: function(html) {  						
 			  			  $modal.html(html);
 			  			  $modal.modal();
 			  			}
 			  		});	  
 			  		break;
+	  			case 'editmeasurement':
+			    	$.ajax({ 
+			    		url: '/my-account/edit-measurement/id/' + $id,
+			    		success: function(html) {
+			    			$modal.html(html);
+				  			$modal.modal();
+			    		}
+			    	})
+		  			break;	
 		  		case 'manageworkout':
 		  			$.ajax({ 
 		  				url: '/my-account/manage-workout/id/' + $id,
@@ -28,7 +39,7 @@ var vkNgineModals = function() {
 		  					$modal.html(html);
 				  			$modal.modal();
 		  				}
-		  			})	
+		  			});
 		  			break;
 		  		case 'exercisedetail':
 		  			$.ajax({ 
@@ -37,7 +48,8 @@ var vkNgineModals = function() {
 		  					$modal.html(html);
 				  			$modal.modal();
 		  				}
-		  			})
+		  			});
+		  			break;
 		  		case 'deleteworkout':
 		  			$modal.modal();
 		  			$('#vkNgine-modal-' + $(this).data('target') + ' .submit').bind('click', function() {
@@ -48,6 +60,18 @@ var vkNgineModals = function() {
 		  						window.top.location = '/my-account/my-workouts';
 		  					}
 		  				});	
+		  			});
+		  			break;
+		  		case 'deletemeasurement':
+		  			$modal.modal();		  			
+		  			$('#vkNgine-modal-' + $(this).data('target') + ' .submit').bind('click', function() {
+		  				$.ajax( {
+		  					url: "/my-account/delete-measurement/id/" + $id,
+		  					dataType : 'json',
+		  					success: function(data) {
+		  						window.top.location = '/my-account/my-measurements';
+		  					}
+		  				});
 		  			});
 		  			break;
 	  		}
@@ -98,6 +122,24 @@ var vkNgineModals = function() {
 	        	   
 	        	$('#vkNgine-modal-editworkout form').ajaxForm(options);
 		        break;
+	    	case 'edit-measurements':
+	    		$('button.submit').bind('click', function() {
+	    			$('#vkNgine-modal-editmeasurement form').submit();	    			
+	    			
+	    			location.reload(true);
+	    		});
+	    			
+	    		var options = {  
+	    			url: '/my-account/edit-measurement',
+	    			dataType : 'json'
+	    	    };
+	    	    
+	    		$('#vkNgine-modal-editmeasurement form').ajaxForm(options);
+
+	    		$('.date-picker').datepicker({
+	    			format: 'yyyy-mm-dd'	
+	    		});		
+	    		break;
     	}
     }
     
