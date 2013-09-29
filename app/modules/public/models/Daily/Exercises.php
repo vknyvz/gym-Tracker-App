@@ -22,7 +22,7 @@ class Public_Model_Daily_Exercises extends vkNgine_DbTable_Abstract
 		$select = $this->select($date);
 		$select->where('date = ?', $date);
 		$select->where('userId = ?', $user->getId());
-		
+			
 		return $this->fetchAll($select)->toArray();		
 	}
 }

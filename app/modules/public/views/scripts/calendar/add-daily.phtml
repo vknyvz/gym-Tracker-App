@@ -6,55 +6,5 @@
 ?>
 
 <script>
-$(document).ready(function(){
-	$('.btn-primary').bind('click', function() {
-		$('#<?= $this->form->getId(); ?>').submit();
-	});
-	
-	var options = {  
-		url: '<?= $this->form->getAction(); ?>',
-        success: vkNgineAjaxFormSubmit,
-		dataType : 'json'
-    };
-    
-	$('#<?= $this->form->getId(); ?>').ajaxForm(options);
-
-	$('#workoutDay-label').hide();
-	$('#workoutDay-element').hide();
-
-	$(".setdays").change(function(){
-		var selected = $(".setdays option:selected");    
-		if(selected.val()){
-			$('#workoutDay-element').show();			
-			$.ajax({ 
-				url: '/calendar/set-workout-day/id/' + selected.val(),
-				success: function(returnData) {
-					$('dd#workoutDay-element').html(returnData);
-				}
-			});
-			
-			$('#type').hide();
-			$('#moreDetails').hide();
-			$('#activity').hide();
-		}
-		else {
-			$('#type').show();
-			$('#moreDetails').show();
-			$('#activity').show();
-			$('#workoutDay-label').hide();
-			$('#workoutDay-element').hide();
-		}
-	});
-
-	$("#type").change(function(){
-		var selected = $("#type option:selected");  
-		if(selected.val()){
-			$(".setdays").hide();
-		}
-		else {
-			$(".setdays").show();
-		}
-	});
-});
+	vkNgineModals.calendar('add-exercise');
 </script>
-

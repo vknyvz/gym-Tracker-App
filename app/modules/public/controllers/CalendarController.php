@@ -36,7 +36,7 @@ class CalendarController extends vkNgine_Public_Controller
 			
 		$modelMeasurements = new Public_Model_Measurements();
 			
-		$this->view->param = $this->_getAllParams();
+		$this->view->action = 'calendar-monthly';
 		
 		$this->view->otherdata = $modelMeasurements->fetchAll("userId = '" . $this->user->getId() . "' and date >= '" . $start . "' and date < '" . $end . "' ")->toArray();
 	}
@@ -93,13 +93,7 @@ class CalendarController extends vkNgine_Public_Controller
 	
 				$modelDailyExcercises->insert($values);
 				
-				echo Zend_Json::encode(array('success' => 1,
-					'href'    => '/calendar/' . $forward,
-					'dialog'  => 'lnk-addexercise-dialog',
-					'title'   => $this->t->_('Success Message'),
-					'message' => $this->t->_('Exercise was successfully added'),
-					'icon'    => 'success'
-				));
+				echo Zend_Json::encode(array('success' => 1, 'href'    => $forward));
 				
 				exit;
 			}
@@ -218,7 +212,7 @@ class CalendarController extends vkNgine_Public_Controller
 	
 				$values['userId'] = $this->user->getId();
 				
-				$forward = $values['forward'];
+				$forward = str_replace('-', '/', $values['forward']);
 				unset( $values['forward']);
 				 
 				$modelDailyDetails->insert($values);

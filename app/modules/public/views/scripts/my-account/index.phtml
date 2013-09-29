@@ -1,14 +1,14 @@
 <?= $this->partial('_breadcrumbs.phtml', 
-				array('t' 		  => $this->t,
-					  'pageTitle' => $this->t->_($this->user->getFullname()),
-					  'page'	  => $this->t->_('My Settings'),
-						
+		array('t' 		  => $this->t,
+			  'pageTitle' => $this->t->_($this->user->getFullname()),
+			  'page'	  => $this->t->_('My Settings'),
 	)); 
 ?>
 
 <?php
 	$this->headScript()
-		 	->appendFile($this->baseUrl('/js/public/vkNgine.myaccount.js'));
+		 	->appendFile($this->baseUrl('/js/public/vkNgine.myaccount.js'))
+		 	->appendFile($this->baseUrl('/js/public/vkNgine.myaccount.modals.js'));		 	
 ?>     
 
                <div class="row-fluid">
@@ -87,8 +87,8 @@
 		</div>
 		<div class="portlet-body form">
 			<p align="center">
-		   	  <a class="language" href="javascript:void(0);" rel="tr"><img src="/images/Turkey.png" width="32"></a>
-			  <a class="language" href="javascript:void(0);" rel="en"><img src="/images/Us.png" width="32"></a>
+		   	  <a class="language" data-lang="tr"><img src="/images/Turkey.png" width="32"></a>
+			  <a class="language" data-lang="en"><img src="/images/Us.png" width="32"></a>
 		   </p>
 		   <p class="warning">
 		   	  <?= $this->t->_('Clicking a flag will change the language for the current session'); ?>

@@ -8,8 +8,9 @@
 
 <?php
 	$this->headScript()
-		 	->appendFile($this->baseUrl('/js/public/vkNgine.myaccount.js'));
-?>  
+		 	->appendFile($this->baseUrl('/js/public/vkNgine.myaccount.js'))
+		 	->appendFile($this->baseUrl('/js/public/vkNgine.myaccount.modals.js'));		 	
+?>
 
 	<div class="row-fluid">
 		<div class="span12">			
@@ -70,6 +71,5 @@
 </div>
 
 <script>
-	var core = new vkNgine.core.engine();
-	core.initMyAccount('my-workouts');											
+	vkNgineModals.myAccount();
 </script>

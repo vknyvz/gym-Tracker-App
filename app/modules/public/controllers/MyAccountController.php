@@ -182,7 +182,7 @@ class MyAccountController extends vkNgine_Public_Controller
 			$language->session = true;
 			$language->config = false;
 		}
-	
+				
 		echo Zend_Json::encode(array('success' => 1));
 		exit;
 	}

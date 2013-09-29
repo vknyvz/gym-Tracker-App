@@ -75,7 +75,7 @@ vkNgine.page = vkNgine.page || {};
     	});
 
     	$('.language').bind('click', function() {
-    		var lang = $(this).attr('rel');
+    		var lang = $(this).data('lang');
     		
     		$.ajax( {
     			url: '/my-account/language/lang/' + lang,
@@ -160,13 +160,5 @@ vkNgine.page = vkNgine.page || {};
     			}
     	    });
     	});
-    });
-    
-    vkNgine.page.myaccount.method( 'myworkouts', function () {
-    	vkNgineModals.myAccount();			
-    });
-    
-    vkNgine.page.myaccount.method( 'mymeasurements', function () {
-    	vkNgineModals.myAccount();
     });
 })();

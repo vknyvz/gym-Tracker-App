@@ -150,7 +150,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 	    
 	    $language = new Zend_Session_Namespace('language');
 	    
-	   	if($language->__isset('session')){
+	    if($language->__isset('session')){
 	        $lang = $language->lang;
 	    }
 	    else{

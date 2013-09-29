@@ -58,16 +58,22 @@ vkNgine.core = vkNgine.core || {};
 	 		case 'my-plate':
 	 			data.myplate();	
 	 			break;
-	 		case 'my-workouts':
-	 			data.myworkouts();
-	 			break;
-	 		case 'my-measurements':
-	 			data.mymeasurements();
 	 		case '':
 	 		default:
 	 			data.myaccount();
 	 			break;
  		}		
+ 	});
+ 	
+ 	vkNgine.core.engine.method ( 'initCalendar', function (page, today, prev, next, notCurrentMonth) {
+ 		var data = new vkNgine.page.calendar();
+ 		
+ 		switch( page ) {
+ 			case '':
+ 			default:
+ 				data.calendar(today, prev, next, notCurrentMonth);	
+ 				break;
+ 		}
  	});
  	
  	vkNgine.core.engine.method( 'isTouchDevice', function () {
