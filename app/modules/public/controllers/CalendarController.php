@@ -56,7 +56,8 @@ class CalendarController extends vkNgine_Public_Controller
 			$workoutDetail[$workout['workoutId']] = $workout['name'];
 		}
 
-		$this->view->param = $this->_getAllParams();
+		$this->view->action = 'calendar-weekly';
+		
 		$this->view->workoutDetail = $workoutDetail;
 		$this->view->calendar = $calendar;
 	}
