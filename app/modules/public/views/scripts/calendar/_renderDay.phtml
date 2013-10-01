@@ -3,7 +3,7 @@
   	  <?php 
   	  if($this->mode == 'monthly') :	
   	  ?>
-	  <div class="fc-day-number vkNgine-Modal" data-target="view-detail" data-date="<?= $this->date; ?>"><?= $this->day->thisDay(); ?></div>
+	  <div class="fc-day-number vkNgine-modal" data-id="<?= $this->day->thisDay(); ?>" data-action="<?= $this->action; ?>" data-target="daydetail" data-date="<?= $this->date; ?>"><?= $this->day->thisDay(); ?></div>
 	  <?php 
 	  endif;
 	  ?>
@@ -28,7 +28,7 @@
 				}
 				
 				echo '
-					<div data-id="' . $this->days[$i]['id'] . '" data-target="view-detail" class="fc-event fc-event-skin fc-event-hori fc-corner-left fc-corner-right" style="background-color: rgb(71, 125, 174); border-color: rgb(14, 105, 161); top: 30px; -moz-user-select: none;">
+					<div data-id="' . $this->days[$i]['id'] . '" data-target="viewdetail" class="fc-event fc-event-skin fc-event-hori fc-corner-left fc-corner-right vkNgine-modal" style="background-color: rgb(71, 125, 174); border-color: rgb(14, 105, 161); top: 30px; -moz-user-select: none;">
 						<div class="fc-event-inner fc-event-skin" style="background-color:#477dae;border-color:#0E69A1">
 				';
 					if(isset($activity)) {
@@ -52,7 +52,7 @@
 			for($k=0; $k<count($this->details); $k++) {
 				if($this->details[$k]['type'] == 'SUPPLEMENT'){
 					echo '
-						<div data-id="' . $this->details[$k]['id'] . '" data-target="viewDayDetail" class="fc-event fc-event-skin fc-event-hori fc-corner-left fc-corner-right" style="background-color: rgb(71, 125, 174); border-color: rgb(14, 105, 161); top: 30px; -moz-user-select: none;">
+						<div data-id="' . $this->details[$k]['id'] . '" data-target="viewdaydetail" class="fc-event fc-event-skin fc-event-hori fc-corner-left fc-corner-right vkNgine-modal" style="background-color: rgb(71, 125, 174); border-color: rgb(14, 105, 161); top: 30px; -moz-user-select: none;">
 							<div class="fc-event-inner fc-event-skin" style="background-color:#477dae;border-color:#0E69A1">
 								<span class="fc-event-time">' . $this->t->_('Supplement Taken') .'</span>
 								<span class="fc-event-title">' . $this->details[$k]['value'] . '</span>

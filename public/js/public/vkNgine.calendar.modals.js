@@ -9,7 +9,7 @@ var vkNgineModals = function() {
 	    		$modal = $("#vkNgine-modal-" + $(this).data('target'));
 	    		
 		  		$('body').modalmanager('loading');
-		  		_($target);
+		  		
 		  		switch($target) {
 	  				case 'addexercise':
 	  					$.ajax( {
@@ -19,22 +19,41 @@ var vkNgineModals = function() {
 	  			  			    $modal.modal();		           
 	  				    	}
 	  				    });
+	  					
+	  					return;
 	  					break;
 	  				case 'viewdetail':
-	  					$modal.modal();
-  						//lnk_viewDetail($(this).attr('rel'), 'Error Message', 'Exercise was successfully deleted');
-  						return false;
+	  					$.ajax( {
+	  				        url: '/calendar/view-detail/id/' + $id,
+	  				        success: function(html) { 
+	  				        	$modal.html(html);
+	  				        	$modal.modal();
+	  				    	}
+	  				    });
+	  					
+	  					return false;
 	  					break;
 	  				case 'viewdaydetail':
-	  					//lnk_viewDayDetail('Delete', 'Close', $(this).attr('rel'), 'Day Details', 'Error Message', 'Day detail was successfully deleted');
+	  					$.ajax( {
+	  				        url: '/calendar/view-day-detail/id/' + $id,
+	  				        success: function(html) { 
+	  				        	$modal.html(html);
+	  				        	$modal.modal();	           
+	  				    	}
+	  				    });
+	  					
 						return false;
 	  					break;
 	  				case 'daydetail':
-	  					day = $(this).attr('rel');
-  						date = explode('-', $(this).attr('rel'));
-  						dateStr = date[1] + '/' + date[2] + '/' + date[0];
-  						//lnk_dayDetail('Save', 'Close', day, 'Adding Day Details:' + dateStr, 'action');
-  						return false;
+	  					$.ajax( {
+	  				        url: '/calendar/daily-detail/forward/' + $(this).data('action') + '/date/' + $(this).data('date'),
+	  				        success: function(html) { 
+	  					        $modal.html(html)
+	  					        $modal.modal();
+	  				    	}
+	  				    });
+
+	  					return false;
 	  					break;
 		  		}
 			});
@@ -89,6 +108,67 @@ var vkNgineModals = function() {
 							$(".setdays").show();
 						}
 					});
+					break;
+				case 'add-daily-detail':
+					$('button.submit').bind('click', function() {
+						$('#vkNgine-modal-daydetail form').submit();	   
+					});
+					
+					var options = {  
+						url: '/calendar/daily-detail',
+						dataType : 'json'
+				    };
+				    
+					$('#vkNgine-modal-daydetail form').ajaxForm(options);
+
+					$('#value').hide();
+					$('#color').hide();
+					$('.help-inline-type').show();
+					$('.help-inline-color').hide();
+
+					$("#type").change(function(){
+						var selected = $("#type option:selected");    
+						
+						if(selected.val() == 'COLOR'){
+							$('#value').hide();
+							$('#color').show();
+							$('.help-inline-type').hide();
+							$('.help-inline-color').show();
+						}
+						else if(selected.val() == 'SUPPLEMENT'){
+							$('#value').show();
+							$('#color').hide();
+							$('.help-inline-type').hide();
+							$('.help-inline-color').hide();
+						}
+						else {
+							$('#value').hide();
+							$('#color').hide();
+							$('.help-inline-type').show();
+							$('.help-inline-color').hide();
+						}
+					});
+					
+					break;
+				case 'view-day-detail':
+					$('button.submit').bind('click', function() {
+						$.ajax( {
+					        url: '/calendar/delete-day-detail/id/' + $id,
+					        success: function(data) { 
+					    	}
+					    });
+					});
+					
+					break;
+				case 'delete-daily-exercise':
+					$('button.submit').bind('click', function() {
+						$.ajax( {
+					        url: '/calendar/delete-daily-log/id/' + $id,
+					        success: function(data) { 
+					    	}
+					    });
+					});
+					
 					break;
 			}
 		}

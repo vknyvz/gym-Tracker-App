@@ -51,7 +51,7 @@ class vkNgine_Form_Element_Decorator_Text extends Zend_Form_Decorator_Abstract
         if (empty($desc)) {
             return '';
         }
-        return '<div>' . $desc . '</div>';
+        return '<div class="help-inline-' . $element->getName() . '">' . $desc . '</div>';
 	}
 	
 	public function render($content)

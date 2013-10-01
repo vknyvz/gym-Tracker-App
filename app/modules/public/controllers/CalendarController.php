@@ -217,19 +217,13 @@ class CalendarController extends vkNgine_Public_Controller
 				 
 				$modelDailyDetails->insert($values);
 				 
-				echo Zend_Json::encode(array('success' => 1,
-						'href'	   => '/calendar/' . $forward,
-						'dialog'  => 'lnk-dailyDetails-dialog',
-						'title'   => $this->t->_('Success Message'),
-						'message' => $this->t->_('Day details was successfully added'),
-						'icon'    => 'success'
-				));
+				echo Zend_Json::encode(array('success' => 1, 'href' => $forward));
 				exit;
 			}
 			else {
 				echo Zend_Json::encode(array('title'   => $this->t->_('Error Message'),
-						'message' => $this->t->_('Please fill out all required fields'),
-						'icon'    => 'error'
+											 'message' => $this->t->_('Please fill out all required fields'),
+											 'icon'    => 'error'
 				));
 				exit;
 			}

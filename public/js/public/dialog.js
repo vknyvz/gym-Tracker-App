@@ -95,8 +95,7 @@ function lnk_viewDayDetail(yes, no, id, title, successTitle, successMessage){
 				});
 		       window.top.location = '/calendar';
 	    	}
-	       }
-	    );
+	    });
 	}
 	
 	$('.lnk-viewDayDetails-dialog').dialog({

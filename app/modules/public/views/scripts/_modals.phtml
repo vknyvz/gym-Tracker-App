@@ -5,7 +5,15 @@
 <div class="modal-body">
 	<?= $this->content; ?>
 </div>
+
+<?php if(isset($this->delete)) : ?>
 <div class="modal-footer">
-	<button class="btn" data-dismiss="modal" type="button"><?= $this->t->_('Cancel'); ?></button>
+	<button class="btn" data-dismiss="modal" type="button"><?= $this->t->_('Close'); ?></button>
+	<button class="btn red submit" type="button"><?= $this->t->_('Delete'); ?></button>
+</div>
+<?php else: ?>
+<div class="modal-footer">
+	<button class="btn" data-dismiss="modal" type="button"><?= $this->t->_('Close'); ?></button>
 	<button class="btn blue submit" type="button"><?= $this->t->_('Save'); ?></button>
 </div>
+<?php endif; ?>

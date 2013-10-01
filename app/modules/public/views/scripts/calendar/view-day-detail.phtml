@@ -1,15 +1,12 @@
-<h6><?= $this->t->_('Day Details') ?>: <?= date('m-d-Y', strtotime($this->details['date'])) ?></h6>
-   <div class="box-content">	
-   <table>
-	<tbody>
-		<?php 
-    		if($this->details['type'] == 'SUPPLEMENT') :
-    	?>	
-		<tr>
-			<td><?= $this->t->_('Supplement Taken') ?>:</td>
-			<td><strong><?= $this->details['value']?></strong></td>
-  		</tr>
-  		<?php endif; ?>
-	</tbody>
-   </table>
-  	</div>
+<?= $this->partial('_modals.phtml', 
+				array('t' 		  => $this->t,					  
+					  'headline'  => $this->t->_('Day Details') . ': ' . date('m-d-Y', strtotime($this->details['date'])),
+					  'content'   => $this->details['value'],
+					  'delete'    => true,
+	)); 
+?>
+
+<script>
+	vkNgineModals.calendar('view-day-detail');
+</script>
+
