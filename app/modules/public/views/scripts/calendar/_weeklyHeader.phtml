@@ -69,5 +69,5 @@ while ($day = $this->calendar->fetch()) {
 		}
 	}
 		
-	echo '<th rel="' . $date . '" class="fc-widget-header ' . $class . ' dayDetail" style="width: 97px;">' . $value . ' </th>';
+	echo '<th data-date="' . $date . '" class="fc-widget-header vkNgine-modal ' . $class . ' " data-action="' . $this->action .'" data-target="daydetail" style="width: 97px;">' . $value . ' </th>';
 }

@@ -174,31 +174,6 @@ var vkNgineModals = function() {
 		}
 	};
 	
-	/*
-	 * 		$('.addExercise').bind('click', function() {
-			$('#addexercise_dialog').modal('show');
-			lnk_addExercise($(this).attr('rel'), '<?= $this->t->_('Adding Daily Workout: '); ?> ' + $(this).attr('rel'), '<?= $this->param['action']; ?>');
-		});	
-
-		$('.viewDetail').bind('click', function() {
-			lnk_viewDetail('<?= $this->t->_('Delete'); ?>', '<?= $this->t->_('Close'); ?>', $(this).attr('rel'), '<?= $this->t->_('Daily Workout Details'); ?>', '<?= $this->t->_('Error Message')?>', '<?= $this->t->_('Exercise was successfully deleted')?>');
-			return false;
-		});
-
-		$('.viewDayDetail').bind('click', function() {
-			lnk_viewDayDetail('<?= $this->t->_('Delete'); ?>', '<?= $this->t->_('Close'); ?>', $(this).attr('rel'), '<?= $this->t->_('Day Details'); ?>', '<?= $this->t->_('Error Message')?>', '<?= $this->t->_('Day detail was successfully deleted')?>');
-			return false;
-		});
-
-		$('.dayDetail').bind('click', function() {
-			day = $(this).attr('rel');
-			date = explode('-', $(this).attr('rel'));
-			dateStr = date[1] + '/' + date[2] + '/' + date[0];
-			lnk_dayDetail('<?= $this->t->_('Save'); ?>', '<?= $this->t->_('Close'); ?>', day, '<?= $this->t->_('Adding Day Details: '); ?> ' + dateStr, '<?= $this->param['action']; ?>');
-			return false;				
-		});
-	 */
-	
 	return {        
 	    calendar: function(mode) {
 	       	$.fn.modalmanager.defaults.resize = true;

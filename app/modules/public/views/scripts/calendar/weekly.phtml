@@ -75,7 +75,8 @@ if(!isset($this->params['month'])) {
 									    	echo
 									    	$this->partial('calendar/_weeklyHeader.phtml',
 									    			array('t'        => $this->t,
-									    				  'calendar' => $this->calendar
+									    				  'calendar' => $this->calendar,
+													      'action'   => $this->action,
 									    			));
 									    ?>
 									</tr>
@@ -121,7 +122,8 @@ if(!isset($this->params['month'])) {
 												                  'action'         => $this->action,
 									    						  'date'  		   => $date,
 																  'day'   		   => $day,
-																  'detail'		   => $details,
+															      'days'		   => $days,
+																  'details'		   => $details,
 																  'firstLast'      => $firstLast,
 																  'cssBgColor'     => $cssBgColor,
 							  									  'highlightedCss' => $highlightedCss,
