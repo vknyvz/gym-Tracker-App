@@ -17,11 +17,14 @@
 			</div>
 		</div>
 		
+	<h3 class="page-title">
 	<?php if(isset($this->pageTitle)) : ?>					
-		<h3 class="page-title">
+		
 			<?= $this->pageTitle; ?>
-		</h3>
+	<?php else: ?>
+		&nbsp;
 	<?php endif; ?>
+	</h3>
 		
 		<ul class="breadcrumb">
 			<li>

@@ -141,7 +141,7 @@ class CalendarController extends vkNgine_Public_Controller
 		}
 		else {
 			$modelDailyDetails->insert($values);
-		}	
+		}
 		
 		echo Zend_Json::encode(array('success'  => 1,
 									 'loadThis' => '/calendar/',
@@ -232,6 +232,7 @@ class CalendarController extends vkNgine_Public_Controller
 		 
 		$form->setHidden($date, $this->_getParam('forward'));
 		
+		$this->view->param = $this->_getAllParams();
 		$this->view->form = $form;
 	}
 	

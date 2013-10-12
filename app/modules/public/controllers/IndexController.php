@@ -31,7 +31,6 @@ class IndexController extends vkNgine_Public_Controller
     
     public function exercisesAction()
     {  
-    	parent::ajaxEnabled();
     }
     
     public function setDayAction()

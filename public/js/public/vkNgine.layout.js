@@ -506,7 +506,7 @@ vkNgine.layout = vkNgine.layout || {};
 	
 	vkNgine.layout.template.method( 'handleGoTop', function () {
 		 jQuery('.footer').on('click', '.go-top', function (e) {
-             App.scrollTo();
+             vkNgine.scrollTo();
              e.preventDefault();
          });
 	});

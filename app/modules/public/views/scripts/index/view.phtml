@@ -1,10 +1,10 @@
-<?= $this->partial('_breadcrumbs.phtml', 
-				array('t' 		  => $this->t,					  
-					  'page'	  => $this->exercise['name'],
-					  'pageHref'  => false,
-					  'ajax'      => $this->ajax,
-					  'page2'     => $this->exercise['primaryMuscle'],
-					  'page2href' => '/index/exercises/type/' . $this->exercise['primaryMuscle']
+<?= 
+	$this->partial('_breadcrumbs.phtml', 
+		array('t' 		  => $this->t,					  
+			  'page'	  => $this->exercise['name'],
+			  'ajax'      => $this->ajax,
+			  'page2'     => $this->exercise['primaryMuscle'],
+			  'page2href' => '/index/exercises/type/' . $this->exercise['primaryMuscle']
 	)); 
 ?>
 
@@ -14,7 +14,7 @@
 			<div class="portlet-title">
                 <div class="caption">
 					<i class="icon-reorder"></i>
-					<span class="hidden-480"><?= $this->t->_('Exercises'); ?> :: <?= $this->t->_($this->params['type']); ?></span>
+					<span class="hidden-480"><?= $this->t->_('Exercises'); ?></span>
 				</div>                       							
 			</div>	
 		<div class="portlet-body">					
