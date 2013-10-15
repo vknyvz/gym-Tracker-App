@@ -105,21 +105,15 @@ vkNgine.page = vkNgine.page || {};
     	};
     	total();	
       
-     	var options = {
-    		script:"/my-account/my-plate?food=1&",
-    		varname:"foodsearch",
-    		json:true,
-    		shownoresults:true,
-    		maxresults:100,
-    		maxentries:100,
-    		delay:1,
-    		callback: function (obj) { 
-    			$('#foodId').val(obj.id);  
-    			$('#servingSizeValue').html(obj.servingSize);		
-    			$("#servingSizes option[value=" + obj.servingSizeType + "]").attr('selected', 'selected');			
-    		}
-    	};
-    	//var as_json = new bsn.AutoSuggest('foodSearch', options);
+     	$('#foodSearch').typeahead({
+     	    source: function (query, process) {
+     	        return $.get('/my-account/my-plate', { query: query, food: 1}, function (data) {
+     	        	$('#foodId').val(data.id);  
+        			$('#servingSizeValue').html(data.servingSize);		
+        			$("#servingSizes option[value=" + data.servingSizeType + "]").attr('selected', 'selected');			
+     	        });
+     	    }
+     	});
     	
      	var d = new Date();
     	var date = d.getFullYear() + "-" + (d.getMonth()+1) + "-" + d.getDate();

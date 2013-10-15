@@ -454,7 +454,7 @@ vkNgine.layout = vkNgine.layout || {};
         $('.page-sidebar').on('keypress', '.sidebar-search input', function (e) {
             if (e.which == 13) {
                 window.location.href = "extra_search.html";
-                return false; //<---- Add this line
+                return false;
             }
         });
 
@@ -462,18 +462,14 @@ vkNgine.layout = vkNgine.layout || {};
         $('.sidebar-search .submit').on('click', function (e) {
             e.preventDefault();
           
-                if ($('body').hasClass("page-sidebar-closed")) {
-                    if ($('.sidebar-search').hasClass('open') == false) {
-                        if ($('.page-sidebar-fixed').size() === 1) {
-                            $('.page-sidebar .sidebar-toggler').click(); //trigger sidebar toggle button
-                        }
-                        $('.sidebar-search').addClass("open");
-                    } else {
-                        window.location.href = "extra_search.html";
+            if ($('body').hasClass("page-sidebar-closed")) {
+                if ($('.sidebar-search').hasClass('open') == false) {
+                    if ($('.page-sidebar-fixed').size() === 1) {
+                        $('.page-sidebar .sidebar-toggler').click(); //trigger sidebar toggle button
                     }
-                } else {
-                    window.location.href = "extra_search.html";
-                }
+                    $('.sidebar-search').addClass("open");
+                } 
+            } 
         });
 	});
 	
@@ -506,7 +502,9 @@ vkNgine.layout = vkNgine.layout || {};
 	
 	vkNgine.layout.template.method( 'handleGoTop', function () {
 		 jQuery('.footer').on('click', '.go-top', function (e) {
-             vkNgine.scrollTo();
+			 var layout = new vkNgine.layout.template();
+             layout.scroll2();
+             
              e.preventDefault();
          });
 	});
@@ -733,6 +731,12 @@ vkNgine.layout = vkNgine.layout || {};
                 scrollTop: lastClicked.offset().top - 150
             }, 'slow');
         });
+	});
+	
+	vkNgine.layout.template.method( 'scroll2', function () {
+	    jQuery('html,body').animate({
+	        scrollTop: 0,
+	    }, 'slow');
 	});
 	
 	vkNgine.core.engine.method( 'addResponsiveHandler', function (handleChoosenSelect) {
