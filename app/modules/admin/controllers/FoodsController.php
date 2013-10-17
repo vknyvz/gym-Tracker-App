@@ -29,7 +29,7 @@ class Admin_FoodsController extends vkNgine_Admin_Controller
 	public function editAction()
 	{
 		parent::ajaxEnabled();
-	
+			
 		$modelFoods = new Model_Foods();
 		
 		$form = self::getFoodsEditForm();
@@ -100,6 +100,8 @@ class Admin_FoodsController extends vkNgine_Admin_Controller
 								'tagTitle'		=> $this->t->_('Edit this food'),
 								'tagTitleDelete' => $this->t->_('Delete this food'),
 				);
+				
+				$this->refreshFoodsJson();
 					
 				echo Zend_Json::encode(array('success' => 1,
 						'newRow'  => $newRow,
@@ -122,6 +124,16 @@ class Admin_FoodsController extends vkNgine_Admin_Controller
 		}
 	
 		$this->view->form = $form;
+	}
+	
+	public function refreshFoodsJson()
+	{
+		$modelFoods = new Model_Foods();
+		$foods = $modelFoods->fetchAll()->toArray();
+		
+		$fp = fopen(SERVER_PATH .'/public/js/foods.json', 'w');
+		fwrite($fp, Zend_Json::encode($foods));
+		fclose($fp);
 	}
 	
 	public function deleteAction()

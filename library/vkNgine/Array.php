@@ -19,15 +19,11 @@ class vkNgine_Array extends Zend_Controller_Plugin_Abstract
 	 */
 	public static function x($arr, $die = false)
 	{
-		echo '===============';
-			echo '<pre>';
-				print_r($arr);
-			echo '</pre>';
-		echo '===============';
+		printf( '<pre>%s</pre>', print_r( $arr, true ) );
 		
-		if($die) {
-			exit;   
-		}   
+		if(!empty($die)) {
+			exit;
+		}
 	}
 }
 ?>
