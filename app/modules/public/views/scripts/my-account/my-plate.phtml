@@ -19,6 +19,7 @@
 <?php
 	$this->headScript()
 		 	->appendFile($this->baseUrl('/js/public/vkNgine.myaccount.js'))
+		 	->appendFile($this->baseUrl('/js/public/foods.json'))
 		 	->appendFile($this->baseUrl('/js/public/vkNgine.myaccount.modals.js'));		 	
 ?>    
 
@@ -65,7 +66,6 @@
 		                                 	<div class="controls">
 		                                 		<?= $this->formFoods->foodId; ?>
 			                                    <?= $this->formFoods->foodSearch; ?>
-			                                    <ul class="typeahead dropdown-menu" style="top: 44px; left: 10px; display: none;"><li data-value="California" class="active"><a href="#"><strong>Ca</strong>lifornia</a></li><li data-value="North Carolina"><a href="#">North <strong>Ca</strong>rolina</a></li><li data-value="South Carolina"><a href="#">South <strong>Ca</strong>rolina</a></li></ul>
 			                                    <div id="servingSize" style="padding-top:10px;padding-left:3px"><?= $this->t->_('Serving Size'); ?>: <span id="servingSizeValue"></span></div>
 										    </div>
 										    <div class="controls">
