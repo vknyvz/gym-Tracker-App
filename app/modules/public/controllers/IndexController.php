@@ -26,7 +26,16 @@ class IndexController extends vkNgine_Public_Controller
     
     public function aboutAction()
     {
-    	
+    	/*$model = new Model_Exercises();
+    	$a = $model->fetchAll()->toArray();
+    	foreach($a as $b) {
+    		$alias = preg_replace('/[^A-Za-z0-9]/', ' ', $b['name']);
+    		
+    		$url = str_replace(' ', '-', strtolower(trim($alias)));
+    		
+    		$model->update($b['exerciseId'], array('url' => $url));
+    		
+    	}*/
     }
     
     public function exercisesAction()
@@ -124,12 +133,7 @@ class IndexController extends vkNgine_Public_Controller
     				$modelWorkoutsExercises->insert($values);
        			}
     			
-    			echo Zend_Json::encode(array('success' => 1,
-					    					 'dialog'  => 'add_selected_workouts_dialog',
-					    					 'title'   => $this->t->_('Success Message'),
-					    					 'message' => $this->t->_('Exercise was successfully added'),
-					    					 'icon'    => 'success'
-    			));
+    			echo Zend_Json::encode(array('success' => 1));
     			exit;
     		}
     		else {

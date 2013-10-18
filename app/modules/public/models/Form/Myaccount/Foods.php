@@ -39,7 +39,6 @@ class Public_Model_Form_Myaccount_Foods extends vkNgine_Form_AjaxDesign
     		new vkNgine_Form_Element_Select('servingSizes',
     				array('label' 	=> null,
     					  'class' 	=> 'small m-wrap',
-    					  'readonly'=> '',
     					  'onkeyup' => 'var value = $(this).val(); $("#servingSizes").val(value);',
     					  'escape'  => false,
     					  'desc' 	=> null),

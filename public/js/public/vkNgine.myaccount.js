@@ -121,6 +121,8 @@ vkNgine.page = vkNgine.page || {};
         };
         
     	new bsn.AutoSuggest('foodSearch', options);
+    	
+    	$('#servingSizes').attr("disabled", true);
      	
      	var d = new Date();
     	var date = d.getFullYear() + "-" + (d.getMonth()+1) + "-" + d.getDate();

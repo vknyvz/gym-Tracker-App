@@ -7,6 +7,11 @@
 	)); 
 ?>
 
+<?php
+	$this->headScript()
+		 	->appendFile($this->baseUrl('/js/public/vkNgine.index.modals.js'));		 	
+?>
+
 <div class="row-fluid">
 		<div class="span12">			
 			<div class="portlet box blue">
@@ -54,7 +59,7 @@
 		    			</tbody>
 					</table>
 				    <div>
-						<a class="btn blue add_selected_workouts" data-toggle="modal" href="#add_selected_workouts_dialog"><i class="icon-plus"></i> <?= $this->t->_('Add Selected Exercises to a Workout'); ?></a>
+						<a class="btn blue vkNgine-modal" data-target="addselectedworkouts"><i class="icon-plus"></i> <?= $this->t->_('Add Selected Exercises to a Workout'); ?></a>
 				    </div>	
 				</div>
 			</div>			
@@ -62,7 +67,5 @@
 	</div>
 
 <script>
-$('.add_selected_workouts').bind('click', function() {
-	btn_add_selected_workouts();
-});	
+	vkNgineModals.index();
 </script>

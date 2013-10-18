@@ -15,7 +15,7 @@
 		
 		<!-- Dashboard -->
 		
-		<li class="<?= ($this->params['controller'] == 'index' && ($this->params['action'] != 'about')) ? 'active' : ''; ?>">
+		<li class="<?= ($this->params['controller'] == 'index' && $this->params['action'] != 'about' && $this->params['action'] != 'exercises') ? 'active' : ''; ?>">
 			<a href="<?= $this->publicUrl(); ?>">
 				<i class="icon-home"></i> 
 				<span class="title"><?= $this->t->_('Dashboard'); ?></span>
