@@ -47,7 +47,7 @@
 							?>	
 						      <tr>
 						        <td><input type="checkbox" name="exercises[]" value="<?= $exercise['exerciseId']; ?>"></td>
-								<td><a href="<?= $this->publicUrl('view', 'index') ?>/id/<?= $exercise['exerciseId']; ?>/tab/<?= $this->tab; ?>"><?= $exercise['name']; ?></a></td>
+								<td><a href="/exercise/<?= $exercise['url']; ?>"><?= $exercise['name']; ?></a></td>
 								<td><?= $this->t->_($exercise['primaryMuscle']); ?></td>
 								<td><?= (($exercise['secondaryMuscle'] != 'None') ? $this->t->_($exercise['secondaryMuscle']) : ''); ?></td>
 								<td><?= $this->t->_($exercise['mechanics']); ?></td>

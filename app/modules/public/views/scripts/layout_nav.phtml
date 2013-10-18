@@ -16,7 +16,7 @@
 		<!-- Dashboard -->
 		
 		<li class="<?= ($this->params['controller'] == 'index' && $this->params['action'] != 'about' && $this->params['action'] != 'exercises') ? 'active' : ''; ?>">
-			<a href="<?= $this->publicUrl(); ?>">
+			<a href="/">
 				<i class="icon-home"></i> 
 				<span class="title"><?= $this->t->_('Dashboard'); ?></span>
 				<span class="selected"></span>
@@ -32,22 +32,22 @@
 			</a>
 			<ul class="sub-menu">
 				<li <?= ($this->params['controller'] == 'my-account' && $this->params['action'] == 'index') ? 'class="active"' : ''; ?>>
-					<a href="<?= $this->publicUrl(null, 'my-account'); ?>">
+					<a href="/my-account">
 						<?= $this->t->_('My Settings'); ?>
 					</a>
 				</li>
 				<li <?= ($this->params['controller'] == 'my-account' && $this->params['action'] == 'my-plate') ? 'class="active"' : ''; ?>>
-					<a href="<?= $this->publicUrl('my-plate', 'my-account'); ?>">
+					<a href="/my-account/my-plate">
 						<?= $this->t->_('My Plate'); ?>
 					</a>
 				</li>
 				<li <?= ($this->params['controller'] == 'my-account' && $this->params['action'] == 'my-workouts') ? 'class="active"' : ''; ?>>
-					<a href="<?= $this->publicUrl('my-workouts', 'my-account'); ?>">
+					<a href="/my-account/my-workouts">
 						<?= $this->t->_('My Workouts'); ?>
 					</a>
 				</li>
 				<li <?= ($this->params['controller'] == 'my-account' && $this->params['action'] == 'my-measurements') ? 'class="active"' : ''; ?>>
-					<a href="<?= $this->publicUrl('my-measurements', 'my-account'); ?>">
+					<a href="/my-account/my-measurements">
 						<?= $this->t->_('My Measurements'); ?>
 					</a>
 				</li>						
@@ -56,7 +56,7 @@
 		
 		<!-- Exercise Calendar -->
 		<?php
-			$calendarLink = ('weekly' == strtolower($this->user->calendarView)) ? $this->publicUrl('weekly', 'calendar') : $this->publicUrl(null, 'calendar');
+			$calendarLink = ('weekly' == strtolower($this->user->calendarView)) ? 'calendar/weekly' : 'calendar';
 		?>
 		<li class="<?= ($this->params['controller'] == 'calendar') ? 'active' : ''; ?>">
 			<a href="<?= $calendarLink; ?>">
@@ -68,7 +68,7 @@
 		
 		<!-- Calorie Calendar -->
 		<?php
-			$calendarLink = ('weekly' == strtolower($this->user->calendarView)) ? $this->publicUrl('weekly', 'calorie-calendar') : $this->publicUrl(null, 'calorie-calendar');
+			$calendarLink = ('weekly' == strtolower($this->user->calendarView)) ? '/calorie-calendar/weekly' : '/calorie-calendar';
 		?>
 		<li class="<?= ($this->params['controller'] == 'calorie-calendar' && ($this->params['action'] == 'weekly' or $this->params['action'] == 'monthly')) ? 'active' : ''; ?>">
 			<a href="<?= $calendarLink; ?>">
@@ -92,103 +92,103 @@
 					if(vkNgine_Config::getSystemConfig()->language->locale == 'en') :									
 				?>
 					<li <?= ($type == 'Abs') ? 'class="active"' : ''; ?>>
-						<a href="<?= $this->publicUrl('exercises', null); ?>/type/Abs"><?= $this->t->_('Abdominals'); ?> 
+						<a href="/exercises/Abs"><?= $this->t->_('Abdominals'); ?> 
 							<span class="label" style="vertical-align:super;"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Abs%'")) . '' ?></span>
 						</a>
 					</li>
 					<li <?= ($type == 'Back') ? 'class="active"' : ''; ?>>
-						<a href="<?= $this->publicUrl('exercises', null); ?>/type/Back"><?= $this->t->_('Back'); ?> 
+						<a href="/exercises/Back"><?= $this->t->_('Back'); ?> 
 							<span class="label" style="vertical-align:super;"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Back%'")) . '' ?></span>
 						</a>
 					</li>
 					<li <?= ($type == 'Biceps') ? 'class="active"' : ''; ?>>
-						<a href="<?= $this->publicUrl('exercises', null); ?>/type/Biceps"><?= $this->t->_('Biceps'); ?> 
+						<a href="/exercises/Biceps"><?= $this->t->_('Biceps'); ?> 
 							<span class="label" style="vertical-align:super;"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Biceps%'")) . '' ?></span>
 						</a>
 					</li>
 					<li <?= ($type == 'Calves') ? 'class="active"' : ''; ?>>
-						<a href="<?= $this->publicUrl('exercises', null); ?>/type/Calves"><?= $this->t->_('Calves'); ?> 
+						<a href="/exercises/Calves"><?= $this->t->_('Calves'); ?> 
 							<span class="label" style="vertical-align:super;"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Calves%'")) . '' ?></span>
 						</a>
 					</li>
 					<li <?= ($type == 'Chest') ? 'class="active"' : ''; ?>>
-						<a href="<?= $this->publicUrl('exercises', null); ?>/type/Chest"><?= $this->t->_('Chest'); ?> 
+						<a href="/exercises/Chest"><?= $this->t->_('Chest'); ?> 
 							<span class="label" style="vertical-align:super;"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Chest%'")) . '' ?></span>
 						</a>
 					</li>
 					<li <?= ($type == 'Forearms') ? 'class="active"' : ''; ?>>
-						<a href="<?= $this->publicUrl('exercises', null); ?>/type/Forearms"><?= $this->t->_('Forearms'); ?> 
+						<a href="/exercises/Forearms"><?= $this->t->_('Forearms'); ?> 
 							<span class="label" style="vertical-align:super;"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Forearms%'")) . '' ?></span>
 						</a>
 					</li>
 					<li <?= ($type == 'Legs') ? 'class="active"' : ''; ?>>
-						<a href="<?= $this->publicUrl('exercises', null); ?>/type/Legs"><?= $this->t->_('Legs'); ?> 
+						<a href="/exercises/Legs"><?= $this->t->_('Legs'); ?> 
 							<span class="label" style="vertical-align:super;"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Hamstrings%' or primaryMuscle LIKE '%Glutes, Hamstrings, Quadriceps%' or primaryMuscle LIKE '%Quadriceps%' or primaryMuscle LIKE '%Glutes%'")) . '' ?></span>
 						</a>
 					</li>
 					<li <?= ($type == 'Shoulders') ? 'class="active"' : ''; ?>>
-						<a href="<?= $this->publicUrl('exercises', null); ?>/type/Shoulders"><?= $this->t->_('Shoulders'); ?> 
+						<a href="/exercises/Shoulders"><?= $this->t->_('Shoulders'); ?> 
 							<span class="label" style="vertical-align:super;"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Shoulders%'")) . '' ?></span>
 						</a>
 					</li>
 					<li <?= ($type == 'Traps') ? 'class="active"' : ''; ?>>
-						<a href="<?= $this->publicUrl('exercises', null); ?>/type/Traps"><?= $this->t->_('Traps'); ?> 
+						<a href="/exercises/Traps"><?= $this->t->_('Traps'); ?> 
 							<span class="label" style="vertical-align:super;"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Traps%'")) . '' ?></span>
 						</a>
 					</li>
 					<li <?= ($type == 'Triceps') ? 'class="active"' : ''; ?>>
-						<a href="<?= $this->publicUrl('exercises', null); ?>/type/Triceps"><?= $this->t->_('Triceps'); ?> 
+						<a href="/exercises/Triceps"><?= $this->t->_('Triceps'); ?> 
 							<span class="label" style="vertical-align:super;"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Triceps%'")) . '' ?></span>
 						</a>
 					</li>
 				<?php else :?>
 					<li <?= ($type == 'Abs') ? 'class="active"' : ''; ?>>
-						<a href="<?= $this->publicUrl('exercises', null); ?>/type/Abs"><?= $this->t->_('Abdominals'); ?> 
+						<a href="/exercises/Abs"><?= $this->t->_('Abdominals'); ?> 
 							<span class="label" style="vertical-align:super;"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Abs%'")) . '' ?></span>
 						</a>
 					</li>
 					<li <?= ($type == 'Legs') ? 'class="active"' : ''; ?>>
-						<a href="<?= $this->publicUrl('exercises', null); ?>/type/Legs"><?= $this->t->_('Legs'); ?> 
+						<a href="/exercises/Legs"><?= $this->t->_('Legs'); ?> 
 							<span class="label" style="vertical-align:super;"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Hamstrings%' or primaryMuscle LIKE '%Glutes, Hamstrings, Quadriceps%' or primaryMuscle LIKE '%Quadriceps%' or primaryMuscle LIKE '%Glutes%'")) . '' ?></span>
 						</a>
 					</li>
 					<li <?= ($type == 'Calves') ? 'class="active"' : ''; ?>>
-						<a href="<?= $this->publicUrl('exercises', null); ?>/type/Calves"><?= $this->t->_('Calves'); ?> 
+						<a href="/exercises/Calves"><?= $this->t->_('Calves'); ?> 
 							<span class="label" style="vertical-align:super;"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Calves%'")) . '' ?></span>
 						</a>
 					</li>
 					<li <?= ($type == 'Chest') ? 'class="active"' : ''; ?>>
-						<a href="<?= $this->publicUrl('exercises', null); ?>/type/Chest"><?= $this->t->_('Chest'); ?> 
+						<a href="/exercises/Chest"><?= $this->t->_('Chest'); ?> 
 							<span class="label" style="vertical-align:super;"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Chest%'")) . '' ?></span>
 						</a>
 					</li>
 					<li <?= ($type == 'Shoulders') ? 'class="active"' : ''; ?>>
-						<a href="<?= $this->publicUrl('exercises', null); ?>/type/Shoulders"><?= $this->t->_('Shoulders'); ?> 
+						<a href="/exercises/Shoulders"><?= $this->t->_('Shoulders'); ?> 
 							<span class="label" style="vertical-align:super;"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Shoulders%'")) . '' ?></span>
 						</a>
 					</li>
 					<li <?= ($type == 'Forearms') ? 'class="active"' : ''; ?>>
-						<a href="<?= $this->publicUrl('exercises', null); ?>/type/Forearms"><?= $this->t->_('Forearms'); ?> 
+						<a href="/exercises/Forearms"><?= $this->t->_('Forearms'); ?> 
 							<span class="label" style="vertical-align:super;"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Forearms%'")) . '' ?></span>
 						</a>
 					</li>
 					<li <?= ($type == 'Biceps') ? 'class="active"' : ''; ?>>
-						<a href="<?= $this->publicUrl('exercises', null); ?>/type/Biceps"><?= $this->t->_('Biceps'); ?> 
+						<a href="/exercises/Biceps"><?= $this->t->_('Biceps'); ?> 
 							<span class="label" style="vertical-align:super;"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Biceps%'")) . '' ?></span>
 						</a>
 					</li>
 					<li <?= ($type == 'Triceps') ? 'class="active"' : ''; ?>>
-						<a href="<?= $this->publicUrl('exercises', null); ?>/type/Triceps"><?= $this->t->_('Triceps'); ?> 
+						<a href="/exercises/Triceps"><?= $this->t->_('Triceps'); ?> 
 							<span class="label" style="vertical-align:super;"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Triceps%'")) . '' ?></span>
 						</a>
 					</li>
 					<li <?= ($type == 'Back') ? 'class="active"' : ''; ?>>
-						<a href="<?= $this->publicUrl('exercises', null); ?>/type/Back"><?= $this->t->_('Back'); ?> 
+						<a href="/exercises/Back"><?= $this->t->_('Back'); ?> 
 							<span class="label" style="vertical-align:super;"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Back%'")) . '' ?></span>
 						</a>
 					</li>
 					<li <?= ($type == 'Traps') ? 'class="active"' : ''; ?>>
-						<a href="<?= $this->publicUrl('exercises', null); ?>/type/Traps"><?= $this->t->_('Traps'); ?> 
+						<a href="/exercises/Traps"><?= $this->t->_('Traps'); ?> 
 							<span class="label" style="vertical-align:super;"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Traps%'")) . '' ?></span>
 						</a>
 					</li>
@@ -198,7 +198,7 @@
 		
 		<!-- About -->
 		<li class="<?= ($this->params['controller'] == 'index' && ($this->params['action'] == 'about')) ? 'active' : ''; ?>" >
-			<a href="<?= $this->publicUrl('about', null); ?>">
+			<a href="/index/about">
 				<i class="icon-book"></i> 
 				<span class="title"><?= $this->t->_('About'); ?></span>
 				<span class="selected"></span>

@@ -177,6 +177,34 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 	}
 	
 	/**
+	 * initalize Special Routes
+	 */
+	protected function _initRoutes()
+    {
+        $router = Zend_Controller_Front::getInstance()->getRouter();
+	    $router->addRoute(
+	        'exercise', new Zend_Controller_Router_Route('exercise/:url', array(
+	            'controller' => 'index',
+	            'action'     => 'view',
+	        	'url' 		 => '1-leg-pushup'))
+	    );
+	    
+	    $router->addRoute(
+	    	'exercises', new Zend_Controller_Router_Route('exercises/:type', array(
+    			'controller' => 'index',
+    			'action'     => 'exercises',
+    			'type' 		 => 'Abs'))
+	    );
+	    
+    	$router->addRoute(
+    		'workout', new Zend_Controller_Router_Route('workout/:type', array(
+    			'controller' => 'index',
+    			'action'     => 'exercises',
+    			'type' 		 => 'Abs'))
+	    );
+	}
+	
+	/**
 	 * initalize ZF Debug
 	 */
 	protected function _initZFDebug()

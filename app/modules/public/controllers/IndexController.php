@@ -90,17 +90,17 @@ class IndexController extends vkNgine_Public_Controller
     		parent::ajaxEnabled();
     	}
     	
-    	$id = $this->_getParam('id');
+    	$url = $this->_getParam('url');
     	    	
     	$modelExercises = new Model_Exercises();
     	$modelExercisesAssets = new Model_Exercises_Assets();
     	
-    	$exercise = $modelExercises->fetchAll("exerciseId = '" . $id . "'");
-    	$exerciseAssets = $modelExercisesAssets->fetchAll("exerciseId = '" . $id . "' and type = 'PICTURE'")->toArray();
+    	$exercise = $modelExercises->fetchByUrl($url);
+    	$exerciseAssets = $modelExercisesAssets->fetchAll("exerciseId = '" . $exercise->getId() . "' and type = 'PICTURE'")->toArray();
     	
     	$this->view->ajax = $ajax;
     	$this->view->param = $this->_getAllParams();
-    	$this->view->exercise = $exercise->current();
+    	$this->view->exercise = $exercise;
     	$this->view->exerciseAssets = $exerciseAssets;	
     }
     
