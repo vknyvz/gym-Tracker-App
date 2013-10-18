@@ -19,11 +19,13 @@
 <?php
 	$this->headScript()
 		 	->appendFile($this->baseUrl('/js/public/vkNgine.myaccount.js'))
-		 	->appendFile($this->baseUrl('/js/foods.json'))
-		 	->appendFile($this->baseUrl('/js/public/vkNgine.myaccount.modals.js'));		 	
-?>    
+		 	->appendFile($this->baseUrl('/js/public/bsn.AutoSuggest_2.1.3_comp.js'))
+		 	->appendFile($this->baseUrl('/js/public/vkNgine.myaccount.modals.js'));
 
-			<div class="row-fluid">
+	$this->headLink()
+			->appendStylesheet($this->baseUrl('/css/autosuggest_inquisitor.css'))
+	
+?>    <div class="row-fluid">
                   <div class="span12"> 
                   <div class="portlet box blue">       
                   	  	<div class="portlet-title">

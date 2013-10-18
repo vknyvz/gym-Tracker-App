@@ -604,6 +604,10 @@ textarea[class*="span"].m-wrap
   width: 320px !important;
 }
 
+.m-wrap.xlarge {
+  width: 600px !important;
+}
+
 .m-wrap.huge {
   width: 480px !important;
   font-size: 24px !important;
