@@ -22,47 +22,12 @@
 		<div class="span3 responsive" data-tablet="span6" data-desktop="span3">
 			<div class="dashboard-stat blue">
 				<div class="visual">
-					<i class="icon-comments"></i>
+					<i class="icon-bar-chart"></i>
 				</div>
 				<div class="details">
-					<div class="number">
-						1349
-					</div>
-					<div class="desc">                           
-						New Feedbacks
-					</div>
-				</div>
-				<a class="more" href="#">
-				View more <i class="m-icon-swapright m-icon-white"></i>
-				</a>                 
-			</div>
-		</div>
-		<div class="span3 responsive" data-tablet="span6" data-desktop="span3">
-			<div class="dashboard-stat green">
-				<div class="visual">
-					<i class="icon-shopping-cart"></i>
-				</div>
-				<div class="details">
-					<div class="number">549</div>
-					<div class="desc">New Orders</div>
-				</div>
-				<a class="more" href="#">
-				View more <i class="m-icon-swapright m-icon-white"></i>
-				</a>                 
-			</div>
-		</div>
-		<div class="span3 responsive" data-tablet="span6  fix-offset" data-desktop="span3">
-			<div class="dashboard-stat purple">
-				<div class="visual">
-					<i class="icon-globe"></i>
-				</div>
-				<div class="details">
-					<div class="number">+89%</div>
-					<div class="desc">Brand Popularity</div>
-				</div>
-				<a class="more" href="#">
-				View more <i class="m-icon-swapright m-icon-white"></i>
-				</a>                 
+					<div class="number"><?= $this->statistics['dailyexercises']; ?></div>
+					<div class="desc"><?= $this->t->_('Total Exercise Logs'); ?></div>
+				</div>       
 			</div>
 		</div>
 		<div class="span3 responsive" data-tablet="span6" data-desktop="span3">
@@ -71,13 +36,77 @@
 					<i class="icon-bar-chart"></i>
 				</div>
 				<div class="details">
-					<div class="number">12,5M$</div>
-					<div class="desc">Total Profit</div>
+					<div class="number"><?= $this->statistics['dailydetails']; ?></div>
+					<div class="desc"><?= $this->t->_('Total Detail Logs'); ?></div>
+				</div>          
+			</div>
+		</div>
+		<div class="span3 responsive" data-tablet="span6" data-desktop="span3">
+			<div class="dashboard-stat green">
+				<div class="visual">
+					<i class="icon-bar-chart"></i>
 				</div>
-				<a class="more" href="#">
-				View more <i class="m-icon-swapright m-icon-white"></i>
+				<div class="details">
+					<div class="number"><?= $this->statistics['workouts']; ?></div>
+					<div class="desc"><?= $this->t->_('Workouts'); ?></div>
+				</div>
+				<a class="more" href="/my-account/my-workouts">
+				<?= $this->t->_('Go to My Workouts'); ?> <i class="m-icon-swapright m-icon-white"></i>
 				</a>                 
 			</div>
 		</div>
+		<div class="span3 responsive" data-tablet="span6  fix-offset" data-desktop="span3">
+			<div class="dashboard-stat purple">
+				<div class="visual">
+					<i class="icon-bar-chart"></i>
+				</div>
+				<div class="details">
+					<div class="number"><?= $this->statistics['measurements']; ?></div>
+					<div class="desc"><?= $this->t->_('Measurements'); ?></div>
+				</div>
+				<a class="more" href="/my-account/my-measurements">
+				<?= $this->t->_('Go to My Measurements'); ?> <i class="m-icon-swapright m-icon-white"></i>
+				</a>                 
+			</div>
+		</div>
+		
 	</div>
 	<div class="clearfix"></div>
+	
+	<div class="row-fluid">
+		
+               <div class="portlet box purple">
+                  <div class="portlet-title">
+                     <div class="caption"><i class="icon-calendar"></i><?= $this->t->_('Statistics'); ?>:: </div>
+                  </div>
+                  <div class="portlet-body">
+                     <div class="row">
+                        <div class="span4">
+                           <div class="easy-pie-chart">
+                              <div class="number" data-percent="55"><span>+55</span>%</div>
+                              <a class="title" href="#">Transactions <i class="m-icon-swapright"></i></a>
+                           </div>
+                        </div>
+                        <div class="margin-bottom-10 visible-sm"></div>
+                        <div class="span4">
+                           <div class="easy-pie-chart">
+                              <div class="number transactions" data-percent="55"><span>+55</span>%</div>
+                              <a class="title" href="#">Transactions <i class="m-icon-swapright"></i></a>
+                           </div>
+                        
+                        </div>
+                        <div class="margin-bottom-10 visible-sm"></div>
+                        <div class="span4">
+                           <div class="easy-pie-chart">
+                              <div class="number transactions" data-percent="55"><span>+55</span>%</div>
+                              <a class="title" href="#">Transactions <i class="m-icon-swapright"></i></a>
+                           </div>
+                        
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            
+	</div>
+	
+	

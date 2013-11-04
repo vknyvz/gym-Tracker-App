@@ -16,6 +16,15 @@ vkNgine.page = vkNgine.page || {};
 		}
     };
     
+    vkNgine.page.dashboard.method( 'charts', function () {
+    	$('.easy-pie-chart .number').easyPieChart({
+            animate: 1000,
+            size: 75,
+            lineWidth: 3,
+            barColor: '#ffb848'
+        });
+    });
+    
     vkNgine.page.dashboard.method( 'dateRanger', function () {
     	var core = new vkNgine.core.engine();
 		
