@@ -112,7 +112,10 @@ var vkNgineModals = function() {
 		    		break;
 		    	case 'edit-workout':
 		    		$('button.submit').bind('click', function(data) {
-		    			$('#vkNgine-modal-editworkout form').submit();	    			
+		    			$('#vkNgine-modal-editworkout form').submit();
+		    			$('#vkNgine-modal-editworkout').modal('hide');
+		    			
+		    			$(window).attr("location","/my-account/my-workouts");
 		        	});
 		        	
 		        	var options = {  
@@ -125,6 +128,9 @@ var vkNgineModals = function() {
 		    	case 'edit-measurements':
 		    		$('button.submit').bind('click', function() {
 		    			$('#vkNgine-modal-editmeasurement form').submit();
+		    			$('#vkNgine-modal-editmeasurement').modal('hide');
+		    			
+		    			$(window).attr("location","/my-account/my-measurements");
 		    		});
 		    			
 		    		var options = {  

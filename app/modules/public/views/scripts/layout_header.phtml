@@ -90,6 +90,38 @@
 					</li>
 				</ul>
 			</li>				
+			<li class="dropdown">
+				<?php 
+			    $options = vkNgine_Config::getSystemConfig();
+			    
+			    $language = new Zend_Session_Namespace('language');
+			    
+			    if($language->__isset('session')){
+			        $lang = $language->lang;
+			    }
+			    else{
+			        $lang = $options['language']['locale'];
+			    }
+			    
+			    if($lang == 'tr') {
+					$label = 'TR';
+				}
+				else {
+					$label = 'US';
+				}
+			    ?>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" data-lang="<?= $lang; ?>">
+                	<img alt="" src="/images/<?= $lang; ?>.png" width="17" height="11" />
+                	<span class="username"><?= $label; ?></span>
+                	<i class="icon-angle-down"></i>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                    	<a href="#" class="language" data-lang="tr"><img alt="" src="/images/tr.png" width="20" height="11" /> <?= $this->t->_('Turkish'); ?></a>
+                    	<a href="#" class="language" data-lang="en"><img alt="" src="/images/en.png" width="20" height="11" /> <?= $this->t->_('English'); ?></a>
+                    </li>
+            	</ul>
+			</li>
 			<li class="dropdown user">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 					<img alt="" src="/images/avatar1_small.jpg" />
@@ -105,7 +137,7 @@
 					<li><a href="<?= $calendarLink; ?>"><i class="icon-calendar"></i> <?= $this->t->_('Exercise Calendar'); ?></a></li>
 					<li><a href="<?= $calorieCalendarLink; ?>"><i class="icon-calendar"></i> <?= $this->t->_('Calorie Calendar'); ?></a></li>
 					<li class="divider"></li>
-					<li><a href="<?= $this->publicUrl('login', 'auth'); ?>/logout"><i class="icon-key"></i> <?= $this->t->_('Log Out'); ?></a></li>
+					<li><a href="/auth/login/logout"><i class="icon-key"></i> <?= $this->t->_('Log Out'); ?></a></li>
 				</ul>
 			</li>
 				</ul>

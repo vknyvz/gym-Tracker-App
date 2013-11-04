@@ -56,7 +56,7 @@
 		
 		<!-- Exercise Calendar -->
 		<?php
-			$calendarLink = ('weekly' == strtolower($this->user->calendarView)) ? 'calendar/weekly' : 'calendar';
+			$calendarLink = ('weekly' == strtolower($this->user->calendarView)) ? '/calendar/weekly' : '/calendar';
 		?>
 		<li class="<?= ($this->params['controller'] == 'calendar') ? 'active' : ''; ?>">
 			<a href="<?= $calendarLink; ?>">
