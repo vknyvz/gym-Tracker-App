@@ -67,7 +67,7 @@
 						<tbody>
 						<?php foreach($this->workoutsExercises->fetchAllPerDay($this->workout['workoutId'], $i) as $exercise) : ?>
 						<tr>
-					        <td><a href="<?= $this->publicUrl('view', 'index'); ?>/id/<?= $exercise['exerciseId']; ?>" class="exercisedetail">
+					        <td><a href="/exercise/<?= $this->exerciseDetail[$exercise['exerciseId'].'-url']; ?>" class="exercisedetail">
 									<?= $this->exerciseDetail[$exercise['exerciseId']]; ?>
 					   		</a></td>
 					        <td><?= $exercise['sets']; ?></td>

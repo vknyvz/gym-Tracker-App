@@ -37,7 +37,7 @@
 							foreach($this->workouts as $workout) :
 						?>	
 					      <tr class="odd gradeX">
-					        <td><a href="<?= $this->publicUrl('view-workout', 'my-account'); ?>/id/<?= $workout['workoutId']; ?>"><?= $this->escape($workout['name']); ?></a></td>
+					        <td><a href="/workout/<?= $workout['url']; ?>"><?= $this->escape($workout['name']); ?></a></td>
 					        <td><?= $this->escape($workout['day']); ?></td>
 					        <td><?= ($workout['startDate'] != '0000-00-00') ? $this->escape($this->dateFormat($workout['startDate'], Zend_Date::DATE_FULL)) : $this->t->_('Not entered') ?></td>
 					        <td><?= ($workout['endDate'] != '0000-00-00') ? $this->escape($this->dateFormat($workout['endDate'], Zend_Date::DATE_FULL)) : $this->t->_('Not entered') ?></td>

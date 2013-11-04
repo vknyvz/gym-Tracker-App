@@ -63,6 +63,10 @@ var vkNgineModals = function() {
 				case 'add-exercise':
 					$('button.submit').bind('click', function() {
 						$('#vkNgine-modal-addexercise form').submit();	   
+						
+						$('#vkNgine-modal-addexercise').modal('hide');	
+						
+						$(window).attr("location","/calendar");
 					});
 					
 					var options = {  
@@ -111,7 +115,10 @@ var vkNgineModals = function() {
 					break;
 				case 'add-daily-detail':
 					$('button.submit').bind('click', function() {
-						$('#vkNgine-modal-daydetail form').submit();	   
+						$('#vkNgine-modal-daydetail form').submit();
+						$('#vkNgine-modal-daydetail').modal('hide');	
+						
+						$(window).attr("location","/calendar");
 					});
 					
 					var options = {  

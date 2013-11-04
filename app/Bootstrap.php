@@ -197,10 +197,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 	    );
 	    
     	$router->addRoute(
-    		'workout', new Zend_Controller_Router_Route('workout/:type', array(
-    			'controller' => 'index',
-    			'action'     => 'exercises',
-    			'type' 		 => 'Abs'))
+    		'workout', new Zend_Controller_Router_Route('workout/:url', array(
+    			'controller' => 'my-account',
+    			'action'     => 'view-workout',
+    			'url' 		 => 'workout-url'))
 	    );
 	}
 	

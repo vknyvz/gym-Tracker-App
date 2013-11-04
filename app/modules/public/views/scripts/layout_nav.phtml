@@ -4,10 +4,10 @@
 			<div class="sidebar-toggler hidden-phone"></div>
 		</li>
 		<li>
-			<form class="sidebar-search">
+			<form class="sidebar-search" action="/index/search" method="get">
 				<div class="input-box">
 					<a href="javascript:;" class="remove"></a>
-					<input type="text" placeholder="Search..." />
+					<input type="text" placeholder="<?= $this->t->_('Search'); ?>..." name="query" value="<?= (isset($this->params['query'])) ? $this->params['query'] : null; ?>" />
 					<input type="button" class="submit" value=" " />
 				</div>
 			</form>

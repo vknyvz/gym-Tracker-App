@@ -63,22 +63,18 @@ class IndexController extends vkNgine_Public_Controller
     	 
     	$request = $this->getRequest();
     	$this->view->error = false;
-    	if ($request->isGet()) {
-    		$hash = new Zend_Session_Namespace('CsrfError');
-    		if($hash->message) {
-    			$this->view->error = true;
-    		}
     	
-    			$info = $form->getValues();
+    	if ($request->isGet()) {
+    		$info = $form->getValues();
 
-    			$q = $this->_getParam('searchinput');
-    			if($q) {
-    				$modelExercise = new Model_Exercises();
-    				$exercises = $modelExercise->search($q);
+    		$q = $this->_getParam('query');
+    		if($q) {
+    			$modelExercise = new Model_Exercises();
+    			$exercises = $modelExercise->search($q);
 
-    				$this->view->q = $q;
-    				$this->view->exercises = $exercises;
-    			}
+    			$this->view->q = $q;
+    			$this->view->results = $exercises;
+    		}
     	}
     }
     

@@ -452,8 +452,8 @@ vkNgine.layout = vkNgine.layout || {};
 
         // handle the search query submit on enter press
         $('.page-sidebar').on('keypress', '.sidebar-search input', function (e) {
-            if (e.which == 13) {
-                window.location.href = "extra_search.html";
+        	if (e.which == 13) {
+                window.location.href = "/index/search/query/" + $(this).val();
                 return false;
             }
         });

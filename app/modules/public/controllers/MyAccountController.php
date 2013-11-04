@@ -319,7 +319,7 @@ class MyAccountController extends vkNgine_Public_Controller
 	
 	public function viewWorkoutAction()
 	{
-		$id = (int) $this->_getParam('id');
+		$url = $this->_getParam('url');
 		
 		$modelWorkouts = new Model_Workouts();
 		$modelExercises = new Model_Exercises();
@@ -328,11 +328,12 @@ class MyAccountController extends vkNgine_Public_Controller
 		$exerciseDetail = array();
 		foreach($modelExercises->fetchAll() as $exercise){
 			$exerciseDetail[$exercise['exerciseId']] = $exercise['name'];
+			$exerciseDetail[$exercise['exerciseId'].'-url'] = $exercise['url'];
 		}
 		
 		$this->view->exerciseDetail = $exerciseDetail;
 		$this->view->workoutsExercises = $modelWorkoutsExercises;
-		$this->view->workout = $modelWorkouts->fetchAll('workoutId = ' . $id)->current();
+		$this->view->workout = $modelWorkouts->fetchAll('url = "' . $url . '" ')->current();
 	}
 	
 	public function deleteWorkoutAction()
