@@ -11,11 +11,6 @@
 		 	->appendFile($this->baseUrl('/js/public/vkNgine.dashboard.js'));
 ?>     
 
-<script type="text/javascript">
-	var core = new vkNgine.core.engine();
-	core.initDashboard();
-</script>
-	
 <div id="dashboard">
 	<!-- BEGIN DASHBOARD STATS -->
 	<div class="row-fluid">
@@ -70,43 +65,55 @@
 			</div>
 		</div>
 		
-	</div>
-	<div class="clearfix"></div>
-	
-	<div class="row-fluid">
-		
-               <div class="portlet box purple">
-                  <div class="portlet-title">
-                     <div class="caption"><i class="icon-calendar"></i><?= $this->t->_('Statistics'); ?>:: </div>
-                  </div>
-                  <div class="portlet-body">
-                     <div class="row">
-                        <div class="span4">
-                           <div class="easy-pie-chart">
-                              <div class="number" data-percent="55"><span>+55</span>%</div>
-                              <a class="title" href="#">Transactions <i class="m-icon-swapright"></i></a>
-                           </div>
-                        </div>
-                        <div class="margin-bottom-10 visible-sm"></div>
-                        <div class="span4">
-                           <div class="easy-pie-chart">
-                              <div class="number transactions" data-percent="55"><span>+55</span>%</div>
-                              <a class="title" href="#">Transactions <i class="m-icon-swapright"></i></a>
-                           </div>
-                        
-                        </div>
-                        <div class="margin-bottom-10 visible-sm"></div>
-                        <div class="span4">
-                           <div class="easy-pie-chart">
-                              <div class="number transactions" data-percent="55"><span>+55</span>%</div>
-                              <a class="title" href="#">Transactions <i class="m-icon-swapright"></i></a>
-                           </div>
-                        
+		<div class="portlet box purple">
+        	<div class="portlet-title">
+            	<div class="caption"><i class="icon-calendar"></i><?= $this->t->_('Statistics'); ?> -- <?= $this->t->_(date('F')); ?> <?= date('j Y')?> </div>
+            </div>
+            <div class="portlet-body">
+            	<div class="row-fluid">
+            		<div class="caption"><i class="icon-reorder"></i><?= $this->t-_('Use the date ranger to filter data.'); ?></div>
+            		<div class="span1">
+                        <div class="charts">
+                            <div class="ran" data-percent="55"><span>+55</span>%</div>
+                        	<?= $this->t->_('miles ran'); ?>
+                     	</div>
+                     </div>
+                     <div class="span1">
+                     	<div class="charts">
+                        	<div class="caloriesconsumed" data-percent="55"><span>+55</span>%</div>
+                            <?= $this->t->_('calories consumed'); ?>
                         </div>
                      </div>
-                  </div>
-               </div>
-            
-	</div>
+                     <div class="span1">
+                     	<div class="charts">
+                        	<div class="lbslost" data-percent="55"><span>+55</span>%</div>
+                            <?= $this->t->_('lbs lost'); ?>
+                        </div>
+                     </div>
+                     <div class="span1">
+                     	<div class="charts">
+                        	<div class="lbsgain" data-percent="55"><span>+55</span>%</div>
+                            <?= $this->t->_('lbs gained'); ?>
+                        </div>
+                     </div>
+                     <div class="span1">
+                     	<div class="charts">
+                        	<div class="misseddays" data-percent="55"><span>+55</span>%</div>
+                            <?= $this->t->_('days went to gym'); ?>
+                        </div>
+                     </div>
+                     <div class="span1">
+                     	<div class="charts">
+                        	<div class="misseddays" data-percent="55"><span>+55</span>%</div>
+                            <?= $this->t->_('days missed out of gym'); ?>
+                        </div>
+                     </div>
+                </div>
+            </div>
+		</div>
 	
+<script type="text/javascript">
+	var core = new vkNgine.core.engine();
+	core.initDashboard();
+</script>
 	

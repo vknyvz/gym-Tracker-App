@@ -11,23 +11,47 @@ vkNgine.page = vkNgine.page || {};
     };
     
     vkNgine.page.dashboard.method = function (name, fn) {
-    	if ( 'undefined' !== typeof vkNgine && 'undefined' !== typeof vkNgine.page && 'undefined' !== typeof vkNgine.page.dashboard ) {
-			this.prototype[ name ] = fn;
+    	if('undefined' !== typeof vkNgine && 'undefined' !== typeof vkNgine.page && 'undefined' !== typeof vkNgine.page.dashboard) {
+			this.prototype[name] = fn;
 		}
     };
     
     vkNgine.page.dashboard.method( 'charts', function () {
-    	$('.easy-pie-chart .number').easyPieChart({
+    	$('.charts .ran').easyPieChart({
             animate: 1000,
-            size: 75,
+            size: 100,
             lineWidth: 3,
-            barColor: '#ffb848'
+            barColor: '852b99'
+        });
+    	$('.charts .caloriesconsumed').easyPieChart({
+            animate: 1000,
+            size: 100,
+            lineWidth: 3,
+            barColor: 'ffb848'
+        });
+    	$('.charts .lbslost').easyPieChart({
+            animate: 1000,
+            size: 100,
+            lineWidth: 3,
+            barColor: '35aa47'
+        });
+    	$('.charts .lbsgain').easyPieChart({
+            animate: 1000,
+            size: 100,
+            lineWidth: 3,
+            barColor: 'e02222'
+        });
+    	$('.charts .misseddays').easyPieChart({
+            animate: 1000,
+            size: 100,
+            lineWidth: 3,
+            barColor: 'e02222'
         });
     });
     
     vkNgine.page.dashboard.method( 'dateRanger', function () {
     	var core = new vkNgine.core.engine();
-		
+    	
     	$('#dashboard-report-range').daterangepicker({
             ranges: {
                 'Today': ['today', 'today'],
@@ -49,11 +73,11 @@ vkNgine.page = vkNgine.page || {};
             format: 'MM/dd/yyyy',
             separator: ' to ',
             startDate: Date.today().add({
-                days: -29
+                days: -0
             }),
             endDate: Date.today(),
             minDate: '01/01/2012',
-            maxDate: '12/31/2014',
+            maxDate: '12/31/2015',
             locale: {
                 applyLabel: 'Submit',
                 fromLabel: 'From',
@@ -75,7 +99,7 @@ vkNgine.page = vkNgine.page || {};
                     title: 'Dashboard',
                     text: 'Dashboard date range updated.'
                 });
-                App.scrollTo();
+                core.scrollTo();
             }, 1000);
             $('#dashboard-report-range span').html(start.toString('MMMM d, yyyy') + ' - ' + end.toString('MMMM d, yyyy'));
 
@@ -84,7 +108,7 @@ vkNgine.page = vkNgine.page || {};
         $('#dashboard-report-range').show();
 
         $('#dashboard-report-range span').html(Date.today().add({
-            days: -29
+            days: -0
         }).toString('MMMM d, yyyy') + ' - ' + Date.today().toString('MMMM d, yyyy'));
     });        
 })();

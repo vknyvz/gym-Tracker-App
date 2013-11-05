@@ -364,9 +364,9 @@
 "Login to your account";"Hesabınıza Girin"
 "Remember me";"Beni Hatırla"
 "Forgot your password?";"Şifrenizi mi Unuttunuz?"
-"Click %s to reset your password";"%s basarak şifrenizi degiştirebilirsiniz"
+"Click %s to reset your password";"%s basarak şifrenizi değiştirebilirsiniz"
 "here";"Buraya"
-"Enter your e-mail address below to reset your password.";"Şifrenizi degiştirmek için email'inizi girin"
+"Enter your e-mail address below to reset your password.";"Şifrenizi değiştirmek için email'inizi girin"
 "Email";"E-Posta"
 "Submit";"Gönder"
 
@@ -379,3 +379,11 @@
 "Logging";"Kayıt"
 
 "THEME COLOR";"TEMA RENGİ"
+
+"Statistics";"İstatistikler"
+"miles ran";"koşulan mil"
+"lbs lost";"verilen lb"
+"lbs gained";"alınan lb"
+"days missed out of gym":"gym'e gitmediğin gün sayısı"
+"days went to gym":"gym'e gittiğin gün sayısı"
+"calories consumed";"alınan kalori"
