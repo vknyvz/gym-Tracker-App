@@ -172,6 +172,7 @@ var vkNgineModals = function() {
 						$.ajax( {
 					        url: '/calendar/delete-daily-log/id/' + $id,
 					        success: function(data) { 
+					        	$(window).attr("location","/calendar");
 					    	}
 					    });
 					});

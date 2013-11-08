@@ -3,7 +3,7 @@
 					  'pageTitle' => $this->t->_('My Statistics'),
 					  'page'	  => $this->t->_('Dashboard'),
 					  'calendar'  => true,
-	)); 
+	));
 ?>		
 
 <?php
@@ -21,7 +21,7 @@
 				</div>
 				<div class="details">
 					<div class="number"><?= $this->statistics['dailyexercises']; ?></div>
-					<div class="desc"><?= $this->t->_('Total Exercise Logs'); ?></div>
+					<div class="desc"><?= $this->t->_('total exercise logs'); ?></div>
 				</div>       
 			</div>
 		</div>
@@ -32,7 +32,7 @@
 				</div>
 				<div class="details">
 					<div class="number"><?= $this->statistics['dailydetails']; ?></div>
-					<div class="desc"><?= $this->t->_('Total Detail Logs'); ?></div>
+					<div class="desc"><?= $this->t->_('total other logs'); ?></div>
 				</div>          
 			</div>
 		</div>
@@ -71,7 +71,6 @@
             </div>
             <div class="portlet-body">
             	<div class="row-fluid">
-            		<div class="caption"><i class="icon-reorder"></i><?= $this->t-_('Use the date ranger to filter data.'); ?></div>
             		<div class="span1">
                         <div class="charts">
                             <div class="ran" data-percent="55"><span>+55</span>%</div>

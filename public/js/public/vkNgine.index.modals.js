@@ -46,6 +46,8 @@ var vkNgineModals = function() {
 				case 'add-selected-workouts':	
 					$('button.submit').bind('click', function() {
 						$('#vkNgine-modal-addselectedworkouts form').submit();
+						
+						$('#vkNgine-modal-addselectedworkouts').modal('hide');	
 					});
 					
 					var options = {  
