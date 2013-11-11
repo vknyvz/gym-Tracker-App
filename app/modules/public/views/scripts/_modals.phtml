@@ -3,7 +3,17 @@
 	<h3><?= $this->t->_($this->headline); ?></h3>
 </div>
 <div class="modal-body">
-	<?= $this->content; ?>
+	
+	<div class="panel panel-info">
+									<div class="panel-heading">
+										<h5 id="activityorexercise">Add an <span data-type="activity">Activity</span> or <span data-type="exercise">Exercise</span>?</h5>
+									</div>
+									<div class="panel-body">
+										<?= $this->content; ?>
+									
+									</div>
+								</div> 
+								
 </div>
 
 <?php if(isset($this->delete)) : ?>

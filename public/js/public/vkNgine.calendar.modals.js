@@ -75,10 +75,49 @@ var vkNgineModals = function() {
 				    };
 				  
 					$('#vkNgine-modal-addexercise form').ajaxForm(options);
+					
+					$("#activityorexercise span").bind('click', function() {
+						var type = $(this).data('type');
+						if( 'exercise' == type) {
+							$('#type-element').hide();
+							$(this).attr('style', 'color:blue;font-weight:bold;');
+							
+							if($(this).hasClass('editing')) {
+								$(this).attr('style', '');
+								$(this).removeClass('editing')
+							}
+							else {
+								$(this).addClass('editing');
+							}
+						}
+						
+						if( 'activity' == type) {
+							$('#type-element').show();
+							$(this).attr('style', 'color:blue;font-weight:bold;');
+							
+							if($(this).hasClass('editing')) {
+								$('#type-element').hide();
+								$(this).attr('style', '');
+								$(this).removeClass('editing')
+							}
+							else {
+								$(this).addClass('editing');
+							}
+						}
+					});
 		
 					$('#workoutDay-label').hide();
 					$('#workoutDay-element').hide();
-		
+					$('#moreDetails').hide();
+					$('#timeSpentHour').hide();
+					$('#timeSpentHour-label').hide();
+					$('#timeSpentMin').hide();
+					$('#timeSpentMin-label').hide();
+					$('#miles').hide();
+					$('#miles-label').hide();
+					$('#type-element').hide();
+					$('#workoutId').hide();
+					
 					$(".setdays").change(function(){
 						var selected = $(".setdays option:selected");    
 						if(selected.val()){
@@ -92,24 +131,43 @@ var vkNgineModals = function() {
 							
 							$('#type').hide();
 							$('#moreDetails').hide();
-							$('#activity').hide();
+							//$('#activity').hide();
 						}
 						else {
 							$('#type').show();
 							$('#moreDetails').show();
-							$('#activity').show();
+							//$('#activity').show();
 							$('#workoutDay-label').hide();
 							$('#workoutDay-element').hide();
 						}
 					});
 		
 					$("#type").change(function(){
-						var selected = $("#type option:selected");  
-						if(selected.val()){
-							$(".setdays").hide();
+						var selected = $("#type option:selected");
+						if(selected.val()) {
+							$('#moreDetails').show();
+							$('#timeSpentHour').show();
+							$('#timeSpentHour-label').show();
+							$('#timeSpentMin').show();
+							$('#timeSpentMin-label').show();
+							
+							if('Running' == selected.val()) {
+								$('#miles').show();
+								$('#miles-label').show();
+							}
+							else {
+								$('#miles').hide();
+								$('#miles-label').hide();
+							}
 						}
 						else {
-							$(".setdays").show();
+							$('#moreDetails').hide();
+							$('#timeSpentHour').hide();
+							$('#timeSpentHour-label').hide();
+							$('#timeSpentMin').hide();
+							$('#timeSpentMin-label').hide();
+							$('#miles').hide();
+							$('#miles-label').hide();
 						}
 					});
 					break;
