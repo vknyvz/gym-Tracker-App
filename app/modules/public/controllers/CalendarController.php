@@ -80,12 +80,6 @@ class CalendarController extends vkNgine_Public_Controller
 	
 			if($form->isValid($post)) {
 				$values = $form->getValues();
-				if(!$values['workoutId'] and !$values['activity'] and !$values['type']) {
-					echo Zend_Json::encode(array('title'   => $this->t->_('Error Message'),
-												 'message' => $this->t->_('At least one field must be filled'),
-												 'icon'    => 'error' ));
-					exit;
-				}
 				 
 				$values['userId'] = $this->user->getId();
 				

@@ -19,12 +19,7 @@
 				}
 				elseif(0 == $this->days[$i]['workoutId']) {
 					$activity = true;
-					if($this->days[$i]['activity']) {
-						$firstRow .= $this->days[$i]['activity'];
-					}
-					else {
-						$firstRow .= $this->t->_($this->days[$i]['type']);
-					}	
+					$firstRow .= $this->t->_($this->days[$i]['type']);	
 				}
 				
 				echo '

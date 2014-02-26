@@ -61,6 +61,26 @@ var vkNgineModals = function() {
 		else {
 			switch(mode) {
 				case 'add-exercise':
+					function hideActivity() {
+						$('#workoutDay-label').hide();
+						$('#workoutDay-element').hide();
+						$('#moreDetails').hide();
+						$('#timeSpentHour').hide();
+						$('#timeSpentHour-label').hide();
+						$('#timeSpentMin').hide();
+						$('#timeSpentMin-label').hide();
+						$('#miles').hide();
+						$('#miles-label').hide();
+						$('#type-element').hide();
+						$('#workoutId').hide();
+					}
+					
+					function hideExercise() {
+						$('#workoutId').hide();
+						$('#workoutDay-label').hide();
+						$('#workoutDay-element').hide();
+					}
+					
 					$('button.submit').bind('click', function() {
 						$('#vkNgine-modal-addexercise form').submit();	   
 						
@@ -78,45 +98,30 @@ var vkNgineModals = function() {
 					
 					$("#activityorexercise span").bind('click', function() {
 						var type = $(this).data('type');
-						if( 'exercise' == type) {
-							$('#type-element').hide();
-							$(this).attr('style', 'color:blue;font-weight:bold;');
-							
-							if($(this).hasClass('editing')) {
-								$(this).attr('style', '');
-								$(this).removeClass('editing')
-							}
-							else {
-								$(this).addClass('editing');
-							}
-						}
-						
 						if( 'activity' == type) {
-							$('#type-element').show();
-							$(this).attr('style', 'color:blue;font-weight:bold;');
+							$(this).attr('style', 'font-weight:bold;');
 							
-							if($(this).hasClass('editing')) {
-								$('#type-element').hide();
-								$(this).attr('style', '');
-								$(this).removeClass('editing')
-							}
-							else {
-								$(this).addClass('editing');
-							}
+							$('#type-element').show();
+							$('#type').show();
+							
+							hideExercise();
+							
+							$('#activityorexercise').find('.exercise').attr('style', '');
+						}
+						else if( 'exercise' == type) {
+							$(this).attr('style', 'font-weight:bold;');
+
+							$('#type-element').hide();
+							
+							hideActivity();
+							
+							$('#workoutId').show();
+														
+							$('#activityorexercise').find('.activity').attr('style', '');
 						}
 					});
 		
-					$('#workoutDay-label').hide();
-					$('#workoutDay-element').hide();
-					$('#moreDetails').hide();
-					$('#timeSpentHour').hide();
-					$('#timeSpentHour-label').hide();
-					$('#timeSpentMin').hide();
-					$('#timeSpentMin-label').hide();
-					$('#miles').hide();
-					$('#miles-label').hide();
-					$('#type-element').hide();
-					$('#workoutId').hide();
+					hideActivity();
 					
 					$(".setdays").change(function(){
 						var selected = $(".setdays option:selected");    
@@ -130,13 +135,9 @@ var vkNgineModals = function() {
 							});
 							
 							$('#type').hide();
-							$('#moreDetails').hide();
-							//$('#activity').hide();
 						}
 						else {
 							$('#type').show();
-							$('#moreDetails').show();
-							//$('#activity').show();
 							$('#workoutDay-label').hide();
 							$('#workoutDay-element').hide();
 						}
