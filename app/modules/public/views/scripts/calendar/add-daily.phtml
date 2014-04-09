@@ -1,7 +1,9 @@
 <?= $this->partial('_modals.phtml', 
 				array('t' 		  => $this->t,					  
 					  'headline'  => 'Add Daily Activity :: ' . $this->param['date'],
-					  'content'   => $this->form
+					  'content'   => $this->form,
+					  'addingActivity' => true,
+					
 	)); 
 ?>
 

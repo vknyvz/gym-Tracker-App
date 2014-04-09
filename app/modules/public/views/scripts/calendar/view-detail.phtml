@@ -6,7 +6,7 @@
 	<table class="table table-striped table-bordered table-advance table-hover">
   	    <thead>
             <tr>
-            	<?php 
+            	<?php
 		    		if($this->detail['workoutId']) :
 		    	?>
                 	<th style="width:150px;"><?= $this->t->_('Workout Name'); ?></th>
@@ -18,12 +18,6 @@
                		<th style="width:50px;"><?= $this->t->_('Workout Day'); ?></th>
                 <?php endif; ?>
                	
-               	<?php
-		    		if($this->detail['activity']) :
-		    	?>
-                	<th style="width:50px;"><?= $this->t->_('Activity'); ?></th>
-                <?php endif; ?>
-                
                 <?php
 		    		if($this->detail['type']) :
 		    	?>
@@ -34,6 +28,18 @@
 		    		if($this->detail['moreDetails']) :
 		    	?>
                 	<th style="width:50px;"><?= $this->t->_('Additional Details'); ?></th>
+                <?php endif; ?>
+                
+                <?php
+		    		if($this->detail['timeSpentHour'] || $this->detail['timeSpentMin']) :
+		    	?>
+                	<th style="width:50px;"><?= $this->t->_('Duration'); ?></th>
+                <?php endif; ?>
+                
+                <?php
+		    		if($this->detail['miles']) :
+		    	?>
+                	<th style="width:50px;"><?= $this->t->_('Miles Ran'); ?></th>
                 <?php endif; ?>
             </tr>
         </thead>
@@ -54,13 +60,6 @@
                  </td>
                  <?php endif; ?>
                  <?php
-		    		if($this->detail['activity']) :
-		    	 ?>
-                 <td>
-                 	<?= $this->detail['activity'] ?>
-                 </td>
-                 <?php endif; ?>
-                 <?php
 		    		if($this->detail['type']) :
 		    	 ?>
                  <td>
@@ -74,6 +73,16 @@
                  	<?= nl2br($this->detail['moreDetails']); ?>
                  </td>
                  <?php endif; ?>
+                 <?php
+		    		if($this->detail['timeSpentHour'] || $this->detail['timeSpentMin']) :
+		    	 ?>
+                	<td><?= $this->detail['timeSpentHour']; ?>:<?= $this->detail['timeSpentMin']; ?></td>
+                <?php endif; ?>
+                <?php
+		    		if($this->detail['miles']) :
+		    	 ?>
+                	<td><?= $this->detail['miles']; ?></td>
+                <?php endif; ?>                
              </tr>
         </tbody>            
     </table>

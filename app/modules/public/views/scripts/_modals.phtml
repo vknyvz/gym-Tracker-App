@@ -5,9 +5,11 @@
 <div class="modal-body">
 	
 	<div class="panel panel-info">
+		<?php if(isset($this->addingActivity)) : ?>
 		<div class="panel-heading">
 			<h5 id="activityorexercise">Add an <span class="activity" data-type="activity">Activity</span> or <span class="exercise" data-type="exercise">Exercise</span>?</h5>
 		</div>
+		<?php endif; ?>
 		<div class="panel-body">
 			<?= $this->content; ?>
 		
