@@ -24,18 +24,46 @@ class IndexController extends vkNgine_Public_Controller
     	$this->view->statistics = $statistics;
     }
     
+    public function refreshDashboardAction()
+    {
+    	$mode = null;
+    	
+    	$today = $this->_getParam('today');
+    	if($today) {
+    		$mode = 'today';	
+    	}   	
+    	
+    	$modelDailyExercises = new Public_Model_Daily_Exercises();
+    	    	
+    	$today = date('Y-m-d');
+    	$yesterday = date('Y-m-d', strtotime($today. '-1 day'));
+    	$tomorrow = date('Y-m-d', strtotime($today. '+1 day'));
+    	$last7Day = date('Y-m-d', strtotime($today. '-7 days'));
+    	$last30Day = date('Y-m-d', strtotime($today. '-30 days'));
+    	
+    	$dailyIntake = new Public_Model_Daily_Intake;
+    	$dataDailyIntake = $dailyIntake->fetchMacros($today, $this->user);
+    	 
+    	$milesRan = $modelDailyExercises->fetchAll("type = 'Running' and date = '" . $today . "' and userId =  " . $this->user->getId())->toArray();
+    			 
+    	$totalMiles = null;
+    	foreach($milesRan as $data) {
+    		if($data['miles']) {
+    			$totalMiles += $data['miles'];
+    		}
+    	}
+    	 
+    	$daysWithGym = $modelDailyExercises->fetchDaysWithOrWoutGym($yesterday, $today, $this->user);
+    	 
+    	$statistics['milesRan'] = $totalMiles;
+    	$statistics['caloriesConsumed'] = $dataDailyIntake[$today]['totalCalories'];    	
+    	
+    	$this->view->statistics = $statistics;    	
+    }
+    
     public function aboutAction()
     {
-    	/*$model = new Model_Exercises();
-    	$a = $model->fetchAll()->toArray();
-    	foreach($a as $b) {
-    		$alias = preg_replace('/[^A-Za-z0-9]/', ' ', $b['name']);
-    		
-    		$url = str_replace(' ', '-', strtolower(trim($alias)));
-    		
-    		$model->update($b['exerciseId'], array('url' => $url));
-    		
-    	}*/
+    	
     }
     
     public function exercisesAction()

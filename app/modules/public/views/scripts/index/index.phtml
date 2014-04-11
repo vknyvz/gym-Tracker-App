@@ -17,7 +17,7 @@
 		<div class="span3 responsive" data-tablet="span6" data-desktop="span3">
 			<div class="dashboard-stat blue">
 				<div class="visual">
-					<i class="icon-bar-chart"></i>
+					<i class="icon-globe"></i>
 				</div>
 				<div class="details">
 					<div class="number"><?= $this->statistics['dailyexercises']; ?></div>
@@ -28,7 +28,7 @@
 		<div class="span3 responsive" data-tablet="span6" data-desktop="span3">
 			<div class="dashboard-stat yellow">
 				<div class="visual">
-					<i class="icon-bar-chart"></i>
+					<i class="icon-truck"></i>
 				</div>
 				<div class="details">
 					<div class="number"><?= $this->statistics['dailydetails']; ?></div>
@@ -39,7 +39,7 @@
 		<div class="span3 responsive" data-tablet="span6" data-desktop="span3">
 			<div class="dashboard-stat green">
 				<div class="visual">
-					<i class="icon-bar-chart"></i>
+					<i class="icon-caret-down"></i>
 				</div>
 				<div class="details">
 					<div class="number"><?= $this->statistics['workouts']; ?></div>
@@ -65,7 +65,7 @@
 			</div>
 		</div>
 		
-		<div class="portlet box purple">
+		<div class="statistics portlet box purple">
         	<div class="portlet-title">
             	<div class="caption"><i class="icon-calendar"></i><?= $this->t->_('Statistics'); ?> -- <?= $this->t->_(date('F')); ?> <?= date('j Y')?> </div>
             </div>
@@ -73,26 +73,14 @@
             	<div class="row-fluid">
             		<div class="span1">
                         <div class="charts">
-                            <div class="ran" data-percent="55"><span>+55</span>%</div>
+                            <div class="ran" data-percent="<?= $this->statistics['milesRan']; ?>"><span><?= $this->statistics['milesRan']; ?></span></div>
                         	<?= $this->t->_('miles ran'); ?>
                      	</div>
                      </div>
                      <div class="span1">
                      	<div class="charts">
-                        	<div class="caloriesconsumed" data-percent="55"><span>+55</span>%</div>
+                        	<div class="caloriesconsumed" data-percent="<?= $this->statistics['caloriesConsumed']; ?>"><span><?= $this->statistics['caloriesConsumed']; ?></span></div>
                             <?= $this->t->_('calories consumed'); ?>
-                        </div>
-                     </div>
-                     <div class="span1">
-                     	<div class="charts">
-                        	<div class="lbslost" data-percent="55"><span>+55</span>%</div>
-                            <?= $this->t->_('lbs lost'); ?>
-                        </div>
-                     </div>
-                     <div class="span1">
-                     	<div class="charts">
-                        	<div class="lbsgain" data-percent="55"><span>+55</span>%</div>
-                            <?= $this->t->_('lbs gained'); ?>
                         </div>
                      </div>
                      <div class="span1">
