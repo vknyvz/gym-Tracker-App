@@ -71,29 +71,21 @@
             </div>
             <div class="portlet-body">
             	<div class="row-fluid">
-            		<div class="span1">
-                        <div class="charts">
-                            <div class="ran" data-percent="<?= $this->statistics['milesRan']; ?>"><span><?= $this->statistics['milesRan']; ?></span></div>
-                        	<?= $this->t->_('miles ran'); ?>
-                     	</div>
+            		 <div class="span1">
+                     	<div class="ran" ><span><?= $this->statistics['milesRan']; ?></span></div>
+                        <?= $this->t->_('miles ran'); ?>
                      </div>
                      <div class="span1">
-                     	<div class="charts">
-                        	<div class="caloriesconsumed" data-percent="<?= $this->statistics['caloriesConsumed']; ?>"><span><?= $this->statistics['caloriesConsumed']; ?></span></div>
-                            <?= $this->t->_('calories consumed'); ?>
-                        </div>
+                     	 <div class="caloriesconsumed"><span><?= $this->statistics['caloriesConsumed']; ?></span></div>
+                         <?= $this->t->_('calories consumed'); ?>
                      </div>
                      <div class="span1">
-                     	<div class="charts">
-                        	<div class="misseddays" data-percent="55"><span>+55</span>%</div>
-                            <?= $this->t->_('days went to gym'); ?>
-                        </div>
+                     	<div class="misseddays" ><span><?= $this->statistics['misseddays']; ?></span></div>
+                        <?= $this->t->_('days went to gym'); ?>                        
                      </div>
-                     <div class="span1">
-                     	<div class="charts">
-                        	<div class="misseddays" data-percent="55"><span>+55</span>%</div>
-                            <?= $this->t->_('days missed out of gym'); ?>
-                        </div>
+                     <div class="span1">                     
+                     	<div class="misseddays" ><span><?= $this->statistics['caloriesConsumed']; ?></span></div>
+                        <?= $this->t->_('days missed out of gym'); ?>
                      </div>
                 </div>
             </div>

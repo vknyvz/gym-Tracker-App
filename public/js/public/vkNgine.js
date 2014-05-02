@@ -49,7 +49,6 @@ vkNgine.core = vkNgine.core || {};
  		var dashboard = new vkNgine.page.dashboard();
  		
  		dashboard.dateRanger();
- 		dashboard.charts();
  	});
  	
  	vkNgine.core.engine.method ( 'initMyAccount', function (page) {

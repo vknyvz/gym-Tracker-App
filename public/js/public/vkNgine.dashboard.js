@@ -16,39 +16,6 @@ vkNgine.page = vkNgine.page || {};
 		}
     };
     
-    vkNgine.page.dashboard.method( 'charts', function () {
-    	$('.charts .ran').easyPieChart({
-            animate: 1000,
-            size: 100,
-            lineWidth: 10,
-            barColor: '852b99'
-        });
-    	$('.charts .caloriesconsumed').easyPieChart({
-            animate: 1000,
-            size: 100,
-            lineWidth: 3,
-            barColor: 'ffb848'
-        });
-    	$('.charts .lbslost').easyPieChart({
-            animate: 1000,
-            size: 100,
-            lineWidth: 3,
-            barColor: '35aa47'
-        });
-    	$('.charts .lbsgain').easyPieChart({
-            animate: 1000,
-            size: 100,
-            lineWidth: 3,
-            barColor: 'e02222'
-        });
-    	$('.charts .misseddays').easyPieChart({
-            animate: 1000,
-            size: 100,
-            lineWidth: 3,
-            barColor: 'e02222'
-        });
-    });
-    
     vkNgine.page.dashboard.method( 'dateRanger', function () {
     	var core = new vkNgine.core.engine();
     	
@@ -125,7 +92,7 @@ vkNgine.page = vkNgine.page || {};
         	
         	var get;
         	if(_start == _today && _end == _today) {
-        		get = 'today/1';
+        		get = 'mode/today';
         	}
         	else if(_start == _yesterday && _end == _yesterday) {
         		get = 'yesterday/1';
