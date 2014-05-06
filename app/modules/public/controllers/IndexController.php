@@ -21,44 +21,84 @@ class IndexController extends vkNgine_Public_Controller
        		$statistics['measurements'] = count($modelMeasurements->fetchAll('userId = ' . $this->user->getId()));
     	}
     	
-    	$this->view->statistics = $statistics;
-    }
-    
-    public function refreshDashboardAction()
-    {
-    	$mode = null;
-    	
-    	$today = $this->_getParam('today');
-    	if($today) {
-    		$mode = 'today';	
-    	}   	
-    	
-    	$modelDailyExercises = new Public_Model_Daily_Exercises();
-    	    	
     	$today = date('Y-m-d');
-    	$yesterday = date('Y-m-d', strtotime($today. '-1 day'));
-    	$tomorrow = date('Y-m-d', strtotime($today. '+1 day'));
-    	$last7Day = date('Y-m-d', strtotime($today. '-7 days'));
-    	$last30Day = date('Y-m-d', strtotime($today. '-30 days'));
     	
-    	$dailyIntake = new Public_Model_Daily_Intake;
-    	$dataDailyIntake = $dailyIntake->fetchMacros($today, $this->user);
-    	 
     	$milesRan = $modelDailyExercises->fetchAll("type = 'Running' and date = '" . $today . "' and userId =  " . $this->user->getId())->toArray();
-    			 
+    	
     	$totalMiles = null;
     	foreach($milesRan as $data) {
     		if($data['miles']) {
     			$totalMiles += $data['miles'];
     		}
     	}
-    	 
-    	$daysWithGym = $modelDailyExercises->fetchDaysWithOrWoutGym($yesterday, $today, $this->user);
-    	 
-    	$statistics['milesRan'] = $totalMiles;
-    	$statistics['caloriesConsumed'] = $dataDailyIntake[$today]['totalCalories'];    	
     	
-    	$this->view->statistics = $statistics;    	
+    	$statistics['milesRan'] = $totalMiles;
+    	
+    	$dailyIntake = new Public_Model_Daily_Intake;
+    	$dataDailyIntake = $dailyIntake->fetchMacros($today, $this->user);
+    	$statistics['caloriesConsumed'] = $dataDailyIntake[$today]['totalCalories'];
+    	    	
+    	$this->view->statistics = $statistics;
+    }
+    
+    public function refreshDashboardAction()
+    {
+    	$mode = $this->_getParam('mode');
+    	
+    	$today = date('Y-m-d');
+    	
+    	switch($mode) {
+    		case 'today':
+    			$date = $today;
+    			break;
+    		case 'yesterday':
+    			$date = date('Y-m-d', strtotime($today. '-1 day'));
+    			break;
+    		case 'tomorrow':
+    			$date = date('Y-m-d', strtotime($today. '+1 day'));
+    			break;
+    		case 'last7days':
+    			$date1 = date('Y-m-d', strtotime($today. '-7 days'));
+    			$date2 = $today;
+    			break;
+    		case 'last30days':
+    			$date1 = date('Y-m-d', strtotime($today. '-30 days'));
+    			$date2 = $today;
+    			break;
+    		case 'thismonth':
+    			$date = null;
+    			break;
+    		case 'lastmonth':
+    			$date = null;
+    			break;
+    	}
+    	
+    	$modelDailyExercises = new Public_Model_Daily_Exercises();
+    	$dailyIntake = new Public_Model_Daily_Intake;
+    	
+    	if($date1 && $date2) {
+    		$milesRan = $modelDailyExercises->fetchAll("type = 'Running' and date between '" . $date1 . "' and '" . $date2 . "' and userId =  " . $this->user->getId())->toArray();
+    		$daysWithGym = $modelDailyExercises->fetchDaysWithOrWoutGym($date1, $date2, $this->user);
+    	}
+    	else {
+    		$dataDailyIntake = $dailyIntake->fetchMacros($date, $this->user);
+    		$milesRan = $modelDailyExercises->fetchAll("type = 'Running' and date = '" . $date . "' and userId =  " . $this->user->getId())->toArray();
+    		
+    		$statistics['caloriesConsumed'] = $dataDailyIntake[$date]['totalCalories'];
+    	}
+    		 
+    	$totalMiles = null;
+    	foreach($milesRan as $data) {
+    		if($data['miles']) {
+    			$totalMiles += $data['miles'];
+    		}
+    	}
+    	  
+    	$statistics['milesRan'] = $totalMiles;    	
+    	
+    	$this->view->statistics = $statistics;
+
+    	$this->_helper->layout->disableLayout();
     }
     
     public function aboutAction()

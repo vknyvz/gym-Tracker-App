@@ -16,6 +16,19 @@ vkNgine.page = vkNgine.page || {};
 		}
     };
     
+    vkNgine.page.dashboard.method( 'counters', function (end_number, _class, fraction) {
+    	$("." + _class + " span").flipCounter(
+    		"startAnimation", 
+    		{
+    			number: 0,
+    			end_number: end_number,
+    			imagePath:"images/flipCounter-medium.png",
+    			numFractionalDigits: fraction,
+    			duration:3000,
+    		}
+        );
+    });
+    
     vkNgine.page.dashboard.method( 'dateRanger', function () {
     	var core = new vkNgine.core.engine();
     	
@@ -95,36 +108,37 @@ vkNgine.page = vkNgine.page || {};
         		get = 'mode/today';
         	}
         	else if(_start == _yesterday && _end == _yesterday) {
-        		get = 'yesterday/1';
+        		get = 'mode/yesterday';
         	}   
         	else if(_start == _last7days && _end == _today) {
-        		get = 'last7days/1';
+        		get = 'mode/last7days';
         	}
         	else if(_start == _last30days && _end == _today) {
-        		get = 'last30days/1';
+        		get = 'mode/last30days';
         	}
         	else if(_start == _firstDayThisMonth && _end == _lastDayThisMonth) {
-        		get = 'thismonth/1';
+        		get = 'mode/thismonth';
         	}
         	else if(_start == _firstDayLastMonth && _end == _lastDayLastMonth) {
-        		get = 'lastmonth/1';
+        		get = 'mode/lastmonth';
     		}
         	else {
         		get = 'date1/' + start.toString('yyyy-MM-dd') + '/date2/' + end.toString('yyyy-MM-dd');
         	}
         	
-        	$.get("/index/refresh-dashboard/" + get, function( data ) {
+        	$.get("/index/refresh-dashboard/" + get, function( html ) {
         		core.unblockUI(jQuery("#dashboard"));
         		
 	        	$.gritter.add({
 	        		title: 'Dashboard',
 	                text: 'Dashboard date range updated.'
 	            });
-        		core.scrollTo();
+	        	
+	        	$('#counters').replaceWith(html);
         	});
         	
         	$('#dashboard-report-range span').html(start.toString('MMMM d, yyyy') + ' - ' + end.toString('MMMM d, yyyy'));
-            $('.caption').text('Statistics -- ' + start.toString('MMMM d, yyyy') + ' - ' + end.toString('MMMM d, yyyy'));
+            $('.caption').text('Statistics -- ' + start.toString('MMMM d, yyyy') + ' - ' + end.toString('MMMM d, yyyy'));            
         });
 
         $('#dashboard-report-range').show();

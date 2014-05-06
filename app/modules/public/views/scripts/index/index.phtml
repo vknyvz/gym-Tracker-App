@@ -68,31 +68,43 @@
 		<div class="statistics portlet box purple">
         	<div class="portlet-title">
             	<div class="caption"><i class="icon-calendar"></i><?= $this->t->_('Statistics'); ?> -- <?= $this->t->_(date('F')); ?> <?= date('j Y')?> </div>
-            </div>
-            <div class="portlet-body">
-            	<div class="row-fluid">
-            		 <div class="span1">
-                     	<div class="ran" ><span><?= $this->statistics['milesRan']; ?></span></div>
+            </div>            
+            <div id="counters" class="portlet-body">
+            	<div class="row-fluid">             	
+            		 <div class="span2">
+                     	<div class="ran" ><span></span></div>
                         <?= $this->t->_('miles ran'); ?>
                      </div>
-                     <div class="span1">
-                     	 <div class="caloriesconsumed"><span><?= $this->statistics['caloriesConsumed']; ?></span></div>
+                     <div class="span2">
+                     	 <div class="caloriesconsumed"><span></span></div>
                          <?= $this->t->_('calories consumed'); ?>
                      </div>
-                     <div class="span1">
-                     	<div class="misseddays" ><span><?= $this->statistics['misseddays']; ?></span></div>
+                     <!--<div class="span2">
+                     	<div class="misseddays" ><span></span></div>
                         <?= $this->t->_('days went to gym'); ?>                        
                      </div>
-                     <div class="span1">                     
-                     	<div class="misseddays" ><span><?= $this->statistics['caloriesConsumed']; ?></span></div>
+                     <div class="span2">                     
+                     	<div class="misseddays" ><span></span></div>
                         <?= $this->t->_('days missed out of gym'); ?>
                      </div>
+                     -->
                 </div>
             </div>
 		</div>
-	
+<?php 
+
+?>	
 <script type="text/javascript">
 	var core = new vkNgine.core.engine();
 	core.initDashboard();
+
+	var dashboard = new vkNgine.page.dashboard();
+	var milesRan, caloriesConsumed, misseddays, caloriesConsumed = 0;
+
+	milesRan = <?= ((isset($this->statistics['milesRan'])) ? $this->statistics['milesRan'] : 0) ?>;
+	caloriesConsumed = <?= ((isset($this->statistics['caloriesConsumed'])) ? $this->statistics['caloriesConsumed'] : 0) ?>;
+
+	dashboard.counters(milesRan, 'ran', 2);
+	dashboard.counters(caloriesConsumed, 'caloriesconsumed', 0);	
 </script>
 	
