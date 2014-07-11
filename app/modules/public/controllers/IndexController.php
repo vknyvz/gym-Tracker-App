@@ -37,7 +37,7 @@ class IndexController extends vkNgine_Public_Controller
     	$dailyIntake = new Public_Model_Daily_Intake;
     	$dataDailyIntake = $dailyIntake->fetchMacros($today, $this->user);
     	$statistics['caloriesConsumed'] = $dataDailyIntake[$today]['totalCalories'];
-    	    	
+    	  
     	$this->view->statistics = $statistics;
     }
     
