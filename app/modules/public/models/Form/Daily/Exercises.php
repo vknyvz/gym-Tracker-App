@@ -19,9 +19,8 @@ class Public_Model_Form_Daily_Exercises extends vkNgine_Form_AjaxDesign
     	$miles = null;
     	for($i=0; $i<8; $i++) {
     		for($v=0; $v<100; $v++) {
-    			if($v % 2 == 0 ) {
-    				if($i && $v)
-    					$miles[$i . '.' . $v] = $i . '.' . $v;
+    			if($i) {
+    				$miles[$i . '.' . $v] = $i . '.' . $v;
     			}
     		}
     	}
