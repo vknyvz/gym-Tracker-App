@@ -13,8 +13,6 @@ class CalendarController extends vkNgine_Public_Controller
 	
 	public function monthlyAction()
 	{
-		parent::ajaxEnabled();
-		
 		$options = array('month' => $this->_getParam('month'),
 						 'year'  => $this->_getParam('year'),
 						 'day'   => $this->_getParam('day')
@@ -38,15 +36,13 @@ class CalendarController extends vkNgine_Public_Controller
 			
 		$modelMeasurements = new Public_Model_Measurements();
 			
-		$this->view->param = $this->_getAllParams();
+		$this->view->action = 'calendar-monthly';
 		
 		$this->view->otherdata = $modelMeasurements->fetchAll("userId = '" . $this->user->getId() . "' and date >= '" . $start . "' and date < '" . $end . "' ")->toArray();
 	}
 	
 	public function weeklyAction()
-	{
-		parent::ajaxEnabled();
-		
+	{	
 		$options = array('month' => $this->_getParam('month'),
 						 'year'  => $this->_getParam('year'),
 						 'day'   => $this->_getParam('day')
@@ -60,23 +56,20 @@ class CalendarController extends vkNgine_Public_Controller
 			$workoutDetail[$workout['workoutId']] = $workout['name'];
 		}
 
-		$this->view->param = $this->_getAllParams();
+		$this->view->action = 'calendar-weekly';
+		
 		$this->view->workoutDetail = $workoutDetail;
 		$this->view->calendar = $calendar;
 	}
 	
 	public function addDailyAction()
 	{
-		parent::ajaxEnabled(true);
+		parent::ajaxEnabled();
 		 
 		$date = $this->_getParam('date');
 	
 		$form = self::getDailyExercisesForm();
-		
-		if(Zend_Registry::get('mobile')){
-			$form->mobileSettings();
-		}
-		 
+				 
 		$modelWorkouts = new Model_Workouts();
 		$modelDailyExcercises = new Public_Model_Daily_Exercises();
 		 
@@ -87,12 +80,6 @@ class CalendarController extends vkNgine_Public_Controller
 	
 			if($form->isValid($post)) {
 				$values = $form->getValues();
-				if(!$values['workoutId'] and !$values['activity'] and !$values['type']) {
-					echo Zend_Json::encode(array('title'   => $this->t->_('Error Message'),
-												 'message' => $this->t->_('At least one field must be filled'),
-												 'icon'    => 'error' ));
-					exit;
-				}
 				 
 				$values['userId'] = $this->user->getId();
 				
@@ -101,24 +88,8 @@ class CalendarController extends vkNgine_Public_Controller
 	
 				$modelDailyExcercises->insert($values);
 				
-				if(Zend_Registry::get('mobile')){
-					echo Zend_Json::encode(array('success'  => 1,
-											     'loadThis' => '/calendar/',
-												 'loadOn'	=> 'content',
-												 'title'    => $this->t->_('Success Message'),
-												 'message'  => $this->t->_('Exercise was successfully added'),
-												 'icon'     => 'success'
-					));
-				}
-				else {
-					echo Zend_Json::encode(array('success' => 1,
-							'href'    => '/calendar/' . $forward,
-							'dialog'  => 'lnk-addexercise-dialog',
-							'title'   => $this->t->_('Success Message'),
-							'message' => $this->t->_('Exercise was successfully added'),
-							'icon'    => 'success'
-					));
-				}
+				echo Zend_Json::encode(array('success' => 1, 'href'    => $forward));
+				
 				exit;
 			}
 			else {
@@ -164,7 +135,7 @@ class CalendarController extends vkNgine_Public_Controller
 		}
 		else {
 			$modelDailyDetails->insert($values);
-		}	
+		}
 		
 		echo Zend_Json::encode(array('success'  => 1,
 									 'loadThis' => '/calendar/',
@@ -236,24 +207,18 @@ class CalendarController extends vkNgine_Public_Controller
 	
 				$values['userId'] = $this->user->getId();
 				
-				$forward = $values['forward'];
+				$forward = str_replace('-', '/', $values['forward']);
 				unset( $values['forward']);
 				 
 				$modelDailyDetails->insert($values);
 				 
-				echo Zend_Json::encode(array('success' => 1,
-						'href'	   => '/calendar/' . $forward,
-						'dialog'  => 'lnk-dailyDetails-dialog',
-						'title'   => $this->t->_('Success Message'),
-						'message' => $this->t->_('Day details was successfully added'),
-						'icon'    => 'success'
-				));
+				echo Zend_Json::encode(array('success' => 1, 'href' => $forward));
 				exit;
 			}
 			else {
 				echo Zend_Json::encode(array('title'   => $this->t->_('Error Message'),
-						'message' => $this->t->_('Please fill out all required fields'),
-						'icon'    => 'error'
+											 'message' => $this->t->_('Please fill out all required fields'),
+											 'icon'    => 'error'
 				));
 				exit;
 			}
@@ -261,6 +226,7 @@ class CalendarController extends vkNgine_Public_Controller
 		 
 		$form->setHidden($date, $this->_getParam('forward'));
 		
+		$this->view->param = $this->_getAllParams();
 		$this->view->form = $form;
 	}
 	

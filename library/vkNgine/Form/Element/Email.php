@@ -45,3 +45,4 @@ class vkNgine_Form_Element_Email extends vkNgine_Form_Element_Text
 				 ->removeDecorator('Label');
 		}
     }
+}

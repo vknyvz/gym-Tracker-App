@@ -13,8 +13,6 @@ class CalorieCalendarController extends vkNgine_Public_Controller
 	
 	public function monthlyAction()
 	{
-		parent::ajaxEnabled();
-	
 		$options = array('month' => $this->_getParam('month'),
 						 'year'  => $this->_getParam('year'),
 						 'day'   => $this->_getParam('day')
@@ -42,23 +40,13 @@ class CalorieCalendarController extends vkNgine_Public_Controller
 	}
 	
 	public function weeklyAction()
-	{
-		parent::ajaxEnabled();
-	
+	{	
 		$options = array('month' => $this->_getParam('month'),
 						 'year'  => $this->_getParam('year'),
 						 'day'   => $this->_getParam('day')
 		);
 		$calendar = vkNgine_Calendar::buildWeekly($options);
-	
-		$modelWorkouts = new Model_Workouts();
-			
-		$workoutDetail = array();
-		foreach($modelWorkouts->fetchAll() as $workout){
-			$workoutDetail[$workout['workoutId']] = $workout['name'];
-		}
-	
-		$this->view->workoutDetail = $workoutDetail;
+				
 		$this->view->calendar = $calendar;
 	}
 }

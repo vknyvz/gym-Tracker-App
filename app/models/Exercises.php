@@ -23,12 +23,27 @@ class Model_Exercises extends vkNgine_DbTable_Abstract
 	 * fetch an admin user
 	 *
 	 * @param int $userId
+	 * @return Model_Exercise
 	 */
 	public function fetch($exerciseId)
 	{
 		$select = $this->select();
 		$select->where('exerciseId = ?', $exerciseId);
 	
+		return $this->fetchRow($select);
+	}
+	
+	/**
+	 * fetch an exercise by its SEO url
+	 * 
+	 * @param string $url
+	 * @return Model_Exercise
+	 */
+	public function fetchByUrl($url)
+	{
+		$select = $this->select();
+		$select->where('url = ?', $url);
+		
 		return $this->fetchRow($select);
 	}
 	

@@ -19,19 +19,30 @@ class Public_Model_Form_Myaccount_Settings extends vkNgine_Form_AjaxDesign
     	$this->setAttrib('class', 'form');
     	
     	$this->addElements(array(
+    		new vkNgine_Form_Element_Password(
+				'password', 
+				array('label'  => null,
+					  'id'     => null,
+					  'class'  => 'input-password m-wrap medium',
+					  'autocomplete' => 'off',
+					  'desc'   => Zend_Registry::get('t')->_('Write a new password only if you want to change your current password'),
+					  'removeDecorators' => 1), 	
+				true),
     		new vkNgine_Form_Element_Select('calendarView',
-    				array('label' 	=> Zend_Registry::get('t')->_('Default Calendar View'),
-    					  'class' 	=> 'select setCalendarView',
-    					  'style'   => 'width:250px',
+    				array('label' 	=> null,
+    					  'class' 	=> 'setCalendarView m-wrap large',
     					  'escape'  => false,
+    					  'style'   => true,
+    					  'removeDecorators' => true,
     					  'desc' 	=> Zend_Registry::get('t')->_('This will change the default view of the calendar')),
     				array('Weekly'  => Zend_Registry::get('t')->_('Weekly'),
     					  'Monthly' => Zend_Registry::get('t')->_('Monthly'),
     				),
    					true),
     		new vkNgine_Form_Element_Radio('notifications',
-    				array('label' => Zend_Registry::get('t')->_('Notifications'),
-    					  'class' => 'notifications'),
+    				array('label' => null,
+    					  'class' => 'notifications',
+    					  'removeDecorators' => true),
     				array('senddaily' => Zend_Registry::get('t')->_(' Send daily reminders'),
     					  'senddailyifnolog' => Zend_Registry::get('t')->_(' Send daily reminders if nothing logged for the day'),
     					  'disable' => Zend_Registry::get('t')->_(" Don't send any reminders"),
@@ -40,10 +51,10 @@ class Public_Model_Form_Myaccount_Settings extends vkNgine_Form_AjaxDesign
     	));
     }
     
-    public function setMobile()
+    public function changePassword()
     {
-    	$this->getElement('calendarView')
-    		 ->setAttrib('disabled', 'disabled')
-    		 ->setDescription(Zend_Registry::get('t')->_('You can\'t change the layout of the calendar on the mobile app'));
+    	$this->removeElement('notifications');
+    	$this->removeElement('calendarView');
+    	
     }
 }

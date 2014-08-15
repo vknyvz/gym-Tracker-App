@@ -17,110 +17,72 @@ class Public_Model_Daily_Intake extends vkNgine_DbTable_Abstract
 	
 	protected $_saveInsertDate	= true;
 	
-	public function fetchByDate($date, Model_User $user) 
+	/**
+	 * calculate macros
+	 * 
+	 * @param string $where
+	 * @return array
+	 */
+	public function fetchMacros($date, Model_User $user)
 	{
-		$sql = "	
-			SELECT *
-				FROM `" . $this->_name . "` di, `foods` f 
-					WHERE di.date = '" . $date . "' AND di.userId = '" . $user->getId() . "' and f.foodId = di.foodId
-		";
+		$select = $this->select();
+		$select->where('date = ?', $date);
+		$select->where('userId = ?', $user->getId());
 		
-		return $this->_db->query($sql);
-	}
-	
-	public function fetchDailyTotalFoodIntake($date, Model_User $user) 
-	{
-		$sql = "
-			SELECT *, di.servingSize as dailyServingSize
-				FROM `" . $this->_name . "` di, `foods` f
-					WHERE di.date = '" . $date . "' AND di.userId = '" . $user->getId() . "' and f.foodId = di.foodId
-		";
+		$data = $this->fetchAll($select)->toArray();
 		
-		$query = $this->_db->fetchAll($sql);
+		$totalCalories = $mealTotalCalories = $foodTotalCalories = $calories = $protein = $fat = $carbs = $sodium = $sugar = $fiber = $cholesterol = 0;
 		
-		if(0 < count($query)) { 
-			$dailyValues = array();
-			foreach($query as $data) {
-				$dailyValues['calories'][] = $data['calories'] * $data['dailyServingSize'] ;
-				$dailyValues['fat'][] = $data['fat'] * $data['dailyServingSize'];
-				$dailyValues['cholesterol'][] = $data['cholesterol'] * $data['dailyServingSize'];
-				$dailyValues['sodium'][] = $data['sodium'] * $data['dailyServingSize'];
-				$dailyValues['carbs'][] = $data['carbs'] * $data['dailyServingSize'];
-				$dailyValues['fiber'][] = $data['fiber'] * $data['dailyServingSize'];
-				$dailyValues['protein'][] = $data['protein'] * $data['dailyServingSize'];
-				$dailyValues['sugar'][] = $data['sugar'] * $data['dailyServingSize'];
-			}
+		$macros[$date] = array();
+		if(0 < count($data)) {
+			foreach($data as $intake) {
+				if($intake['mealId']){
+					$modelMeals = new Model_Meals();
 			
-			$foodTotals = array(
-				'calories'    => array_sum($dailyValues['calories']),
-				'fat' 		  => array_sum($dailyValues['fat']),
-				'cholesterol' => array_sum($dailyValues['cholesterol']),
-				'sodium'      => array_sum($dailyValues['sodium']),
-				'carbs' 	  => array_sum($dailyValues['carbs']),
-				'fiber' 	  => array_sum($dailyValues['fiber']),
-				'protein'     => array_sum($dailyValues['protein']),
-				'sugar'       => array_sum($dailyValues['sugar']),
-			);
-		}
-		
-		$sql = "
-			SELECT *, mf.servingSize as servingSizeMealFood
-				FROM `" . $this->_name . "` di, `meals_foods` mf, `foods` f
-					WHERE di.date = '" . $date . "' AND di.userId = '" . $user->getId() . "' and di.mealId = mf.mealId and mf.foodId = f.foodId
-		";
-		
-		$query = $this->_db->fetchAll($sql);
-		
-		if(0 < count($query)) {
-			$dailyMealValues = array();
-			foreach($query as $data){
-				$dailyMealValues['calories'][] = $data['calories'] * $data['servingSizeMealFood'];
-				$dailyMealValues['fat'][] = $data['fat'] * $data['servingSizeMealFood'];
-				$dailyMealValues['cholesterol'][] = $data['cholesterol'] * $data['servingSizeMealFood'];
-				$dailyMealValues['sodium'][] = $data['sodium'] * $data['servingSizeMealFood'];
-				$dailyMealValues['carbs'][] = $data['carbs'] * $data['servingSizeMealFood'];
-				$dailyMealValues['fiber'][] = $data['fiber'] * $data['servingSizeMealFood'];
-				$dailyMealValues['protein'][] = $data['protein'] * $data['servingSizeMealFood'];
-				$dailyMealValues['sugar'][] = $data['sugar'] * $data['servingSizeMealFood'];
+					$meal = $modelMeals->fetchMealTotal($intake['mealId']);
+					
+					$calories += $meal['macros']['calories'];
+					$protein += $meal['macros']['protein'];
+					$fat += $meal['macros']['fat'];
+					$sodium += $meal['macros']['sodium'];
+					$cholesterol += $meal['macros']['cholesterol'];
+					$carbs += $meal['macros']['carbs'];
+					$sugar += $meal['macros']['sugar'];
+					$fiber += $meal['macros']['fiber'];
+					
+					$mealTotalCalories += $meal['mealTotalCalories'];
+				}
+				else {
+					$modelFoods = new Model_Foods();
+					$food = $modelFoods->fetch($intake['foodId'])->toArray();
+					
+					$calories += $modelFoods->calculateMacros($food['calories'], $food['servingSize'], $intake['servingSize'], '0');
+					$protein += $modelFoods->calculateMacros($food['protein'], $food['servingSize'], $intake['servingSize'], '0');
+					$fat += $modelFoods->calculateMacros($food['fat'], $food['servingSize'], $intake['servingSize'], '0');
+					$sodium += $modelFoods->calculateMacros($food['sodium'], $food['servingSize'], $intake['servingSize'], '0');
+					$cholesterol += $modelFoods->calculateMacros($food['cholesterol'], $food['servingSize'], $intake['servingSize'], '0');
+					$carbs += $modelFoods->calculateMacros($food['carbs'], $food['servingSize'], $intake['servingSize'], '0');
+					$sugar += $modelFoods->calculateMacros($food['sugar'], $food['servingSize'], $intake['servingSize'], '0');
+					$fiber += $modelFoods->calculateMacros($food['fiber'], $food['servingSize'], $intake['servingSize'], '0');
+				}
 			}
+		
+			$values = array('calories'    => $calories, 
+							'protein'     => $protein, 
+							'fat' 		  => $fat, 
+							'sodium'      => $sodium,
+							'cholesterol' => $cholesterol,
+							'carbs'       => $carbs,
+							'sugar'       => $sugar,
+							'fiber'       => $fiber
+			);
 			
-			$mealTotals = array(
-				'calories'    => array_sum($dailyMealValues['calories']),
-				'fat' 		  => array_sum($dailyMealValues['fat']),
-				'cholesterol' => array_sum($dailyMealValues['cholesterol']),
-				'sodium'      => array_sum($dailyMealValues['sodium']),
-				'carbs' 	  => array_sum($dailyMealValues['carbs']),
-				'fiber' 	  => array_sum($dailyMealValues['fiber']),
-				'protein'     => array_sum($dailyMealValues['protein']),
-				'sugar'       => array_sum($dailyMealValues['sugar']),
-			);
+			$macros[$date]['totalCalories'] = array_sum($values);
+			$macros[$date]['foodTotalCalories'] = $macros[$date]['totalCalories'] - $mealTotalCalories;
+			$macros[$date]['mealTotalCalories'] = $mealTotalCalories;
+			$macros[$date]['macros'] = $values;
 		}
 		
-		if(isset($foodTotals) || isset($mealTotals)){
-			return array(   
-				'calories'    => (isset($mealTotals['calories']) ? $mealTotals['calories'] : 0) + (isset($foodTotals['calories']) ? $foodTotals['calories'] : 0),
-				'fat' 		  => (isset($mealTotals['fat']) ? $mealTotals['fat'] : 0) + (isset($foodTotals['fat']) ? $foodTotals['fat'] : 0),
-				'cholesterol' => (isset($mealTotals['cholesterol']) ? $mealTotals['cholesterol'] : 0) + (isset($foodTotals['cholesterol']) ? $foodTotals['cholesterol'] : 0),
-				'sodium'      => (isset($mealTotals['sodium']) ? $mealTotals['sodium'] : 0) + (isset($foodTotals['sodium']) ? $foodTotals['sodium'] : 0),
-				'carbs' 	  => (isset($mealTotals['carbs']) ? $mealTotals['carbs'] : 0) + (isset($foodTotals['carbs']) ? $foodTotals['carbs'] : 0),
-				'fiber' 	  => (isset($mealTotals['fiber']) ? $mealTotals['fiber'] : 0) + (isset($foodTotals['fiber']) ? $foodTotals['fiber'] : 0),
-				'protein'     => (isset($mealTotals['protein']) ? $mealTotals['protein'] : 0) + (isset($foodTotals['protein']) ? $foodTotals['protein'] : 0),
-				'sugar'       => (isset($mealTotals['sugar']) ? $mealTotals['sugar'] : 0) + (isset($foodTotals['sugar']) ? $foodTotals['sugar'] : 0),
-			);
-		}
-		else {
-			return false;
-		}
-	}
-	
-	public function fetchTotalMealValues($date, Model_User $user) 
-	{
-		$sql = "
-			SELECT *
-				FROM `" . $this->_name . "` di, `meals_foods` mf, `meals` m
-					WHERE di.date = '" . $date . "' AND di.userId = '" . $user->getId() . "' and mf.mealId = di.mealId and mf.mealId = m.mealId
-		";
-		
-		return $this->_db->fetchAll($sql);
+		return $macros;
 	}
 }

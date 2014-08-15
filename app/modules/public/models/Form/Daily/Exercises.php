@@ -16,76 +16,90 @@ class Public_Model_Form_Daily_Exercises extends vkNgine_Form_AjaxDesign
     {
     	parent::init('publicFormDailyExercises');
     	
-    	$this->setAttrib('class', 'form');    	
+    	$miles = null;
+    	for($i=0; $i<8; $i++) {
+    		for($v=0; $v<100; $v++) {
+    			if($v % 2 == 0 ) {
+    				if($i && $v)
+    					$miles[$i . '.' . $v] = $i . '.' . $v;
+    			}
+    		}
+    	}
     	   	
     	$this->addElements(array(
     		new vkNgine_Form_Element_Hidden('date'),
     		new vkNgine_Form_Element_Hidden('forward'),
     		new vkNgine_Form_Element_Select('workoutId',
 	    			array('label' 	=> null,
-    					  'class' 	=> 'select setdays',
+    					  'class' 	=> 'input-large setdays',
     					  'escape'  => false,
+	    				  'select'  => 'none',
     					  'desc' 	=> null),
     				array(),
     				false),
     		new vkNgine_Form_Element_Select('workoutDay',
-    				array('label' 	=> null,
-    					  'class' 	=> 'select',
-    					  'style'   => 'width:100%',
-    					  'escape'  => false,
-    					  'desc' 	=> Zend_Registry::get('t')->_('Choose a workout day')),
+    				array('label' 	=> Zend_Registry::get('t')->_('Choose a workout day'),
+    					  'class' 	=> 'input-mini',
+	    				  'style'   => 'none', 
+    					  'escape'  => false),
     				array(),
     				false),
-    		new vkNgine_Form_Element_Text('activity',
+    		/*new vkNgine_Form_Element_Text('activity',
     				array('label' 	=> null,
-    		 			  'class' 	=> 'input',
+    		 			  'class' 	=> 'input-xlarge',
     					  'placeholder' => Zend_Registry::get('t')->_('If nothing from the above list')),
+    				false),*/
+    			new vkNgine_Form_Element_Select('type',
+    					array('label' 	=> null,
+    							'class' 	=> 'input-large',
+    							'escape'  => false,
+    							'style'   => 'none',
+    							'desc' 	=> null),
+    					array('' => $this->convertText2Turkish(Zend_Registry::get('t')->_('Choose an Activity')),
+    							'Cycling' => $this->convertText2Turkish(Zend_Registry::get('t')->_('Cycling')),
+    							'Rope Jumping' => $this->convertText2Turkish(Zend_Registry::get('t')->_('Rope Jumping')),
+    							'Football' => $this->convertText2Turkish(Zend_Registry::get('t')->_('Football')),
+    							'Running' => $this->convertText2Turkish(Zend_Registry::get('t')->_('Running')),
+    							'Stairs' => $this->convertText2Turkish(Zend_Registry::get('t')->_('Stairs')),
+    							'Swimming' => $this->convertText2Turkish(Zend_Registry::get('t')->_('Swimming')),
+    							'Weight Lifting' => $this->convertText2Turkish(Zend_Registry::get('t')->_('Weight Lifting'))),
+    					false),
+   			
+    		new vkNgine_Form_Element_Select('timeSpentHour',
+   					array('label' 	=> 'Hour',
+   						  'class' 	=> 'input-xsmall',
+   						  'style'   => 'none',
+   						  'escape'  => false),
+    				array(0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5),
     				false),
-   			new vkNgine_Form_Element_Textarea('moreDetails',
-   					array('label' 	=> null,
-   					  	  'class' 	=> 'textarea',
-    					  'escape'  => false,
-   						  'style'   => 'width:325px;height:100px',
-   						  'placeholder' => Zend_Registry::get('t')->_('More details for this')),
+    		new vkNgine_Form_Element_Select('timeSpentMin',
+   					array('label' 	=> 'Minute',
+   						  'class' 	=> 'input-xsmall',
+   						  'style'   => 'none',
+   						  'escape'  => false),
+    				array(0 => 0, 15 => 15, 30 => 30, 45 => 45),
     				false),
-    		new vkNgine_Form_Element_Select('type',
-	    			array('label' 	=> null,
-    					  'class' 	=> 'select',
-	    				  'escape'  => false,
-    					  'desc' 	=> null),
-    				array('' => $this->convertText2Turkish(Zend_Registry::get('t')->_('Choose One')),
-    					  'Cycling' => $this->convertText2Turkish(Zend_Registry::get('t')->_('Cycling')),
-    					  'Rope Jumping' => $this->convertText2Turkish(Zend_Registry::get('t')->_('Rope Jumping')),
-    					  'Football' => $this->convertText2Turkish(Zend_Registry::get('t')->_('Football')),
-    					  'Running' => $this->convertText2Turkish(Zend_Registry::get('t')->_('Running')),
-					  	  'Swimming' => $this->convertText2Turkish(Zend_Registry::get('t')->_('Swimming')),
-    					  'Weight Lifting' => $this->convertText2Turkish(Zend_Registry::get('t')->_('Weight Lifting'))),
-    				false),
+    		new vkNgine_Form_Element_Select('miles',
+   					array('label' 	=> 'Miles',
+   						  'class' 	=> 'input-xsmall',
+   						  'style'   => 'none',
+   						  'escape'  => false),
+    				$miles,
+    				false),			
+    			new vkNgine_Form_Element_Textarea('moreDetails',
+    					array('label' 	=> null,
+    							'class' 	=> 'input-xlarge',
+    							'escape'  => false,
+    							'style'   => 'height: 100px;',
+    							'placeholder' => Zend_Registry::get('t')->_('More details for this')),
+    					false),
     	));
-    }
-    
-    public function mobileSettings()
-    {
-    	if(Zend_Registry::get('mobile')){
-    		$this->getElement('workoutId')->setAttrib('class', 'text-input setdays');
-    		$this->getElement('workoutDay')->setAttrib('class', 'text-input');
-    		$this->getElement('activity')->setAttrib('class', 'text-input');
-    		$this->getElement('moreDetails')->setAttrib('class', 'select-input')->setAttrib('style', null);
-    		$this->getElement('type')->setAttrib('class', 'text-input');
-    		
-    		$submit = $this->createElement('submit', Zend_Registry::get('t')->_('Save'));
-    		$submit->setAttribs(array('class' => 'contactButton button grey',
-    								  'id' => 'contactSubmitBtn',
-    							      'value' => Zend_Registry::get('t')->_('Save')));
-    		
-    		$this->addElements(array($submit));
-    	}
     }
     
 	public function setWorkouts($workouts)
     {
     	$element = $this->getElement('workoutId');
-    	$element->addMultiOption(null, $this->convertText2Turkish(Zend_Registry::get('t')->_('Choose One')));
+    	$element->addMultiOption(null, $this->convertText2Turkish(Zend_Registry::get('t')->_('Choose an Exercise')));
     	
     	foreach ($workouts as $workout) {
     		$element->addMultiOption($workout['workoutId'], $workout['name']);

@@ -1,57 +1,64 @@
-<section id="maincontainer">
-   <div id="main">
-      
-      <div class="box">
-		  <div class="box-header">
-		    <h1><?= $this->t->_('My Body Measurements'); ?></h1>
-		  </div>
-		
-		  <table class="datatable">
-		    <thead>
-		      <tr>
-		        <th><?= $this->t->_('Value'); ?></th>
-		        <th><?= $this->t->_('Type'); ?></th>
-		        <th><?= $this->t->_('Record Date Capital'); ?></th>
-		        <th style="width:50px;"><?= $this->t->_('Actions'); ?></th>
-		      </tr>
-		    </thead>
-		    <tbody>
-		    <?php
-				foreach($this->measurements as $measurements) :
-			?>	
-		      <tr>
-		        <td><?= $this->escape($measurements['value']); ?></td>
-		        <td><?= ($measurements['type'] == 'WEIGHT') ? $this->t->_('Weight') : $this->t->_('Not Entered'); ?></td>
-		        <td><?= $this->escape($this->dateFormat($measurements['date'], Zend_Date::DATE_FULL)); ?></td>
-		        <td>
-		          <a class="button plain deletemeasurement" href="javascript:void(0);" rel="<?= $measurements['id']; ?>">
-		          	<?= $this->t->_('Delete Capital'); ?>
-		          </a>
-		        </td>
-		      </tr>
-		    <?php 
-				endforeach;
-			?>
-		    </tbody>
-		  </table>
-		  <div>
-			<a class="button btn_add_selected_workouts lowercase editmeasurements" href="#">
-				<span class="glyph plus"></span>
-					<?= $this->t->_('Add New Measurement');?>
-			</a>
-	      </div>
+<?= 
+	$this->partial('_breadcrumbs.phtml', 
+		array('t' 		  => $this->t,		
+			  'pageTitle' => $this->t->_('My Body Measurements'), 
+			  'page'	  => $this->t->_('My Body Measurements'),
+	)); 
+?>
+
+<?php
+	$this->headScript()
+		 	->appendFile($this->baseUrl('/js/public/vkNgine.myaccount.js'))
+		 	->appendFile($this->baseUrl('/js/public/vkNgine.myaccount.modals.js'));		 	
+?>
+
+<div class="row-fluid">
+		<div class="span12">			
+			<div class="portlet box blue">
+				<div class="portlet-title">
+                  	<div class="caption">
+						<i class="icon-reorder"></i>
+						<span class="hidden-480"><?= $this->t->_('My Measurements'); ?></span>
+					</div>                       							
+				</div>	
+				<div class="portlet-body">
+					<table class="table table-striped table-hover">
+						<thead>
+							<tr>
+								<th><?= $this->t->_('Value'); ?></th>
+						        <th><?= $this->t->_('Type'); ?></th>
+						        <th><?= $this->t->_('Record Date'); ?></th>
+						        <th><?= $this->t->_('Actions'); ?></th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php
+								foreach($this->measurements as $measurements) :
+							?>	
+						      <tr>
+						        <td><?= $this->escape($measurements['value']); ?></td>
+						        <td><?= ($measurements['type'] == 'WEIGHT') ? $this->t->_('Weight') : $this->t->_('Not Entered'); ?></td>
+						        <td><?= $this->escape($this->dateFormat($measurements['date'], Zend_Date::DATE_FULL)); ?></td>
+						        <td>
+						          <a class="glyphicons bin vkNgine-modal" data-id="<?= $measurements['id']; ?>" data-target="deletemeasurement">
+						          	<i class="icon-remove"></i> <?= $this->t->_('Delete'); ?>
+						          </a>
+						        </td>						        
+						      </tr>
+						    <?php 
+								endforeach;
+							?>		
+						</tbody>
+					</table>
+					<div>
+						<a class="btn blue vkNgine-modal" data-id="0" data-target="editmeasurement"><i class="icon-plus"></i> <?= $this->t->_('Add New Measurement'); ?></a>
+				    </div>
+				    				      
+				</div>
+			</div>			
 		</div>
-	</div>
-</section>
-
+	</div>	
+	
 <script>
-$('.editmeasurements').bind('click', function() {
-	var id = $(this).attr('rel');
-	btn_editmeasurements('<?= $this->t->_('Save'); ?>', '<?= $this->t->_('Cancel'); ?>', id);
-});
-
-$('.deletemeasurement').bind('click', function() {
-	var id = $(this).attr('rel');
-	btn_deletemeasurement('<?= $this->t->_('Delete'); ?>', '<?= $this->t->_('Cancel'); ?>', id);
-});
+	vkNgineModals.myAccount();										
 </script>

@@ -1,0 +1,18 @@
+<?= $this->partial('_breadcrumbs.phtml', 
+				array('t' 		  => $this->t,
+					  'pageTitle' => $this->t->_('About'),
+					  'page'	  => $this->t->_('About'),
+	)); 
+?>
+
+<div class="row-fluid">
+	<div class="span12">				
+			<div class="portlet-title">
+				<h4><i class="icon-dashboard"></i> <?= $this->t->_('App Versions'); ?></h4>												
+			</div>
+			<div class="portlet-body">
+				<div><?= $this->t->_('App version'); ?> <span class="label label-danger"><?= vkNgine_Version::APP_VERSION; ?></span></div>
+				<div><?= $this->t->_('vkNgine version'); ?> <span class="label label-danger"><?= vkNgine_Version::VERSION; ?></span></div>
+			</div>		
+	</div>
+</div>

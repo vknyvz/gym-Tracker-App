@@ -1,49 +1,110 @@
-<div id="main">
-		<div class="box column-full">
-		  <div class="box-header">
-		    <span class="glyph chart"></span><h1><?= $this->t->_('My Statistics'); ?></h1>
-		  </div>
-		
-		  <ul class="statistics">
-		    <li>
-		      <a href="javascript:void(0);">
-		        <span><?= $this->statistics['workouts']; ?></span>
-		        <?= $this->t->_('Workouts'); ?>
-		      </a>
-		    </li>
-		    <li>
-		      <a href="javascript:void(0);">
-		        <span><?= $this->statistics['dailydetails']; ?></span>
-		        <?= $this->t->_('Daily details'); ?>
-		      </a>
-		    </li>
-		    <li>
-		      <a href="javascript:void(0);">
-		        <span><?= $this->statistics['dailyexercises']; ?></span>
-		        <?= $this->t->_('Daily exercises'); ?>
-		      </a>
-		    </li>
-		    <li>
-		      <a href="javascript:void(0);">
-		        <span><?= $this->statistics['measurements']; ?></span>
-		        <?= $this->t->_('Measurements'); ?>
-		      </a>
-		    </li>
-		  </ul>
+<?= $this->partial('_breadcrumbs.phtml', 
+				array('t' 		  => $this->t,
+					  'pageTitle' => $this->t->_('My Statistics'),
+					  'page'	  => $this->t->_('Dashboard'),
+					  'calendar'  => true,
+	));
+?>		
+
+<?php
+	$this->headScript()
+		 	->appendFile($this->baseUrl('/js/public/vkNgine.dashboard.js'));
+?>     
+
+<div id="dashboard">
+	<!-- BEGIN DASHBOARD STATS -->
+	<div class="row-fluid">
+		<div class="span3 responsive" data-tablet="span6" data-desktop="span3">
+			<div class="dashboard-stat blue">
+				<div class="visual">
+					<i class="icon-globe"></i>
+				</div>
+				<div class="details">
+					<div class="number"><?= $this->statistics['dailyexercises']; ?></div>
+					<div class="desc"><?= $this->t->_('total exercise logs'); ?></div>
+				</div>       
+			</div>
 		</div>
+		<div class="span3 responsive" data-tablet="span6" data-desktop="span3">
+			<div class="dashboard-stat yellow">
+				<div class="visual">
+					<i class="icon-truck"></i>
+				</div>
+				<div class="details">
+					<div class="number"><?= $this->statistics['dailydetails']; ?></div>
+					<div class="desc"><?= $this->t->_('total other logs'); ?></div>
+				</div>          
+			</div>
+		</div>
+		<div class="span3 responsive" data-tablet="span6" data-desktop="span3">
+			<div class="dashboard-stat green">
+				<div class="visual">
+					<i class="icon-caret-down"></i>
+				</div>
+				<div class="details">
+					<div class="number"><?= $this->statistics['workouts']; ?></div>
+					<div class="desc"><?= $this->t->_('Workouts'); ?></div>
+				</div>
+				<a class="more" href="/my-account/my-workouts">
+				<?= $this->t->_('Go to My Workouts'); ?> <i class="m-icon-swapright m-icon-white"></i>
+				</a>                 
+			</div>
+		</div>
+		<div class="span3 responsive" data-tablet="span6  fix-offset" data-desktop="span3">
+			<div class="dashboard-stat purple">
+				<div class="visual">
+					<i class="icon-bar-chart"></i>
+				</div>
+				<div class="details">
+					<div class="number"><?= $this->statistics['measurements']; ?></div>
+					<div class="desc"><?= $this->t->_('Measurements'); ?></div>
+				</div>
+				<a class="more" href="/my-account/my-measurements">
+				<?= $this->t->_('Go to My Measurements'); ?> <i class="m-icon-swapright m-icon-white"></i>
+				</a>                 
+			</div>
+		</div>
+		
+		<div class="statistics portlet box purple">
+        	<div class="portlet-title">
+            	<div class="caption"><i class="icon-calendar"></i><?= $this->t->_('Statistics'); ?> -- <?= $this->t->_(date('F')); ?> <?= date('j Y')?> </div>
+            </div>            
+            <div id="counters" class="portlet-body">
+            	<div class="row-fluid">             	
+            		 <div class="span2">
+                     	<div class="ran" ><span></span></div>
+                        <?= $this->t->_('miles ran'); ?>
+                     </div>
+                     <div class="span2">
+                     	 <div class="caloriesconsumed"><span></span></div>
+                         <?= $this->t->_('calories consumed'); ?>
+                     </div>
+                     <!--<div class="span2">
+                     	<div class="misseddays" ><span></span></div>
+                        <?= $this->t->_('days went to gym'); ?>                        
+                     </div>
+                     <div class="span2">                     
+                     	<div class="misseddays" ><span></span></div>
+                        <?= $this->t->_('days missed out of gym'); ?>
+                     </div>
+                     -->
+                </div>
+            </div>
+		</div>
+<?php 
+
+?>	
+<script type="text/javascript">
+	var core = new vkNgine.core.engine();
+	core.initDashboard();
+
+	var dashboard = new vkNgine.page.dashboard();
+	var milesRan, caloriesConsumed, misseddays, caloriesConsumed = 0;
+
+	milesRan = <?= ((isset($this->statistics['milesRan'])) ? $this->statistics['milesRan'] : 0) ?>;
+	caloriesConsumed = <?= ((isset($this->statistics['caloriesConsumed'])) ? $this->statistics['caloriesConsumed'] : 0) ?>;
+
+	dashboard.counters(milesRan, 'ran', 2);
+	dashboard.counters(caloriesConsumed, 'caloriesconsumed', 0);	
+</script>
 	
-		<div class="box column-full">    
-		  <div class="box-header">
-		    <h1><?= $this->t->_('App Details'); ?></h1>
-		  </div>
-		
-		  <table>
-		    <tbody>
-		      <tr>
-		        <td><?= $this->t->_('App version'); ?>:</td>
-		        <td class="red"><?= vkNgine_Version::APP_VERSION; ?></td>
-		      </tr>	
-		    </tbody>
-		  </table>
-		</div>
-      </div>

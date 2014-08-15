@@ -51,6 +51,27 @@ class Model_Foods extends vkNgine_DbTable_Abstract
 		parent::update($data, $where);
 	}
 	
+
+	/**
+	 * calculate macro values based on serving size
+	 * 
+	 * @param int $macroValue
+	 * @param int $foodServingSize
+	 * @param int $intakeServingSize
+	 * @param int $return
+	 * @return number|string
+	 */
+	public function calculateMacros($macroValue, $foodServingSize, $intakeServingSize, $return = 0)
+	{
+		if(!$macroValue) {
+			return 0;
+		}
+	
+		if($macroValue){
+			return number_format(($macroValue / $foodServingSize) * $intakeServingSize, 1);
+		}
+	}
+	
 	/**
 	 * fetch all foods with pagination support
 	 *

@@ -1,15 +1,3 @@
-/**
- *  author:		Timothy Groves - http://www.brandspankingnew.net
- *	version:	1.2 - 2006-11-17
- *              1.3 - 2006-12-04
- *              2.0 - 2007-02-07
- *              2.1.1 - 2007-04-13
- *              2.1.2 - 2007-07-07
- *              2.1.3 - 2007-07-19
- *
- */
-
-
 if (typeof(bsn) == "undefined")
 	_b = bsn = {};
 

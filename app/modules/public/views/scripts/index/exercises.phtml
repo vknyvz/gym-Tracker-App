@@ -1,56 +1,71 @@
-<section id="maincontainer">
-   <div id="main">
-      <div class="box">
-		<div class="box-header">
-		    <h1><?= $this->t->_('Exercises Capital'); ?></h1>
-		</div>
-		  <table class="datatable">
-		    <thead>
-		      <tr>
-		        <th>&nbsp;</th>
-				<th><?= $this->t->_('Exercise Name'); ?></th>
-			    <th><?= $this->t->_('Primary Muscle'); ?></th> 
-			    <th><?= $this->t->_('Secondary Muscle'); ?></th> 
-			    <th><?= $this->t->_('Mechanics'); ?></th>
-			    <th><?= $this->t->_('Equipment Used'); ?></th>
-		      </tr>
-		    </thead>
-		    
-		    <tbody>
-		    <?php
-			    if($this->params['type'] != 'Legs'){
-			    	$this->params['type'] = "primaryMuscle LIKE '%" . $this->params['type'] . "%'";
-			    }
-			    else {
-			    	$this->params['type'] = "primaryMuscle LIKE '%Hamstrings%' or primaryMuscle LIKE '%Glutes, Hamstrings, Quadriceps%' or primaryMuscle LIKE '%Quadriceps%' or primaryMuscle LIKE '%Glutes%'";
-			    }
-				foreach($this->exercises->fetchAll($this->params['type'])->toArray() as $exercise):
-			?>	
-		      <tr>
-		        <td><input type="checkbox" name="exercises[]" value="<?= $exercise['exerciseId']; ?>"></td>
-				<td><a href="<?= $this->publicUrl('view', 'index') ?>/id/<?= $exercise['exerciseId']; ?>/tab/<?= $this->tab; ?>"><?= $exercise['name']; ?></a></td>
-				<td><?= $exercise['primaryMuscle']; ?></td>
-				<td><?= $exercise['secondaryMuscle']; ?></td>
-				<td><?= $exercise['mechanics']; ?></td>
-				<td><?= $exercise['equipmentUsed']; ?></td>
-		      </tr>
-		    <?php 
-				endforeach;
-			?>
-		    </tbody>
-		    </table>
-		    <div>
-				<a class="button btn_add_selected_workouts lowercase" href="#">
-					<span class="glyph plus"></span>
-						<?= $this->t->_('Add Selected Exercises to a Workout');?>
-				</a>
-		    </div>
+<?= $this->partial('_breadcrumbs.phtml', 
+				array('t' 		  => $this->t,
+					  'pageTitle' => $this->t->_('Exercises'),
+					  'page'	  => $this->t->_($this->params['type']),
+					  'page2'     => $this->t->_('Exercises'),
+					  'page2href' => '/index/exercises/type/Abs',
+	)); 
+?>
+
+<?php
+	$this->headScript()
+		 	->appendFile($this->baseUrl('/js/public/vkNgine.index.modals.js'));		 	
+?>
+
+<div class="row-fluid">
+		<div class="span12">			
+			<div class="portlet box blue">
+				<div class="portlet-title">
+					<div class="caption">
+						<i class="icon-reorder"></i>
+						<span class="hidden-480"><?= $this->t->_('Exercises'); ?> :: <?= $this->t->_($this->params['type']); ?></span>
+					</div>                       							
+				</div>	
+							
+				<div class="portlet-body">
+					<table class="table table-condensed table-hover">
+						<thead>
+							<tr>
+					        <th>&nbsp;</th>
+							<th><?= $this->t->_('Exercise Name'); ?></th>
+						    <th><?= $this->t->_('Primary Muscle'); ?></th> 
+						    <th><?= $this->t->_('Secondary Muscle'); ?></th> 
+						    <th><?= $this->t->_('Mechanics'); ?></th>
+						    <th><?= $this->t->_('Equipment Used'); ?></th>
+					      </tr>
+					    </thead>
+					    
+					    <tbody>
+						    <?php
+							    if($this->params['type'] != 'Legs'){
+							    	$type = "primaryMuscle LIKE '%" . $this->params['type'] . "%'";
+							    }
+							    else {
+							    	$type = "primaryMuscle LIKE '%Hamstrings%' or primaryMuscle LIKE '%Glutes, Hamstrings, Quadriceps%' or primaryMuscle LIKE '%Quadriceps%' or primaryMuscle LIKE '%Glutes%'";
+							    }
+								foreach($this->exercises->fetchAll($type)->toArray() as $exercise):
+							?>	
+						      <tr>
+						        <td><input type="checkbox" name="exercises[]" value="<?= $exercise['exerciseId']; ?>"></td>
+								<td><a href="/exercise/<?= $exercise['url']; ?>"><?= $exercise['name']; ?></a></td>
+								<td><?= $this->t->_($exercise['primaryMuscle']); ?></td>
+								<td><?= (($exercise['secondaryMuscle'] != 'None') ? $this->t->_($exercise['secondaryMuscle']) : ''); ?></td>
+								<td><?= $this->t->_($exercise['mechanics']); ?></td>
+								<td><?= $this->t->_($exercise['equipmentUsed']); ?></td>
+						      </tr>
+						    <?php 
+								endforeach;
+							?>
+		    			</tbody>
+					</table>
+				    <div>
+						<a class="btn blue vkNgine-modal" data-target="addselectedworkouts"><i class="icon-plus"></i> <?= $this->t->_('Add Selected Exercises to a Workout'); ?></a>
+				    </div>	
+				</div>
+			</div>			
 		</div>
 	</div>
-</section>
 
 <script>
-$('.btn_add_selected_workouts').bind('click', function() {
-	btn_add_selected_workouts('<?= $this->t->_('Add'); ?>', '<?= $this->t->_('Cancel'); ?>');
-});	
+	vkNgineModals.index();
 </script>

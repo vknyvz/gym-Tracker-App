@@ -66,20 +66,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 	}
 	
 	/**
-	 * initalize mobile app settings
-	 */
-	protected function _initMobileApp()
-	{
-		Zend_Registry::set('mobile', false);
-		
-		$browser = new vkNgine_Browser();
-		if($browser->isMobile() && $browser->getPlatform() == 'iPhone') {
-			Zend_Registry::set('mobile', true);
-			$this->getResource('layout')->setViewSuffix('m.' . $this->getResource('layout')->getViewSuffix());
-		}
-	}
-	
-	/**
 	 * initalize logging
 	 */
 	protected function _initLogger() 
@@ -163,7 +149,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 	    $options = $this->getOptions();
 	    
 	    $language = new Zend_Session_Namespace('language');
-	   	if($language->__isset('session')){
+	    
+	    if($language->__isset('session')){
 	        $lang = $language->lang;
 	    }
 	    else{
@@ -184,9 +171,37 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     				'locale'  => $lang
     		)
 	    );
-	    
+		
 		Zend_Registry::set('t', $translate);
 		Zend_Locale::setDefault($lang);
+	}
+	
+	/**
+	 * initalize Special Routes
+	 */
+	protected function _initRoutes()
+    {
+        $router = Zend_Controller_Front::getInstance()->getRouter();
+	    $router->addRoute(
+	        'exercise', new Zend_Controller_Router_Route('exercise/:url', array(
+	            'controller' => 'index',
+	            'action'     => 'view',
+	        	'url' 		 => '1-leg-pushup'))
+	    );
+	    
+	    $router->addRoute(
+	    	'exercises', new Zend_Controller_Router_Route('exercises/:type', array(
+    			'controller' => 'index',
+    			'action'     => 'exercises',
+    			'type' 		 => 'Abs'))
+	    );
+	    
+    	$router->addRoute(
+    		'workout', new Zend_Controller_Router_Route('workout/:url', array(
+    			'controller' => 'my-account',
+    			'action'     => 'view-workout',
+    			'url' 		 => 'workout-url'))
+	    );
 	}
 	
 	/**

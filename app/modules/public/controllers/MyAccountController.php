@@ -8,26 +8,16 @@ class MyAccountController extends vkNgine_Public_Controller
 	
 	public function indexAction()
 	{
-		parent::ajaxEnabled();
-		
-		$formCalendar = self::getMyaccountSettingsForm();
+		$form = self::getMyaccountSettingsForm();
 		
 		$populateData = array();
 		
 		$modelUsers = new Model_Users();
 		
-		if(Zend_Registry::get('mobile')){
-			$formCalendar->setMobile();
-			$populateData['calendarView'] = 'Monthly';
-			$this->view->mobile = true;
-		}
-		else {
-			$populateData['calendarView'] = $this->user['calendarView'];
-		}
-		
+		$populateData['calendarView'] = $this->user['calendarView'];
 		$populateData['notifications'] = $this->user['notifications'];
 		
-		$formCalendar->populate($populateData);
+		$form->populate($populateData);
 		
 		$request = $this->getRequest();
 		
@@ -47,6 +37,31 @@ class MyAccountController extends vkNgine_Public_Controller
 					
 				$modelUsers->update($this->user->getId(), $data);
 			}
+			elseif($this->_getParam('password')) {
+				$what = 'Password';
+				
+				$form->changePassword();
+				
+				$request = $this->getRequest();
+				
+				if ($request->isPost()) {
+					$post = $request->getPost();
+					
+					if($form->isValid($post)) {
+						$values = $form->getValues();
+					}
+					else {
+						echo Zend_Json::encode(array('title'   => $this->t->_('Error Message'),
+												     'icon'    => 'error',
+										 			 'message' => $this->t->_($what . ' was not updated')));
+						exit;
+					}
+				}
+			
+				$data['password'] = $values['password'];
+					
+				$modelUsers->update($this->user->getId(), $data);
+			}
 			
 			echo Zend_Json::encode(array('success' => 1,
 										 'title'   => $this->t->_('Success Message'),
@@ -54,13 +69,13 @@ class MyAccountController extends vkNgine_Public_Controller
 			exit;
 		}
 		
-		$this->view->formSettings = $formCalendar;
+		$this->view->formSettings = $form;
 	}
 	
 	public function myPlateAction()
 	{
 		$request = $this->getRequest();
-		
+						
 		if($request->isGet()) {
 			$food = $this->_getParam('food');
 			$date = $this->_getParam('date');
@@ -123,14 +138,13 @@ class MyAccountController extends vkNgine_Public_Controller
 					}
 				}
 				
-				echo Zend_Json::encode(array('success' => 1, 
-											 'title'   => $this->t->_('Success Message'), 
-											 'message' => $this->t->_($what . ' was successfully added')));
+				echo Zend_Json::encode(array('success' => 1));
 				exit;
 			}
 		}
 		
 		$modelMeals = new Model_Meals();
+		$modelFoods = new Model_Foods();
 		
 		$formMeals = self::getMyaccountMealsForm();
 		$formMeals->setMeals($modelMeals->fetchAll('userId = ' . $this->user->getId())->toArray());
@@ -138,12 +152,11 @@ class MyAccountController extends vkNgine_Public_Controller
 		$formFoods = self::getMyaccountFoodsForm();
 		
 		$modelDailyIntake = new Public_Model_Daily_Intake();
-		$a = $modelDailyIntake->fetchDailyTotalFoodIntake(date('Y-m-d'), $this->user);
-		
+				
 		$this->view->dailyIntake = $modelDailyIntake->fetchAll("date = '" . date('Y-m-d') . "' and userId = " . (int) $this->user->getId() . "")->toArray();
 		$this->view->formMeals = $formMeals;
 		$this->view->formFoods = $formFoods;
-		$this->view->dailyTotals = $modelDailyIntake->fetchDailyTotalFoodIntake(date('Y-m-d'), $this->user);
+		$this->view->modelFoods = $modelFoods;
 	}
 	
 	public function myWorkoutsAction()
@@ -155,7 +168,7 @@ class MyAccountController extends vkNgine_Public_Controller
 	public function myMeasurementsAction()
 	{
 		$modelMeasurements = new Public_Model_Measurements();
-		$this->view->measurements = $modelMeasurements->fetchAll('userId = ' . $this->user->getId())->toArray();
+		$this->view->measurements = $modelMeasurements->fetchAll("userId = " . $this->user->getId(), "date DESC")->toArray();
 	}
 	
 	public function languageAction()
@@ -169,7 +182,7 @@ class MyAccountController extends vkNgine_Public_Controller
 			$language->session = true;
 			$language->config = false;
 		}
-	
+				
 		echo Zend_Json::encode(array('success' => 1));
 		exit;
 	}
@@ -210,6 +223,8 @@ class MyAccountController extends vkNgine_Public_Controller
 						
 			if (count($workout) > 0) {
 				$populateData = $workout->toArray();
+				$populateData['startDate'] = ($workout->startDate == '0000-00-00') ? '' : $workout->startDate;				
+				$populateData['endDate'] = ($workout->endDate == '0000-00-00') ? '' : $workout->endDate;				
 			}
 			
 			$form->populate($populateData);
@@ -232,13 +247,7 @@ class MyAccountController extends vkNgine_Public_Controller
 					$id = $modelWorkouts->insert($values);
 				}
 				
-				echo Zend_Json::encode(array('success' => 1,
-											 'href'    => '/my-account/my-workouts',
-											 'dialog'  => 'btn_edit_workout_dialog',
-											 'title'   => $this->t->_('Success Message'),
-											 'message' => $this->t->_('Workout was successfully edited'),
-											 'icon'    => 'success'
-				));
+				echo Zend_Json::encode(array('success' => 1));
 				exit;
 			}
 			else {
@@ -271,13 +280,7 @@ class MyAccountController extends vkNgine_Public_Controller
 				$values['userId'] = $this->user->getId();
 				$id = $modelMeasurements->insert($values);
 				
-				echo Zend_Json::encode(array('success' => 1,
-											 'href'    => '/my-account',
-											 'dialog'  => 'btn_edit_measurements_dialog',
-											 'title'   => $this->t->_('Success Message'),
-											 'message' => $this->t->_('Measurement data was successfully inserted'),
-											 'icon'    => 'success'
-				));
+				echo Zend_Json::encode(array('success' => 1));
 				exit;
 			}
 			else {
@@ -293,7 +296,7 @@ class MyAccountController extends vkNgine_Public_Controller
 	
 	public function manageWorkoutAction()
 	{
-		parent::ajaxEnabled(true);
+		parent::ajaxEnabled();
 		
 		$id = (int) $this->_getParam('id');
 		
@@ -316,7 +319,7 @@ class MyAccountController extends vkNgine_Public_Controller
 	
 	public function viewWorkoutAction()
 	{
-		$id = (int) $this->_getParam('id');
+		$url = $this->_getParam('url');
 		
 		$modelWorkouts = new Model_Workouts();
 		$modelExercises = new Model_Exercises();
@@ -325,11 +328,12 @@ class MyAccountController extends vkNgine_Public_Controller
 		$exerciseDetail = array();
 		foreach($modelExercises->fetchAll() as $exercise){
 			$exerciseDetail[$exercise['exerciseId']] = $exercise['name'];
+			$exerciseDetail[$exercise['exerciseId'].'-url'] = $exercise['url'];
 		}
 		
 		$this->view->exerciseDetail = $exerciseDetail;
-		$this->view->exercises = $modelWorkoutsExercises;
-		$this->view->workout = $modelWorkouts->fetchAll('workoutId = ' . $id)->current();
+		$this->view->workoutsExercises = $modelWorkoutsExercises;
+		$this->view->workout = $modelWorkouts->fetchAll('url = "' . $url . '" ')->current();
 	}
 	
 	public function deleteWorkoutAction()

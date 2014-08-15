@@ -1,13 +1,29 @@
 <?php
-define('IN_DEVELOPMENT', APPLICATION_ENV === 'development');
-
-$this->headLink()->prependStylesheet($this->baseUrl('/css/error.css'));
-
 echo $this->doctype() . "\n";
+
+$this->headLink()
+	->prependStylesheet($this->baseUrl('/js/public/bootstrap/css/bootstrap.min.css'))
+	->appendStylesheet($this->baseUrl('/css/style-metro.css'))
+	->appendStylesheet($this->baseUrl('/css/style.css'))
+	->appendStylesheet($this->baseUrl('/css/pages/error.css'))
+	->appendStylesheet($this->baseUrl('/css/glyphicons/css/glyphicons.css'))
+	
+	->headLink(array('rel' => 'icon', 'href' => $this->baseUrl('dumbbell.ico'), 'type' => 'image/x-icon', 'PREPEND'));
+
+$this->headMeta()
+	->appendHttpEquiv('Content-Type', 'text/html; charset=UTF-8')
+	->appendHttpEquiv('expires', 'Oct, 31 Sun 1982 06:66:66 GMT')
+	->appendHttpEquiv('pragma', 'no-cache')
+	->appendHttpEquiv('Cache-Control', 'no-cache')
+	->appendName('viewport', 'width=device-width, initial-scale=1.0');
 ?>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://www.w3.org/2005/10/profile">
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if IE 10]> <html lang="en" class="ie10 no-js"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+
+<head>
 
 <?php
 echo $this->headTitle() . "\n";
@@ -18,6 +34,10 @@ echo $this->headScript(). "\n";
 
 </head>
 
-<body>
+<body class="page-500-full-page">
 	<?= $this->layout()->content ?>
+</body>
+
+
+
 </html>

@@ -1,72 +1,97 @@
-<h6><?= $this->t->_('Workout Details') ?>: <?= date('m-d-Y', strtotime($this->detail['date'])) ?></h6>
-   	<div class="box-content">	
-   		<ul>
-    	<?php 
-    		if($this->detail['workoutId']) :
-    	?>	
-	    	<li><strong><?= $this->t->_('Workout Name') ?>:</strong> <a href="<?= $this->publicUrl('view-workout', 'my-account'); ?>/id/<?= $this->detail['workoutId']; ?>"><?= $this->workoutDetail['name'] ?></a></li>
-    	<?php endif; ?>
-    	
-    	<?php 
-    		if($this->detail['workoutDay']) :
-    	?>	
-	    	<li><strong><?= $this->t->_('Workout Day') ?>:</strong> <?= $this->detail['workoutDay'] ?></li>
-    	<?php endif; ?>
-    	
-    	<?php
-    		if($this->detail['activity'])	:
-    	?>
-	    	<li><strong><?= $this->t->_('Activity') ?>:</strong> <?= $this->detail['activity'] ?></li>
-    	<?php endif; ?>
-    	
-    	<?php
-    		if($this->detail['type']) :
-    	?>
-    		<li><strong><?= $this->t->_('Type') ?>:</strong> <?= $this->t->_($this->detail['type']) ?> </li>
-		<?php endif; ?>
-		
-		<?php
-    		if($this->detail['moreDetails']) :
-    	?>
-    		<li><strong><?= $this->t->_('Additional Details') ?>:</strong> <div style="padding-left:15px;padding-top:5px;"> <?= nl2br($this->detail['moreDetails']); ?></div> </li>
-		<?php endif; ?>
-		</ul>
-	  </div>
-	  
-		<?php
-    	if(0 != count($this->workoutExercises)) :
-    	?>
-	    <h6><?= $this->t->_('Exercises in this workout') ?>:</h6>
-    	<div class="box-content">	
-	    <table>
-		 <tbody>
-		 	<tr>
-		        <th><?= $this->t->_('Exercise Name'); ?></th>
-		        <th><?= $this->t->_('Sets'); ?></th>
-		        <th><?= $this->t->_('Reps'); ?></th>
-		      </tr>
-		      		    <tbody>
-	    <?php
-	    	foreach($this->workoutExercises as $exercise):
-	    		$exerciseDetail = $this->exercises->fetch($exercise['exerciseId']);
-	    ?>
-	    	<tr>
-	    		<td><a href="javascript:void(0);" rel="<?= $exercise['exerciseId']; ?>" class="exercisedetail"><?= $exerciseDetail->getName() ?></a></td>
-	    		<td><?= $exercise['sets']; ?></td> 
-	    		<td><?= $exercise['reps']; ?></td>
-	    	</tr>
-	    <?php
-	    	endforeach; 
-	    ?>	
-	    	</table>
-	    </div>
-	    <?php endif; ?>
-   
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+	<h3 id="myModalLabel3"><?= $this->t->_('Workout Details'); ?>: <?= date('m-d-Y', strtotime($this->detail['date'])); ?></h3>
+</div>
+<div class="modal-body">
+	<table class="table table-striped table-bordered table-advance table-hover">
+  	    <thead>
+            <tr>
+            	<?php
+		    		if($this->detail['workoutId']) :
+		    	?>
+                	<th style="width:150px;"><?= $this->t->_('Workout Name'); ?></th>
+                <?php endif; ?>
+               
+                <?php 
+		    		if($this->detail['workoutDay']) :
+		    	?>	
+               		<th style="width:50px;"><?= $this->t->_('Workout Day'); ?></th>
+                <?php endif; ?>
+               	
+                <?php
+		    		if($this->detail['type']) :
+		    	?>
+                	<th style="width:50px;"><?= $this->t->_('Type'); ?></th>
+                <?php endif; ?>
+                
+                <?php
+		    		if($this->detail['moreDetails']) :
+		    	?>
+                	<th style="width:50px;"><?= $this->t->_('Additional Details'); ?></th>
+                <?php endif; ?>
+                
+                <?php
+		    		if($this->detail['timeSpentHour'] || $this->detail['timeSpentMin']) :
+		    	?>
+                	<th style="width:50px;"><?= $this->t->_('Duration'); ?></th>
+                <?php endif; ?>
+                
+                <?php
+		    		if($this->detail['miles']) :
+		    	?>
+                	<th style="width:50px;"><?= $this->t->_('Miles Ran'); ?></th>
+                <?php endif; ?>
+            </tr>
+        </thead>
+        <tbody>
+             <tr>
+             	 <?php 
+		    		if($this->detail['workoutId']) :
+		    	 ?>
+                 <td>
+                    <a href="<?= $this->publicUrl('view-workout', 'my-account'); ?>/id/<?= $this->detail['workoutId']; ?>"><?= $this->workoutDetail['name'] ?></a>
+                 </td>
+                 <?php endif; ?>
+                 <?php 
+		    		if($this->detail['workoutDay']) :
+		    	 ?>
+                 <td>
+                 	<?= $this->detail['workoutDay'] ?>
+                 </td>
+                 <?php endif; ?>
+                 <?php
+		    		if($this->detail['type']) :
+		    	 ?>
+                 <td>
+                 	<?= $this->t->_($this->detail['type']) ?>
+                 </td>
+                 <?php endif; ?>
+                 <?php
+		    		if($this->detail['moreDetails']) :
+		    	 ?>
+                 <td>
+                 	<?= nl2br($this->detail['moreDetails']); ?>
+                 </td>
+                 <?php endif; ?>
+                 <?php
+		    		if($this->detail['timeSpentHour'] || $this->detail['timeSpentMin']) :
+		    	 ?>
+                	<td><?= $this->detail['timeSpentHour']; ?>:<?= $this->detail['timeSpentMin']; ?></td>
+                <?php endif; ?>
+                <?php
+		    		if($this->detail['miles']) :
+		    	 ?>
+                	<td><?= $this->detail['miles']; ?></td>
+                <?php endif; ?>                
+             </tr>
+        </tbody>            
+    </table>
+</div>
+<div class="modal-footer">
+	<button class="btn" data-dismiss="modal" aria-hidden="true"><?= $this->t->_('Close'); ?></button>	
+	<button class="btn red submit" type="button"><?= $this->t->_('Delete'); ?></button>
+</div>
 
-
-<script type="text/javascript">		
-	$('.exercisedetail').bind('click', function() {
-		var id = $(this).attr('rel');
-		btn_exerciseDetail('<?= $this->t->_('Close'); ?>', id);
-	});
-</script>   
+<script>
+	vkNgineModals.calendar('delete-daily-exercise');
+</script>

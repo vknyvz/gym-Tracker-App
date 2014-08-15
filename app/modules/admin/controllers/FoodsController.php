@@ -29,7 +29,7 @@ class Admin_FoodsController extends vkNgine_Admin_Controller
 	public function editAction()
 	{
 		parent::ajaxEnabled();
-	
+			
 		$modelFoods = new Model_Foods();
 		
 		$form = self::getFoodsEditForm();

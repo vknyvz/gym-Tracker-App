@@ -1,0 +1,209 @@
+<div class="page-sidebar nav-collapse collapse">	
+	<ul class="page-sidebar-menu">
+		<li>
+			<div class="sidebar-toggler hidden-phone"></div>
+		</li>
+		<li>
+			<form class="sidebar-search" action="/index/search" method="get">
+				<div class="input-box">
+					<a href="javascript:;" class="remove"></a>
+					<input type="text" placeholder="<?= $this->t->_('Search'); ?>..." name="query" value="<?= (isset($this->params['query'])) ? $this->params['query'] : null; ?>" />
+					<input type="button" class="submit" value=" " />
+				</div>
+			</form>
+		</li>
+		
+		<!-- Dashboard -->
+		
+		<li class="<?= ($this->params['controller'] == 'index' && $this->params['action'] != 'about' && $this->params['action'] != 'exercises') ? 'active' : ''; ?>">
+			<a href="/">
+				<i class="icon-home"></i> 
+				<span class="title"><?= $this->t->_('Dashboard'); ?></span>
+				<span class="selected"></span>
+			</a>
+		</li>
+				
+		<!-- FirstName LastName -->
+		<li class="<?= ($this->params['controller'] == 'my-account') ? 'active' : ''; ?>">
+			<a href="javascript:;">
+				<i class="icon-cogs"></i> 
+				<span class="title"><?= $this->user->getFullName(); ?></span>
+				<span class="arrow "></span>
+			</a>
+			<ul class="sub-menu">
+				<li <?= ($this->params['controller'] == 'my-account' && $this->params['action'] == 'index') ? 'class="active"' : ''; ?>>
+					<a href="/my-account">
+						<?= $this->t->_('My Settings'); ?>
+					</a>
+				</li>
+				<li <?= ($this->params['controller'] == 'my-account' && $this->params['action'] == 'my-plate') ? 'class="active"' : ''; ?>>
+					<a href="/my-account/my-plate">
+						<?= $this->t->_('My Plate'); ?>
+					</a>
+				</li>
+				<li <?= ($this->params['controller'] == 'my-account' && $this->params['action'] == 'my-workouts') ? 'class="active"' : ''; ?>>
+					<a href="/my-account/my-workouts">
+						<?= $this->t->_('My Workouts'); ?>
+					</a>
+				</li>
+				<li <?= ($this->params['controller'] == 'my-account' && $this->params['action'] == 'my-measurements') ? 'class="active"' : ''; ?>>
+					<a href="/my-account/my-measurements">
+						<?= $this->t->_('My Measurements'); ?>
+					</a>
+				</li>						
+			</ul>
+		</li>
+		
+		<!-- Exercise Calendar -->
+		<?php
+			$calendarLink = ('weekly' == strtolower($this->user->calendarView)) ? '/calendar/weekly' : '/calendar';
+		?>
+		<li class="<?= ($this->params['controller'] == 'calendar') ? 'active' : ''; ?>">
+			<a href="<?= $calendarLink; ?>">
+				<i class="icon-calendar"></i> 
+				<span class="title"><?= $this->t->_('Exercise Calendar'); ?></span>
+				<span class="selected"></span>
+			</a>
+		</li>
+		
+		<!-- Calorie Calendar -->
+		<?php
+			$calendarLink = ('weekly' == strtolower($this->user->calendarView)) ? '/calorie-calendar/weekly' : '/calorie-calendar';
+		?>
+		<li class="<?= ($this->params['controller'] == 'calorie-calendar' && ($this->params['action'] == 'weekly' or $this->params['action'] == 'monthly')) ? 'active' : ''; ?>">
+			<a href="<?= $calendarLink; ?>">
+				<i class="icon-calendar"></i> 
+				<span class="title"><?= $this->t->_('Calorie Calendar'); ?></span>
+				<span class="selected"></span>
+			</a>
+		</li>
+		
+		<!-- Exercises -->
+		<li class="<?= ($this->params['controller'] == 'index' && $this->params['action'] == 'exercises') ? 'active' : ''; ?>">
+			<a href="javascript:;">
+				<i class="icon-camera"></i> 
+				<span class="title"><?= $this->t->_('Exercises'); ?></span>
+				<span class="selected"></span>
+			</a>
+			<ul class="sub-menu">
+				<?php
+					$type = (isset($this->params['type'])) ? $this->params['type'] : null;
+					
+					if(vkNgine_Config::getSystemConfig()->language->locale == 'en') :									
+				?>
+					<li <?= ($type == 'Abs') ? 'class="active"' : ''; ?>>
+						<a href="/exercises/Abs"><?= $this->t->_('Abdominals'); ?> 
+							<span class="label" style="vertical-align:super;"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Abs%'")) . '' ?></span>
+						</a>
+					</li>
+					<li <?= ($type == 'Back') ? 'class="active"' : ''; ?>>
+						<a href="/exercises/Back"><?= $this->t->_('Back'); ?> 
+							<span class="label" style="vertical-align:super;"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Back%'")) . '' ?></span>
+						</a>
+					</li>
+					<li <?= ($type == 'Biceps') ? 'class="active"' : ''; ?>>
+						<a href="/exercises/Biceps"><?= $this->t->_('Biceps'); ?> 
+							<span class="label" style="vertical-align:super;"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Biceps%'")) . '' ?></span>
+						</a>
+					</li>
+					<li <?= ($type == 'Calves') ? 'class="active"' : ''; ?>>
+						<a href="/exercises/Calves"><?= $this->t->_('Calves'); ?> 
+							<span class="label" style="vertical-align:super;"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Calves%'")) . '' ?></span>
+						</a>
+					</li>
+					<li <?= ($type == 'Chest') ? 'class="active"' : ''; ?>>
+						<a href="/exercises/Chest"><?= $this->t->_('Chest'); ?> 
+							<span class="label" style="vertical-align:super;"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Chest%'")) . '' ?></span>
+						</a>
+					</li>
+					<li <?= ($type == 'Forearms') ? 'class="active"' : ''; ?>>
+						<a href="/exercises/Forearms"><?= $this->t->_('Forearms'); ?> 
+							<span class="label" style="vertical-align:super;"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Forearms%'")) . '' ?></span>
+						</a>
+					</li>
+					<li <?= ($type == 'Legs') ? 'class="active"' : ''; ?>>
+						<a href="/exercises/Legs"><?= $this->t->_('Legs'); ?> 
+							<span class="label" style="vertical-align:super;"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Hamstrings%' or primaryMuscle LIKE '%Glutes, Hamstrings, Quadriceps%' or primaryMuscle LIKE '%Quadriceps%' or primaryMuscle LIKE '%Glutes%'")) . '' ?></span>
+						</a>
+					</li>
+					<li <?= ($type == 'Shoulders') ? 'class="active"' : ''; ?>>
+						<a href="/exercises/Shoulders"><?= $this->t->_('Shoulders'); ?> 
+							<span class="label" style="vertical-align:super;"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Shoulders%'")) . '' ?></span>
+						</a>
+					</li>
+					<li <?= ($type == 'Traps') ? 'class="active"' : ''; ?>>
+						<a href="/exercises/Traps"><?= $this->t->_('Traps'); ?> 
+							<span class="label" style="vertical-align:super;"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Traps%'")) . '' ?></span>
+						</a>
+					</li>
+					<li <?= ($type == 'Triceps') ? 'class="active"' : ''; ?>>
+						<a href="/exercises/Triceps"><?= $this->t->_('Triceps'); ?> 
+							<span class="label" style="vertical-align:super;"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Triceps%'")) . '' ?></span>
+						</a>
+					</li>
+				<?php else :?>
+					<li <?= ($type == 'Abs') ? 'class="active"' : ''; ?>>
+						<a href="/exercises/Abs"><?= $this->t->_('Abdominals'); ?> 
+							<span class="label" style="vertical-align:super;"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Abs%'")) . '' ?></span>
+						</a>
+					</li>
+					<li <?= ($type == 'Legs') ? 'class="active"' : ''; ?>>
+						<a href="/exercises/Legs"><?= $this->t->_('Legs'); ?> 
+							<span class="label" style="vertical-align:super;"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Hamstrings%' or primaryMuscle LIKE '%Glutes, Hamstrings, Quadriceps%' or primaryMuscle LIKE '%Quadriceps%' or primaryMuscle LIKE '%Glutes%'")) . '' ?></span>
+						</a>
+					</li>
+					<li <?= ($type == 'Calves') ? 'class="active"' : ''; ?>>
+						<a href="/exercises/Calves"><?= $this->t->_('Calves'); ?> 
+							<span class="label" style="vertical-align:super;"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Calves%'")) . '' ?></span>
+						</a>
+					</li>
+					<li <?= ($type == 'Chest') ? 'class="active"' : ''; ?>>
+						<a href="/exercises/Chest"><?= $this->t->_('Chest'); ?> 
+							<span class="label" style="vertical-align:super;"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Chest%'")) . '' ?></span>
+						</a>
+					</li>
+					<li <?= ($type == 'Shoulders') ? 'class="active"' : ''; ?>>
+						<a href="/exercises/Shoulders"><?= $this->t->_('Shoulders'); ?> 
+							<span class="label" style="vertical-align:super;"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Shoulders%'")) . '' ?></span>
+						</a>
+					</li>
+					<li <?= ($type == 'Forearms') ? 'class="active"' : ''; ?>>
+						<a href="/exercises/Forearms"><?= $this->t->_('Forearms'); ?> 
+							<span class="label" style="vertical-align:super;"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Forearms%'")) . '' ?></span>
+						</a>
+					</li>
+					<li <?= ($type == 'Biceps') ? 'class="active"' : ''; ?>>
+						<a href="/exercises/Biceps"><?= $this->t->_('Biceps'); ?> 
+							<span class="label" style="vertical-align:super;"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Biceps%'")) . '' ?></span>
+						</a>
+					</li>
+					<li <?= ($type == 'Triceps') ? 'class="active"' : ''; ?>>
+						<a href="/exercises/Triceps"><?= $this->t->_('Triceps'); ?> 
+							<span class="label" style="vertical-align:super;"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Triceps%'")) . '' ?></span>
+						</a>
+					</li>
+					<li <?= ($type == 'Back') ? 'class="active"' : ''; ?>>
+						<a href="/exercises/Back"><?= $this->t->_('Back'); ?> 
+							<span class="label" style="vertical-align:super;"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Back%'")) . '' ?></span>
+						</a>
+					</li>
+					<li <?= ($type == 'Traps') ? 'class="active"' : ''; ?>>
+						<a href="/exercises/Traps"><?= $this->t->_('Traps'); ?> 
+							<span class="label" style="vertical-align:super;"><?= count($this->exercises->fetchAll("primaryMuscle LIKE '%Traps%'")) . '' ?></span>
+						</a>
+					</li>
+				<?php endif; ?>
+			</ul>
+		</li>
+		
+		<!-- About -->
+		<li class="<?= ($this->params['controller'] == 'index' && ($this->params['action'] == 'about')) ? 'active' : ''; ?>" >
+			<a href="/index/about">
+				<i class="icon-book"></i> 
+				<span class="title"><?= $this->t->_('About'); ?></span>
+				<span class="selected"></span>
+			</a>
+		</li>	
+		
+	</ul>	
+</div>

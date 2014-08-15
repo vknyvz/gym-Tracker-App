@@ -1,70 +1,75 @@
-<section id="maincontainer">
-   <div id="main">
-      
-      <div class="box">
-		  <div class="box-header">
-		    <h1><?= $this->t->_('My Workouts'); ?></h1>
-		  </div>
-		
-		  <table class="datatable">
-		    <thead>
-		      <tr>
-		        <th><?= $this->t->_('Workout Name'); ?></th>
-		        <th><?= $this->t->_('Days'); ?></th>
-		        <th><?= $this->t->_('Start Date'); ?></th>
-		        <th><?= $this->t->_('End Date'); ?></th>
-		        <th style="width:185px;"><?= $this->t->_('Actions'); ?></th>
-		      </tr>
-		    </thead>
-		    <tbody>
-		    <?php
-				foreach($this->workouts as $workout) :
-			?>	
-		      <tr>
-		        <td><a href="<?= $this->publicUrl('view-workout', 'my-account'); ?>/id/<?= $workout['workoutId']; ?>"><?= $this->escape($workout['name']); ?></a></td>
-		        <td><?= $this->escape($workout['day']); ?></td>
-		        <td><?= ($workout['startDate'] != '0000-00-00') ? $this->escape($this->dateFormat($workout['startDate'], Zend_Date::DATE_FULL)) : $this->t->_('Not entered') ?></td>
-		        <td><?= ($workout['endDate'] != '0000-00-00') ? $this->escape($this->dateFormat($workout['endDate'], Zend_Date::DATE_FULL)) : $this->t->_('Not entered') ?></td>
-		        <td>
-		          <a class="button plain manageworkout" href="javascript:void(0);" rel="<?= $workout['workoutId']; ?>">
-		          	<?= $this->t->_('Manage'); ?>
-		          </a>
-		          <a class="button plain editworkout" href="javascript:void(0);" rel="<?= $workout['workoutId']; ?>">
-		          	<?= $this->t->_('Edit'); ?>
-		          </a>
-		          <a class="button plain deleteworkout" href="javascript:void(0);" rel="<?= $workout['workoutId']; ?>">
-		          	<?= $this->t->_('Delete Capital'); ?>
-		          </a>
-		        </td>
-		      </tr>
-		    <?php 
-				endforeach;
-			?>
-		    </tbody>
-		  </table>
-		  <div>
-			<a class="button btn_add_selected_workouts lowercase editworkout" href="#">
-				<span class="glyph plus"></span>
-					<?= $this->t->_('Add New Workout');?>
-			</a>
-	      </div>
-		</div>
+<?= 
+	$this->partial('_breadcrumbs.phtml', 
+		array('t' 		  => $this->t,		
+			  'pageTitle' => $this->t->_('My Workouts'),				 
+			  'page'	  => $this->t->_('My Workouts'),
+	)); 
+?>
+
+<?php
+	$this->headScript()
+		 	->appendFile($this->baseUrl('/js/public/vkNgine.myaccount.js'))
+		 	->appendFile($this->baseUrl('/js/public/vkNgine.myaccount.modals.js'));		 	
+?>
+
+	<div class="row-fluid">
+		<div class="span12">			
+			<div class="portlet box blue">
+				<div class="portlet-title">
+                	<div class="caption">
+						<i class="icon-reorder"></i>
+						<span class="hidden-480"><?= $this->t->_('My Workouts'); ?></span>
+				</div>
+			</div>	
+			<div class="portlet-body">
+				<table class="table table-striped table-hover">
+					<thead>
+						<tr>
+							<th><?= $this->t->_('Workout Name'); ?></th>
+					        <th><?= $this->t->_('Days'); ?></th>
+					        <th><?= $this->t->_('Start Date'); ?></th>
+					        <th><?= $this->t->_('End Date'); ?></th>
+					        <th style="text-align:right"><?= $this->t->_('Actions'); ?></th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php
+							foreach($this->workouts as $workout) :
+						?>	
+					      <tr class="odd gradeX">
+					        <td><a href="/workout/<?= $workout['url']; ?>"><?= $this->escape($workout['name']); ?></a></td>
+					        <td><?= $this->escape($workout['day']); ?></td>
+					        <td><?= ($workout['startDate'] != '0000-00-00') ? $this->escape($this->dateFormat($workout['startDate'], Zend_Date::DATE_FULL)) : $this->t->_('Not entered') ?></td>
+					        <td><?= ($workout['endDate'] != '0000-00-00') ? $this->escape($this->dateFormat($workout['endDate'], Zend_Date::DATE_FULL)) : $this->t->_('Not entered') ?></td>
+					        <td style="text-align:right">
+								<a class="glyphicons more_items vkNgine-modal" data-id="<?= $workout['workoutId']; ?>" data-target="manageworkout">
+									<i></i>
+									<?= $this->t->_('Manage'); ?>
+								</a> 	
+								<a class="glyphicons edit vkNgine-modal" data-id="<?= $workout['workoutId']; ?>" data-target="editworkout">
+									<i></i>
+									<?= $this->t->_('Edit'); ?>
+								</a> 
+								<a class="glyphicons bin vkNgine-modal" data-id="<?= $workout['workoutId']; ?>" data-target="deleteworkout">
+									<i></i>
+									<?= $this->t->_('Delete'); ?>
+								</a> 		
+							</td>						        
+					      </tr>
+					    <?php 
+							endforeach;
+						?>
+						
+					</tbody>
+				</table>
+				<div>
+					<a class="btn blue vkNgine-modal" data-target="editworkout"><i class="icon-plus"></i> <?= $this->t->_('Add New Workout'); ?></a>
+			    </div>				    
+			</div>
+		</div>			
 	</div>
-</section>
+</div>
 
 <script>
-$('.editworkout').bind('click', function() {
-	var id = $(this).attr('rel');
-	btn_editworkout('<?= $this->t->_('Save'); ?>', '<?= $this->t->_('Cancel'); ?>', id);
-});
-
-$('.manageworkout').bind('click', function() {
-	var id = $(this).attr('rel');
-	btn_manageworkout('<?= $this->t->_('Close'); ?>', id);
-});
-
-$('.deleteworkout').bind('click', function() {
-	var id = $(this).attr('rel');
-	btn_deleteworkout('<?= $this->t->_('Delete'); ?>', '<?= $this->t->_('Cancel'); ?>', id);
-});
+	vkNgineModals.myAccount();
 </script>

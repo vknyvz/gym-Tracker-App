@@ -21,7 +21,7 @@ class Public_Model_Form_Myaccount_Meals extends vkNgine_Form_AjaxDesign
     	$this->addElements(array(
     		new vkNgine_Form_Element_Select('meals',
     				array('label' 	=> null,
-    					  'class' 	=> 'select',
+    					  'class' 	=> 'large m-wrap',
     					  'style'   => 'width:250px',
     					  'escape'  => false,
     					  'desc' 	=> null),

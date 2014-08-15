@@ -1,41 +1,12 @@
-<?= $this->form; ?>
+<?= $this->partial('_modals.phtml', 
+				array('t' 		  => $this->t,					  
+					  'headline'  => 'Add Daily Activity :: ' . $this->param['date'],
+					  'content'   => $this->form,
+					  'addingActivity' => true,
+					
+	)); 
+?>
 
 <script>
-$(document).ready(function(){
-	$("#activity").focus();
-
-	$('select').select_skin();
-
-	var options = {  
-		url: '<?= $this->form->getAction(); ?>',
-        success: vkNgineAjaxFormSubmit,
-		dataType : 'json'
-    };
-    
-	$('#<?= $this->form->getId(); ?>').ajaxForm(options);
-
-	$('#workoutDay-label').hide();
-	$('#workoutDay-element').hide();
-
-	$(".setdays").change(function(){
-		var selected = $(".setdays option:selected");    
-		if(selected.val()){
-			$('#workoutDay-element').show();
-
-			$('select#workoutDay').select_skin();
-			
-			$.ajax({ 
-				url: '/calendar/set-workout-day/id/' + selected.val(),
-				success: function(returnData) {
-					$('dd#workoutDay-element').html(returnData);
-				}
-			})
-		}
-		else {
-			$('#workoutDay-label').hide();
-			$('#workoutDay-element').hide();
-		}
-	});
-});
+	vkNgineModals.calendar('add-exercise');
 </script>
-

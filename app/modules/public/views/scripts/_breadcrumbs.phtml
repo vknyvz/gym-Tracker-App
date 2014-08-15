@@ -1,0 +1,68 @@
+<?php if(!$this->ajax): ?>
+<div class="row-fluid">
+	<div class="span12">
+		<div class="color-panel hidden-phone">
+			<div class="color-mode-icons icon-color"></div>
+			<div class="color-mode-icons icon-color-close"></div>
+			<div class="color-mode">
+				<p><?= $this->t->_('THEME COLOR'); ?></p>
+				<ul class="inline">
+					<li class="color-black current color-default" data-style="default"></li>
+					<li class="color-blue" data-style="blue"></li>
+					<li class="color-brown" data-style="brown"></li>
+					<li class="color-purple" data-style="purple"></li>
+					<li class="color-grey" data-style="grey"></li>
+					<li class="color-white color-light" data-style="light"></li>
+				</ul>
+			</div>
+		</div>
+		
+	<h3 class="page-title">
+	<?php if(isset($this->pageTitle)) : ?>					
+		
+			<?= $this->pageTitle; ?>
+	<?php else: ?>
+		&nbsp;
+	<?php endif; ?>
+	</h3>
+		
+		<ul class="breadcrumb">
+			<li>
+				<i class="icon-home"></i>
+				<a href="<?= $this->publicUrl(); ?>"><?= $this->t->_('Home'); ?></a>				
+			</li>
+			
+			<li>
+			<?php if(!$this->pageHref) : ?>
+				<i class="icon-angle-right"></i>	
+				<?= $this->page; ?>				
+			<?php else: ?>
+				<i class="icon-angle-right"></i>
+				<a href="<?= $this->pageHref; ?>"><?= $this->page; ?></a>
+			<?php endif; ?>				
+			</li>
+			
+			<?php if(isset($this->page2)): ?>
+			<li>
+				<i class="icon-angle-right"></i>
+				<?php if(isset($this->page2href)) : ?> 		
+					<a href="<?= $this->page2href?>"><?= $this->t->_($this->page2); ?></a>
+				<?php else: ?>
+					<?= $this->t->_($this->page2); ?>
+				<?php endif; ?>
+			</li>
+			<?php endif; ?>
+			
+			<?php if(isset($this->calendar)) : ?>
+			<li class="pull-right no-text-shadow">
+				<div id="dashboard-report-range" class="dashboard-date-range tooltips no-tooltip-on-touch-device responsive" data-tablet="" data-desktop="tooltips" data-placement="top" data-original-title="Change dashboard date range">
+					<i class="icon-calendar"></i>
+					<span></span>
+					<i class="icon-angle-down"></i>
+				</div>
+			</li>
+			<?php endif; ?>
+		</ul>
+	</div>
+</div>	
+<?php endif; ?>

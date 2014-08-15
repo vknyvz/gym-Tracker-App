@@ -34,7 +34,7 @@ class vkNgine_Public_Controller extends Zend_Controller_Action
     	$this->view->searchForm = $searchForm;
     	
     	$view = Zend_Registry::get('view');
-    	$appTitle = Zend_Registry::get('t')->_('GYM Tracker lower');
+    	$appTitle = Zend_Registry::get('t')->_('GYM Tracker');
     	$view->headTitle($appTitle, Zend_View_Helper_Placeholder_Container_Abstract::SET);
     	
     	if (!vkNgine_Auth::isAuthenticated()) {
@@ -47,11 +47,7 @@ class vkNgine_Public_Controller extends Zend_Controller_Action
     	
     	$user = vkNgine_Public_Auth::revalidate();
     	
-    	$this->view->params = $this->_getAllParams();
-    	
-    	if(Zend_Registry::get('mobile')) {
-    		Zend_Controller_Action_HelperBroker::getExistingHelper('ViewRenderer')->setViewSuffix('m.phtml');
-    	}
+    	$this->view->params = $this->getAllParams();
     	
     	Zend_Registry::set('user', $user);
     	$this->view->assign('user', $user);
@@ -62,10 +58,8 @@ class vkNgine_Public_Controller extends Zend_Controller_Action
 		$this->t = Zend_Registry::get('t');
     }
     
-    public function ajaxEnabled($dialog = false)
+    public function ajaxEnabled()
     {
-    	if(Zend_Registry::get('mobile') || $dialog) {
-    		$this->_helper->layout->disableLayout();
-    	}
+   		$this->_helper->layout->disableLayout();
     }
 }

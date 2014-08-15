@@ -1,19 +1,55 @@
-<div>
-	<h1><?php echo $this->message; ?><blink>__</blink></h1>
-</div>
+<?php 
+	$isLogged = vkNgine_Config::getSystemConfig()->settings->error_logging;	
+	$logFile = vkNgine_Config::getSystemConfig()->settings->error_logfile;
+?>
 
-<span class="neg"><?php echo $this->exception->getMessage(); ?></span>
-
-<p>
-	<pre>
-		<div class="left"><?php echo $this->exception->getTraceAsString(); ?></div>
-	</pre>
-</p>
-
-<p>
-	<?php echo print_r($this->request->getParams(), 1); ?>
-</p>
-
-<div class="menu">
-	<a href="<?= $this->baseUrl(); ?>">home</a>
+<div class="row-fluid">
+	<div class="span11 page-500">
+		<a class="glyphicons no-js circle_exclamation_mark" href="#">
+			<i></i>
+		</a>
+		
+		<h2><?= $this->t->_($this->message); ?></h2>
+		
+		<div class=" details">
+			<div class="menu">
+			<p>					
+				<a class="btn black btn-block" href="<?= $this->publicUrl(); ?>">
+					<?= $this->t->_('Home'); ?>
+					<i class="m-icon-swapleft m-icon-white"></i>
+				</a>	
+			</p>
+			</div>
+			<p>
+				<label><strong><?= $this->t->_('Message'); ?></strong></label>
+				<pre><?= $this->exception->getMessage(); ?></pre>
+			</p>
+			
+			<?php if($isLogged): ?>
+			<p>
+				<label><strong><?= $this->t->_('Logging'); ?></strong></label>
+				<pre>This error was logged to <i>`<?= $logFile; ?>`</i></pre>
+			</p>
+			<?php endif; ?>
+			
+			<p>
+				<label><strong><?= $this->t->_('Request Parameters'); ?></strong></label>
+				<pre><?= print_r($this->request->getParams(), 1); ?></pre>
+			</p>
+			
+			<p>
+				<label><strong><?= $this->t->_('Trace'); ?></strong></label>
+				<pre><?= $this->exception->getTraceAsString(); ?></pre>
+			</p>
+			
+			<div class="menu">
+				<p>					
+					<a class="btn black btn-block" href="<?= $this->publicUrl(); ?>">
+						<?= $this->t->_('Home'); ?>
+						<i class="m-icon-swapleft m-icon-white"></i>
+					</a>	
+				</p>
+			</div>
+		</div>
+	</div>
 </div>

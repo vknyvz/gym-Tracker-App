@@ -1,0 +1,31 @@
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+	<h3><?= $this->t->_($this->headline); ?></h3>
+</div>
+<div class="modal-body">
+	
+	<div class="panel panel-info">
+		<?php if(isset($this->addingActivity)) : ?>
+		<div class="panel-heading">
+			<h5 id="activityorexercise">Add an <span class="activity" data-type="activity">Activity</span> or <span class="exercise" data-type="exercise">Exercise</span>?</h5>
+		</div>
+		<?php endif; ?>
+		<div class="panel-body">
+			<?= $this->content; ?>
+		
+		</div>
+	</div> 
+								
+</div>
+
+<?php if(isset($this->delete)) : ?>
+<div class="modal-footer">
+	<button class="btn" data-dismiss="modal" type="button"><?= $this->t->_('Close'); ?></button>
+	<button class="btn red submit" type="button"><?= $this->t->_('Delete'); ?></button>
+</div>
+<?php else: ?>
+<div class="modal-footer">
+	<button class="btn" data-dismiss="modal" type="button"><?= $this->t->_('Close'); ?></button>
+	<button class="btn blue submit" type="button"><?= $this->t->_('Save'); ?></button>
+</div>
+<?php endif; ?>
