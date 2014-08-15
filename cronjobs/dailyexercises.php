@@ -5,6 +5,7 @@
 require_once 'cronMaster.php';
 
 $modelUsers = new Model_Users();
+
 foreach($modelUsers->fetchAll("notifications != 'disable'")->toArray() as $users) {
 	$db = Zend_Db::factory($config->resources->db->adapter, $config->resources->db->params);
 	$db->getConnection();
@@ -28,6 +29,7 @@ foreach($modelUsers->fetchAll("notifications != 'disable'")->toArray() as $users
 		$sql = "SELECT * FROM daily_exercises WHERE date = '" . date('Y-m-d') . "' and userId = " . $users['userId'];
 		
 		$user = $modelUsers->fetch($users['userId']);
+		
 		$params = array (
 				'subject'   => 'Did you add your exercise log for today?',
 				'firstName' => $users['firstName'],

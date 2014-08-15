@@ -44,7 +44,7 @@ class vkNgine_Email
 			}
 			
 			if(!$fromName || !$fromEmail) {
-				$mail->setFrom($config->noreply, 'vkNgine3 Emailer');
+				$mail->setFrom($config->noreply, 'GYM Tracker');
 			}
 			else {
 				$mail->setFrom($fromEmail, $fromName);
