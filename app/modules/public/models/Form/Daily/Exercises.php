@@ -43,11 +43,6 @@ class Public_Model_Form_Daily_Exercises extends vkNgine_Form_AjaxDesign
     					  'escape'  => false),
     				array(),
     				false),
-    		/*new vkNgine_Form_Element_Text('activity',
-    				array('label' 	=> null,
-    		 			  'class' 	=> 'input-xlarge',
-    					  'placeholder' => Zend_Registry::get('t')->_('If nothing from the above list')),
-    				false),*/
     			new vkNgine_Form_Element_Select('type',
     					array('label' 	=> null,
     							'class' 	=> 'input-large',
@@ -63,7 +58,6 @@ class Public_Model_Form_Daily_Exercises extends vkNgine_Form_AjaxDesign
     							'Swimming' => $this->convertText2Turkish(Zend_Registry::get('t')->_('Swimming')),
     							'Weight Lifting' => $this->convertText2Turkish(Zend_Registry::get('t')->_('Weight Lifting'))),
     					false),
-   			
     		new vkNgine_Form_Element_Select('timeSpentHour',
    					array('label' 	=> 'Hour',
    						  'class' 	=> 'input-xsmall',

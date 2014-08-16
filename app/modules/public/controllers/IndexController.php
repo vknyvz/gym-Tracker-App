@@ -76,7 +76,7 @@ class IndexController extends vkNgine_Public_Controller
     	$modelDailyExercises = new Public_Model_Daily_Exercises();
     	$dailyIntake = new Public_Model_Daily_Intake;
     	
-    	if($date1 && $date2) {
+    	if(isset($date1) && isset($date2)) {
     		$milesRan = $modelDailyExercises->fetchAll("type = 'Running' and date between '" . $date1 . "' and '" . $date2 . "' and userId =  " . $this->user->getId())->toArray();
     		$daysWithGym = $modelDailyExercises->fetchDaysWithOrWoutGym($date1, $date2, $this->user);
     	}
@@ -84,7 +84,9 @@ class IndexController extends vkNgine_Public_Controller
     		$dataDailyIntake = $dailyIntake->fetchMacros($date, $this->user);
     		$milesRan = $modelDailyExercises->fetchAll("type = 'Running' and date = '" . $date . "' and userId =  " . $this->user->getId())->toArray();
     		
-    		$statistics['caloriesConsumed'] = $dataDailyIntake[$date]['totalCalories'];
+    		if(isset($dataDailyIntake[$date]['totalCalories'])) {
+	    		$statistics['caloriesConsumed'] = $dataDailyIntake[$date]['totalCalories'];
+    		}
     	}
     		 
     	$totalMiles = null;

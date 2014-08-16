@@ -50,8 +50,10 @@ class Public_Model_Daily_Exercises extends vkNgine_DbTable_Abstract
 				}
 			}
 			
-			if(!in_array($dates, $final['daysWithGym'])) {
-				$final['daysWithoutGym'][] = $dates;
+			if(is_array($final['daysWithGym'])) {
+				if(!in_array($dates, $final['daysWithGym'])) {
+					$final['daysWithoutGym'][] = $dates;
+				}
 			}
 		}
 		
