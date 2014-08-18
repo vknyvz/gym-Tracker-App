@@ -7,7 +7,7 @@ class IndexController extends vkNgine_Public_Controller
 	}
 	
     public function indexAction()
-    {
+    {    	
     	$modelWorkouts = new Model_Workouts();
     	$modelDailyDetails = new Public_Model_Daily_Details();
     	$modelDailyExercises = new Public_Model_Daily_Exercises();

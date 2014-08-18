@@ -47,6 +47,13 @@ class Model_Exercises extends vkNgine_DbTable_Abstract
 		return $this->fetchRow($select);
 	}
 	
+	public function _fetchAll()
+	{
+		$select = $this->select();
+		
+		return $this->fetchAll($select)->toArray();
+	}
+	
 	/**
 	 * fetch all exercises with pagination support
 	 *

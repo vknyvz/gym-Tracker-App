@@ -203,33 +203,4 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     			'url' 		 => 'workout-url'))
 	    );
 	}
-	
-	/**
-	 * initalize ZF Debug
-	 */
-	protected function _initZFDebug()
-	{
-		if(!DEBUG) {
-			return;
-		}
-				
-	    $options = array(
-	       'jquery_path' => 'http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js',
-	       'plugins' => array('Variables',
-						      'Html',
-						      'Database',
-						      'File' => array('basePath' => BASE_PATH),
-						      'Memory',
-						      'Time',
-	    				      'ZFDebug_Controller_Plugin_Debug_Plugin_Auth',
-						      'Registry',
-						      'Exception')
-	     );
-		
-	    $debug = new ZFDebug_Controller_Plugin_Debug($options);
-
-	    $this->bootstrap('frontController');
-	    $frontController = $this->getResource('frontController');
-	    $frontController->registerPlugin($debug);
-	}
 }
