@@ -7,7 +7,7 @@ class IndexController extends vkNgine_Public_Controller
 	}
 	
     public function indexAction()
-    {    	
+    {
     	$modelWorkouts = new Model_Workouts();
     	$modelDailyDetails = new Public_Model_Daily_Details();
     	$modelDailyExercises = new Public_Model_Daily_Exercises();
@@ -36,8 +36,11 @@ class IndexController extends vkNgine_Public_Controller
     	
     	$dailyIntake = new Public_Model_Daily_Intake;
     	$dataDailyIntake = $dailyIntake->fetchMacros($today, $this->user);
-    	$statistics['caloriesConsumed'] = $dataDailyIntake[$today]['totalCalories'];
-    	  
+    	
+    	if($dataDailyIntake) {
+    		$statistics['caloriesConsumed'] = $dataDailyIntake[$today]['totalCalories'];
+    	}
+    	
     	$this->view->statistics = $statistics;
     }
     
