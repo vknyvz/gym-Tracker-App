@@ -71,11 +71,11 @@
             </div>            
             <div id="counters" class="portlet-body">
             	<div class="row-fluid">             	
-            		 <div class="span2">
+            		 <div class="span2 ran-div">
                      	<div class="ran" ><span></span></div>
                         <?= $this->t->_('miles ran'); ?>
                      </div>
-                     <div class="span2">
+                     <div class="span2 caloriesconsumed-div">
                      	 <div class="caloriesconsumed"><span></span></div>
                          <?= $this->t->_('calories consumed'); ?>
                      </div>
@@ -99,11 +99,23 @@
 	core.initDashboard();
 
 	var dashboard = new vkNgine.page.dashboard();
-	var milesRan, caloriesConsumed, misseddays, caloriesConsumed = 0;
+	var milesRan, caloriesConsumed, misseddays = 0;
 
 	milesRan = <?= ((isset($this->statistics['milesRan'])) ? $this->statistics['milesRan'] : 0) ?>;
 	caloriesConsumed = <?= ((isset($this->statistics['caloriesConsumed'])) ? $this->statistics['caloriesConsumed'] : 0) ?>;
 
+	if(!milesRan) {
+		$('.ran-div').hide();
+	} else {
+		$('.ran-div').show();
+	}
+
+	if(!caloriesConsumed) {
+		$('.caloriesconsumed-div').hide();
+	} else {
+		$('.caloriesconsumed-div').show();
+	}
+	
 	dashboard.counters(milesRan, 'ran', 2);
 	dashboard.counters(caloriesConsumed, 'caloriesconsumed', 0);	
 </script>
