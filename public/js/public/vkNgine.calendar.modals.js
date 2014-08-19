@@ -86,7 +86,7 @@ var vkNgineModals = function() {
 						
 						$('#vkNgine-modal-addexercise').modal('hide');	
 						
-						$(window).attr("location","/calendar");
+						//$(window).attr("location","/calendar");
 					});
 					
 					var options = {  
