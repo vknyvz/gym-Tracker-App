@@ -17,9 +17,11 @@ class Public_Model_Form_Daily_Exercises extends vkNgine_Form_AjaxDesign
     	parent::init('publicFormDailyExercises');
     	
     	$miles = null;
+    	$miles[null] = 0;
     	for($i=0; $i<8; $i++) {
     		for($v=0; $v<100; $v++) {
     			if($i) {
+    				
     				$miles[$i . '.' . $v] = $i . '.' . $v;
     			}
     		}
@@ -63,14 +65,14 @@ class Public_Model_Form_Daily_Exercises extends vkNgine_Form_AjaxDesign
    						  'class' 	=> 'input-xsmall',
    						  'style'   => 'none',
    						  'escape'  => false),
-    				array(0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5),
+    				array(null => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5),
     				false),
     		new vkNgine_Form_Element_Select('timeSpentMin',
    					array('label' 	=> 'Minute',
    						  'class' 	=> 'input-xsmall',
    						  'style'   => 'none',
    						  'escape'  => false),
-    				array(0 => 0, 15 => 15, 30 => 30, 45 => 45),
+    				array(null => 0, 10 => 10, 15 => 15, 20 => 20, 25 => 25, 30 => 30, 35 => 35, 40 => 40, 45 => 45),
     				false),
     		new vkNgine_Form_Element_Select('miles',
    					array('label' 	=> 'Miles',

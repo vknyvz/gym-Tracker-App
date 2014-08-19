@@ -23,9 +23,9 @@ class CalendarController extends vkNgine_Public_Controller
 			
 		$workoutDetail = array();
 		foreach($modelWorkouts->fetchAll() as $workout){
-			$workoutDetail[$workout['workoutId']] = $workout['name'];
+			$workoutDetail[11] = $workout['name'];
 		}
-		
+				
 		$this->view->workoutDetail = $workoutDetail;
 		$this->view->links = array('next' => $calendar->nextMonth('object'), 'prev' => $calendar->prevMonth('object'));
 		$this->view->calendar = $calendar;
@@ -85,7 +85,7 @@ class CalendarController extends vkNgine_Public_Controller
 				
 				$forward = $values['forward'];
 				unset( $values['forward']);
-	
+				
 				$modelDailyExcercises->insert($values);
 				
 				echo Zend_Json::encode(array('success' => 1, 'href'    => $forward));

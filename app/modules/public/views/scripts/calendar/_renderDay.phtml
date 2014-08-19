@@ -27,8 +27,25 @@
 						<div class="fc-event-inner fc-event-skin" style="background-color:#477dae;border-color:#0E69A1">
 				';
 					if(isset($activity)) {
+						$miles = $this->days[$i]['miles'];
+						$hour = $this->days[$i]['timeSpentHour'];
+						$min = $this->days[$i]['timeSpentMin'];
+						
+						$detailMiles = $miles ? $miles . ' miles' : '';
+						
+						$detailClock = null;
+						if($min && $hour) {
+							$detailClock = $hour . '::' . $min . ' hour';  
+						} elseif($min) {
+							$detailClock = $min . ' minutes';
+						} elseif($hour) {
+							$detailClock = $hour . ' hours';
+						}
+						
+						$detailClock = $detailMiles ? '|' . $detailClock : $detailClock; 
+						
 						echo '
-							<span class="fc-event-time"> ' . $this->t->_($this->days[$i]['type']) . '</span>
+							<span class="fc-event-time"> ' . $this->t->_($this->days[$i]['type']) . ' ' . $detailMiles . $detailClock . '</span>
 							' . (($firstRow != $this->t->_($this->days[$i]['type'])) ? '<span class="fc-event-title"> ' . $firstRow . '</span>' : '') . '
 						';
 					}
