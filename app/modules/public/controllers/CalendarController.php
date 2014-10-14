@@ -78,7 +78,7 @@ class CalendarController extends vkNgine_Public_Controller
 		 
 		if ($request->isPost()) {
 			$post = $request->getPost();
-	print_r($post);exit;
+	
 			if($form->isValid($post)) {
 				$values = $form->getValues();
 				 print_r($values);exit;
