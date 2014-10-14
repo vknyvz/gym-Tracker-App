@@ -81,7 +81,7 @@ class CalendarController extends vkNgine_Public_Controller
 	
 			if($form->isValid($post)) {
 				$values = $form->getValues();
-				 print_r($values);exit;
+				 
 				$values['userId'] = $this->user->getId();
 				
 				$forward = $values['forward'];
