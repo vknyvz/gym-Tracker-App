@@ -17,9 +17,15 @@
 					$firstRow .= $this->workoutDetail[$this->days[$i]['workoutId']];
 					$secondRow = $this->t->_('Day') . ' ' . $this->days[$i]['workoutDay'];
 				}
-				elseif(0 == $this->days[$i]['workoutId']) {
-					$activity = true;
-					$firstRow .= $this->t->_($this->days[$i]['type']);	
+				else if(0 == $this->days[$i]['workoutId']) {
+					if($this->days[$i]['type'] == 'Notes') {
+						$firstRow = 'Notes ';
+						$secondRow = $this->days[$i]['moreDetails'];
+					}
+					else {
+						$activity = true;
+						$firstRow .= $this->t->_($this->days[$i]['type']);
+					}	
 				}
 				
 				echo '

@@ -64,7 +64,6 @@ class CalendarController extends vkNgine_Public_Controller
 	
 	public function addDailyAction()
 	{
-		
 		parent::ajaxEnabled();
 		 
 		$date = $this->_getParam('date');
@@ -89,7 +88,7 @@ class CalendarController extends vkNgine_Public_Controller
 				
 				$modelDailyExcercises->insert($values);
 				
-				echo Zend_Json::encode(array('success' => 1, 'href'    => $forward));
+				echo Zend_Json::encode(array('success' => 1, 'href' => $forward));
 				
 				exit;
 			}

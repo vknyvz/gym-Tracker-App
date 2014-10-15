@@ -156,6 +156,14 @@ var vkNgineModals = function() {
 								$('#miles').show();
 								$('#miles-label').show();
 							}
+							else if('Notes' == selected.val()){
+								$('#timeSpentHour').hide();
+								$('#timeSpentHour-label').hide();
+								$('#timeSpentMin').hide();
+								$('#timeSpentMin-label').hide();
+								$('#miles').hide();
+								$('#miles-label').hide();
+							}
 							else {
 								$('#miles').hide();
 								$('#miles-label').hide();

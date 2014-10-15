@@ -55,6 +55,7 @@ class Public_Model_Form_Daily_Exercises extends vkNgine_Form_AjaxDesign
     							'Cycling' => $this->convertText2Turkish(Zend_Registry::get('t')->_('Cycling')),
     							'Rope Jumping' => $this->convertText2Turkish(Zend_Registry::get('t')->_('Rope Jumping')),
     							'Football' => $this->convertText2Turkish(Zend_Registry::get('t')->_('Football')),
+    							'Notes' => $this->convertText2Turkish(Zend_Registry::get('t')->_('Notes')),
     							'Running' => $this->convertText2Turkish(Zend_Registry::get('t')->_('Running')),
     							'Stairs' => $this->convertText2Turkish(Zend_Registry::get('t')->_('Stairs')),
     							'Swimming' => $this->convertText2Turkish(Zend_Registry::get('t')->_('Swimming')),
