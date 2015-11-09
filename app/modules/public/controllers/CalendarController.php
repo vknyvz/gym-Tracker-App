@@ -23,7 +23,7 @@ class CalendarController extends vkNgine_Public_Controller
 			
 		$workoutDetail = array();
 		foreach($modelWorkouts->fetchAll() as $workout){
-			$workoutDetail[11] = $workout['name'];
+			$workoutDetail[$workout['workoutId']] = $workout['name'];
 		}
 				
 		$this->view->workoutDetail = $workoutDetail;
@@ -86,9 +86,22 @@ class CalendarController extends vkNgine_Public_Controller
 				$forward = $values['forward'];
 				unset( $values['forward']);
 				
+				if(empty($values['type'])){
+				    unset($values['type']);
+				}
+				
+				if(empty($values['workoutId'])){
+				    $values['workoutId'] = 0;
+				}
+				
+				if(empty($values['workoutDay'])){
+				    $values['workoutDay'] = 0;
+				}
+				
+				
 				$modelDailyExcercises->insert($values);
 				
-				echo Zend_Json::encode(array('success' => 1, 'href' => $forward));
+				echo Zend_Json::encode(array('success' => 1));
 				
 				exit;
 			}

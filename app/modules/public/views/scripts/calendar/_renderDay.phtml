@@ -9,33 +9,36 @@
 	  ?>
   	  <div class="fc-day-content">
 	  	<div style="position:relative">
-		  <?php 
-		  	for($i=0; $i<count($this->days); $i++) {
-				$firstRow = null;
+		  <?php 	
+              foreach($this->days as $day) {
+                    
+				$activity = $firstRow = $secondRow = null;
 				
-				if(0 != $this->days[$i]['workoutId']) {
-					$firstRow .= $this->workoutDetail[$this->days[$i]['workoutId']];
-					$secondRow = $this->t->_('Day') . ' ' . $this->days[$i]['workoutDay'];
+				if(0 != $day['workoutId']) {
+				    if(!empty($this->workoutDetail[$day['workoutId']]))
+    					$firstRow .= $this->workoutDetail[$day['workoutId']];
+				    
+					$secondRow = $this->t->_('Day') . ' ' . $day['workoutDay'];
 				}
-				else if(0 == $this->days[$i]['workoutId']) {
-					if($this->days[$i]['type'] == 'Notes') {
+				else if(0 == $day['workoutId']) {
+					if($day['type'] == 'Notes') {
 						$firstRow = 'Notes ';
-						$secondRow = $this->days[$i]['moreDetails'];
+						$secondRow = $day['moreDetails'];
 					}
 					else {
 						$activity = true;
-						$firstRow .= $this->t->_($this->days[$i]['type']);
+						$firstRow .= $this->t->_($day['type']);
 					}	
 				}
 				
 				echo '
-					<div data-id="' . $this->days[$i]['id'] . '" data-target="viewdetail" class="fc-event fc-event-skin fc-event-hori fc-corner-left fc-corner-right vkNgine-modal" style="background-color: rgb(71, 125, 174); border-color: rgb(14, 105, 161); top: 30px; -moz-user-select: none;">
+					<div data-id="' . $day['id'] . '" data-target="viewdetail" class="fc-event fc-event-skin fc-event-hori fc-corner-left fc-corner-right vkNgine-modal" style="background-color: rgb(71, 125, 174); border-color: rgb(14, 105, 161); top: 30px; -moz-user-select: none;">
 						<div class="fc-event-inner fc-event-skin" style="background-color:#477dae;border-color:#0E69A1">
 				';
-					if(isset($activity)) {
-						$miles = $this->days[$i]['miles'];
-						$hour = $this->days[$i]['timeSpentHour'];
-						$min = $this->days[$i]['timeSpentMin'];
+					if(!empty($activity)) {
+						$miles = $day['miles'];
+						$hour = $day['timeSpentHour'];
+						$min = $day['timeSpentMin'];
 						
 						$detailMiles = $miles ? $miles . ' miles' : '';
 						
@@ -51,8 +54,8 @@
 						$detailClock = $detailMiles ? '|' . $detailClock : $detailClock; 
 						
 						echo '
-							<span class="fc-event-time"> ' . $this->t->_($this->days[$i]['type']) . ' ' . $detailMiles . $detailClock . '</span>
-							' . (($firstRow != $this->t->_($this->days[$i]['type'])) ? '<span class="fc-event-title"> ' . $firstRow . '</span>' : '') . '
+							<span class="fc-event-time"> ' . $this->t->_($day['type']) . ' ' . $detailMiles . $detailClock . '</span>
+							' . (($firstRow != $this->t->_($day['type'])) ? '<span class="fc-event-title"> ' . $firstRow . '</span>' : '') . '
 						';
 					}
 					else {
@@ -66,20 +69,7 @@
 						</div>
 					</div>
 					';
-			}
-			
-			for($k=0; $k<count($this->details); $k++) {
-				if($this->details[$k]['type'] == 'SUPPLEMENT'){
-					echo '
-						<div data-id="' . $this->details[$k]['id'] . '" data-target="viewdaydetail" class="fc-event fc-event-skin fc-event-hori fc-corner-left fc-corner-right vkNgine-modal" style="background-color: rgb(71, 125, 174); border-color: rgb(14, 105, 161); top: 30px; -moz-user-select: none;">
-							<div class="fc-event-inner fc-event-skin" style="background-color:#477dae;border-color:#0E69A1">
-								<span class="fc-event-time">' . $this->t->_('Supplement Taken') .'</span>
-								<span class="fc-event-title">' . $this->details[$k]['value'] . '</span>
-							</div>
-						</div>
-					';
-				}
-			}
+                }
 			?>				
 			</div>
 		</div>
