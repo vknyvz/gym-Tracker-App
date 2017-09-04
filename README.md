@@ -3,7 +3,7 @@ GYM Tracker App 2
 
 ### Application Full Source Code ###
 
-#### This is no longer maintained, new app is at [a vkNgine](https://github.com/vknyvz/vkNGine) branch ####
+#### This is no longer maintained, new app is at [vkNgine](https://github.com/vknyvz/vkNGine) branch ####
 
 #### Technology ####
  - Written for LAMP environment. <br>
